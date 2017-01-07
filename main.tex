@@ -110,12 +110,12 @@
 
 %% http://www.lix.polytechnique.fr/~albenque/INF421-2016/Alignment_Project.pdf
 
-\begin{exercise}
+\begin{exercise} % Task 1
 The longest common subsequence (LCS) problem can be solved for two sequences $s=s_1\dots s_n$ and $t=t_1\dots t_m$ in a naive way by considering all the $2^{n}$ subsequences of $s$ and determining if it is a subsequence of $t$. The last step can be done with a complexity of $\O(m)$, which leaves the naive algorithm with a complexity of $\O(2^{n}m)$.
 \end{exercise}
 
-\begin{exercise}
-In order to solve the LCS in a more efficient way, dynamic programming (DP) can be used. We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ append to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution will be the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, this problem can be solved as described by [\cite{jones}]. One implementation of this DP in Java is given by the algorithm \ref{task2}.
+\begin{exercise} % Task 2
+In order to solve the LCS in a more efficient way, dynamic programming (DP) can be used. We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ append to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution will be the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, this problem can be solved as described by [\cite{jones}]. One implementation of this DP in Java is given by the algorithm \ref{task2} whose complexity is $\O(nm)$.
 \begin{comment}
 This solution consists of filling two matrices $A_{n+1,m+1}$ and $B_{n+1,m+1}$, following the given rules: initialize the first line and the first column of $A$ in zeros, fill this matrix according to 
 \begin{align*}
@@ -124,6 +124,37 @@ A_{i,j}
 \end{comment}
 
 \lstinputlisting[caption={Longest common subsequence}, label=task2, language=java]{Solution.java}
+\end{exercise}
+
+\begin{exercise} % Task 3
+The editing distance given two sequences $s=s_1\dots s_n$ and $t=t_1\dots t_m$ can be thought as being equivalent to adding hyphens in $s$ and $t$ in such a way that we minimize the numbers of mentioned hyphens added to the number of letters that $s$ and $t$ differ if we consider that adding an hyphen to a sequence, lets say $s$, is equivalent to an insertion in $s$ or a deletion in $t$ and vice-versa. The difference between the letters can be interpreted as a transforming in $s$ or $t$. It is important to notice that given an editing distance there is more than one way of insert, delete and transform the characters to find the alignment and for each choice we have a different alignment with the same editing distance.
+
+The algorithm \ref{task3} computes and displays one optimal alignment.
+\lstinputlisting[caption={Optimal alignment}, label=task3, language=java]{Solution.java} 
+\end{exercise}
+
+\begin{exercise} % Task 4
+	content...
+\end{exercise}
+
+\begin{exercise} % Task 5
+	content...
+\end{exercise}
+
+\begin{exercise} % Task 6
+	content...
+\end{exercise}
+
+\begin{exercise} % Task 7
+	content...
+\end{exercise}
+
+\begin{exercise} % Task 8
+	content...
+\end{exercise}
+
+\begin{exercise} % Task 9
+	content...
 \end{exercise}
 
 \begin{thebibliography}{3}
