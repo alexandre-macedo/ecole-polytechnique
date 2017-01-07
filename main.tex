@@ -115,7 +115,7 @@ The longest common subsequence (LCS) problem can be solved for two sequences $s=
 \end{exercise}
 
 \begin{exercise} % Task 2
-In order to solve the LCS in a more efficient way, dynamic programming (DP) can be used. We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ append to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution will be the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, this problem can be solved as described by [\cite{jones}]. One implementation of this DP in Java is given by the algorithm \ref{task2} whose complexity is $\O(nm)$.
+In order to solve the LCS in a more efficient way, dynamic programming (DP) can be used. We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ append to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution will be the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, this problem can be solved as described by \cite{jones}. One implementation of this DP in Java is given by the algorithm \ref{task2} whose complexity is $\O(nm)$.
 \begin{comment}
 This solution consists of filling two matrices $A_{n+1,m+1}$ and $B_{n+1,m+1}$, following the given rules: initialize the first line and the first column of $A$ in zeros, fill this matrix according to 
 \begin{align*}
