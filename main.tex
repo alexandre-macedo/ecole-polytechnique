@@ -59,7 +59,7 @@
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.95}
-\definecolor{backcolourOld}{rgb}{0.95,0.95,0.92}
+%\definecolor{backcolourOld}{rgb}{0.95,0.95,0.92}
  
 \lstset{
   backgroundcolor=\color{backcolour},	% choose the background color;
@@ -82,9 +82,6 @@
   tabsize=2,							% sets default tabsize to 2 spaces
   captionpos=t							% caption position
 }
-
-
-
 
 % --------------------------------------------------------------
 %                       Custom commands, counters
@@ -112,42 +109,37 @@
 %% http://www.lix.polytechnique.fr/~albenque/INF421-2016/Alignment_Project.pdf
 
 \begin{exercise} % Task 1
-The longest common subsequence (LCS) problem can be solved for two sequences $s=s_1\dots s_n$ and $t=t_1\dots t_m$ in a naive way by considering all the $2^{n}$ subsequences of $s$ and determining if it is a subsequence of $t$. The last step can be done with a complexity of $\O(m)$, which leaves the naive algorithm with a complexity of $\O(2^{n}m)$.
+We can solve the longest common subsequence (LCS) for two sequences $s=s_1\dots s_n$ and $t=t_1\dots t_m$ in a naive way by considering all the $2^{n}$ subsequences of $s$ and determining if it is a subsequence of $t$. The last step can be done with a complexity of $\O(m)$, which leaves the naive algorithm with a complexity of $\O(2^{n}m)$.
 \end{exercise}
 
 \begin{exercise} % Task 2
-In order to solve the LCS in a more efficient way, dynamic programming (DP) can be used. We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ append to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution will be the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, this problem can be solved as described by \cite{jones}. One implementation of this DP in Java is given by the algorithm \ref{task2} whose complexity is $\O(nm)$.
-\begin{comment}
-This solution consists of filling two matrices $A_{n+1,m+1}$ and $B_{n+1,m+1}$, following the given rules: initialize the first line and the first column of $A$ in zeros, fill this matrix according to 
-\begin{align*}
-A_{i,j}
-\end{align*}
-\end{comment}
-
-\lstinputlisting[caption={Longest common subsequence}, label=task2, language=java]{Solution.java}
+In order to solve the LCS in a more efficient way we can use dynamic programming (DP). We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ appended to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution is the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, we can solve it as described in \cite{jones}. The algorithm \ref{task2} is an implementation in Java of this DP whose time complexity is $\O(nm)$.
+\lstinputlisting[caption={Longest common subsequence}, label=task2, language=java]{nada.java}
 \end{exercise}
 
 \begin{exercise} % Task 3
-The editing distance given two sequences $s=s_1\dots s_n$ and $t=t_1\dots t_m$ can be thought as being equivalent to adding hyphens in $s$ and $t$ in such a way that we minimize the numbers of mentioned hyphens added to the number of letters that $s$ and $t$ differ if we consider that adding an hyphen to a sequence, lets say $s$, is equivalent to an insertion in $s$ or a deletion in $t$ and vice-versa. The difference between the letters can be interpreted as a transforming in $s$ or $t$. It is important to notice that given an editing distance there is more than one way of insert, delete and transform the characters to find the alignment and for each choice we have a different alignment with the same editing distance.
 
-The algorithm \ref{task3} computes and displays one optimal alignment.
-\lstinputlisting[caption={Optimal alignment}, label=task3, language=java]{Solution.java} 
+We can show the equivalence between the editing distance and the number of inserted hyphens added to the number mismatches, letters that are  different between sequences, by interpreting the action of adding an hyphen to a sequence, lets say $s$, as an insertion in this sequence or as a deletion in $t$ and interpreting a mismatch as a transform in either of these sequences. The algorithm \ref{task3} computes and displays one optimal alignment.
+\lstinputlisting[caption={Optimal alignment}, label=task3, language=java]{nada.java} 
 \end{exercise}
 
 \begin{exercise} % Task 4
-	content...
+To compute the alignment using the Blosum50 score matrix, we use the Needleman-Wunsch algorithm as described in \cite{durbin}. The algorithm \ref{task4} is an implementation of this algorithm.
+\lstinputlisting[caption={Needleman-Wunsch}, label=task4, language=java]{nada.java}
 \end{exercise}
 
 \begin{exercise} % Task 5
-	content...
+In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. The implementation is shown in the algorithm \ref{task5}.
+\lstinputlisting[caption={Semi-global alignment with affine gap penalty}, label=task5, language=java]{nada.java}
 \end{exercise}
 
 \begin{exercise} % Task 6
-	content...
+For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. The algorithm \ref{task6} is the implementation in Java.
+\lstinputlisting[caption={Smith-Waterman with affine gaps}, label=task6, language=java]{nada.java}
 \end{exercise}
 
 \begin{exercise} % Task 7
-	content...
+The algorithms presented so far are all exact, in a sense that they will return for sure the alignment with the best score but they all come with complexity of $\O(mn)$. If we use this to align a given sequence of size one thousand to a database of hundreds of millions of residues, the number of matrix entries will be the order of $10^{11}$ which would take a long time to compute, as explained in \cite{durbin}. In order to solve this problem, we can use heuristic algorithms that not necessarily return the best alignment but that can run much faster. Such a example is BLAST.
 \end{exercise}
 
 \begin{exercise} % Task 8
