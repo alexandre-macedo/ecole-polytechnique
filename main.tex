@@ -26,6 +26,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{verbatim}
+\usepackage[title]{appendix}
 
 % --------------------------------------------------------------
 %                       Exercise Env
@@ -113,29 +114,29 @@ We can solve the longest common subsequence (LCS) for two sequences $s=s_1\dots 
 \end{exercise}
 
 \begin{exercise} % Task 2
-In order to solve the LCS in a more efficient way we can use dynamic programming (DP). We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ appended to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution is the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, we can solve it as described in \cite{jones}. The algorithm \ref{task2} is an implementation in Java of this DP whose time complexity is $\O(nm)$.
-\lstinputlisting[caption={Longest common subsequence}, label=task2, language=java]{nada.java}
+In order to solve the LCS in a more efficient way we can use dynamic programming (DP). We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ appended to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution is the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, we can solve it as described in \cite{jones}. The algorithm \ref{alg:task2} is an implementation in Java of this DP whose time complexity is $\O(nm)$.
+
 \end{exercise}
 
 \begin{exercise} % Task 3
 
-We can show the equivalence between the editing distance and the number of inserted hyphens added to the number mismatches, letters that are  different between sequences, by interpreting the action of adding an hyphen to a sequence, lets say $s$, as an insertion in this sequence or as a deletion in $t$ and interpreting a mismatch as a transform in either of these sequences. The algorithm \ref{task3} computes and displays one optimal alignment.
-\lstinputlisting[caption={Optimal alignment}, label=task3, language=java]{nada.java} 
+We can show the equivalence between the editing distance and the number of inserted hyphens added to the number mismatches, letters that are  different between sequences, by interpreting the action of adding an hyphen to a sequence, lets say $s$, as an insertion in this sequence or as a deletion in $t$ and interpreting a mismatch as a transform in either of these sequences. The algorithm \ref{alg:task3} computes and displays one optimal alignment.
+ 
 \end{exercise}
 
 \begin{exercise} % Task 4
-To compute the alignment using the Blosum50 score matrix, we use the Needleman-Wunsch algorithm as described in \cite{durbin}. The algorithm \ref{task4} is an implementation of this algorithm.
-\lstinputlisting[caption={Needleman-Wunsch}, label=task4, language=java]{nada.java}
+To compute the alignment using the Blosum50 score matrix, we use the Needleman-Wunsch algorithm as described in \cite{durbin}. The algorithm \ref{alg:task4} is an implementation of this algorithm.
+
 \end{exercise}
 
 \begin{exercise} % Task 5
-In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. The implementation is shown in the algorithm \ref{task5}.
-\lstinputlisting[caption={Semi-global alignment with affine gap penalty}, label=task5, language=java]{nada.java}
+In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. The implementation is shown in the algorithm \ref{alg:task5}.
+
 \end{exercise}
 
 \begin{exercise} % Task 6
-For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. The algorithm \ref{task6} is the implementation in Java.
-\lstinputlisting[caption={Smith-Waterman with affine gaps}, label=task6, language=java]{nada.java}
+For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. The algorithm \ref{alg:task6} is the implementation in Java.
+
 \end{exercise}
 
 \begin{exercise} % Task 7
@@ -164,4 +165,11 @@ The algorithms presented so far are all exact, in a sense that they will return 
 	
 \end{thebibliography}
 
+\appendix
+	\section{Implementations of the algorithms in Java} \label{app:alg}
+	\lstinputlisting[caption={Longest common subsequence}, label={alg:task2}, language=java]{nada.java}
+	\lstinputlisting[caption={Optimal alignment}, label={alg:task3}, language=java]{nada.java}
+	\lstinputlisting[caption={Needleman-Wunsch}, label={alg:task4}, language=java]{nada.java}
+	\lstinputlisting[caption={Semi-global alignment with affine gap penalty}, label={alg:task5}, language=java]{nada.java}
+	\lstinputlisting[caption={Smith-Waterman with affine gaps}, label={alg:task6}, language=java]{nada.java}
 \end{document}
