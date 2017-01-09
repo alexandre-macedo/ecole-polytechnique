@@ -3,6 +3,7 @@
 % --------------------------------------------------------------
 \documentclass[11pt]{article} %draft = show box warnings
 \usepackage[a4paper, total={6.5in,10.2in}]{geometry} % Flexible and complete interface to document dimensions
+\renewcommand{\baselinestretch}{1.3} 
 
 \usepackage[utf8]{inputenc} % accept different input encodings [utf8]
 \usepackage[T1]{fontenc}    % Standard package for selecting font encodings
@@ -30,7 +31,8 @@
 \usepackage{titlesec}
 \usepackage{theoremref}
 \usepackage{graphicx}
-
+\usepackage{qtree}
+\usepackage{tikz}
 % --------------------------------------------------------------
 %                       Task Env
 % --------------------------------------------------------------
@@ -99,6 +101,8 @@
 % --------------------------------------------------------------
 \renewcommand{\lstlistingname}{Algorithm}
 \renewcommand*{\O}{\mathcal{O}}
+\renewcommand*{\S}{\mathcal{S}}
+\newcommand*{\W}{\mathcal{W}}
 
 % --------------------------------------------------------------
 
@@ -146,9 +150,6 @@ The first case corresponds to the case when $s_i$ is not present in the LCS, the
 	\end{cases}
 \end{align*}
 and print the character that corresponds to the case $\nwarrow$. That is, the LCS will composed by all $s_i$ such that $b_{i,j}= \nwarrow$. This algorithms has a time complexity of $\O(nm)$.
-
-The algorithm \ref{alg:task2} in the appendix \ref{app:alg} is an implementation of this DP.
-
 \end{exercise}
 
 \begin{exercise} % Task 3 
@@ -164,9 +165,6 @@ a_{i-1,j-1} &\text{ if } s_i=t_j
 \end{cases}
 \end{align*}
 and the traceback will be similar in a manner where gaps are added to the sequences when we do not have a match. 
-
-The algorithm \ref{alg:task3} computes and displays one optimal alignment.
- 
 \end{exercise}
 
 \begin{exercise} \thlabel{task:4}% Task 4
@@ -175,8 +173,6 @@ To compute the alignment using the Blosum50 score matrix, we use the Needleman-W
 a_{i,j}=\text{max}[a_{i-1,j}+Sc(s_i,-), a_{i,j-1}+Sc(-,t_j),a_{i-1,j-1}+Sc(s_i,t_j)]}$
 and the traceback will be similar to the described above. It is a more general case of \thref{task:2} where we define a penalty for adding a gap in a sequence, lets say $s$ and aligning this gap to a base of $t$ and we also define a score for aligning a base of $s$ with $t$. The value of $Sc$ that gives the same result as the LCS problem is $Sc(s_i,-)=Sc(-,t_j)=0$, $Sc(s_i,t_j)=1$ if $s_i=t_j$ and $Sc(s_i,t_j)=-\infty$ if $s_i \neq t_j$.
 	\end{sloppypar}
-The algorithm \ref{alg:task4} in the appendix \ref{app:alg} is an implementation of this algorithm.
-
 \end{exercise}
 
 \begin{exercise} \thlabel{task:5}% Task 5
@@ -194,20 +190,16 @@ In order to justify why we are using three matrices we can think of our problem 
 
 Since we are on a semi-global alignment, we consider the best score equals to ${\text{max}[\text{max}(k_{n,1},\dots,k_{n,j}),\text{max}(k_{1,m},\dots ,k_{i,m})]}$ and we make the traceback from this point. In order to do it we need to consider, like in the problems above, which option was used to get the maximum value but this implies changing between states. Keeping in the state $I_x$ or $I_y$ means increasing the gap, and the state $M$ means a match.
 \end{sloppypar}
-
-The implementation is shown in the algorithm \ref{alg:task5} in the appendix \ref{app:alg}.
-
 \end{exercise}
 
 \begin{exercise} % Task 6
 For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. In other words, it is better to align the sequences locally than going with a negative score. This is done by changing the case in \thref{task:5} to ${k_{i,j}=\text{max}[k_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j},0]}$.
-
-The algorithm \ref{alg:task6} in the appendix \ref{app:alg} shows the implementation
-
 \end{exercise}
 
 \begin{exercise} % Task 7
 The algorithms presented so far are all exact, in a sense that they will return for sure the alignment with the best score but they all come with complexity of $\O(mn)$. If we use this to align a given sequence of size one thousand to a database of hundreds of millions of residues, the number of matrix entries will be the order of $10^{11}$ which would take a long time to compute, as explained in \cite{durbin}. We should keep in mind that the human genome, for example, has $3,0.10^9$ base pairs. In order to solve this problem, we can use heuristic algorithms that not necessarily return the best alignment but that can run much faster. Such a example is BLAST.
+
+In order to do this task we will use the Aho-Corasick algorithm as described in \cite{pekka}. We start by creating the set $\W_g$ and from this set we create $\S_g$ by doing for each word of $\W_g$ the following procedure: we modify the first entry of this word by all the possibilities, meaning the entries of Blosum50, and we store those whose alignment score with the original sequence is greater than the defined threshold. 
 \end{exercise}
 
 \begin{exercise} % Task 8
@@ -239,16 +231,10 @@ We should keep in mind that as the diagram in figure \ref{fig:automatom} was ext
 	\textit{Lecture Slides}. 
 	 Available at \\ http://www3.cs.stonybrook.edu/~rp/class/549f14/lectures/CSE549-Lec04.pdf.
 	
+	\bibitem{pekka} 
+	Pekka Kilpelainen. 
+	\textit{Lecture Slides}. 
+	Available at\\ https://www.cs.uku.fi/~kilpelai/BSA05/lectures/slides04.pdf
 \end{thebibliography}
-
-\newpage
-\begin{appendices}
-	\section{Implementations of the algorithms in Java} \label{app:alg}
-\lstinputlisting[caption={Longest common subsequence}, label={alg:task2}, language=java]{nada.java}
-\lstinputlisting[caption={Optimal alignment}, label={alg:task3}, language=java]{nada.java}
-\lstinputlisting[caption={Needleman-Wunsch}, label={alg:task4}, language=java]{nada.java}
-\lstinputlisting[caption={Semi-global alignment with affine gap penalty}, label={alg:task5}, language=java]{nada.java}
-\lstinputlisting[caption={Smith-Waterman with affine gaps}, label={alg:task6}, language=java]{nada.java}
-\end{appendices}
 
 \end{document}
