@@ -1,7 +1,7 @@
 % --------------------------------------------------------------
 %                         Template DM
 % --------------------------------------------------------------
-\documentclass[10pt]{article} %draft = show box warnings
+\documentclass[11pt]{article} %draft = show box warnings
 \usepackage[a4paper, total={6.5in,10.2in}]{geometry} % Flexible and complete interface to document dimensions
 
 \usepackage[utf8]{inputenc} % accept different input encodings [utf8]
@@ -29,6 +29,7 @@
 \usepackage[titletoc,toc,title]{appendix}
 \usepackage{titlesec}
 \usepackage{theoremref}
+\usepackage{graphicx}
 
 % --------------------------------------------------------------
 %                       Exercise Env
@@ -165,7 +166,7 @@ The algorithm \ref{alg:task3} computes and displays one optimal alignment.
 	\begin{sloppypar}
 To compute the alignment using the Blosum50 score matrix, we use the Needleman-Wunsch algorithm as named in \cite{durbin} and described in \cite{jones}. In that case the initialization becomes $a_{0,0}=0$, $a_{i,0} = a_{i-1,0} + Sc(s_i,-)$, $a_{0,j} = a_{0,j-1} + Sc(-,t_j)$ where $Sc(x,y)$ is the score between the alignment of $x$ and $y$ and $-$ is a gap. The recursion is ${
 a_{i,j}=\text{max}[a_{i-1,j}+Sc(s_i,-), a_{i,j-1}+Sc(-,t_j),a_{i-1,j-1}+Sc(s_i,t_j)]}$
-and the traceback will be similar to the described above. It is a more general case of \thref{task:2} where we define a penalty for adding a gap in a sequence, lets say $s$ and aligning this gap to a base of $t$ and we also define a score for aligning a base of $s$ with $t$. The value of $Sc$ that gives the same result as the LCS problem is $Sc(s_i,-)=Sc(-,t_j)=0$, $Sc(s_i,t_j)=1$ if $s_i=t_j$ and $Sc(s_i,t_j)=-\infty$ if $s_i \neq t_j$
+and the traceback will be similar to the described above. It is a more general case of \thref{task:2} where we define a penalty for adding a gap in a sequence, lets say $s$ and aligning this gap to a base of $t$ and we also define a score for aligning a base of $s$ with $t$. The value of $Sc$ that gives the same result as the LCS problem is $Sc(s_i,-)=Sc(-,t_j)=0$, $Sc(s_i,t_j)=1$ if $s_i=t_j$ and $Sc(s_i,t_j)=-\infty$ if $s_i \neq t_j$.
 	\end{sloppypar}
 The algorithm \ref{alg:task4} in the appendix \ref{app:alg} is an implementation of this algorithm.
 
@@ -174,9 +175,15 @@ The algorithm \ref{alg:task4} in the appendix \ref{app:alg} is an implementation
 \begin{exercise} \thlabel{task:5}% Task 5
 	\begin{sloppypar}
 
-In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. This is a much complex case that we take by reference \cite{durbin}. Let's start by calling the opening gap penalty $d$ and the increasing gap penalty $e$. We will need three matrices to keep the algorithm time complexity in $\O(nm)$. These matrices are ${d_{i,j}=\text{max}[d_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j}]}$, ${p_{i,j}=\text{max}[m_{i-1,j}+d,p_{i-1,j}+e]}$ and ${q_{i,j}=\text{max}[m_{i,j-1}+d,q_{i,j-1}+e]}$. We initialize them by $m_{i,j}=0$, $p_{0,j}=-\infty$, $q_{i,0}=-\infty$, $p_{i,0}=\text{"not used"}$, $q_{0,j}=\text{"not used"}$. In order to justify why we are using 
+In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. This is a much complex case that we take by reference \cite{durbin}. Let's start by calling the opening gap penalty $d$ and the increasing gap penalty $e$. We will need three matrices to keep the algorithm time complexity in $\O(nm)$. These matrices are ${d_{i,j}=\text{max}[d_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j}]}$, ${p_{i,j}=\text{max}[d_{i-1,j}-d,p_{i-1,j}-e]}$ and ${q_{i,j}=\text{max}[d_{i,j-1}-d,q_{i,j-1}-e]}$. We initialize them by $d_{i,j}=0$, $p_{0,j}=-\infty$, $q_{i,0}=-\infty$, $p_{i,0}=\text{"not used"}$, $q_{0,j}=\text{"not used"}$. The initialization of $D$ is due to the semi-global aspect of the case. That is, when we get to the first line or column, the gap costs are zero because they are in the beginning of the sequence. In order to justify why we are using three matrices we can think of our problem as having three different states as show in figure \ref{fig:automatom} copied from \cite{durbin}. In this figure, the matches are represented by the state $M$ and the gaps by $I_x$ and $I_Y$ The matrix $D$ keeps track of the cases where there is the alignment of of the bases and the matrices $P$ and $Q$ keeps track of the cases where we introduced gaps, in one or in the other sequence. We might run in a case where at first it is the better option to close the gap, without knowing that in the future, it will be necessary to reopen the gap, what would have a bigger cost than not making the match and keep the cost of the increasing gap. Therefore, we need to keep track of these cases which is the role of the other two matrices.
 
-Since we are on a semi-global alignment, we consider the best score equals to ${\text{max}[\text{max}(d_{n,1},\dots,d_{n,j}),\text{max}(d_{1,m},\dots ,d_{i,m})]}$ and we make the traceback from this point.
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\linewidth]{automaton.png}}
+	\caption{Diagram showing the three states.}
+	\label{fig:automatom}
+\end{figure}
+
+Since we are on a semi-global alignment, we consider the best score equals to ${\text{max}[\text{max}(d_{n,1},\dots,d_{n,j}),\text{max}(d_{1,m},\dots ,d_{i,m})]}$ and we make the traceback from this point. In order to do it we need to consider, like in the problems above, which option was used to get the maximum value but this implies changing between states. Keeping in the state $I_x$ or $I_y$ means increasing the gap, and the state $M$ means a match.
 \end{sloppypar}
 
 The implementation is shown in the algorithm \ref{alg:task5} in the appendix \ref{app:alg}.
