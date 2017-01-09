@@ -4,7 +4,7 @@
 \documentclass[10pt]{article} %draft = show box warnings
 \usepackage[a4paper, total={6.5in,10.2in}]{geometry} % Flexible and complete interface to document dimensions
 
-\usepackage[utf8]{inputenc} % Accept different input encodings [utf8]
+\usepackage[utf8]{inputenc} % accept different input encodings [utf8]
 \usepackage[T1]{fontenc}    % Standard package for selecting font encodings
 \usepackage{lmodern} % Good looking T1 font
 % --------------------------------------------------------------
@@ -13,7 +13,7 @@
 %\usepackage{mathpazo} % Hermann Zapf's Palatino font
 %\usepackage{kpfonts} % Kepler font
 %\usepackage{mathptmx} % Times New Roman Like Font
-%\usepackage{eulervm} %  AMS Euler (eulervm) math font.
+%\usepackage{eulervm} %  aMS Euler (eulervm) math font.
 
 % --------------------------------------------------------------
 %                         Packages
@@ -21,12 +21,14 @@
 \usepackage[english]{babel} % Multilingual support
 \usepackage{graphicx} % Enhanced support for graphics
 \usepackage{float} % Improved interface for floating objects
-\usepackage{amsmath,amsthm,amssymb} % American Mathematics Society facilities
+\usepackage{amsmath,amsthm,amssymb} % american Mathematics Society facilities
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{verbatim}
-\usepackage[title]{appendix}
+\usepackage[titletoc,toc,title]{appendix}
+\usepackage{titlesec}
+\usepackage{theoremref}
 
 % --------------------------------------------------------------
 %                       Exercise Env
@@ -50,7 +52,7 @@
 % Change counter type
 %\renewcommand{\theexercise}{\Roman{exercise}. } % Exercise I)
 \renewcommand{\theexercise}{\arabic{exercise}.} % Exercise 1.
-%\renewcommand{\theexercise}{\Alph{exercise}.} % Exercise A.
+%\renewcommand{\theexercise}{\alph{exercise}.} % Exercise a.
 %\renewcommand{\theexercise}{\alph{exercise}.} % Exercise a.
 
 % --------------------------------------------------------------
@@ -87,7 +89,7 @@
 % --------------------------------------------------------------
 %                       Custom commands, counters
 % --------------------------------------------------------------
-\renewcommand{\lstlistingname}{Algorithm}
+\renewcommand{\lstlistingname}{algorithm}
 \renewcommand*{\O}{\mathcal{O}}
 
 % --------------------------------------------------------------
@@ -101,41 +103,90 @@
 \normalsize\textbf{Conception et analyse d'algorithmes} \hfill \textbf{École Polytechnique}\\
 \normalsize\textbf{INF 421} \hfill \textbf{\today}\vspace{20pt}
 \centerline{\Large Programming Project P1 – X2015}\vspace{5pt}
-\centerline{\Large \textbf{From ADN to formation of proteins : how to align sequences ?}}\vspace{3pt}
-\centerline{Project proposed by Marie Albenque -- \texttt{ albenque@lix.polytechnique.fr}}\vspace{13pt}
+\centerline{\Large \textbf{From aDN to formation of proteins : how to align sequences ?}}\vspace{3pt}
+\centerline{Project proposed by Marie albenque -- \texttt{ albenque@lix.polytechnique.fr}}\vspace{13pt}
 \centerline{Lucas Lugão Guimarães -- \texttt{lucas.lugao-guimaraes@polytechnique.edu}}
-\centerline{Alexandre Ribeiro João Macedo --  \texttt{alexandre.macedo@polytechnique.edu}}\vspace{20pt}
+\centerline{alexandre Ribeiro João Macedo --  \texttt{alexandre.macedo@polytechnique.edu}}\vspace{20pt}
 % --------------------------------------------------------------
 
-%% http://www.lix.polytechnique.fr/~albenque/INF421-2016/Alignment_Project.pdf
+%% http://www.lix.polytechnique.fr/~albenque/INF421-2016/alignment_Project.pdf
 
 \begin{exercise} % Task 1
 We can solve the longest common subsequence (LCS) for two sequences $s=s_1\dots s_n$ and $t=t_1\dots t_m$ in a naive way by considering all the $2^{n}$ subsequences of $s$ and determining if it is a subsequence of $t$. The last step can be done with a complexity of $\O(m)$, which leaves the naive algorithm with a complexity of $\O(2^{n}m)$.
 \end{exercise}
 
-\begin{exercise} % Task 2
-In order to solve the LCS in a more efficient way we can use dynamic programming (DP). We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ appended to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution is the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. In a more straight-forward way, we can solve it as described in \cite{jones}. The algorithm \ref{alg:task2} is an implementation in Java of this DP whose time complexity is $\O(nm)$.
+\begin{exercise} \thlabel{task:2} % Task 2
+In order to solve the LCS in a more efficient way we can use dynamic programming (DP). We denote $LCS(s,t)$ the solution of the problem given the inputs $s=s_1\dots s_n$ and $t=t_1\dots t_m$. In the case where $s_m = t_n = u$, the solution will be $u$ appended to the end of the solution of $LCS(\hat{s}=s_1\dots s_{n-1}, \hat{t}=t_1\dots t_{m-1})$. In the case where $s_m \neq t_n$, the solution is the longest sequence between $LCS(\hat{s}=s_1\dots s_{n-1}, t)$ and $LCS(s, \hat{t}=t_1\dots t_{m-1})$. 
+
+In a more straight-forward way, we can solve it as described in \cite{jones}. We use a matrix $A_{m,n}$ such that the elements $a_{i,j}$ corresponds to the length of a LCS of $\hat{s}=s_1\dots s_{i}$ and $\hat{t}=t_1\dots t_{j}$. It is clear that we initialize the matrix as $a_{i,0} = a_{0,j} = 0$ for all $0\leq i \leq n$ and $0\leq j \leq m$. Then we compute the recurrence
+\begin{align*}
+		a_{i,j} = \text{max}
+	\begin{cases}
+	a_{i-1,j} &\\
+	a_{i,j-1} &\\
+	a_{i-1,j-1}+1, &\text{ if } s_i=t_j 
+	\end{cases}
+	\text{.}
+\end{align*}
+The first case corresponds to the case when $s_i$ is not present in the LCS, the second corresponds to the case when $t_j$ is not present in the LCS and the third case when both are present. The longest length is given by $a_{n,m}$. In order to get the LSC, we need to keep track of which of the cases were chosen. We can do this by creating a new matrix 
+\begin{align*}
+	b_{i,j} =
+	\begin{cases}
+	\uparrow, &\text{if } a_{i,j}=a_{i-1,j} \\
+	\leftarrow, &\text{if } a_{i,j}=a_{i-1,j} \\
+	\nwarrow, &\text{if } a_{i,j}=a_{i-1,j-1} +1
+	\end{cases}
+\end{align*}
+and print the character that corresponds to the case $\nwarrow$. That is, the LCS will composed by all $s_i$ such that $b_{i,j}= \nwarrow$. This algorithms has a time complexity of $\O(nm)$.
+
+The algorithm \ref{alg:task2} in the appendix \ref{app:alg} is an implementation of this DP.
 
 \end{exercise}
 
-\begin{exercise} % Task 3
+\begin{exercise} % Task 3 
+We can show the equivalence between the editing distance and the number of inserted hyphens added to the number mismatches, letters that are  different between sequences, by interpreting the action of adding an hyphen to a sequence, lets say $s$, as an insertion in this sequence or as a deletion in $t$ and interpreting a mismatch as a transform in either of these sequences.
 
-We can show the equivalence between the editing distance and the number of inserted hyphens added to the number mismatches, letters that are  different between sequences, by interpreting the action of adding an hyphen to a sequence, lets say $s$, as an insertion in this sequence or as a deletion in $t$ and interpreting a mismatch as a transform in either of these sequences. The algorithm \ref{alg:task3} computes and displays one optimal alignment.
+The editing distance $ED(s,t)$ can be computed using the same idea of DP but in this case we initialize the matrix as $a_{i,0} = i$, $a_{0,j} = j$ to account for the not matches. As we want to minimize the distance the recurrence becomes
+\begin{align*}
+a_{i,j}=\text{min}
+\begin{cases}
+a_{i-1,j}+1 &\\
+a_{i,j-1}+1 &\\
+a_{i-1,j-1} &\text{ if } s_i=t_j
+\end{cases}
+\end{align*}
+and the traceback will be similar in a manner where gaps are added to the sequences when we do not have a match. 
+
+The algorithm \ref{alg:task3} computes and displays one optimal alignment.
  
 \end{exercise}
 
 \begin{exercise} % Task 4
-To compute the alignment using the Blosum50 score matrix, we use the Needleman-Wunsch algorithm as described in \cite{durbin}. The algorithm \ref{alg:task4} is an implementation of this algorithm.
+	\begin{sloppypar}
+To compute the alignment using the Blosum50 score matrix, we use the Needleman-Wunsch algorithm as named in \cite{durbin} and described in \cite{jones}. In that case the initialization becomes $a_{0,0}=0$, $a_{i,0} = a_{i-1,0} + Sc(s_i,-)$, $a_{0,j} = a_{0,j-1} + Sc(-,t_j)$ where $Sc(x,y)$ is the score between the alignment of $x$ and $y$ and $-$ is a gap. The recursion is ${
+a_{i,j}=\text{max}[a_{i-1,j}+Sc(s_i,-), a_{i,j-1}+Sc(-,t_j),a_{i-1,j-1}+Sc(s_i,t_j)]}$
+and the traceback will be similar to the described above. It is a more general case of \thref{task:2} where we define a penalty for adding a gap in a sequence, lets say $s$ and aligning this gap to a base of $t$ and we also define a score for aligning a base of $s$ with $t$. The value of $Sc$ that gives the same result as the LCS problem is $Sc(s_i,-)=Sc(-,t_j)=0$, $Sc(s_i,t_j)=1$ if $s_i=t_j$ and $Sc(s_i,t_j)=-\infty$ if $s_i \neq t_j$
+	\end{sloppypar}
+The algorithm \ref{alg:task4} in the appendix \ref{app:alg} is an implementation of this algorithm.
 
 \end{exercise}
 
-\begin{exercise} % Task 5
-In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. The implementation is shown in the algorithm \ref{alg:task5}.
+\begin{exercise} \thlabel{task:5}% Task 5
+	\begin{sloppypar}
+
+In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. This is a much complex case that we take by reference \cite{durbin}. Let's start by calling the opening gap penalty $d$ and the increasing gap penalty $e$. We will need three matrices to keep the algorithm time complexity in $\O(nm)$. These matrices are ${d_{i,j}=\text{max}[d_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j}]}$, ${p_{i,j}=\text{max}[m_{i-1,j}+d,p_{i-1,j}+e]}$ and ${q_{i,j}=\text{max}[m_{i,j-1}+d,q_{i,j-1}+e]}$. We initialize them by $m_{i,j}=0$, $p_{0,j}=-\infty$, $q_{i,0}=-\infty$, $p_{i,0}=\text{"not used"}$, $q_{0,j}=\text{"not used"}$. In order to justify why we are using 
+
+Since we are on a semi-global alignment, we consider the best score equals to ${\text{max}[\text{max}(d_{n,1},\dots,d_{n,j}),\text{max}(d_{1,m},\dots ,d_{i,m})]}$ and we make the traceback from this point.
+\end{sloppypar}
+
+The implementation is shown in the algorithm \ref{alg:task5} in the appendix \ref{app:alg}.
 
 \end{exercise}
 
 \begin{exercise} % Task 6
-For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. The algorithm \ref{alg:task6} is the implementation in Java.
+For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. In other words, it is better to align the sequences locally than going with a negative score. This is done by changing the case in \thref{task:5} to ${m_{i,j}=\text{max}[d_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j},0]}$.
+
+The algorithm \ref{alg:task6} in the appendix \ref{app:alg} shows the implementation
 
 \end{exercise}
 
@@ -154,22 +205,25 @@ The algorithms presented so far are all exact, in a sense that they will return 
 \begin{thebibliography}{3}
 	
 	\bibitem{jones} 
-	Neil C. Jones and Pavel A. Pevzner. 
-	\textit{An Introduction to Bioinformatics Algorithms}. 
+	Neil C. Jones and Pavel a. Pevzner. 
+	\textit{an Introduction to Bioinformatics algorithms}. 
 	MIT Press, 2004
 	
 	\bibitem{durbin} 
-	Richard Durbin, Sean R. Eddy, Anders Krogh and Graeme Mitchison. 
-	\textit{Biological Sequence Analysis: Probabilistic Models of Proteins and Nucleic Acids}. 
+	Richard Durbin, Sean R. Eddy, anders Krogh and Graeme Mitchison. 
+	\textit{Biological Sequence analysis: Probabilistic Models of Proteins and Nucleic acids}. 
 	Cambridge University Press, 1998
 	
 \end{thebibliography}
 
-\appendix
+\newpage
+\begin{appendices}
 	\section{Implementations of the algorithms in Java} \label{app:alg}
-	\lstinputlisting[caption={Longest common subsequence}, label={alg:task2}, language=java]{nada.java}
-	\lstinputlisting[caption={Optimal alignment}, label={alg:task3}, language=java]{nada.java}
-	\lstinputlisting[caption={Needleman-Wunsch}, label={alg:task4}, language=java]{nada.java}
-	\lstinputlisting[caption={Semi-global alignment with affine gap penalty}, label={alg:task5}, language=java]{nada.java}
-	\lstinputlisting[caption={Smith-Waterman with affine gaps}, label={alg:task6}, language=java]{nada.java}
+\lstinputlisting[caption={Longest common subsequence}, label={alg:task2}, language=java]{nada.java}
+\lstinputlisting[caption={Optimal alignment}, label={alg:task3}, language=java]{nada.java}
+\lstinputlisting[caption={Needleman-Wunsch}, label={alg:task4}, language=java]{nada.java}
+\lstinputlisting[caption={Semi-global alignment with affine gap penalty}, label={alg:task5}, language=java]{nada.java}
+\lstinputlisting[caption={Smith-Waterman with affine gaps}, label={alg:task6}, language=java]{nada.java}
+\end{appendices}
+
 \end{document}
