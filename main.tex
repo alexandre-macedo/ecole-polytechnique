@@ -32,7 +32,7 @@
 \usepackage{graphicx}
 
 % --------------------------------------------------------------
-%                       Exercise Env
+%                       Task Env
 % --------------------------------------------------------------
 \newtheoremstyle{problemstyle}  % <name>
 {3pt}                   % <space above>
@@ -55,6 +55,13 @@
 \renewcommand{\theexercise}{\arabic{exercise}.} % Exercise 1.
 %\renewcommand{\theexercise}{\alph{exercise}.} % Exercise a.
 %\renewcommand{\theexercise}{\alph{exercise}.} % Exercise a.
+
+% --------------------------------------------------------------
+%                       Comment Env
+% --------------------------------------------------------------
+\theoremstyle{problemstyle}
+\newtheorem{commental}{Comment}
+\renewcommand{\thecommental}{\arabic{commental}.} 
 
 % --------------------------------------------------------------
 %                       Listing conf
@@ -90,7 +97,7 @@
 % --------------------------------------------------------------
 %                       Custom commands, counters
 % --------------------------------------------------------------
-\renewcommand{\lstlistingname}{algorithm}
+\renewcommand{\lstlistingname}{Algorithm}
 \renewcommand*{\O}{\mathcal{O}}
 
 % --------------------------------------------------------------
@@ -103,8 +110,8 @@
 \noindent
 \normalsize\textbf{Conception et analyse d'algorithmes} \hfill \textbf{École Polytechnique}\\
 \normalsize\textbf{INF 421} \hfill \textbf{\today}\vspace{20pt}
-\centerline{\Large Programming Project P1 – X2015}\vspace{5pt}
-\centerline{\Large \textbf{From aDN to formation of proteins : how to align sequences ?}}\vspace{3pt}
+\centerline{\Large Programming Project P2 – X2015}\vspace{5pt}
+\centerline{\Large \textbf{From ADN to formation of proteins : how to align sequences ?}}\vspace{3pt}
 \centerline{Project proposed by Marie albenque -- \texttt{ albenque@lix.polytechnique.fr}}\vspace{13pt}
 \centerline{Lucas Lugão Guimarães -- \texttt{lucas.lugao-guimaraes@polytechnique.edu}}
 \centerline{alexandre Ribeiro João Macedo --  \texttt{alexandre.macedo@polytechnique.edu}}\vspace{20pt}
@@ -162,7 +169,7 @@ The algorithm \ref{alg:task3} computes and displays one optimal alignment.
  
 \end{exercise}
 
-\begin{exercise} % Task 4
+\begin{exercise} \thlabel{task:4}% Task 4
 	\begin{sloppypar}
 To compute the alignment using the Blosum50 score matrix, we use the Needleman-Wunsch algorithm as named in \cite{durbin} and described in \cite{jones}. In that case the initialization becomes $a_{0,0}=0$, $a_{i,0} = a_{i-1,0} + Sc(s_i,-)$, $a_{0,j} = a_{0,j-1} + Sc(-,t_j)$ where $Sc(x,y)$ is the score between the alignment of $x$ and $y$ and $-$ is a gap. The recursion is ${
 a_{i,j}=\text{max}[a_{i-1,j}+Sc(s_i,-), a_{i,j-1}+Sc(-,t_j),a_{i-1,j-1}+Sc(s_i,t_j)]}$
@@ -175,7 +182,7 @@ The algorithm \ref{alg:task4} in the appendix \ref{app:alg} is an implementation
 \begin{exercise} \thlabel{task:5}% Task 5
 	\begin{sloppypar}
 
-In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. This is a much complex case that we take by reference \cite{durbin}. Let's start by calling the opening gap penalty $d$ and the increasing gap penalty $e$. We will need three matrices to keep the algorithm time complexity in $\O(nm)$. These matrices are ${d_{i,j}=\text{max}[d_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j}]}$, ${p_{i,j}=\text{max}[d_{i-1,j}-d,p_{i-1,j}-e]}$ and ${q_{i,j}=\text{max}[d_{i,j-1}-d,q_{i,j-1}-e]}$. We initialize them by $d_{i,j}=0$, $p_{0,j}=-\infty$, $q_{i,0}=-\infty$, $p_{i,0}=\text{"not used"}$, $q_{0,j}=\text{"not used"}$. The initialization of $D$ is due to the semi-global aspect of the case. That is, when we get to the first line or column, the gap costs are zero because they are in the beginning of the sequence. In order to justify why we are using three matrices we can think of our problem as having three different states as show in figure \ref{fig:automatom} copied from \cite{durbin}. In this figure, the matches are represented by the state $M$ and the gaps by $I_x$ and $I_Y$ The matrix $D$ keeps track of the cases where there is the alignment of of the bases and the matrices $P$ and $Q$ keeps track of the cases where we introduced gaps, in one or in the other sequence. We might run in a case where at first it is the better option to close the gap, without knowing that in the future, it will be necessary to reopen the gap, what would have a bigger cost than not making the match and keep the cost of the increasing gap. Therefore, we need to keep track of these cases which is the role of the other two matrices.
+In this question, we use a variant of the previous algorithm that considers an affine gap penalty and ignores penalty gaps at the beginning and at the end of sequences, it can be classified as a semi-global alignment with affine gap penalty. This is a much complex case that we take by reference \cite{durbin}. Let's start by calling the opening gap penalty $d$ and the increasing gap penalty $e$. We will need three matrices to keep the algorithm time complexity in $\O(nm)$. These matrices are ${d_{i,j}=\text{max}[d_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j}]}$, ${p_{i,j}=\text{max}[d_{i-1,j}-d,p_{i-1,j}-e]}$ and ${q_{i,j}=\text{max}[d_{i,j-1}-d,q_{i,j-1}-e]}$. We initialize them by $d_{i,j}=0$, $p_{0,j}=-\infty$, $q_{i,0}=-\infty$, $p_{i,0}=\text{"not used"}$, $q_{0,j}=\text{"not used"}$. Since this line and column are not used, we initialize them to $0$. The initialization of $D$ is due to the semi-global aspect of the case. That is, when we get to the first line or column, the gap costs are zero because they are in the beginning of the sequence. In order to justify why we are using three matrices we can think of our problem as having three different states as show in figure \ref{fig:automatom} found in \cite{durbin}. In this figure, the matches are represented by the state $M$ and the gaps by $I_x$ and $I_y$ The matrix $D$ keeps track of the cases where there is the alignment of of the bases and the matrices $P$ and $Q$ keeps track of the cases where we introduced gaps, in one or in the other sequence. We might run in a case where at first it is the better option to close the gap, without knowing that in the future, it will be necessary to reopen the gap, what would have a bigger cost than not making the match and keep the cost of the increasing gap. Therefore, we need to keep track of these cases which is the role of the other two matrices.
 
 \begin{figure}[h]
 	\centerline{\includegraphics[width=0.5\linewidth]{automaton.png}}
@@ -191,7 +198,7 @@ The implementation is shown in the algorithm \ref{alg:task5} in the appendix \re
 \end{exercise}
 
 \begin{exercise} % Task 6
-For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. In other words, it is better to align the sequences locally than going with a negative score. This is done by changing the case in \thref{task:5} to ${m_{i,j}=\text{max}[d_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j},0]}$.
+For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. In other words, it is better to align the sequences locally than going with a negative score. This is done by changing the case in \thref{task:5} to ${d_{i,j}=\text{max}[d_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j},0]}$.
 
 The algorithm \ref{alg:task6} in the appendix \ref{app:alg} shows the implementation
 
@@ -205,9 +212,9 @@ The algorithms presented so far are all exact, in a sense that they will return 
 	content...
 \end{exercise}
 
-\begin{exercise} % Task 9
-	content...
-\end{exercise}
+\begin{commental}
+For \thref{task:4} and \thref{task:5} we used MATLAB and Bioinformatics Toolbox Release 2016a in order to test our algorithm. This toolbox has an implementation of the cases we were handling in these tasks, making us able to validate our code and fine minor errors in the implementation.
+\end{commental}
 
 \begin{thebibliography}{3}
 	
