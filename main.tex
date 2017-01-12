@@ -1,5 +1,155 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+%http://www.cmap.polytechnique.fr/~allaire/map411/MiniProjets/sujets2016/sujet_Augier.pdf
+
+% --------------------------------------------------------------
+%                         Template
+% --------------------------------------------------------------
+
+\documentclass[12pt]{article} %draft = show box warnings
+\usepackage[utf8]{inputenc} % Accept different input encodings [utf8]
+\usepackage[T1]{fontenc}    % Standard package for selecting font encodings
+\usepackage{lmodern} % Good looking T1 font
+\usepackage[a4paper, total={6.5in,10.2in}]{geometry} % Flexible and complete interface to document dimensions
+\renewcommand{\baselinestretch}{1.0}
+
+% --------------------------------------------------------------
+%                         Other Fonts
+% --------------------------------------------------------------
+%\usepackage{mathpazo} % Hermann Zapf's Palatino font
+%\usepackage{kpfonts} % Kepler font
+%\usepackage{mathptmx} % Times New Roman Like Font
+%\usepackage{eulervm} %  AMS Euler (eulervm) math font.
+
+% --------------------------------------------------------------
+%                         Package
+% --------------------------------------------------------------
+\usepackage[french]{babel} % Multilingual support [french]
+\usepackage{enumerate} % Enumerate with redefinable labels
+\usepackage{graphicx} % Enhanced support for graphics
+\usepackage[makeroom]{cancel} % Place lines through maths formulae
+\usepackage{booktabs} % Publication quality tables
+\usepackage{braket} % Dirac bra-ket and set notations
+\usepackage{epstopdf} % Convert EPS to ‘encapsulated’ PDF using Ghostscript
+\usepackage{bbm} % "Blackboard-style" cm fonts
+\RequirePackage{epsfig} % Include Encapsulated PostScript
+\usepackage{float} % Improved interface for floating objects
+\usepackage{amsmath,amsthm,amssymb} % American Mathematics Society facilities
+
+\usepackage{stmaryrd} % St Mary Road symbols for theoretical computer science.
+\usepackage{xfrac} % Create inline fraction
+\usepackage{hyperref} % Create hyperf
+\usepackage{secdot} % Put dots at the end of a section
+
+
+
+%------------------- tikz --------------------------------------
+\usepackage{tikz,bm,color}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.pathreplacing,angles,quotes}
+\usetikzlibrary{shapes.geometric,arrows,positioning}
+\usetikzlibrary{calc}
+
+% --------------------------------------------------------------
+%                         Custom commands
+% --------------------------------------------------------------
+\newcommand*{\1}{\mathbbm{1}}
+\newcommand*{\E}{\mathbb{E}}
+\newcommand*{\Pb}{\mathbb{P}}
+\newcommand*{\N}{\mathbb{N}} 
+\newcommand*{\Z}{\mathbb{Z}}
+\newcommand*{\car}{\text{card}}
+\renewcommand*{\Re}{\operatorname{Re}}
+\renewcommand*{\Im}{\operatorname{Im}}
+\newcommand*\Laplace{\mathop{}\!\mathbin\bigtriangleup}
+\newcommand*{\grad}{\nabla}
+
+% --------------------------------------------------------------
+%                         Exercise Environment
+% --------------------------------------------------------------
+\renewcommand{\thesection}{\Roman{section}}
+\sectiondot{subsection}
+\renewcommand{\subsubsection}{
+	\pagebreak[2]
+	\refstepcounter{subsubsection}
+	\noindent
+	\textbf{\thesubsubsection.}
+}
+% --------------------------------------------------------------
+
 \begin{document}
-(Type your content here.)
+	% --------------------------------------------------------------
+	%                       Title  Header
+	% --------------------------------------------------------------
+	\noindent
+	\normalsize\textbf{Approximation numérique et optimisation} \hfill \textbf{École Polytechnique}\\
+	\normalsize\textbf{MAP 411} \hfill \textbf{\today}\vspace{20pt}
+	\centerline{\Large Projet MAP411 – X2015}\vspace{5pt}
+	\centerline{\Large \textbf{Applications de méthodes d'optimisation à la résolution des EDP}}\vspace{3pt}
+	\centerline{Sujet proposé par Nicolas Augier -- \texttt{nicolas.augier@ens-cachan.fr}  }\vspace{13pt}
+	\centerline{Lucas Lugão Guimarães -- \texttt{lucas.lugao-guimaraes@polytechnique.edu}  }
+	\centerline{Alexandre Ribeiro João Macedo --  \texttt{alexandre.macedo@polytechnique.edu}}\vspace{20pt}
+	% --------------------------------------------------------------
+	
+	\section{Méthodes de gradient}
+	\subsection{Gradient à pas constant}
+	\subsubsection{} %%I.1.1
+	La figure \ref{fig:I11} montre les lignes de niveau de la fonction de Rosenbrock,
+	\begin{align} \label{eq:rosenbrock}
+	J(u_1,u_2)=(u_1-1)^2+100(u_1^2-u_2)^2 \text{,}
+	\end{align}
+	dans le rectangle $(u_1, u_2) \in [-1.5, 1.5] \textmd{ x } [0.5, 1.5]$.
+	\begin{figure}[ht]
+		\begin{center}
+	\includegraphics[width=5cm]{nada.png}
+		\end{center}
+		\caption{Lignes de niveau de $J$.}
+		\label{fig:I11}
+	\end{figure}
+	
+	\subsubsection{} %% I.1.2
+	On applique la méthode de gradient a pas constant $u_{k+1}=u_k-\rho \grad J(u_k)$ ou, pour $ u_k= (u_{k1},u_{k2})$, on a $\grad J(u_k) = ( 400u_{k1}^3 + 2u_{k1}  - 400u_{k1}u_{k2} - 2, 200u_{k1}^2 - 200u_{k2})$. Pour les valeurs numériques $u_0=(1, 0)$ et $\rho = 0.002$, et le critère d'arrêt $J(u_{k+1}) < 10^{-3}$, on a besoin de \textbf{$12312$} itérations. La figure \ref{fig:I12} montre les lignes de niveau de l'équation \ref{eq:rosenbrock} et le parcours du méthode avant l'arrête.
+	\begin{figure}[ht]
+		\begin{center}
+	\includegraphics[width=5cm]{nada.png}
+		\end{center}
+		\caption{Parcours du méthode de gradient à pas constant.}
+		\label{fig:I12}
+	\end{figure}
+	
+	\subsubsection{} %% I.1.3
+	Si on applique le méthode pour $\rho = 0.0045$ et pour $\rho = 0.01$, on a que le méthode diverge. 
+	
+	\subsection{Gradient optimal}
+	\subsubsection{}
+	Soit $J(u)=\frac{1}{2} \langle Au, u \rangle - \langle b, u \rangle$. On veut trouver ${\rho_k=\textrm{argmin}_{\rho \geq 0} J(u_k- \rho \grad J(u_k))}$. Soit ${r_k= \grad J(u_k) = Au_k-b}$, on a
+	\begin{align} \label{eq:gradopt}
+	\begin{split}
+	J(u_k - \rho \grad J(u_k)) &= J(u_k - \rho r_k) \\ 
+	&=  \frac{1}{2} \langle A(u_k - \rho r_k), u_k - \rho r_k \rangle - \langle b, u_k - \rho r_k \rangle \\
+	&=\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle + \frac{1}{2} \langle - \rho A r_k, - \rho r_k \rangle  \\
+	&  - \langle b, - \rho r_k \rangle \\
+    &= J(u_k) - \frac{\rho}{2} [\langle A u_k, r_k \rangle + \langle A r_k, u_k \rangle]+\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle b,  r_k \rangle \\
+    &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle A u_k, r_k \rangle] \\
+    &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle r_k - b, r_k \rangle] \\
+      &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle r_k, r_k \rangle \textrm{.}
+	\end{split}
+	\end{align}
+	Alors, la valeur de $\rho$ que minimise l'équation \ref{eq:gradopt} est
+    \begin{align*}
+    \rho_k=\frac{\langle r_k, r_k \rangle}{\langle A r_k, r_k \rangle} \textrm{.}
+    \end{align*}
+    
+    Pour les valeur
+    \begin{align*}
+    A=
+    \begin{pmatrix}
+    1 & 0 \\
+    0 & \lambda
+    \end{pmatrix} \qquad \text{ et } \qquad b=
+    \begin{pmatrix}
+    1 \\
+    1
+    \end{pmatrix}
+    \end{align*}
+    On a 
 \end{document}
