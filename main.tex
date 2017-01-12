@@ -1,10 +1,10 @@
-% 
+%http://www.cmap.polytechnique.fr/~allaire/map411/MiniProjets/sujets2016/sujet_Augier.pdf
 
 % --------------------------------------------------------------
 %                         Template
 % --------------------------------------------------------------
 
-\documentclass[12pt]{article} %draft = show box warnings
+\documentclass[12pt, draft]{article} %draft = show box warnings
 \usepackage[utf8]{inputenc} % Accept different input encodings [utf8]
 \usepackage[T1]{fontenc}    % Standard package for selecting font encodings
 \usepackage{lmodern} % Good looking T1 font
@@ -126,30 +126,57 @@
 	\begin{split}
 	J(u_k - \rho \grad J(u_k)) &= J(u_k - \rho r_k) \\ 
 	&=  \frac{1}{2} \langle A(u_k - \rho r_k), u_k - \rho r_k \rangle - \langle b, u_k - \rho r_k \rangle \\
-	&=\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle + \frac{1}{2} \langle - \rho A r_k, - \rho r_k \rangle  \\
-	&  - \langle b, - \rho r_k \rangle \\
+	&=\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle + \frac{1}{2} \langle - \rho A r_k,  - \rho r_k \rangle  \\
+	& \hphantom{==\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle } - \langle b, - \rho r_k \rangle\\
     &= J(u_k) - \frac{\rho}{2} [\langle A u_k, r_k \rangle + \langle A r_k, u_k \rangle]+\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle b,  r_k \rangle \\
     &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle A u_k, r_k \rangle] \\
     &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle r_k - b, r_k \rangle] \\
       &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle r_k, r_k \rangle \textrm{.}
 	\end{split}
 	\end{align}
-	Alors, la valeur de $\rho$ que minimise l'équation \ref{eq:gradopt} est
-    \begin{align*}
-    \rho_k=\frac{\langle r_k, r_k \rangle}{\langle A r_k, r_k \rangle} \textrm{.}
-    \end{align*}
-    
-    Pour les valeur
-    \begin{align*}
-    A=
+	Alors, la valeur de $\rho$ que minimise l'équation \ref{eq:gradopt} est 
+	\begin{align*}
+	\rho_k=\frac{\langle r_k, r_k \rangle}{\langle A r_k, r_k \rangle}
+	\end{align*}
+\subsubsection
+Pour les valeur $A=\begin{pmatrix} 1 & 0 \\  0 & \lambda \end{pmatrix}$ et  $b= \begin{pmatrix} 1 \\1 \end{pmatrix}$ on a
+\begin{align*}
+    	\begin{pmatrix}
+    	r_{k1} \\
+    	r_{k2}
+    	\end{pmatrix}
+    =    
+ \begin{pmatrix}
+1 & 0 \\
+0 & \lambda
+\end{pmatrix} 
+\begin{pmatrix}
+u_{k1} \\
+u_{k2}
+\end{pmatrix}
++
     \begin{pmatrix}
-    1 & 0 \\
-    0 & \lambda
-    \end{pmatrix} \qquad \text{ et } \qquad b=
-    \begin{pmatrix}
-    1 \\
-    1
-    \end{pmatrix}
-    \end{align*}
-    On a 
+1 \\
+1
+\end{pmatrix}
+=
+ \begin{pmatrix}
+u_{k1} + 1 \\
+\lambda u_{k2} +1
+\end{pmatrix}
+\text{. Alors,}
+\end{align*}
+\begin{align} \label{eq:rho_k}
+\rho_k = \frac{(u_{k1} + 1)^2 + (\lambda u_{k2} +1)^2}{(u_{k1} + 1)^2 + \lambda (\lambda u_{k2} +1)^2 }
+\end{align}
+À chaque itération, on actualise $\rho_k$ en utilisant l'équation \ref{eq:rho_k}. Les figures \ref{fig:I22a} et \ref{fig:I22b} montre les résultats pour différentes condition initiales et pour le critère de arrête 
+\begin{align*}
+\frac{\| r_k \|}{\| r_0 \|} \leq 10^{-2}\text{.}
+\end{align*}
+
+\subsubsection
+Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme le rapport $\frac{\| r_k \|}{\| r_0 \|}$ en fonction de $k$ pour les cas montrés dans les figure \ref{fig:I22a} et \ref{fig:I22b}.
+
+\subsubsection
+Quand on met en œuvre le procède pour l'équation \ref{eq:rosenbrock}, on trouve le résultat ci-dessous.
 \end{document}
