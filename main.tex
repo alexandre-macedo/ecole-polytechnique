@@ -289,11 +289,20 @@ $
 M_{ij}=
 \begin{cases}
 1 + 2 \delta &\text{, si } i=j \\
-\delta - \gamma &\text{, si } i=j-1 \\
+\gamma - \delta  &\text{, si } i=j-1 \\
 - \gamma - \delta &\text{, si } i=j+1 \\
 0 &\text{, sinon}
 \end{cases}
-$
+$.
+
+\subsubsection{}
+On définit $M^s =\frac{1}{2} (M + M^T) = M^s_{ij}=
+\begin{cases}
+1 + 2 \delta &\text{, si } i=j \\
+- \delta &\text{, si } i =  j \pm 1 \\
+0 &\text{, sinon}
+\end{cases}
+$. D'après \cite{weiss}, M est positive définit si et seulement si $M^s$ le est. D'après \cite{milica}, comme $\| 1 +2 \delta \| > \| - \delta \| + \| - \delta \|$, $M^s$ est définit positive, alors $M$ est définit positive. Ce qu'implique que $M$ est inversible.
 
 \begin{thebibliography}{3}
 
