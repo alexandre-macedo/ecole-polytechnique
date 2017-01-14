@@ -101,7 +101,7 @@
 	dans le rectangle $(u_1, u_2) \in [-1.5, 1.5] \textmd{ x } [0.5, 1.5]$.
 	\begin{figure}[ht]
 		\begin{center}
-	\includegraphics[width=5cm]{nada.png}
+	\includegraphics[width=5cm]{I11.eps}
 		\end{center}
 		\caption{Lignes de niveau de $J$.}
 		\label{fig:I11}
@@ -155,20 +155,20 @@ Pour les valeur $A=\begin{pmatrix} 1 & 0 \\  0 & \lambda \end{pmatrix}$ et  $b= 
 u_{k1} \\
 u_{k2}
 \end{pmatrix}
-+
+-
     \begin{pmatrix}
 1 \\
 1
 \end{pmatrix}
 =
  \begin{pmatrix}
-u_{k1} + 1 \\
-\lambda u_{k2} +1
+u_{k1} - 1 \\
+\lambda u_{k2} -1
 \end{pmatrix}
 \text{. Alors,}
 \end{align*}
 \begin{align} \label{eq:rho_k}
-\rho_k = \frac{(u_{k1} + 1)^2 + (\lambda u_{k2} +1)^2}{(u_{k1} + 1)^2 + \lambda (\lambda u_{k2} +1)^2 }
+\rho_k = \frac{(u_{k1} - 1)^2 + (\lambda u_{k2} - 1)^2}{(u_{k1} - 1)^2 + \lambda (\lambda u_{k2} - 1)^2 }
 \end{align}
 À chaque itération, on actualise $\rho_k$ en utilisant l'équation \ref{eq:rho_k}. Les figures \ref{fig:I22a} et \ref{fig:I22b} montre les résultats pour différentes condition initiales et pour le critère de arrête 
 \begin{align*}
@@ -197,14 +197,14 @@ On remplace $u_i^n$ par $u(x_i, t_n)$ où $u$ est une fonction régulière. On c
 \begin{align*}
 \frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta x} -b \frac{u_{i+1}^{n}-u_{i-1}^{n} - 2 u_i^{n}}{\Delta x^2} =0 \text{, on a}
 \end{align*}
-\begin{align*}
-u(x_{i}, t_{n+1})=u(x_{i}, t_{n}) + \Delta t \frac{\partial u}{\partial t} (x_{i}, t_{n}) + \frac{1}{2} \Delta t^2 \frac{\partial^2 u}{\partial t^2} (x_{i}, t_{n}) + \O (\Delta t^3)
-\end{align*}
 \begin{multline*}
-u(x_{i \pm 1}, t_n)= u(x_{i}, t_{n}) \pm \Delta x \frac{\partial u}{\partial x} (x_{i}, t_{n}) + \frac{1}{2} \Delta x^2 \frac{\partial^2 u}{\partial x^2}(x_{i}, t_{n}) \pm \frac{1}{6} \Delta x^3 \frac{\partial^3 u}{\partial x^3}(x_{i}, t_{n}) \\ + \frac{1}{24} \Delta x^4 \frac{\partial^4 u}{\partial^4 x} (x_{i}, t_{n}) + \O (\Delta x^5) \textrm{.}
+u(x_{i \pm 1}, t_n)= u(x_{i}, t_{n}) \pm \Delta x \frac{\partial u}{\partial x} (x_{i}, t_{n}) + \frac{1}{2} \Delta x^2 \frac{\partial^2 u}{\partial x^2}(x_{i}, t_{n}) \pm \frac{1}{6} \Delta x^3 \frac{\partial^3 u}{\partial x^3}(x_{i}, t_{n}) \\ + \frac{1}{24} \Delta x^4 \frac{\partial^4 u}{\partial^4 x} (x_{i}, t_{n}) + \O (\Delta x^5) \text{,}
 \end{multline*}
+\begin{align*}
+u(x_{i}, t_{n+1})=u(x_{i}, t_{n}) + \Delta t \frac{\partial u}{\partial t} (x_{i}, t_{n}) + \frac{1}{2} \Delta t^2 \frac{\partial^2 u}{\partial t^2} (x_{i}, t_{n}) + \O (\Delta t^3) \text{.}
+\end{align*}
 On remplace le développement dans l'erreur de troncature qui est définit comme
-\begin{align*} \label{eq:erreur}
+\begin{align*}
 \begin{split}
 E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta x} -b \frac{u_{i+1}^{n}-u_{i-1}^{n} - 2 u_i^{n}}{\Delta x^2} \\
 &= \frac{\partial u}{\partial t}(x_i, t_n) + a \frac{\partial u}{\partial x}(x_i, t_n) - b \frac{\partial^2 u}{\partial^2 t}(x_i, t_n) + \O (\Delta t + \Delta x^2)
@@ -212,8 +212,25 @@ E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta
 \end{align*}
 Le erreur ci-dessus est dans le "standad" mentionné dans le Remarque 2.2.5 du polycopié, c'est à dire, pour une fonction régulière qui n'est pas solution de notre problème, la limite de l'erreur de troncature n'est pas nulle. Alors c'est schéma est consistante et d'ordre 1 en temps et 2 en espace.
 Pour le schéma
-\begin{align}
+\begin{align*}
+\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\Delta x} -b \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1} - 2 u_i^{n+1}}{\Delta x^2} =0 \text{,}
+\end{align*}
+on fait le développement au tour du point $(x_i, t_{n+1})$ et on trouve
+\begin{multline*}
+u(x_{i \pm 1}, t_{n+1})= u(x_{i}, t_{n+1}) \pm \Delta x \frac{\partial u}{\partial x} (x_{i}, t_{n+1}) + \frac{1}{2} \Delta x^2 \frac{\partial^2 u}{\partial x^2}(x_{i}, t_{n+1}) \pm \frac{1}{6} \Delta x^3 \frac{\partial^3 u}{\partial x^3}(x_{i}, t_{n+1}) \\ + \frac{1}{24} \Delta x^4 \frac{\partial^4 u}{\partial^4 x} (x_{i}, t_{n+1}) + \O (\Delta x^5) \text{,}
+\end{multline*}
+\begin{align*}
+u(x_{i}, t_{n})=u(x_{i}, t_{n+1}) - \Delta t \frac{\partial u}{\partial t} (x_{i}, t_{n+1}) + \frac{1}{2} \Delta t^2 \frac{\partial^2 u}{\partial t^2} (x_{i}, t_{n+1}) + \O (\Delta t^3) \text{, et finalement}
+\end{align*}
 
-\end{align}
+\begin{align*}
+\begin{split}
+E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\Delta x} -b \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1} - 2 u_i^{n+1}}{\Delta x^2} \\
+&= \frac{\partial u}{\partial t}(x_i, t_{n+1}) + a \frac{\partial u}{\partial x}(x_i, t_{n+1}) - b \frac{\partial^2 u}{\partial^2 t}(x_i, t_{n+1}) + \O (\Delta t + \Delta x^2) \text{.}
+\end{split}
+\end{align*}
+Par le même argument du schéma antérieur, ce schéma est consistant d'ordre 1 en temps et 2 en espace.
+
+\subsubsection
 
 \end{document}
