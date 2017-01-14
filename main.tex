@@ -4,7 +4,7 @@
 %                         Template
 % --------------------------------------------------------------
 
-\documentclass[12pt, draft]{article} %draft = show box warnings
+\documentclass[12pt]{article} %draft = show box warnings
 \usepackage[utf8]{inputenc} % Accept different input encodings [utf8]
 \usepackage[T1]{fontenc}    % Standard package for selecting font encodings
 \usepackage{lmodern} % Good looking T1 font
@@ -38,6 +38,7 @@
 \usepackage{xfrac} % Create inline fraction
 \usepackage{hyperref} % Create hyperf
 \usepackage{secdot} % Put dots at the end of a section
+\usepackage{comment}
 
 
 
@@ -98,10 +99,12 @@
 	\begin{align} \label{eq:rosenbrock}
 	J(u_1,u_2)=(u_1-1)^2+100(u_1^2-u_2)^2 \text{,}
 	\end{align}
-	dans le rectangle $(u_1, u_2) \in [-1.5, 1.5] \textmd{ x } [0.5, 1.5]$.
+	dans le rectangle $(u_1, u_2) \in [-1.5, 1.5] \textmd{ x } [0.5, 1.5]$.   
 	\begin{figure}[ht]
 		\begin{center}
-	\includegraphics[width=5cm]{I11.eps}
+    \hspace*{-1cm}  
+	\includegraphics[height=8cm]{I11.eps}
+        \vspace{-1cm}
 		\end{center}
 		\caption{Lignes de niveau de $J$.}
 		\label{fig:I11}
@@ -109,17 +112,26 @@
 	
 	\subsubsection{} %% I.1.2
 	On applique la méthode de gradient a pas constant $u_{k+1}=u_k-\rho \grad J(u_k)$ ou, pour $ u_k= (u_{k1},u_{k2})$, on a $\grad J(u_k) = ({400u_{k1}^3 + 2u_{k1}  - 400u_{k1}u_{k2} - 2}, {200u_{k1}^2 - 200u_{k2}})$. Pour les valeurs numériques $u_0=(1, 0)$ et $\rho = 0.002$, et le critère d'arrêt $J(u_{k+1}) < 10^{-3}$, on a besoin de \textbf{$12312$} itérations. La figure \ref{fig:I12} montre les lignes de niveau de l'équation \ref{eq:rosenbrock} et le parcours du méthode avant l'arrête.
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\begin{center}
-	\includegraphics[width=5cm]{nada.png}
+	\includegraphics[height=8cm]{I12002.eps}
+        \vspace{-1cm}
 		\end{center}
 		\caption{Parcours du méthode de gradient à pas constant.}
-		\label{fig:I12}
+		\label{fig:I12p}
 	\end{figure}
 	
 	\subsubsection{} %% I.1.3
 	Si on applique le méthode pour $\rho = 0.0045$ et pour $\rho = 0.01$, on a que le méthode diverge. 
-	
+	\begin{figure}[H]
+		\begin{center}
+	\includegraphics[height=5cm]{I12d.eps}
+        \vspace{-1cm}
+		\end{center}
+		\caption{Le parcours du méthode de gradient à pas constant $\rho = 0.045$ et $\rho = 0.01$.}
+		\label{fig:I12d}
+	\end{figure}
+    \newpage
 	\subsection{Gradient optimal}
 	\subsubsection{}
 	Soit $J(u)=\frac{1}{2} \langle Au, u \rangle - \langle b, u \rangle$. On veut trouver ${\rho_k=\textrm{argmin}_{\rho \geq 0} J(u_k- \rho \grad J(u_k))}$. Soit ${r_k= \grad J(u_k) = Au_k-b}$, on a
@@ -176,8 +188,24 @@ u_{k1} - 1 \\
 \end{align*}
 
 \subsubsection
-Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme le rapport $\frac{\| r_k \|}{\| r_0 \|}$ en fonction de $k$ pour les cas montrés dans les figure \ref{fig:I22a} et \ref{fig:I22b}.
-
+Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme le rapport $\frac{\| r_k \|}{\| r_0 \|}$ en fonction de $k$ pour les cas montrés dans les figure \ref{fig:I23a} et \ref{fig:I23b}.
+\begin{figure}[H]
+	\begin{center}
+\includegraphics[height=8cm]{I123a.eps}
+    \vspace{-1cm}
+	\end{center}
+	\caption{Parcours du méthode de gradient à pas optimal.}
+	\label{fig:I23a}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+\includegraphics[height=8cm]{I123b.eps}
+    \vspace{-1cm}
+	\end{center}
+	\caption{Parcours du méthode de gradient à pas optimal.}
+	\label{fig:I23b}
+\end{figure}
+	
 \subsubsection
 Quand on met en œuvre le procédé de dichotomie pour l'équation \ref{eq:rosenbrock}, on trouve le résultat ci-dessous.
 
@@ -185,6 +213,7 @@ Quand on met en œuvre le procédé de dichotomie pour l'équation \ref{eq:rosen
 \subsection{Méthode de Newton}
 \subsection{Méthode de Gauss-Newton}
 \subsubsection{}
+On commence par calculer la matrice $Df(u)$ où $\left[Df(u)\right]_{ij} = \frac{\partial f_i(u)}{\partial u_j}$
 
 \subsubsection{}
 
@@ -210,7 +239,7 @@ E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta
 &= \frac{\partial u}{\partial t}(x_i, t_n) + a \frac{\partial u}{\partial x}(x_i, t_n) - b \frac{\partial^2 u}{\partial^2 t}(x_i, t_n) + \O (\Delta t + \Delta x^2)
 \end{split}
 \end{align*}
-Le erreur ci-dessus est dans le "standad" mentionné dans le Remarque 2.2.5 du polycopié, c'est à dire, pour une fonction régulière qui n'est pas solution de notre problème, la limite de l'erreur de troncature n'est pas nulle. Alors c'est schéma est consistante et d'ordre 1 en temps et 2 en espace.
+Le erreur ci-dessus est dans le "standard" mentionné dans le Remarque 2.2.5 du polycopié, c'est à dire, pour une fonction régulière qui n'est pas solution de notre problème, la limite de l'erreur de troncature n'est pas nulle. Alors c'est schéma est consistante et d'ordre 1 en temps et 2 en espace.
 Pour le schéma
 \begin{align*}
 \frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\Delta x} -b \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1} - 2 u_i^{n+1}}{\Delta x^2} =0 \text{,}
@@ -233,4 +262,50 @@ Par le même argument du schéma antérieur, ce schéma est consistant d'ordre 1
 
 \subsubsection
 
+\subsection{Schéma implicite}
+
+\subsubsection{}
+On peut récrire le schéma implicite comme
+\begin{align*}
+u_i^n= \left ( \frac{a \Delta t}{2 \Delta x} - \frac{b \Delta t}{\Delta x^2} \right ) u_{i+1}^{n+1} + \left ( 1 +  \frac{2 b \Delta t}{\Delta x^2} \right ) u_{i}^{n+1} + \left ( - \frac{a \Delta t}{2 \Delta x} - \frac{b \Delta t}{\Delta x^2} \right ) u_{i-1}^{n+1} \text{.}
+\end{align*}
+On pose
+\begin{align*}
+\gamma = \frac{a \Delta t}{2 \Delta x} \qquad \textrm{et} \qquad \delta=\frac{b \Delta t}{\Delta x^2} \text{.}
+\end{align*}
+Alors pour $U^n=MU^{n+1}$, où $U^n= \begin{pmatrix} u_{-i_\text{max}}^n \\ \vdots \\ u_{i_\text{max}}^n \end{pmatrix}$, on trouve
+\begin{comment}
+\begin{align*}
+M=\begin{pmatrix} 
+ 1 + 2 \delta & \gamma - \delta & 0 & \dots  & 0 \\
+ -\gamma - \delta & 1 + 2 \delta & \gamma - \delta & \dots  & 0 \\
+ \vdots & -\gamma - \delta & \ddots & \ddots & \vdots \\
+  0 & 0 & \ddots & 1 + 2 \delta  & \gamma - \delta \\
+ 0 & 0 & \dots & -\gamma - \delta &  1 + 2 \delta
+\end{pmatrix}
+\end{align*}
+\end{comment}
+$
+M_{ij}=
+\begin{cases}
+1 + 2 \delta &\text{, si } i=j \\
+\delta - \gamma &\text{, si } i=j-1 \\
+- \gamma - \delta &\text{, si } i=j+1 \\
+0 &\text{, sinon}
+\end{cases}
+$
+
+\begin{thebibliography}{3}
+
+	\bibitem{weiss} 
+	Weisstein, Eric W.
+	\textit{Positive Definite Matrices}. 
+	From MathWorld--A Wolfram Web Resource. \url{http://mathworld.wolfram.com/PositiveDefiniteMatrix.html}
+	
+    \bibitem{milica} 
+	Milica Anđelić and C. M. da Fonseca.
+	\textit{Sufficient Conditions for Positive Definiteness of Tridiagonal Matricies Revisited}.
+   \url{http://www.mat.uc.pt/~cmf/papers/tri_positive_definite_revisited.pdf}
+    
+\end{thebibliography}
 \end{document}
