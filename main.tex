@@ -110,6 +110,15 @@
 		\label{fig:I11}
 	\end{figure}
 	
+    \begin{figure}[ht]
+		\begin{center}
+    \hspace*{-2cm}  
+	\includegraphics[height=8cm]{I13d.png}
+        \vspace{-1cm}
+		\end{center}
+		\caption{Surface plot de la fonction de Rosenbrock.}
+		\label{fig:I13d}
+	\end{figure}
 	\subsubsection{} %% I.1.2
 	On applique la méthode de gradient a pas constant $u_{k+1}=u_k-\rho \grad J(u_k)$ ou, pour $ u_k= (u_{k1},u_{k2})$, on a $\grad J(u_k) = ({400u_{k1}^3 + 2u_{k1}  - 400u_{k1}u_{k2} - 2}, {200u_{k1}^2 - 200u_{k2}})$. Pour les valeurs numériques $u_0=(1, 0)$ et $\rho = 0.002$, et le critère d'arrêt $J(u_{k+1}) < 10^{-3}$, on a besoin de \textbf{$2764$} itérations. La figure \ref{fig:I12p} montre les lignes de niveau de l'équation \ref{eq:rosenbrock} et le parcours du méthode avant l'arrête.
 	\begin{figure}[H]
@@ -134,20 +143,18 @@
     \subsection{Gradient optimal}
 \subsubsection{} %% II.1.1
 	Soit $J(u)=\frac{1}{2} \langle Au, u \rangle - \langle b, u \rangle$. On veut trouver ${\rho_k=\textrm{argmin}_{\rho \geq 0} J(u_k- \rho \grad J(u_k))}$. Soit ${r_k= \grad J(u_k) = Au_k-b}$, on a
-	\begin{align} \label{eq:gradopt}
-	\begin{split}
+	\begin{align*}
 	J(u_k - \rho \grad J(u_k)) &= J(u_k - \rho r_k) \\ 
 	&=  \frac{1}{2} \langle A(u_k - \rho r_k), u_k - \rho r_k \rangle - \langle b, u_k - \rho r_k \rangle \\
 	&=\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle + \frac{1}{2} \langle - \rho A r_k,  - \rho r_k \rangle  \\
-	& \hphantom{==\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle } - \langle b, - \rho r_k \rangle\\
+	& \hphantom{==\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle } - \langle b, - \rho r_k \rangle \\
     &= J(u_k) - \frac{\rho}{2} [\langle A u_k, r_k \rangle + \langle A r_k, u_k \rangle]+\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle b,  r_k \rangle \\
-    &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle A u_k, r_k \rangle] \\
+    &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle A u_k, r_k \rangle] \displaybreak[4]\\
     &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle r_k - b, r_k \rangle] \\
       &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle r_k, r_k \rangle \textrm{.}
-	\end{split}
-	\end{align}
+	\end{align*}
     
-Alors, la valeur de $\rho$ que minimise l'équation \ref{eq:gradopt} est 
+Alors, la valeur que minimise cette fonction quadratique en $\rho$ est 
 	\begin{align*}
 	\rho_k=\frac{\langle r_k, r_k \rangle}{\langle A r_k, r_k \rangle}
 	\end{align*}
