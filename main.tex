@@ -386,7 +386,7 @@ On peut récrire le schéma comme
 \begin{align*}
 u_i^n = \left ( -\frac{b \Delta t}{\Delta x^2} \right) u_{i+1}^{n+1} +\left ( 1 + 2 \frac{b \Delta t}{\Delta x^2} \right )  u_{i}^{n+1}  + \left ( -\frac{b \Delta t}{\Delta x^2} \right) u_{i-1}^{n+1} + u_i^{n+1}(u_i^n)^3 \text{.}
 \end{align*}
-Ainsi, on peu écrire $U^n=(A+ \Delta t \;\text{diag}((u_{-i_{\text{max}}}^n), \dots, (u_{i_{\text{max}}}^n)))U^{n+1}$
+Ainsi, on peu écrire $U^n=(A+ \Delta t \;\text{diag}((u_{-i_{\text{max}}}^n)^3, \dots, (u_{i_{\text{max}}}^n)))U^{n+1}$
 , où $U^n= \begin{pmatrix} u_{-i_\text{max}}^n \\ \vdots \\ u_{i_\text{max}}^n \end{pmatrix}$, $\delta=\frac{b \Delta t}{\Delta x^2}$ et
 \begin{align*}
 A = \begin{pmatrix}
