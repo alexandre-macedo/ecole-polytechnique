@@ -147,7 +147,8 @@
       &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle r_k, r_k \rangle \textrm{.}
 	\end{split}
 	\end{align}
-	Alors, la valeur de $\rho$ que minimise l'équation \ref{eq:gradopt} est 
+    
+Alors, la valeur de $\rho$ que minimise l'équation \ref{eq:gradopt} est 
 	\begin{align*}
 	\rho_k=\frac{\langle r_k, r_k \rangle}{\langle A r_k, r_k \rangle}
 	\end{align*}
@@ -182,6 +183,7 @@ u_{k1} - 1 \\
 \begin{align} \label{eq:rho_k}
 \rho_k = \frac{(u_{k1} - 1)^2 + (\lambda u_{k2} - 1)^2}{(u_{k1} - 1)^2 + \lambda (\lambda u_{k2} - 1)^2 }
 \end{align}
+
 À chaque itération, on actualise $\rho_k$ en utilisant l'équation \ref{eq:rho_k}. Les figures \ref{fig:I22a} et \ref{fig:I22b} montre les résultats pour différentes condition initiales et pour le critère de arrête 
 \begin{align*}
 \frac{\| r_k \|}{\| r_0 \|} \leq 10^{-2}\text{.}
@@ -208,17 +210,42 @@ Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme l
 	
 \subsubsection
 Quand on met en œuvre le procédé de dichotomie pour l'équation \ref{eq:rosenbrock}, on trouve le résultat ci-dessous.
-
+\newpage
 \section{Méthodes newtoniennes}
 \subsection{Méthode de Newton}
 \subsection{Méthode de Gauss-Newton}
 \subsubsection{}
-On commence par calculer la matrice $Df(u)$ où $\left[Df(u)\right]_{ij} = \frac{\partial f_i(u)}{\partial u_j}$
+On note le vecteur des paramètres $\beta = \{\beta_1, \dots, \beta_{3K}\}$ de manière que $\beta_j = \alpha_j$, $\beta_{j+K} = \sigma_{j}$ et $\beta_{j+2K} = x^0_j$. Ainsi la matrice jacobienne $Df(\beta)$ de dimension $N\times3K$ est donné par $\left[Df(\beta)\right]_{ij} = \frac{\partial f_i(\beta)}{\partial \beta_j}$. À fin de la calculer on rappelle la définition du vecteur $f$ $f_i(\beta) = y_i - g(x_i, \beta)$ avec $g(x_i,\beta) = \sum_{j = 1}^K \alpha_j \exp\left(-\frac{1}{2} \frac{(x-x_j^0)^2}{\sigma_j^2}\right)$
+\begin{align*}
+\left[Df(\beta)\right]_{ij} = \frac{\partial f_i(\beta)}{\partial \alpha_j} &= - \exp\left(-\frac{1}{2} \frac{(x-x_j^0)^2}{\sigma_j^2}\right),\quad 1\leq j \leq K\\
+\left[Df(\beta)\right]_{i(K+j)} = \frac{\partial f_i(\beta)}{\partial \sigma_j} &= -\alpha_j \frac{(x-x_j^0)^2}{\sigma_j^3}\exp\left(-\frac{1}{2} \frac{(x-x_j^0)^2}{\sigma_j^2}\right),\quad 1\leq j \leq K\\
+\left[Df(\beta)\right]_{i(2K+j)} =\frac{\partial f_i(\beta)}{\partial x_j^0} &= -\alpha_j \frac{(x-x_j^0)}{\sigma_j^2}\exp\left(-\frac{1}{2} \frac{(x-x_j^0)^2}{\sigma_j^2}\right),\quad 1\leq j \leq K
+\end{align*}
 
+On écrit le processus itératif à partir de l'algorithme de Newton $\beta_{k+1} = \beta_{k} - [DF(\beta_k)]^{-1}F(\beta_k)$ en prenant l'approximation $DF(\beta_k) = D [\nabla J(\beta_k)] = \nabla^2 J(\beta_k) \approx Df^T(u)Df(u)$ et en rappelant que $F(\beta_k) = \nabla J(\beta_k) =  Df^T(\beta_{k})f(\beta_{k})$
+\begin{align*}
+\beta_{k+1} = \beta_{k} - [Df^T(\beta_{k})Df(\beta_{k})]^{-1} Df^T(\beta_{k})f(\beta_{k}),\quad k\geq 0
+\end{align*}
 \subsubsection{}
-
+Avec les conditions initiales la méthode de Gauss-Newton 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8cm]{I22.eps}
+		\vspace{-1cm}
+	\end{center}
+	\caption{Nuage de points obtenue à partir des conditions initiales $\alpha_1 = \alpha_2 = \sigma_1 = \sigma_2 = 1$, $x_1^0 = 3$ et $x_2^0 = 7$}
+	\label{fig:I22}
+\end{figure}
 \subsubsection{}
-
+D'après la figure \ref{fig:I23} on voit la divergence de la méthode de Gauss-Newton avec des conditions initiales proches de la solution trouvé dans l'item précédent. De cette manière on voit la non-convergence locale de cette approximation de la
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8cm]{I23.eps}
+		\vspace{-1cm}
+	\end{center}
+	\caption{Nuage de points obtenue à partir des conditions initiales $\alpha_1 = \alpha_2 = \sigma_1 = \sigma_2 = 1$, $x_1^0 = 3$ et $x_2^0 = 6$}
+	\label{fig:I23}
+\end{figure}
 \section{Application à l'équation de convection-diffusion}
 \subsection{Différences schémas d'approximation}
 \subsubsection{}
@@ -232,6 +259,7 @@ u(x_{i \pm 1}, t_n)= u(x_{i}, t_{n}) \pm \Delta x \frac{\partial u}{\partial x} 
 \begin{align*}
 u(x_{i}, t_{n+1})=u(x_{i}, t_{n}) + \Delta t \frac{\partial u}{\partial t} (x_{i}, t_{n}) + \frac{1}{2} \Delta t^2 \frac{\partial^2 u}{\partial t^2} (x_{i}, t_{n}) + \O (\Delta t^3) \text{.}
 \end{align*}
+
 On remplace le développement dans l'erreur de troncature qui est définit comme
 \begin{align*}
 \begin{split}
@@ -239,6 +267,7 @@ E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta
 &= \frac{\partial u}{\partial t}(x_i, t_n) + a \frac{\partial u}{\partial x}(x_i, t_n) - b \frac{\partial^2 u}{\partial^2 t}(x_i, t_n) + \O (\Delta t + \Delta x^2)
 \end{split}
 \end{align*}
+
 Le erreur ci-dessus est dans le "standard" mentionné dans le Remarque 2.2.5 du polycopié, c'est à dire, pour une fonction régulière qui n'est pas solution de notre problème, la limite de l'erreur de troncature n'est pas nulle. Alors c'est schéma est consistante et d'ordre 1 en temps et 2 en espace.
 Pour le schéma
 \begin{align*}
@@ -258,6 +287,7 @@ E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\D
 &= \frac{\partial u}{\partial t}(x_i, t_{n+1}) + a \frac{\partial u}{\partial x}(x_i, t_{n+1}) - b \frac{\partial^2 u}{\partial^2 t}(x_i, t_{n+1}) + \O (\Delta t + \Delta x^2) \text{.}
 \end{split}
 \end{align*}
+
 Par le même argument du schéma antérieur, ce schéma est consistant d'ordre 1 en temps et 2 en espace.
 
 \subsubsection
@@ -269,10 +299,12 @@ On peut récrire le schéma implicite comme
 \begin{align*}
 u_i^n= \left ( \frac{a \Delta t}{2 \Delta x} - \frac{b \Delta t}{\Delta x^2} \right ) u_{i+1}^{n+1} + \left ( 1 +  \frac{2 b \Delta t}{\Delta x^2} \right ) u_{i}^{n+1} + \left ( - \frac{a \Delta t}{2 \Delta x} - \frac{b \Delta t}{\Delta x^2} \right ) u_{i-1}^{n+1} \text{.}
 \end{align*}
-On pose
+On pose $\gamma = \frac{a \Delta t}{2 \Delta x}$ et $\delta=\frac{b \Delta t}{\Delta x^2}$.
+\begin{comment}
 \begin{align*}
 \gamma = \frac{a \Delta t}{2 \Delta x} \qquad \textrm{et} \qquad \delta=\frac{b \Delta t}{\Delta x^2} \text{.}
 \end{align*}
+\end{comment}
 Alors pour $U^n=MU^{n+1}$, où $U^n= \begin{pmatrix} u_{-i_\text{max}}^n \\ \vdots \\ u_{i_\text{max}}^n \end{pmatrix}$, on trouve
 \begin{comment}
 \begin{align*}
@@ -284,25 +316,48 @@ M=\begin{pmatrix}
  0 & 0 & \dots & -\gamma - \delta &  1 + 2 \delta
 \end{pmatrix}
 \end{align*}
-\end{comment}
 $
 M_{ij}=
 \begin{cases}
 1 + 2 \delta &\text{, si } i=j \\
 \gamma - \delta  &\text{, si } i=j-1 \\
-- \gamma - \delta &\text{, si } i=j+1 \\
+- (\gamma + \delta) &\text{, si } i=j+1 \\
 0 &\text{, sinon}
 \end{cases}
 $.
+\end{comment}
 
+\begin{align*}
+M = \begin{pmatrix}
+1 + 2 \delta & \gamma - \delta\\
+- (\gamma + \delta) & 1 + 2 \delta & \gamma - \delta \\
+& - (\gamma + \delta)& \ddots & \ddots \\
+& & \ddots & \ddots & \gamma - \delta \\
+& & & - (\gamma + \delta) & 1 + 2 \delta
+\end{pmatrix}
+\end{align*}
 \subsubsection{}
-On définit $M^s =\frac{1}{2} (M + M^T) = M^s_{ij}=
+On définit 
+\begin{comment}
+M^s =\frac{1}{2} (M + M^T) = M^s_{ij}=
 \begin{cases}
 1 + 2 \delta &\text{, si } i=j \\
 - \delta &\text{, si } i =  j \pm 1 \\
 0 &\text{, sinon}
 \end{cases}
-$. D'après \cite{weiss}, M est positive définit si et seulement si $M^s$ le est. D'après \cite{milica}, comme $\| 1 +2 \delta \| > \| - \delta \| + \| - \delta \|$, $M^s$ est définit positive, alors $M$ est définit positive. Ce qu'implique que $M$ est inversible.
+$.
+\end{comment}
+\begin{align}
+M^\mathcal{S} = \begin{pmatrix}
+1 + 2 \delta & - \delta\\
+- \delta & 1 + 2 \delta & - \delta \\
+& - \delta & \ddots & \ddots \\
+& & \ddots & \ddots & - \delta \\
+& & & - \delta & 1 + 2 \delta
+\end{pmatrix}
+\end{align}
+
+D'après \cite{weiss}, M est positive définit si et seulement si $M^\mathcal{S}$ y est. D'après \cite{milica}, comme ${\| 1 +2 \delta \| > \| - \delta \| + \| - \delta \|}$, $M^\mathcal{S}$ est définit positive, alors $M$ est définit positive. Ce qu'implique que $M$ est inversible.
 
 \subsubsection{}
 content...
@@ -310,9 +365,27 @@ content...
 \subsection{Schéma implicite linéaire}
 
 \subsubsection{}
-content...
+On peut récrire le schéma comme
+\begin{align*}
+u_i^n = \left ( -\frac{b \Delta t}{\Delta x^2} \right) u_{i+1}^{n+1} +\left ( 1 + 2 \frac{b \Delta t}{\Delta x^2} \right )  u_{i}^{n+1}  + \left ( -\frac{b \Delta t}{\Delta x^2} \right) u_{i-1}^{n+1} + u_i^{n+1}(u_i^n)^3 \text{.}
+\end{align*}
+Ainsi, on peu écrire $U^n=(A+ \Delta t \text{diag}((u_{-i_{\text{max}}}^n), \dots, (u_{i_{\text{max}}}^n)))U^{n+1}$
+, où $U^n= \begin{pmatrix} u_{-i_\text{max}}^n \\ \vdots \\ u_{i_\text{max}}^n \end{pmatrix}$, $\delta=\frac{b \Delta t}{\Delta x^2}$ et $A_{ij}= \begin{cases}
+1 + 2 \delta &\text{, si } i=j \\
+- \delta  &\text{, si } i=j \pm1 \\
+0 &\text{, sinon}
+\end{cases}$.
 
 \subsubsection{}
+\begin{align*}
+T = \begin{pmatrix}
+a_1 & b_1 \\
+c_1 & a_2 & b_2 \\
+& c_2 & \ddots & \ddots \\
+& & \ddots & \ddots & b_{n-1} \\
+& & & c_{n-1} & a_n
+\end{pmatrix}
+\end{align*}
 content...
 
 \subsection{Schéma pour l'équation stationnaire}
