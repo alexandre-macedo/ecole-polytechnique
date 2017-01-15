@@ -112,7 +112,7 @@
 	
     \begin{figure}[ht]
 		\begin{center}
-    \hspace*{-2cm}  
+    \hspace*{-3cm}  
 	\includegraphics[height=8cm]{I13d.png}
         \vspace{-1cm}
 		\end{center}
@@ -134,12 +134,15 @@
 	Si on applique la méthode pour $\rho = 0.0045$ et pour $\rho = 0.01$, on a que le méthode diverge. Pour la valeur $\rho = 0.0045$, la méthode oscille en tour du minimum et ne converge pas. Pour la valeur  $\rho = 0.01$, la première itération est déjà très loin du point de minimum et il ne reviens pas.
 	\begin{figure}[H]
 		\begin{center}
-	\includegraphics[height=5cm]{I12d.eps}
+    \hspace*{-1.5cm}  
+	\includegraphics[height=6cm]{I12d.eps}
         \vspace{-1cm}
 		\end{center}
 		\caption{Le parcours du méthode de gradient à pas constant $\rho = 0.045$ et $\rho = 0.01$.}
 		\label{fig:I12d}
     \end{figure}
+Toutes les figures et résultats ci-dessus peuvent être crée par le code "problem1.py".
+    
     \subsection{Gradient optimal}
 \subsubsection{} %% II.1.1
 	Soit $J(u)=\frac{1}{2} \langle Au, u \rangle - \langle b, u \rangle$. On veut trouver ${\rho_k=\textrm{argmin}_{\rho \geq 0} J(u_k- \rho \grad J(u_k))}$. Soit ${r_k= \grad J(u_k) = Au_k-b}$, on a
@@ -149,7 +152,7 @@
 	&=\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle + \frac{1}{2} \langle - \rho A r_k,  - \rho r_k \rangle  \\
 	& \hphantom{==\frac{1}{2} \langle Au_k, u_k \rangle - \langle b, u_k \rangle  + \frac{1}{2} \langle Au_k, - \rho r_k \rangle + \frac{1}{2} \langle - \rho A r_k, u_k \rangle } - \langle b, - \rho r_k \rangle \\
     &= J(u_k) - \frac{\rho}{2} [\langle A u_k, r_k \rangle + \langle A r_k, u_k \rangle]+\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle b,  r_k \rangle \\
-    &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle A u_k, r_k \rangle] \displaybreak[4]\\
+    &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle A u_k, r_k \rangle] \\
     &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho [\langle b,  r_k \rangle -\langle r_k - b, r_k \rangle] \\
       &=J(u_k)  +\frac{\rho^2}{2} \langle A r_k, r_k \rangle + \rho \langle r_k, r_k \rangle \textrm{.}
 	\end{align*}
@@ -203,7 +206,7 @@ u_{k1} - 1 \\
 	\label{fig:I23a}
 \end{figure}
 \subsubsection
-Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme le rapport $\frac{\| r_k \|}{\| r_0 \|}$ en fonction de $k$ pour les cas montrés dans les figure \ref{fig:I23a} et \ref{fig:I23b}.
+Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme le rapport $\frac{\| r_k \|}{\| r_0 \|}$ en fonction de $k$ pour les cas montrés dans les figure \ref{fig:I23a} et \ref{fig:I23b}. Ces résultats peuvent être trouver en utilisant le code python disponible dans "problem2.py"
 
 \begin{figure}[H]
 	\begin{center}
@@ -215,7 +218,7 @@ Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme l
 \end{figure}
 	
 \subsubsection
-Quand on met en œuvre le procédé de dichotomie pour l'équation \ref{eq:rosenbrock}, on trouve le résultat ci-dessous.
+Quand on met en œuvre le procédé de dichotomie pour l'équation \ref{eq:rosenbrock}, on trouve le résultat ci-dessous. Ce résultat a été géré par le code disponible dans le fichier "problem3.py". 
 \begin{figure}[H]
 	\begin{center}
 \includegraphics[height=8cm]{I124.eps}
@@ -268,12 +271,14 @@ D'après la figure \ref{fig:I23} on voit la divergence de la méthode de Gauss-N
 	\caption{Nuage de points obtenue à partir des conditions initiales $\alpha_1 = \alpha_2 = \sigma_1 = \sigma_2 = 1$, $x_1^0 = 3$ et $x_2^0 = 6$}
 	\label{fig:I23}
 \end{figure}
+
+Les résultats ci-dessus ont été crée par le code disponible dans "problem4.py".
 \section{Application à l'équation de convection-diffusion}
 \subsection{Différences schémas d'approximation}
 \subsubsection{}
 On remplace $u_i^n$ par $u(x_i, t_n)$ où $u$ est une fonction régulière. On commence par le développement de Taylor au tour du point $(x_i, t_n)$. Pour le schéma
 \begin{align} \label{eq:sch_exp}
-\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta x} -b \frac{u_{i+1}^{n}-u_{i-1}^{n} - 2 u_i^{n}}{\Delta x^2} =0 \text{, on a}
+\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta x} -b \frac{u_{i+1}^{n}+u_{i-1}^{n} - 2 u_i^{n}}{\Delta x^2} =0 \text{, on a}
 \end{align}
 \begin{multline*}
 u(x_{i \pm 1}, t_n)= u(x_{i}, t_{n}) \pm \Delta x \frac{\partial u}{\partial x} (x_{i}, t_{n}) + \frac{1}{2} \Delta x^2 \frac{\partial^2 u}{\partial x^2}(x_{i}, t_{n}) \pm \frac{1}{6} \Delta x^3 \frac{\partial^3 u}{\partial x^3}(x_{i}, t_{n}) \\ + \frac{1}{24} \Delta x^4 \frac{\partial^4 u}{\partial^4 x} (x_{i}, t_{n}) + \O (\Delta x^5) \text{,}
@@ -285,7 +290,7 @@ u(x_{i}, t_{n+1})=u(x_{i}, t_{n}) + \Delta t \frac{\partial u}{\partial t} (x_{i
 On remplace le développement dans l'erreur de troncature qui est définit comme
 \begin{align*}
 \begin{split}
-E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta x} -b \frac{u_{i+1}^{n}-u_{i-1}^{n} - 2 u_i^{n}}{\Delta x^2} \\
+E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta x} + b \frac{u_{i+1}^{n}+u_{i-1}^{n} - 2 u_i^{n}}{\Delta x^2} \\
 &= \frac{\partial u}{\partial t}(x_i, t_n) + a \frac{\partial u}{\partial x}(x_i, t_n) - b \frac{\partial^2 u}{\partial^2 t}(x_i, t_n) + \O (\Delta t + \Delta x^2)
 \end{split}
 \end{align*}
@@ -293,7 +298,7 @@ E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta
 Le erreur ci-dessus est dans le "standard" mentionné dans le Remarque 2.2.5 du polycopié, c'est à dire, pour une fonction régulière qui n'est pas solution de notre problème, la limite de l'erreur de troncature n'est pas nulle. Alors c'est schéma est consistante et d'ordre 1 en temps et 2 en espace.
 Pour le schéma
 \begin{align} \label{eq:sch_imp}
-\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\Delta x} -b \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1} - 2 u_i^{n+1}}{\Delta x^2} =0 \text{,}
+\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\Delta x} -b \frac{u_{i+1}^{n+1} + u_{i-1}^{n+1} - 2 u_i^{n+1}}{\Delta x^2} =0 \text{,}
 \end{align}
 on fait le développement au tour du point $(x_i, t_{n+1})$ et on trouve
 \begin{multline*}
@@ -305,7 +310,7 @@ u(x_{i}, t_{n})=u(x_{i}, t_{n+1}) - \Delta t \frac{\partial u}{\partial t} (x_{i
 
 \begin{align*}
 \begin{split}
-E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\Delta x} -b \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1} - 2 u_i^{n+1}}{\Delta x^2} \\
+E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\Delta x} -b \frac{u_{i+1}^{n+1}u_{i-1}^{n+1} - 2 u_i^{n+1}}{\Delta x^2} \\
 &= \frac{\partial u}{\partial t}(x_i, t_{n+1}) + a \frac{\partial u}{\partial x}(x_i, t_{n+1}) - b \frac{\partial^2 u}{\partial^2 t}(x_i, t_{n+1}) + \O (\Delta t + \Delta x^2) \text{.}
 \end{split}
 \end{align*}
@@ -313,7 +318,51 @@ E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\D
 Par le même argument du schéma antérieur, ce schéma est consistant d'ordre 1 en temps et 2 en espace.
 
 \subsubsection
-content...
+On commence par le schéma explicite \ref{eq:sch_exp}. Pour la stabilité $l^\infty$, on va trouver les conditions CFL pour que le schéma vérifie le principe du maximum discret.
+
+Soit $k$ et $l$ tel que
+\begin{align*}
+u_k^{n+1}=M=\underset{j}{\max}\,u_j^{n+1} \quad \text{et} \quad u_l^{n+1}=M=\underset{j}{\min}\,u_j^{n+1}
+\end{align*}
+
+Notons que $M$ est positif ou nul et $m$ est négatif ou nul. On veut trouver les conditions pour que
+\begin{align} \label{eq:M}
+M \leq \max (0, \underset{j}{\max} \, u_j^n)
+\end{align}
+\begin{align} \label{eq:m}
+\text{et} \min (0, \underset{j}{\min} \, u_j^n ) \leq m \text{.}
+\end{align}
+
+On commence l'analyse par l'inégalité \ref{eq:M}. Elle est trivialement vérifiée si $M=0$. Alors, on analyse le cas où $M\neq 0$. Le maximum de $u_j^{n+1}$ pour tout $j \in \{ i_{\text{max}}-1, \, i_{\text{max}}+1 \}$ est atteint en un élément $k \in \{ i_{\text{max}}, \, i_{\text{max}} \}$. Alors
+\begin{align*}
+\frac{M-u_k^{n}}{\Delta t} + a \frac{u_{k+1}^{n}-u_{k-1}^{n}}{2\Delta x} -b \frac{u_{k+1}^{n}+u_{k-1}^{n} - 2 u_k^{n}}{\Delta x^2} \leq 0
+\end{align*}
+soit
+\begin{align*}
+M \leq \left ( -\frac{a \Delta t}{2 \Delta x} + \frac{b \Delta t}{\Delta x^2} \right ) u_{k+1}^{n} + \left ( 1 -  \frac{2 b \Delta t}{\Delta x^2} \right ) u_{k}^{n} + \left ( \frac{a \Delta t}{2 \Delta x} + \frac{b \Delta t}{\Delta x^2} \right ) u_{k-1}^{n}
+\end{align*}
+
+Pour que le schéma de droite soit une combinaison convexe de $u_n$ et l'inégalité \ref{eq:M} soit vérifiée on les conditions ci-dessus.
+\begin{align*}
+\Delta x \leq \frac{2b}{a} \quad \text{,} \quad \Delta x \geq - \frac{2b}{a} \quad \text{et} \quad \Delta t \leq \frac{\Delta x^2}{2b} \text{.}
+\end{align*}
+
+Pour vérifiée l'inégalité \ref{eq:m}, on  remplace $u^n$ par $-u^n$ et $M$ par $-m$.
+
+Pour la stabilité du schéma \ref{eq:sch_imp} en $l^\infty$, on voit que c'est un schéma implicite qui vérifie le principe du maximum. Alors, il est stable.
+
+Pour la stabilité du schéma \ref{eq:sch_exp} en $l^2$, on a, pour la transformé de Fourier,
+\begin{align*}
+\hat{u}^{n+1}(k) = \left ( 1- \frac{a \Delta t}{2 \Delta x} (e^{2i\pi k \Delta x} - e^{-2i\pi k \Delta x}) + \frac{b \Delta t}{\Delta x^2}(e^{2i\pi k \Delta x} + e^{-2i\pi k \Delta x} -2) \right ) \hat{u}^{n}(k)
+\end{align*}
+
+Autrement dit 
+
+\begin{align*}
+\hat{u}^{n+1}(k) = A(k) \hat{u}^n(k)= A(k)^{n+1}\hat{u}^0(k)\text{ avec }A(k) = \left ( 1 - \frac{i a \Delta t}{2 \Delta x} \text{sin}(2 \pi k \Delta x) + \frac{4 b \Delta t}{\Delta x^2}\text{sin}^2(\pi k \Delta x) \right )
+\end{align*}
+
+Comme $\| A(k) \| \leq 1$ pour tout mode de Fourier k, la formule de Plancherel permet de conclure à la stabilité $l^2$ du schéma. (Voir polycopié page 36). 
 
 \subsection{Schéma implicite}
 \subsubsection{}
@@ -359,7 +408,7 @@ M = \begin{pmatrix}
 \end{pmatrix}
 \end{align*}
 \subsubsection{}
-On définit 
+On définit $M^\mathcal{S} =\frac{1}{2} (M + M^T) $
 \begin{comment}
 M^s =\frac{1}{2} (M + M^T) = M^s_{ij}=
 \begin{cases}
@@ -382,7 +431,15 @@ M^\mathcal{S} = \begin{pmatrix}
 D'après \cite{weiss}, M est positive définit si et seulement si $M^\mathcal{S}$ y est. D'après \cite{milica}, comme ${\| 1 +2 \delta \| > \| - \delta \| + \| - \delta \|}$, $M^\mathcal{S}$ est définit positive, alors $M$ est définit positive. Ce qu'implique que $M$ est inversible.
 
 \subsubsection{}
-content...
+La solution a été calculé e la figure crée par le code disponible sur "problem5.py".
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8cm]{III23.eps}
+		\vspace{-1cm}
+	\end{center}
+	\caption{Représentation de la solution implicite pour $\Delta x = 0.1$, $\Delta t=10^{-4}$ et $n = 10^{5}$. Les fonctions sont superposées et l'intensité de la couleur rouge augmente avec le temps.}
+	\label{fig:III23}
+\end{figure}
 \section{Application à l'équation de la chaleur non linéaire}
 \subsection{Schéma implicite linéaire}
 
@@ -392,16 +449,14 @@ On peut récrire le schéma comme
 u_i^n = \left ( -\frac{b \Delta t}{\Delta x^2} \right) u_{i+1}^{n+1} +\left ( 1 + 2 \frac{b \Delta t}{\Delta x^2} \right )  u_{i}^{n+1}  + \left ( -\frac{b \Delta t}{\Delta x^2} \right) u_{i-1}^{n+1} + u_i^{n+1}(u_i^n)^3 \Delta t \text{.}
 \end{align*}
 Ainsi, on peut écrire $U^n=(A+ \Delta t \;\text{diag}((u_{-i_{\text{max}}}^n)^3, \dots, (u_{i_{\text{max}}}^n)^3))U^{n+1}$
-, où $U^n= \begin{pmatrix} u_{-i_\text{max}}^n \\ \vdots \\ u_{i_\text{max}}^n \end{pmatrix}$, $\delta=\frac{b \Delta t}{\Delta x^2}$ et
-\begin{align*}
+, où $U^n= \begin{pmatrix} u_{-i_\text{max}}^n \\ \vdots \\ u_{i_\text{max}}^n \end{pmatrix}$, $\delta=\frac{b \Delta t}{\Delta x^2}$ et$
 A = \begin{pmatrix}
 1 + 2 \delta & - \delta\\
 - \delta & 1 + 2 \delta & - \delta \\
 & - \delta & \ddots & \ddots \\
 & & \ddots & \ddots & - \delta \\
 & & & - \delta & 1 + 2 \delta 
-\end{pmatrix}
-\end{align*}
+\end{pmatrix}$.
 
 \begin{comment}
 $A_{ij}= \begin{cases}
@@ -411,18 +466,55 @@ $A_{ij}= \begin{cases}
 \end{cases}$.
 \end{comment}
 
+\newpage
 \subsubsection{}
-
-content...
+La solution a été calculé e la figure crée par le code disponible sur "problem5.py".
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8cm]{IV12.eps}
+		\vspace{-1cm}
+	\end{center}
+	\caption{Représentation de la solution implicite pour $\Delta x = 0.1$, $\Delta t=10^{-4}$ et $n = 10^{5}$. Les fonctions sont superposées et l'intensité de la couleur rouge augmente avec le temps.}
+	\label{fig:IV12}
+\end{figure}
 
 \subsection{Schéma pour l'équation stationnaire}
 	
 \subsubsection{}
-content...
+On va écrire la fonction $G$ comme
+\begin{align*}
+G_i(U) = - b \frac{u_{i+1}+u_{i-1}-2u_{i}}{\Delta x^2} + u_i^4 - Q_i \text{, } \forall i \in [-i_{\text{max}}, i_{\text{max}}]
+\end{align*}
+de façon que pour $G=(G_{-i_{\text{max}}}, \dots ,G_{i_{\text{max}}})$, on a $G(U)=0$.
 
 \subsubsection{}
-content...
-
+On sait que $\left[DG(\beta)\right]_{ij} = \frac{\partial G_i(\beta)}{\partial \beta_j}$. Pour Q=1 et $\theta = \frac{b}{\Delta x^2}$, on a
+\begin{align*}
+DG(U) = \begin{pmatrix}
+2\theta + 4 u_{-i_{\text{max}}}^3  & - \theta\\
+- \theta & 2\theta + 4 u_{-i_{\text{max}}+1}^3 & - \theta \\
+& - \theta & \ddots & \ddots \\
+& & \ddots & \ddots & - \theta \\
+& & & -\theta & 2\theta +4 u_{i_{\text{max}}}^3 
+\end{pmatrix} \text{.}
+\end{align*}
+Pour l'algorithme de Newton on aura
+\begin{align*}
+U^{k_1}= U^k - (DG(U^k))^{-1}G(U^k), \text{ou alors}
+\end{align*}
+\begin{align*}
+G(U^k)=DG(U^k)(U^k-U^{k+1}) \text{.}
+\end{align*}
+Le choix de la fonction initiale est arbitraire et on peut utiliser par exemple une parabole $u_0(x) = 1-\frac{x^2}{100}$. On voit la convergence vers une fonction proche que 1 au milieu et avec une courbature qui compense les conditions de Dirichlet aux bords.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8cm]{IV22.eps}
+		\vspace{-1cm}
+	\end{center}
+	\caption{Représentation de la solution du problème stationnaire avec $\Delta x = 0.01$ et $n=20$ itérations. Les fonctions sont superposées et l'intensité de la couleur rouge augmente avec le temps.} 
+	\label{fig:IV22}
+\end{figure}
+Le calcule et la figure ont été faits par le code "problem6.py".
 \begin{thebibliography}{3}
 
 	\bibitem{weiss} 
