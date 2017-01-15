@@ -111,7 +111,7 @@
 	\end{figure}
 	
 	\subsubsection{} %% I.1.2
-	On applique la méthode de gradient a pas constant $u_{k+1}=u_k-\rho \grad J(u_k)$ ou, pour $ u_k= (u_{k1},u_{k2})$, on a $\grad J(u_k) = ({400u_{k1}^3 + 2u_{k1}  - 400u_{k1}u_{k2} - 2}, {200u_{k1}^2 - 200u_{k2}})$. Pour les valeurs numériques $u_0=(1, 0)$ et $\rho = 0.002$, et le critère d'arrêt $J(u_{k+1}) < 10^{-3}$, on a besoin de \textbf{$12312$} itérations. La figure \ref{fig:I12} montre les lignes de niveau de l'équation \ref{eq:rosenbrock} et le parcours du méthode avant l'arrête.
+	On applique la méthode de gradient a pas constant $u_{k+1}=u_k-\rho \grad J(u_k)$ ou, pour $ u_k= (u_{k1},u_{k2})$, on a $\grad J(u_k) = ({400u_{k1}^3 + 2u_{k1}  - 400u_{k1}u_{k2} - 2}, {200u_{k1}^2 - 200u_{k2}})$. Pour les valeurs numériques $u_0=(1, 0)$ et $\rho = 0.002$, et le critère d'arrêt $J(u_{k+1}) < 10^{-3}$, on a besoin de \textbf{$2764$} itérations. La figure \ref{fig:I12p} montre les lignes de niveau de l'équation \ref{eq:rosenbrock} et le parcours du méthode avant l'arrête.
 	\begin{figure}[H]
 		\begin{center}
 	\includegraphics[height=8cm]{I12002.eps}
@@ -122,7 +122,7 @@
 	\end{figure}
 	
 	\subsubsection{} %% I.1.3
-	Si on applique le méthode pour $\rho = 0.0045$ et pour $\rho = 0.01$, on a que le méthode diverge. 
+	Si on applique la méthode pour $\rho = 0.0045$ et pour $\rho = 0.01$, on a que le méthode diverge. Pour la valeur $\rho = 0.0045$, la méthode oscille en tour du minimum et ne converge pas. Pour la valeur  $\rho = 0.01$, la première itération est déjà très loin du point de minimum et il ne reviens pas.
 	\begin{figure}[H]
 		\begin{center}
 	\includegraphics[height=5cm]{I12d.eps}
@@ -133,7 +133,7 @@
 	\end{figure}
     \newpage
 	\subsection{Gradient optimal}
-	\subsubsection{}
+	\subsubsection{} %% II.1.1
 	Soit $J(u)=\frac{1}{2} \langle Au, u \rangle - \langle b, u \rangle$. On veut trouver ${\rho_k=\textrm{argmin}_{\rho \geq 0} J(u_k- \rho \grad J(u_k))}$. Soit ${r_k= \grad J(u_k) = Au_k-b}$, on a
 	\begin{align} \label{eq:gradopt}
 	\begin{split}
@@ -210,6 +210,15 @@ Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme l
 	
 \subsubsection
 Quand on met en œuvre le procédé de dichotomie pour l'équation \ref{eq:rosenbrock}, on trouve le résultat ci-dessous.
+\begin{figure}[H]
+	\begin{center}
+\includegraphics[height=8cm]{I124.eps}
+    \vspace{-1cm}
+	\end{center}
+	\caption{Parcours obtenu à partir du procédé de dichotomie pour trouver le minimum global de la fonction de Rosenbrock.}
+	\label{fig:I24}
+\end{figure}
+	
 \newpage
 \section{Méthodes newtoniennes}
 \subsection{Méthode de Newton}
@@ -227,7 +236,15 @@ On écrit le processus itératif à partir de l'algorithme de Newton $\beta_{k+1
 \beta_{k+1} = \beta_{k} - [Df^T(\beta_{k})Df(\beta_{k})]^{-1} Df^T(\beta_{k})f(\beta_{k}),\quad k\geq 0
 \end{align*}
 \subsubsection{}
-Avec les conditions initiales la méthode de Gauss-Newton 
+Avec les conditions initiales $\alpha_1 = \alpha_2 = \sigma_1 = \sigma_2 = 1$, $x_1^0 = 3$ et $x_2^0 = 7$ la méthode de Gauss-Newton converge vers les valeurs suivantes
+\begin{align*}
+\alpha_1 = 0.22213775,\quad
+\alpha_2 = 0.98932187,\quad
+\sigma_1 = 1.27128674,\\
+\sigma_2 = 2.64012043,\quad
+x^0_1 = 2.57935799,\quad
+x^0_2 = 9.16230523          
+\end{align*}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=8cm]{I22.eps}
@@ -237,7 +254,7 @@ Avec les conditions initiales la méthode de Gauss-Newton
 	\label{fig:I22}
 \end{figure}
 \subsubsection{}
-D'après la figure \ref{fig:I23} on voit la divergence de la méthode de Gauss-Newton avec des conditions initiales proches de la solution trouvé dans l'item précédent. De cette manière on voit la non-convergence locale de cette approximation de la
+D'après la figure \ref{fig:I23} on voit la divergence de la méthode de Gauss-Newton avec des conditions initiales proches de la solution trouvé dans l'item précédent. De cette manière on voit la non-convergence locale de cette approximation de la Méthode de Newton classique.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=8cm]{I23.eps}
@@ -250,9 +267,9 @@ D'après la figure \ref{fig:I23} on voit la divergence de la méthode de Gauss-N
 \subsection{Différences schémas d'approximation}
 \subsubsection{}
 On remplace $u_i^n$ par $u(x_i, t_n)$ où $u$ est une fonction régulière. On commence par le développement de Taylor au tour du point $(x_i, t_n)$. Pour le schéma
-\begin{align*}
+\begin{align} \label{eq:sch_exp}
 \frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta x} -b \frac{u_{i+1}^{n}-u_{i-1}^{n} - 2 u_i^{n}}{\Delta x^2} =0 \text{, on a}
-\end{align*}
+\end{align}
 \begin{multline*}
 u(x_{i \pm 1}, t_n)= u(x_{i}, t_{n}) \pm \Delta x \frac{\partial u}{\partial x} (x_{i}, t_{n}) + \frac{1}{2} \Delta x^2 \frac{\partial^2 u}{\partial x^2}(x_{i}, t_{n}) \pm \frac{1}{6} \Delta x^3 \frac{\partial^3 u}{\partial x^3}(x_{i}, t_{n}) \\ + \frac{1}{24} \Delta x^4 \frac{\partial^4 u}{\partial^4 x} (x_{i}, t_{n}) + \O (\Delta x^5) \text{,}
 \end{multline*}
@@ -270,9 +287,9 @@ E&=\frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n}-u_{i-1}^{n}}{2\Delta
 
 Le erreur ci-dessus est dans le "standard" mentionné dans le Remarque 2.2.5 du polycopié, c'est à dire, pour une fonction régulière qui n'est pas solution de notre problème, la limite de l'erreur de troncature n'est pas nulle. Alors c'est schéma est consistante et d'ordre 1 en temps et 2 en espace.
 Pour le schéma
-\begin{align*}
+\begin{align} \label{eq:sch_imp}
 \frac{u_i^{n+1}-u_i^{n}}{\Delta t} + a \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2\Delta x} -b \frac{u_{i+1}^{n+1}-u_{i-1}^{n+1} - 2 u_i^{n+1}}{\Delta x^2} =0 \text{,}
-\end{align*}
+\end{align}
 on fait le développement au tour du point $(x_i, t_{n+1})$ et on trouve
 \begin{multline*}
 u(x_{i \pm 1}, t_{n+1})= u(x_{i}, t_{n+1}) \pm \Delta x \frac{\partial u}{\partial x} (x_{i}, t_{n+1}) + \frac{1}{2} \Delta x^2 \frac{\partial^2 u}{\partial x^2}(x_{i}, t_{n+1}) \pm \frac{1}{6} \Delta x^3 \frac{\partial^3 u}{\partial x^3}(x_{i}, t_{n+1}) \\ + \frac{1}{24} \Delta x^4 \frac{\partial^4 u}{\partial^4 x} (x_{i}, t_{n+1}) + \O (\Delta x^5) \text{,}
@@ -369,26 +386,32 @@ On peut récrire le schéma comme
 \begin{align*}
 u_i^n = \left ( -\frac{b \Delta t}{\Delta x^2} \right) u_{i+1}^{n+1} +\left ( 1 + 2 \frac{b \Delta t}{\Delta x^2} \right )  u_{i}^{n+1}  + \left ( -\frac{b \Delta t}{\Delta x^2} \right) u_{i-1}^{n+1} + u_i^{n+1}(u_i^n)^3 \text{.}
 \end{align*}
-Ainsi, on peu écrire $U^n=(A+ \Delta t \text{diag}((u_{-i_{\text{max}}}^n), \dots, (u_{i_{\text{max}}}^n)))U^{n+1}$
-, où $U^n= \begin{pmatrix} u_{-i_\text{max}}^n \\ \vdots \\ u_{i_\text{max}}^n \end{pmatrix}$, $\delta=\frac{b \Delta t}{\Delta x^2}$ et $A_{ij}= \begin{cases}
+Ainsi, on peu écrire $U^n=(A+ \Delta t \;\text{diag}((u_{-i_{\text{max}}}^n), \dots, (u_{i_{\text{max}}}^n)))U^{n+1}$
+, où $U^n= \begin{pmatrix} u_{-i_\text{max}}^n \\ \vdots \\ u_{i_\text{max}}^n \end{pmatrix}$, $\delta=\frac{b \Delta t}{\Delta x^2}$ et
+\begin{align*}
+A = \begin{pmatrix}
+1 + 2 \delta & - \delta\\
+- \delta & 1 + 2 \delta & - \delta \\
+& - \delta & \ddots & \ddots \\
+& & \ddots & \ddots & - \delta \\
+& & & - \delta & 1 + 2 \delta 
+\end{pmatrix}
+\end{align*}
+
+\begin{comment}
+$A_{ij}= \begin{cases}
 1 + 2 \delta &\text{, si } i=j \\
 - \delta  &\text{, si } i=j \pm1 \\
 0 &\text{, sinon}
 \end{cases}$.
+\end{comment}
 
 \subsubsection{}
-\begin{align*}
-T = \begin{pmatrix}
-a_1 & b_1 \\
-c_1 & a_2 & b_2 \\
-& c_2 & \ddots & \ddots \\
-& & \ddots & \ddots & b_{n-1} \\
-& & & c_{n-1} & a_n
-\end{pmatrix}
-\end{align*}
+
 content...
 
 \subsection{Schéma pour l'équation stationnaire}
+	
 \subsubsection{}
 content...
 
