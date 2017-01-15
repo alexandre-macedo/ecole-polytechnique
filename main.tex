@@ -130,10 +130,9 @@
 		\end{center}
 		\caption{Le parcours du méthode de gradient à pas constant $\rho = 0.045$ et $\rho = 0.01$.}
 		\label{fig:I12d}
-	\end{figure}
-    \newpage
-	\subsection{Gradient optimal}
-	\subsubsection{} %% II.1.1
+    \end{figure}
+    \subsection{Gradient optimal}
+\subsubsection{} %% II.1.1
 	Soit $J(u)=\frac{1}{2} \langle Au, u \rangle - \langle b, u \rangle$. On veut trouver ${\rho_k=\textrm{argmin}_{\rho \geq 0} J(u_k- \rho \grad J(u_k))}$. Soit ${r_k= \grad J(u_k) = Au_k-b}$, on a
 	\begin{align} \label{eq:gradopt}
 	\begin{split}
@@ -184,13 +183,10 @@ u_{k1} - 1 \\
 \rho_k = \frac{(u_{k1} - 1)^2 + (\lambda u_{k2} - 1)^2}{(u_{k1} - 1)^2 + \lambda (\lambda u_{k2} - 1)^2 }
 \end{align}
 
-À chaque itération, on actualise $\rho_k$ en utilisant l'équation \ref{eq:rho_k}. Les figures \ref{fig:I22a} et \ref{fig:I22b} montre les résultats pour différentes condition initiales et pour le critère de arrête 
+À chaque itération, on actualise $\rho_k$ en utilisant l'équation \ref{eq:rho_k}. Le figure \ref{fig:I23a} montre les résultats pour différentes condition initiales et pour le critère de arrête 
 \begin{align*}
 \frac{\| r_k \|}{\| r_0 \|} \leq 10^{-2}\text{.}
 \end{align*}
-
-\subsubsection
-Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme le rapport $\frac{\| r_k \|}{\| r_0 \|}$ en fonction de $k$ pour les cas montrés dans les figure \ref{fig:I23a} et \ref{fig:I23b}.
 \begin{figure}[H]
 	\begin{center}
 \includegraphics[height=8cm]{I123a.eps}
@@ -199,6 +195,9 @@ Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme l
 	\caption{Parcours du méthode de gradient à pas optimal.}
 	\label{fig:I23a}
 \end{figure}
+\subsubsection
+Les figure \ref{fig:I23a} et \ref{fig:I23b} montre en échelle semi logarithme le rapport $\frac{\| r_k \|}{\| r_0 \|}$ en fonction de $k$ pour les cas montrés dans les figure \ref{fig:I23a} et \ref{fig:I23b}.
+
 \begin{figure}[H]
 	\begin{center}
 \includegraphics[height=8cm]{I123b.eps}
@@ -219,7 +218,6 @@ Quand on met en œuvre le procédé de dichotomie pour l'équation \ref{eq:rosen
 	\label{fig:I24}
 \end{figure}
 	
-\newpage
 \section{Méthodes newtoniennes}
 \subsection{Méthode de Newton}
 \subsection{Méthode de Gauss-Newton}
