@@ -81,22 +81,15 @@ def newtonMethod(b, dx, u0):
     for i in range(n):
         DG = buildDG(b, dx, u)
         B = G(b, dx, u)
-        #delta = gradientOptimal(DG, B, np.matmul(linalg.inv(DG),B) + u*0.1, 1.0e-3)
-        #u = u - delta
         u = u - np.matmul(linalg.inv(DG),B)
-        #dhist.append(d)
         uhist.append(u)
-    #print("Avarage relative precision:",np.mean(dhist))
     return uhist
     
 b = 1    
 X = 10
 dx = 0.01
 x0 = np.arange(-X,X+dx,dx)
-#u0 = (1/np.sqrt(2*np.pi)) * np.exp((-1/2)* x0**2)
-#u0 = 1- np.cos(x0*np.pi/10)
 u0 = 1-(x0**2)/100
-#COLOR MAP DEFINITION
     
 
 tic()
@@ -111,17 +104,3 @@ plt.gca().set_ylabel(r'$u$')
 plt.title(r'Representation de la solution du problème stationnaire')  
 plt.savefig('IV22.eps', format='eps')
 plt.show()
-
-
-
-'''
-Y = np.matrix(uhist)
-X = np.arange(-X,X+dx,dx)
-T = np.arange(0,T+dt,dt)
-Xm, Tm = np.meshgrid(X, T)
-
-fig = plt.figure()
-ax = fig.gca(projection='3d')
-surf = ax.plot_surface(Xm, Tm, Y,  rstride=1, cstride=1, cmap=cm.coolwarm,
-        linewidth=0, antialiased=False)
-'''

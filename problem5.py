@@ -102,7 +102,6 @@ dt = 0.0001
 T = 1
 x0 = np.arange(-X,X+dx,dx)
 u0 = (1/np.sqrt(2*np.pi)) * np.exp((-1/2)* x0**2)
-#u0 = 1 - np.cos(x0*np.pi/10)
 tic()
 uhist = implicitIterative(a, b, dx, dt, T, u0, buildM)
 toc()
@@ -128,16 +127,3 @@ plt.gca().set_ylabel(r'$u$')
 plt.title(r'Représentation de la solution implicite')  
 plt.savefig('IV12.eps', format='eps')
 plt.show()
-
-
-'''
-Y = np.matrix(uhist)
-X = np.arange(-X,X+dx,dx)
-T = np.arange(0,T+dt,dt)
-Xm, Tm = np.meshgrid(X, T)
-
-fig = plt.figure()
-ax = fig.gca(projection='3d')
-surf = ax.plot_surface(Xm, Tm, Y,  rstride=1, cstride=1, cmap=cm.coolwarm,
-        linewidth=0, antialiased=False)
-'''
