@@ -116,9 +116,9 @@
 \normalsize\textbf{INF 421} \hfill \textbf{\today}\vspace{20pt}
 \centerline{\Large Programming Project P2 – X2015}\vspace{5pt}
 \centerline{\Large \textbf{From ADN to formation of proteins : how to align sequences ?}}\vspace{3pt}
-\centerline{Project proposed by Marie albenque -- \texttt{ albenque@lix.polytechnique.fr}}\vspace{13pt}
+\centerline{Project proposed by Marie Albenque -- \texttt{ albenque@lix.polytechnique.fr}}\vspace{13pt}
 \centerline{Lucas Lugão Guimarães -- \texttt{lucas.lugao-guimaraes@polytechnique.edu}}
-\centerline{alexandre Ribeiro João Macedo --  \texttt{alexandre.macedo@polytechnique.edu}}\vspace{20pt}
+\centerline{Alexandre Ribeiro João Macedo --  \texttt{alexandre.macedo@polytechnique.edu}}\vspace{20pt}
 % --------------------------------------------------------------
 
 %% http://www.lix.polytechnique.fr/~albenque/INF421-2016/alignment_Project.pdf
@@ -196,14 +196,69 @@ Since we are on a semi-global alignment, we consider the best score equals to ${
 For the local alignment with affine gaps, we can use an algorithm based in the Smith-Waterman algorithm, described in \cite{durbin}. It is a particular case where we consider, in addition to the possibilities of adding a gap to one or the other sequence or not adding a gap, the possibility of stopping or starting at that point. This is implemented as a change in the DP, by adding the case $0$ when getting the maximum score in the recursion. In other words, it is better to align the sequences locally than going with a negative score. This is done by changing the case in \thref{task:5} to ${k_{i,j}=\text{max}[k_{i-1,j}+Sc(s_i,t_j), p_{i,j}, q_{i,j},0]}$.
 \end{exercise}
 
-\begin{exercise} % Task 7
+\begin{exercise} \thlabel{task:7}% Task 7
 The algorithms presented so far are all exact, in a sense that they will return for sure the alignment with the best score but they all come with complexity of $\O(mn)$. If we use this to align a given sequence of size one thousand to a database of hundreds of millions of residues, the number of matrix entries will be the order of $10^{11}$ which would take a long time to compute, as explained in \cite{durbin}. We should keep in mind that the human genome, for example, has $3,0.10^9$ base pairs. In order to solve this problem, we can use heuristic algorithms that not necessarily return the best alignment but that can run much faster. Such a example is BLAST.
 
-In order to do this task we will use the Aho-Corasick algorithm as described in \cite{pekka}. We start by creating the set $\W_g$ and from this set we create $\S_g$ by doing for each word of $\W_g$ the following procedure: we modify the first entry of this word by all the possibilities, meaning the entries of Blosum50, and we store those whose alignment score with the original sequence is greater than the defined threshold. 
+In order to do this task we will use the Aho-Corasick, a classic exact match algorithm, as described in \cite{pekka}. We start by creating the set $\W_g$ from $g$ and from this set we create $\S_g$ by doing for each word of $\W_g$ the following procedure: we modify the first entry of this word by all the possibilities, meaning the entries of Blosum50, and we store those whose alignment score with the original sequence is greater than the defined threshold. And for each stored new word, we do the same procedure but instead of changing the first entry, we change the next one. We can check for changes only for the entries that had an alignment score above the threshold because an change in the sequence can only reduce the score when aligned to the original sequence. We keep doing this up to the point we modified all entries, that is, a number $k$ of times. After we are done with the creation of words based on the modification of the first entry of the original word, we do it for the next one, up to the end, that is $k$ times. This procedure is illustrated in figure \ref{fig:sg}. Once we have $\S_g$, we can run the Aho-Corasick, that will make the exact set matching of $\S_g$ and $t$. This is done by a refinement of a keyword tree. We construct the Aho-Corasick automaton, see \cite{pekka}, in $\S_g$, and we will run $t$ in this automaton to get the results. The complexity will be $\O(h+m+z)$, where $h$ is the some of the length of all words in $\S_g$ and $z$ the number of occurrences of the pattern in $t$. 
+
+\begin{figure}[h]
+\begin{tikzpicture}
+\fill [black] (-5.5,4.5) rectangle (-5,4) node (v6) {};
+\fill [blue] (-5,4.5) rectangle (-4.5,4);
+\fill [cyan] (-4.5,4.5) rectangle (-4,4);
+\fill [gray] (-4,4.5) rectangle (-3.5,4) node (v8) {};
+
+\fill[green] (-11.5,2) node (v2) {} rectangle (-11,1.5) node (v4) {};
+\fill [blue] (-11,2) rectangle (-10.5,1.5);
+\fill [cyan] (-10.5,2) rectangle (-10,1.5);
+\fill [gray] (-10,2) rectangle (-9.5,1.5);
+
+\fill [magenta] (-9,2) node (v3) {} rectangle (-8.5,1.5);
+\fill [blue] (-8.5,2) rectangle (-8,1.5);
+\fill [cyan] (-8,2) rectangle (-7.5,1.5);
+\fill [gray] (-7.5,2) rectangle (-7,1.5);
+
+\node (v1) at (-5.5,4) {};
+\draw [black] (v1) edge (v2);
+\draw [black] (v1) edge (v3);
+\fill [green] (-13,0.5) rectangle (-12.5,0);
+\fill [purple] (-12.5,0.5) node (v5) {} rectangle (-12,0);
+\fill [cyan] (-12,0.5) rectangle (-11.5,0);
+\fill [gray] (-11.5,0.5) rectangle (-11,0);
+\draw [black] (v4) edge (v5);
+\fill [black] (-5.5,2) rectangle (-5,1.5);
+\fill [purple] (-5,2) node (v7) {} rectangle (-4.5,1.5);
+\fill [cyan] (-4.5,2) rectangle (-4,1.5);
+\fill [gray] (-4,2) rectangle (-3.5,1.5);
+\draw  (v6) edge (v7);
+\fill [black]  (0,2) rectangle (0.5,1.5);
+\fill [blue]  (0.5,2) rectangle (1,1.5);
+\fill [cyan] (1,2) rectangle (1.5,1.5);
+\fill [yellow]  (1.5,2) node (v9) {} rectangle (2,1.5);
+\draw  (v8) edge (v9);
+\node (v10) at (-12,-0.5) {};
+\node (v11) at (-12,-1) {};
+\draw [densely dotted] (v10) -- (v11);
+\node (v14) at (-4.5,0.5) {};
+\node (v15) at (-4.5,0) {};
+\node (v16) at (-2,1.5) {};
+\node (v17) at (-1.5,1.5) {};
+\node (v18) at (1,0.5) {};
+\node (v19) at (1,0) {};
+\node (v12) at (-8,0.5) {};
+\node (v13) at (-8,0) {};
+\draw [densely dotted] (v12) -- (v13);
+\draw [densely dotted] (v14) -- (v15);
+\draw [densely dotted] (v16) -- (v17);
+\draw [densely dotted] (v18) -- (v19);
+\end{tikzpicture}
+	\caption{Initialization of $\S_g$}
+	\label{fig:sg}
+\end{figure}
 \end{exercise}
 
 \begin{exercise} % Task 8
-	content...
+In this task, once we have the working algorithm of \thref{task:7}, that give us the exact match, all we need to do is, once we have the match, we try to add an extra word from the original sequence $g$ to the left and/or to the right. We keep doing this up to the point when we get an match that would have a negative score. From this sequences, we will keep those whose alignment score are above the set threshold. The meaning of the threshold, $th_l$, times ${[\text{score of the alignment of $g$ with  itself}]}$ is how much "mutation" we allow for the local alignment to be still good. The output of the algorithm will finally be aligned sequences with its score, starting point in the sequence $t$ and its length.
 \end{exercise}
 
 \begin{commental}
