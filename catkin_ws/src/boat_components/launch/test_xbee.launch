@@ -1,15 +1,8 @@
 <launch>
 
-
 <node pkg="boat_components" name="xbee_send" type="xbee_send" clear_params="true" output="screen">
 <param name="port" value="/dev/ttyUSB0" />
 <param name="baud_rate" value="9600" type="str" />
 </node>
-
-<node pkg="boat_components" name="xbee_send2" type="xbee_send" clear_params="true" output="screen">
-<param name="port" value="/dev/ttyUSB0" />
-<param name="baud_rate" value="9600" type="str" />
-</node>
-
 
 </launch>

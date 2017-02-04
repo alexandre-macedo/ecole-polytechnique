@@ -11,8 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package()
 
 include_directories(include ${catkin_INCLUDE_DIRS})
-include_directories(local_lib/include)
-add_library(init_param local_lib/src/init_param.cpp)
+include_directories(${CMAKE_SOURCE_DIR}/local_lib/include)
 
 roslaunch_add_file_check(launch)
 
