@@ -7,3 +7,7 @@ build/
 build_isolated/
 */src/CMakeLists.txt
 .catkin_workspace
+####################################################
+##		VS code
+####################################################
+.vscode

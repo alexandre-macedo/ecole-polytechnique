@@ -11,10 +11,13 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package()
 
 include_directories(include ${catkin_INCLUDE_DIRS})
+include_directories(local_lib/include)
+add_library(init_param local_lib/src/init_param.cpp)
+
 roslaunch_add_file_check(launch)
 
 add_executable(xbee_send src/xbee/xbee_send.cpp)
-target_link_libraries(xbee_send ${catkin_LIBRARIES})
+target_link_libraries(xbee_send ${catkin_LIBRARIES} init_param)
 
 add_executable(motor src/motor/motor.cpp)
 target_link_libraries(motor ${catkin_LIBRARIES})

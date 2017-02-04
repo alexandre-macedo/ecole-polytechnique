@@ -2,10 +2,11 @@
 #include <serial/serial.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Empty.h>
+#include <init_param.h>
 
 serial::Serial ser;
 
-void write_callback(const std_msgs::String::ConstPtr &msg)
+void writeCallback(const std_msgs::String::ConstPtr &msg)
 {
     ROS_INFO_STREAM("Writing to serial port:" << msg->data);
     ser.write(msg->data);
@@ -15,38 +16,17 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "xbee_send");
     ros::NodeHandle nh;
+    const std::string node_name = ros::this_node::getName();
 
     // Get parameters from server/
-
-    const std::string parameters_name[] = {"port", "baud_rate", "timeout"};
-    const std::string parameters_default[] = {"NODEFAULT", "9600", "1000"};
-    std::string parameters[3];
-
-    bool erro_flag = false;
-    const std::string node_name = ros::this_node::getName();
-    ROS_INFO_STREAM("Initializing parameter for " << node_name);
-    for (unsigned int i = 0; i < sizeof(parameters_name) / sizeof(parameters_name[0]); i++)
-    {
-        if (nh.getParam(node_name + "/" + parameters_name[i], parameters[i]))
-            ROS_INFO_STREAM("Parameter " << node_name + "/" + parameters_name[i] << " initialized to " << parameters[i] << ".");
-        else
-        {
-            if (parameters_default[i] == "NODEFAULT")
-            {
-                ROS_ERROR_STREAM("Parameter " << node_name + "/" + parameters_name[i] << " not found.");
-                erro_flag = true;
-            }
-            else
-            {
-                parameters[i] = parameters_default[i];
-                ROS_WARN_STREAM("Parameter " << node_name + "/" + parameters_name[i] << " not found. Initializing to default value " << parameters_default[i] << ".");
-            }
-        }
-    }
-    if (erro_flag){
-        ROS_ERROR_STREAM("Invalid parameter initialization. Consider solving it before continuing. Node " << node_name << " has died.");
+    const std::vector<std::string> parameters_names = {"port", "baud_rate", "timeout"};
+    const std::vector<std::string> parameters_default = {"NODEFAULT", "9600", "1000"};
+    
+    int parameters_number = parameters_names.size();
+    std::vector<std::string> parameters(parameters_number);
+    if (!initParam(parameters_names, parameters_default, node_name, parameters, parameters_number))
         return -1;
-    }
+
     // Start serial communication with Xbee
     try
     {
@@ -71,7 +51,7 @@ int main(int argc, char **argv)
     }
 
     // Subscribe to topics
-    ros::Subscriber send_sub = nh.subscribe(node_name + "/send", 2, write_callback);
+    ros::Subscriber send_sub = nh.subscribe(node_name + "/send", 2, writeCallback);
 
     // Run ros
     ros::spin();

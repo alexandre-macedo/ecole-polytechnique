@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>boat_components</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>Simple ros nodes to interact with the boat components</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
