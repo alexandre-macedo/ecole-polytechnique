@@ -11,4 +11,4 @@ catkin_package()
 include_directories(include ${catkin_INCLUDE_DIRS})
 include_directories(include)
 
-add_library(init_param src/init_param.cpp)
+add_library(local_lib src/init_param.cpp)

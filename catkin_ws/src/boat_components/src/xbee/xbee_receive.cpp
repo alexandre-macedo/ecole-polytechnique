@@ -14,13 +14,13 @@ void writeCallback(const std_msgs::String::ConstPtr &msg)
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "xbee_send");
+    ros::init(argc, argv, "xbee_receive");
     ros::NodeHandle nh;
     const std::string node_name = ros::this_node::getName();
 
     // Get parameters from server/
-    const std::vector<std::string> parameters_names = {"port", "baud_rate", "timeout"};
-    const std::vector<std::string> parameters_default = {"NODEFAULT", "9600", "1000"};
+    const std::vector<std::string> parameters_names = {"port", "baud_rate", "timeout", "loop_rate"};
+    const std::vector<std::string> parameters_default = {"NODEFAULT", "9600", "1000", "60"};
 
     const int parameters_number = parameters_names.size();
     std::vector<std::string> parameters(parameters_number);
@@ -50,9 +50,21 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    // Subscribe to topics
-    ros::Subscriber send_sub = nh.subscribe(node_name + "/send", 2, writeCallback);
+    // Read from serial and publish information
 
-    // Run ros
-    ros::spin();
+    ros::Publisher read_pub = nh.advertise<std_msgs::String>(node_name + "/commands" , 1000);
+    ros::Rate loop_rate(std::stoul(parameters[3]));
+    std_msgs::String result;
+    while (ros::ok())
+    {
+        ros::spinOnce();
+        if (ser.available())
+        {
+            result.data = ser.read(ser.available());
+            ROS_INFO_STREAM("Reading from serial port");
+            ROS_INFO_STREAM("Read: " << result.data);
+            read_pub.publish(result);
+        }
+        loop_rate.sleep();
+    }
 }

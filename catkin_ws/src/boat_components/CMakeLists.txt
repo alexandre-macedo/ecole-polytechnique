@@ -16,7 +16,10 @@ include_directories(${CMAKE_SOURCE_DIR}/local_lib/include)
 roslaunch_add_file_check(launch)
 
 add_executable(xbee_send src/xbee/xbee_send.cpp)
-target_link_libraries(xbee_send ${catkin_LIBRARIES} init_param)
+target_link_libraries(xbee_send ${catkin_LIBRARIES} local_lib)
+
+add_executable(xbee_receive src/xbee/xbee_receive.cpp)
+target_link_libraries(xbee_receive ${catkin_LIBRARIES} local_lib)
 
 add_executable(motor src/motor/motor.cpp)
 target_link_libraries(motor ${catkin_LIBRARIES})
