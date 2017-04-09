@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include <init_param.h>
+#include <btmx/init_param.h>
 
 namespace ipl
 {

@@ -1,1 +1,0 @@
-This folder will keep the ROS 3rd party dependencies

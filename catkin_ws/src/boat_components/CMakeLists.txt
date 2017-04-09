@@ -12,15 +12,15 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package()
 
 include_directories(include ${catkin_INCLUDE_DIRS})
-include_directories(${CMAKE_SOURCE_DIR}/local_lib/include)
+include_directories(${CMAKE_SOURCE_DIR}/btmx/include/)
 
 roslaunch_add_file_check(launch)
 
 add_executable(xbee_send src/xbee/xbee_send.cpp)
-target_link_libraries(xbee_send ${catkin_LIBRARIES} local_lib)
+target_link_libraries(xbee_send ${catkin_LIBRARIES} btmx)
 
 add_executable(xbee_receive src/xbee/xbee_receive.cpp)
-target_link_libraries(xbee_receive ${catkin_LIBRARIES} local_lib)
+target_link_libraries(xbee_receive ${catkin_LIBRARIES} btmx)
 
 add_executable(motor src/motor/motor.cpp)
 target_link_libraries(motor ${catkin_LIBRARIES})
