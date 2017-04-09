@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 
     const int parameters_number = parameters_names.size();
     std::vector<std::string> parameters(parameters_number);
-    if (!ipl::initParam(parameters_names, parameters_default, parameters, parameters_number, node_name))
+    if (!btmx::initParam(parameters_names, parameters_default, parameters, parameters_number, node_name))
         return -1;
 
     // Start serial communication with Xbee
