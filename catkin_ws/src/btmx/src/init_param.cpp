@@ -74,7 +74,7 @@ bool initParam(const std::vector<std::string> &parameters_names, const std::vect
 }
 
 template <typename T>
-T initParam(const std::string &parameter_name, const T &default_value, const std::string &node_name)
+T getParam(const std::string &parameter_name, const T &default_value, const std::string &node_name)
 {
     T v;
     if (ros::param::get(parameter_name, v))
@@ -88,7 +88,7 @@ T initParam(const std::string &parameter_name, const T &default_value, const std
 }
 
 template <typename T>
-T initParam(const std::string &parameter_name, const std::string &node_name)
+T getParam(const std::string &parameter_name, const std::string &node_name)
 {
     T v;
     if (ros::param::get(node_name + "/" + parameter_name, v))
@@ -102,7 +102,7 @@ T initParam(const std::string &parameter_name, const std::string &node_name)
 }
 
 template <typename T>
-T initParam(const std::string &parameter_name, const T &default_value)
+T getParam(const std::string &parameter_name, const T &default_value)
 {
     T v;
     if (ros::param::get(parameter_name, v))
@@ -116,7 +116,7 @@ T initParam(const std::string &parameter_name, const T &default_value)
 }
 
 template <typename T>
-T initParam(const std::string &parameter_name)
+T getParam(const std::string &parameter_name)
 {
     T v;
     if (ros::param::get(parameter_name, v))

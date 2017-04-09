@@ -1,7 +1,7 @@
 #ifndef INIT_PARAM_H
 #define INIT_PARAM_H
 
-namespace ipl
+namespace btmx
 {
 bool initParam(const std::vector<std::string> &parameters_names, const std::vector<std::string> &parameters_default, std::vector<std::string> &parameters, const int &parameters_number, const std::string &node_name);
 
