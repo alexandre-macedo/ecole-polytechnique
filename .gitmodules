@@ -1,0 +1,3 @@
+[submodule "catkin_ws_3rdparty/src/serial"]
+	path = catkin_ws_3rdparty/src/serial
+	url = https://github.com/wjwwood/serial
