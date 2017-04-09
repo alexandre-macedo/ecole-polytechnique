@@ -8,7 +8,13 @@ find_package(catkin REQUIRED COMPONENTS
   roslaunch
 )
 
-catkin_package()
+catkin_package(
+   CATKIN_DEPENDS roslaunch
+)
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 roslaunch_add_file_check(launch)
+
+install(DIRECTORY launch/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+    PATTERN ".svn" EXCLUDE)

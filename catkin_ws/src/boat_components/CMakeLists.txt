@@ -10,9 +10,15 @@ find_package(catkin REQUIRED COMPONENTS
 	btmx
 )
 
-catkin_package()
-
 include_directories(include ${catkin_INCLUDE_DIRS})
+
+catkin_package(
+	CATKIN_DEPENDS
+	roslaunch
+	roscpp 
+	serial
+	btmx
+)
 
 roslaunch_add_file_check(launch)
 
@@ -48,4 +54,8 @@ camera
 )
 
 install(TARGETS ${${PROJECT_NAME}_NODES}
-        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+		RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+install(DIRECTORY launch/
+  		DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+  		PATTERN ".svn" EXCLUDE)

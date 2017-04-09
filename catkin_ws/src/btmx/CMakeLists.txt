@@ -8,6 +8,7 @@ roscpp
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 catkin_package(
+        CATKIN_DEPENDS roscpp
         LIBRARIES ${PROJECT_NAME}
         INCLUDE_DIRS include
 )
