@@ -5,6 +5,8 @@ devel/
 devel_isolated/
 build/
 build_isolated/
+install/
+install_isolated/
 */src/CMakeLists.txt
 .catkin_workspace
 ####################################################

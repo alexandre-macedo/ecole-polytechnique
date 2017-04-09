@@ -40,12 +40,16 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>roscpp</build_depend>
   <build_depend>roslaunch</build_depend>
   <build_depend>serial</build_depend>
+  <build_depend>btmx</build_depend>
+
   <run_depend>roscpp</run_depend>
   <run_depend>roslaunch</run_depend>
   <run_depend>serial</run_depend>
+  <run_depend>btmx</run_depend>
   
 
 

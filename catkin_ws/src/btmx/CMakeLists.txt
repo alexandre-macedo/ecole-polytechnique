@@ -12,12 +12,12 @@ catkin_package(
         INCLUDE_DIRS include
 )
 
-set(btmx_SRCS
+set(${PROJECT_NAME}_SRCS
     src/init_param.cpp
     include/btmx/init_param.h
 )
 
-add_library(${PROJECT_NAME} ${btmx_SRCS})
+add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SRCS})
 
 
 # Install executables
