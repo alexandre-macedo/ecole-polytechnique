@@ -18,6 +18,10 @@ set(${PROJECT_NAME}_SRCS
     include/btmx/init_param.h
 )
 
+set(${PROJECT_NAME}_INCLUDES
+    include/btmx/init_param.h
+)
+
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SRCS})
 
 
@@ -28,5 +32,5 @@ install(TARGETS ${PROJECT_NAME}
 )
 
 # Install headers
-install(FILES include/btmx/init_param.h
-  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}/btmx)
+install(FILES ${${PROJECT_NAME}_INCLUDES}
+  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}/${PROJECT_NAME})
