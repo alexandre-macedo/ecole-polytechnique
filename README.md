@@ -4,7 +4,7 @@
 
 To clone the complete repository and its submodules do
 ```
-git clone --recursive https://arj.macedo@gitlab.com/arj.macedo/bateautomotix2015.git
+git clone --recursive git@gitlab.com:arj.macedo/bateautomotix2015.git
 ```
 
 To clone the submodules in an already cloned repository do
