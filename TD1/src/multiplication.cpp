@@ -1,9 +1,11 @@
 #include <iostream>
 
 #include <iostream>
- 
-int** lireMatrice(int& n, int& m)
+
+int **lireMatrice(int &n, int &m)
 {
+  std::cin >> n;
+  std::cin >> m;
   int **matrice = 0;
   matrice = new int *[n];
 
@@ -25,63 +27,39 @@ int** lireMatrice(int& n, int& m)
   }
   return matrice;
 }
- 
-int main(int argc, char** argv)
-{
-  // lecture des deux matrices A et B
- 
-  int nA, mA;
-  int** A = lireMatrice(nA, mA);
- 
-  int nB, mB;
-  int** B = lireMatrice(nB, mB);
- 
-  // affichage de A x B
- 
-  // a completer
- 
-  return 0;
-}
+
 int main(int argc, char **argv)
 {
-  // lecture de la taille de la matrice
+  // lecture des deux matrices A et B
+  int nA, mA;
+  int **A = lireMatrice(nA, mA);
 
-  int n = 0;
-  int m = 0;
+  int nB, mB;
+  int **B = lireMatrice(nB, mB);
 
-  std::cin >> n;
-  std::cin >> m;
+  int **C = 0;
+  C = new int *[nA];
+  for (unsigned i = 0; i < nA; i++)
+    C[i] = new int[mB];
 
-  // lecture de la matrice
+  // affichage de A x B
 
-  int **matrice = 0;
-  matrice = new int *[n];
+ for(unsigned i = 0; i < nA; ++i)
+        for(unsigned j = 0; j < mB; ++j)
+            for(unsigned k = 0; k < mA; ++k)
+            {
+                C[i][j] += A[i][k] * B[k][j];
+            }
 
-  // A FAIRE :
-  // 1. creation de la matrice en memoire et lecture de la matrice
-  // 2. affichage de la matrice transposee
-
-  for (int i = 0; i < n; i++)
+  for (unsigned i = 0; i < nA; i++)
   {
-    matrice[i] = new int[m];
-  }
-
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      std::cin >> matrice[i][j];
-    }
-  }
-
-  for (int i = 0; i < m; i++)
-  {
-    for (int j = 0; j < n-1; j++)
-    {
-      std::cout << matrice[j][i] << " ";
-    }
-      std::cout << matrice[n-1][i];
+    for (unsigned j = 0; j < mB-1; j++)
+      std::cout << C[i][j] << " ";
+      std::cout << C[i][mB -1];
     std::cout << std::endl;
   }
+
+  // a completer
+
   return 0;
 }
