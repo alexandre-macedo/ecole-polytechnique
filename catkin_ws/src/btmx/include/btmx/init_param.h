@@ -2,7 +2,6 @@
 #define INIT_PARAM_H
 
 #include <ros/ros.h>
-#include <string>
 
 namespace btmx
 {

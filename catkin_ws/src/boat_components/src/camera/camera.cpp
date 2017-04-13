@@ -3,7 +3,6 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <btmx/init_param.h>
-#include <btmx/TeleCommands.h>
 
 int main(int argc, char **argv)
 {
@@ -32,7 +31,6 @@ int main(int argc, char **argv)
     sensor_msgs::ImagePtr msg;
     image_transport::Publisher pub = it.advertise(node_name + "/image", 1);
     ros::Rate loop_rate(frame_rate);
-    btmx::TeleCommands olar;
     
     while (nh.ok())
     {
@@ -41,7 +39,6 @@ int main(int argc, char **argv)
         {
             msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", frame).toImageMsg();
             pub.publish(msg);
-            cv::waitKey(1);
         }
         ros::spinOnce();
         loop_rate.sleep();
