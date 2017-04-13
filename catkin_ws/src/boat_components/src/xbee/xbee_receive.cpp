@@ -3,6 +3,7 @@
 #include <std_msgs/String.h>
 #include <std_msgs/Empty.h>
 #include <btmx/init_param.h>
+#include <btmx/TeleCommands.h>
 
 serial::Serial ser;
 

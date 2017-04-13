@@ -45,6 +45,7 @@ target_link_libraries(imu ${catkin_LIBRARIES})
 add_executable(camera src/camera/camera.cpp)
 target_link_libraries(camera ${catkin_LIBRARIES})
 
+
 set(${PROJECT_NAME}_NODES
 xbee_send
 xbee_receive
