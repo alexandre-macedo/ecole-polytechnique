@@ -1,16 +1,18 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(boat_components)
 
-#set (CMAKE_CXX_STANDARD 11)
+#set (CMAKE_CXX_STANDARD 14)
 set (CMAKE_CXX_FLAGS "--std=gnu++11 ${CMAKE_CXX_FLAGS}")
 find_package(catkin REQUIRED COMPONENTS
 	roslaunch
 	roscpp 
 	serial
+	cv_bridge
+	image_transport
 	btmx
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS})
+include_directories(${catkin_INCLUDE_DIRS})
 
 catkin_package(
 	CATKIN_DEPENDS

@@ -22,9 +22,8 @@ int main(int argc, char **argv)
     const std::vector<std::string> parameters_names = {"port", "baud_rate", "timeout"};
     const std::vector<std::string> parameters_default = {"NODEFAULT", "9600", "1000"};
 
-    const int parameters_number = parameters_names.size();
-    std::vector<std::string> parameters(parameters_number);
-    if (!btmx::initParam(parameters_names, parameters_default, parameters, parameters_number, node_name))
+    std::vector<std::string> parameters(parameters_names.size());
+    if (!btmx::initParam(parameters, parameters_names, parameters_default, node_name))
         return -1;
 
     // Start serial communication with Xbee

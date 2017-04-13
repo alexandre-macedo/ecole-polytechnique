@@ -15,7 +15,6 @@ catkin_package(
 
 set(${PROJECT_NAME}_SRCS
     src/init_param.cpp
-    include/btmx/init_param.h
 )
 
 set(${PROJECT_NAME}_INCLUDES

@@ -22,10 +22,9 @@ int main(int argc, char **argv)
     const std::vector<std::string> parameters_names = {"port", "baud_rate", "timeout", "loop_rate"};
     const std::vector<std::string> parameters_default = {"NODEFAULT", "9600", "1000", "60"};
 
-    const int parameters_number = parameters_names.size();
-    std::vector<std::string> parameters(parameters_number);
-    if (!btmx::initParam(parameters_names, parameters_default, parameters, parameters_number, node_name))
-        return -1;
+    std::vector<std::string> parameters(parameters_names.size());
+    if (!btmx::initParam(parameters, parameters_names, parameters_default, node_name))
+        return 1;
 
     // Start serial communication with Xbee
     try
@@ -39,15 +38,15 @@ int main(int argc, char **argv)
     catch (serial::IOException &e)
     {
         ROS_ERROR_STREAM("Could not connect to Xbee.");
-        return -1;
+        return 1;
     }
 
     if (ser.isOpen())
-        ROS_INFO_STREAM("Serial Port initialized.");
+        ROS_INFO_STREAM("Serial port initialized.");
     else
     {
-        ROS_ERROR_STREAM("Unable to initialize port.");
-        return -1;
+        ROS_ERROR_STREAM("Unable to initialize serial port.");
+        return 1;
     }
 
     // Read from serial and publish information
