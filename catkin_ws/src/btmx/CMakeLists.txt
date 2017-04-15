@@ -7,21 +7,10 @@ message_generation
 std_msgs
 )
 
-add_message_files(
-  DIRECTORY msg
-  FILES
-  TeleCommands.msg
-)
-
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-)
-
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 catkin_package(
-        CATKIN_DEPENDS roscpp message_runtime std_msgs
+        CATKIN_DEPENDS roscpp
         LIBRARIES ${PROJECT_NAME}
         INCLUDE_DIRS include
 )

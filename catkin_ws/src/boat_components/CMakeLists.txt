@@ -6,7 +6,6 @@ set (CMAKE_CXX_FLAGS "--std=gnu++11 ${CMAKE_CXX_FLAGS}")
 find_package(catkin REQUIRED COMPONENTS
 	roslaunch
 	roscpp 
-	serial
 	cv_bridge
 	image_transport
 	btmx
@@ -18,26 +17,16 @@ catkin_package(
 	CATKIN_DEPENDS
 	roslaunch
 	roscpp 
-	serial
 	btmx
 )
 
 roslaunch_add_file_check(launch)
-
-add_executable(xbee_send src/xbee/xbee_send.cpp)
-target_link_libraries(xbee_send ${catkin_LIBRARIES})
-
-add_executable(xbee_receive src/xbee/xbee_receive.cpp)
-target_link_libraries(xbee_receive ${catkin_LIBRARIES})
 
 add_executable(motor src/motor/motor.cpp)
 target_link_libraries(motor ${catkin_LIBRARIES})
 
 add_executable(servo src/servo/servo.cpp)
 target_link_libraries(servo ${catkin_LIBRARIES})
-
-add_executable(gps src/gps/gps.cpp)
-target_link_libraries(gps ${catkin_LIBRARIES})
 
 add_executable(imu src/imu/imu.cpp)
 target_link_libraries(imu ${catkin_LIBRARIES})
@@ -47,11 +36,8 @@ target_link_libraries(camera ${catkin_LIBRARIES})
 
 
 set(${PROJECT_NAME}_NODES
-xbee_send
-xbee_receive
 motor
 servo
-gps
 imu
 camera
 )

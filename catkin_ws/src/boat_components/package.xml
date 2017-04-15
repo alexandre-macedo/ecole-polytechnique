@@ -48,9 +48,7 @@
 
   <run_depend>roscpp</run_depend>
   <run_depend>roslaunch</run_depend>
-  <run_depend>serial</run_depend>
   <run_depend>btmx</run_depend>
-  
 
 
   <!-- The export tag contains other, unspecified, tags -->
