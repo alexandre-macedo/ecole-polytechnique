@@ -1,0 +1,7 @@
+<launch>
+
+<node pkg="boat_components" name="camera_left" type="camera" clear_params="true" output="screen">
+<param name="video_source" value="0" />
+</node>
+
+</launch>
