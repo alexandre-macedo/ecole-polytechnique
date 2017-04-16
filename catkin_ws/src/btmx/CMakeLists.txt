@@ -3,8 +3,6 @@ project(btmx)
 
 find_package(catkin REQUIRED COMPONENTS
 roscpp
-message_generation
-std_msgs
 )
 
 include_directories(include ${catkin_INCLUDE_DIRS})
