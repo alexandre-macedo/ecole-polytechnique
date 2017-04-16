@@ -1,8 +1,8 @@
 #!/bin/bash
 port="/dev/ttyUSB0"
 baudrate="9600"
-my_ip="192.168.10.2"
-target_ip="192.168.10.1"
+my_ip="192.168.10.1"
+target_ip="192.168.10.2"
 
 complete_restart()
 {
