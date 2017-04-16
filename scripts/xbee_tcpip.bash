@@ -6,7 +6,7 @@ target_ip="192.168.10.1"
 
 complete_restart()
 {
-    echo "Starting slattach. (1/3)"
+    echo "Starting slattach... (1/3)"
     /sbin/slattach -s $baudrate $port &
     pid=$!
     sleep 2
@@ -43,14 +43,17 @@ complete_restart()
     fi
 }
 
+## Header
 date
 echo
 ps $$
 echo
+
 ## Check if device exists
 echo "Checking device..."
 if ! (ls $port) > /dev/null 2>&1
 then
+    ## Device does not exist
     echo "Device not found."
     echo
     ## Kill /sbin/slattach if it exists
@@ -73,15 +76,16 @@ then
     echo "Fail. Device not found."
     exit
 else
+    ## Device exists
     echo "Device found."
     echo
     echo "Checking slattach."
-    ## Check /sbin/slattach
+    ## Check slattach
     if /usr/bin/pgrep "slattach" > /dev/null
     then
         echo "Slattach runnning."
         echo
-        ## Check for if config
+        ## Check ifconfig
         echo "Checking for ifconfig..."
         if ! (/sbin/ifconfig | grep "sl0") > /dev/null 2>&1
         then
@@ -99,7 +103,7 @@ else
             echo "Ifconfig found."
         fi
         echo
-        ## Check for /sbin/route
+        ## Check for route
         echo "Checking route..."
         if  ! (/sbin/route | grep "sl0") > /dev/null 2>&1
         then
@@ -117,7 +121,7 @@ else
         echo "Route found."
         fi
     else
-        ## If no /sbin/slattach reconfigure.
+        ## If slattach reconfigure.
         echo "Slattach not running. Restarting..."
         echo
         complete_restart
