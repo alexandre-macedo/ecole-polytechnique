@@ -49,30 +49,9 @@ complete_restart()
     fi
 }
 
-## Header
-date
-echo
-ps $$
-echo
-
-## Look for device
-port=''
-get_port port
-if [[ -z $port ]]
-then
-    echo "No candidate for Xbee device found."
-    echo "Fail."
-else
-    echo "Candidate found at $port"
-    echo
-    ## Check if device exists
-    echo "Checking device..."
-    if ! (ls $port) > /dev/null 2>&1
-    then
-        ## Device does not exist
-        echo "Device not found."
-        echo
-        ## Kill /sbin/slattach if it exists
+kill_slattach()
+{
+## Kill /sbin/slattach if it exists
         echo "Looking for slattach to kill."
         if /usr/bin/pgrep "slattach" > /dev/null
         then
@@ -88,6 +67,35 @@ else
         else
             echo "Not found."
         fi
+}
+
+## Header
+date
+echo
+ps $$
+echo
+
+## Look for device
+port=''
+get_port port
+if [[ -z $port ]]
+then
+    echo "No candidate for Xbee device found."
+    echo
+    kill_slattach
+    echo
+    echo "Fail. Candidate not found."
+else
+    echo "Candidate found at $port"
+    echo
+    ## Check if device exists
+    echo "Checking device..."
+    if ! (ls $port) > /dev/null 2>&1
+    then
+        ## Device does not exist
+        echo "Device not found."
+        echo
+        kill_slattach
         echo
         echo "Fail. Device not found."
         exit
