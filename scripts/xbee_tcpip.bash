@@ -76,7 +76,11 @@ main()
 get_port()
 {
     temp=$(dmesg | grep "FTDI USB Serial Device converter now attached to")
-    eval "$1='/dev/${temp##*" "}'"
+    temp=${temp##*" "}
+    if ! [[ -z $temp ]]
+    then
+        eval "$1='/dev/$temp"
+    fi
 }
 
 kill_slattach()
