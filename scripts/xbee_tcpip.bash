@@ -1,8 +1,14 @@
 #!/bin/bash
-port="/dev/ttyUSB0"
+#port="/dev/ttyUSB0"
 baudrate="9600"
 my_ip="192.168.10.1"
 target_ip="192.168.10.2"
+
+get_port()
+{
+    temp=$(dmesg | grep "FTDI USB Serial Device converter now attached to")
+    eval "$1='/dev/${temp##*" "}'"
+}
 
 complete_restart()
 {
@@ -49,81 +55,92 @@ echo
 ps $$
 echo
 
-## Check if device exists
-echo "Checking device..."
-if ! (ls $port) > /dev/null 2>&1
+## Look for device
+port=''
+get_port port
+if [[ -z $port ]]
 then
-    ## Device does not exist
-    echo "Device not found."
-    echo
-    ## Kill /sbin/slattach if it exists
-    echo "Looking for slattach to kill."
-    if /usr/bin/pgrep "slattach" > /dev/null
-    then
-        echo "Slattach found."
-        echo
-        echo "Killing slattach..."
-        if kill -9 $(/usr/bin/pgrep "slattach")
-        then
-            echo "Killed."
-        else
-            echo "Process not killed."
-        fi
-    else
-        echo "Not found."
-    fi
-    echo
-    echo "Fail. Device not found."
-    exit
+    echo "No candidate for Xbee device found."
+    echo "Fail."
 else
-    ## Device exists
-    echo "Device found."
+    echo "Candidate found at $port"
     echo
-    echo "Checking slattach."
-    ## Check slattach
-    if /usr/bin/pgrep "slattach" > /dev/null
+    ## Check if device exists
+    echo "Checking device..."
+    if ! (ls $port) > /dev/null 2>&1
     then
-        echo "Slattach runnning."
+        ## Device does not exist
+        echo "Device not found."
         echo
-        ## Check ifconfig
-        echo "Checking for ifconfig..."
-        if ! (/sbin/ifconfig | grep "sl0") > /dev/null 2>&1
+        ## Kill /sbin/slattach if it exists
+        echo "Looking for slattach to kill."
+        if /usr/bin/pgrep "slattach" > /dev/null
         then
-            echo "Config not found."
+            echo "Slattach found."
             echo
-            echo "Reconfiguring..." 
-            if /sbin/ifconfig sl0 $my_ip pointopoint $target_ip up
+            echo "Killing slattach..."
+            if kill -9 $(/usr/bin/pgrep "slattach")
             then
-                echo "Success."
+                echo "Killed."
             else
-                echo "Fail."
-                exit
+                echo "Process not killed."
             fi
         else
-            echo "Ifconfig found."
+            echo "Not found."
         fi
         echo
-        ## Check for route
-        echo "Checking route..."
-        if  ! (/sbin/route | grep "sl0") > /dev/null 2>&1
-        then
-            echo "Route not found."
-            echo
-            echo "Creating route..."
-            if /sbin/route add -host $target_ip dev sl0
-            then
-                echo "Success."
-            else
-                echo "Fail."
-                exit
-            fi
-        else
-        echo "Route found."
-        fi
+        echo "Fail. Device not found."
+        exit
     else
-        ## If slattach reconfigure.
-        echo "Slattach not running. Restarting..."
+        ## Device exists
+        echo "Device found."
         echo
-        complete_restart
+        echo "Checking slattach."
+        ## Check slattach
+        if /usr/bin/pgrep "slattach" > /dev/null
+        then
+            echo "Slattach runnning."
+            echo
+            ## Check ifconfig
+            echo "Checking for ifconfig..."
+            if ! (/sbin/ifconfig | grep "sl0") > /dev/null 2>&1
+            then
+                echo "Config not found."
+                echo
+                echo "Reconfiguring..." 
+                if /sbin/ifconfig sl0 $my_ip pointopoint $target_ip up
+                then
+                    echo "Success."
+                else
+                    echo "Fail."
+                    exit
+                fi
+            else
+                echo "Ifconfig found."
+            fi
+            echo
+            ## Check for route
+            echo "Checking route..."
+            if  ! (/sbin/route | grep "sl0") > /dev/null 2>&1
+            then
+                echo "Route not found."
+                echo
+                echo "Creating route..."
+                if /sbin/route add -host $target_ip dev sl0
+                then
+                    echo "Success."
+                else
+                    echo "Fail."
+                    exit
+                fi
+            else
+            echo "Route found."
+            fi
+        else
+            ## If slattach reconfigure.
+            echo "Slattach not running. Restarting..."
+            echo
+            complete_restart
+        fi
     fi
 fi
