@@ -129,20 +129,20 @@ check_route()
     ## Check and and add route
     echo "Checking route..."
     if  ! (/sbin/route | grep "sl0") > /dev/null 2>&1
+        then
+            echo "Route not found."
+            echo
+            echo "Creating route..."
+            if /sbin/route add -host $target_ip dev sl0
             then
-                echo "Route not found."
-                echo
-                echo "Creating route..."
-                if /sbin/route add -host $target_ip dev sl0
-                then
-                    echo "Success."
-                else
-                    echo "Fail."
+                 echo "Success."
+             else
+                  echo "Fail."
                     exit
-                fi
-            else
-            echo "Route found."
-            fi
+              fi
+          else
+          echo "Route found."
+    fi
 }
 
 complete_restart()
