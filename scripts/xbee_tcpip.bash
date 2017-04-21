@@ -1,14 +1,14 @@
 #!/bin/bash
 #title           :xbee_tcpip.bash
 #description     :This script will start a network interface for a xbee device and create a P2P connection.
-#author		     :Moi
+#author		     :Alexandre
 #date            :21/Apr/2017
 #notes           :This is ideally to be run from the root crontab.
 
 ## Parameters 
 my_ip="192.168.10.1"
 target_ip="192.168.10.2"
-#port="/dev/ttyUSB0" # Comment this line for automatic find of Xbee
+#port="/dev/ttyUSB1" # Comment this line for automatic find of Xbee
 baudrate="9600"
 
 main()
@@ -79,7 +79,7 @@ get_port()
     temp=${temp##*" "}
     if ! [[ -z $temp ]]
     then
-        eval "$1='/dev/$temp"
+        eval "$1='/dev/$temp'"
     fi
 }
 
