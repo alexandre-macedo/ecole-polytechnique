@@ -3,7 +3,7 @@
 #description     :This script will start a network interface for a xbee device and create a P2P connection.
 #author		     :Alexandre
 #date            :21/Apr/2017
-#notes           :This is ideally to be run from the root crontab.
+#notes           :This script should not work to initialize two devices.
 
 ## Parameters 
 my_ip="192.168.10.2"
