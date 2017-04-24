@@ -1,1 +1,0 @@
-This folder should keep ONLY the non-ROS dependencies. For the ROS dependencies use catkin_ws_3rparty.
