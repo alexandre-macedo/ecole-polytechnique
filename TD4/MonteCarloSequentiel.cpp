@@ -16,7 +16,10 @@ unsigned long monteCarlo(unsigned long e, std::vector<Boule> mol,
  	//std::cout << point[0];
 	for (unsigned int j=0; j < mol.size(); j++)
 		if (mol[j].contains(point))
+		{
 			ePrime++;
+			break;
+		}
 	}
 	return ePrime;
 }
@@ -47,7 +50,7 @@ int main(int argc, char **argv) {
 	// Compute volume.
 	unsigned long ePrime = monteCarlo(e, molecule, BB);
 	// TODO: compute correct volume.
-	std::cout << ePrime;
+	//std::cout << ePrime;
 	double vol = (double)ePrime / (double) e * fabs(BB[0][0] - BB[0][1]) * fabs(BB[1][0] - BB[1][1]) * fabs(BB[2][0] - BB[2][1]);
 
 	// Set maximal precision when printing doubles.
