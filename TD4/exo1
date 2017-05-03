@@ -1,0 +1,13 @@
+    Que font ces codes ?
+Les codes prennent un nombre paire de taches et les divisent en binôme. Chaque tache informe l`information de son binôme. Le première code fait cela d`une façon bloquante et le deuxième d`une façon non-bloquante.
+
+    Voyez vous une différence entre les sorties de ces programmes ?
+Il n`y a pas une difference entre les sorties de ces programmes. 
+
+    A présent, ouvrez les fichiers sources et cherchez à comprendre que font les différentes conditions (if ... else).
+
+
+Le première if else sort le programme si le nombre de tache n`est pas paire. Le deuxième dit a chaque processus qui est son partenaire en divisant les processus en deux moitié.
+
+    Quel est la différence fondamentale entre ces deux programmes ?
+La différence fondamentale entre ces deux programmes est qu`un est bloquante et l`outre non.
