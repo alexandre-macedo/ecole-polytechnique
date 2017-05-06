@@ -7,9 +7,7 @@
 class RtRay{
     public:
         struct point_struct{
-                double x;
-                double y;
-                double z;
+                double x, y, z;
             };
         RtRay(double, double, double, RtVector&);
         RtRay();
