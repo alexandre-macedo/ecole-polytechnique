@@ -1,20 +1,25 @@
 #include "rt_sphere.h"
 #include <stdio.h>
 
-RtSphere::RtSphere(double x_, double y_, double z_, double r_, Color c_){
+RtSphere::RtSphere(double x_, double y_, double z_, double rad_, int r_, int g_, int b_){
     center.x = x_;
     center.y = y_;
     center.z = z_;
-    radius = r_;
-    color = c_;
+    radius = rad_;
+    // init color !!
+    color.red = r_;
+    color.green = g_;
+    color.blue = b_;
 }
 
 void RtSphere::print(){
-    printf("Sphere with center (%lf, %lf, %lf), radius = %lf and color ", center.x,
+    printf("Sphere with center (%.3lf, %.3lf, %.3lf), radius = %.3lf and color ", center.x,
     center.y, center.z, radius);
-    switch(color){
-        case red : printf("red\n");
-        case green: printf("green\n");
-        case blue: printf("blue\n");
-    }
+    printf("(red, green, blue) = (%d, %d, %d)\n", color.red, color.green, color.blue);
+}
+
+int main(){
+    RtSphere sph (0., 0., 0., 1., 0, 0, 0);
+    sph.print();
+    return 0;
 }

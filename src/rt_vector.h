@@ -5,7 +5,8 @@
 class RtVector{
     
 public:
-    RtVector(double x_, double y_, double z_);
+    RtVector(double , double, double);
+    RtVector();
     ~RtVector();
     void print();
 
