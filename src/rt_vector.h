@@ -4,7 +4,7 @@
 
 class RtVector{
     double x,y,z;
-
-}
+    void print();
+};
 
 #endif /* RT_VECTOR_H */
