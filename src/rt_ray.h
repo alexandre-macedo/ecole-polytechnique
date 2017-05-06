@@ -4,7 +4,7 @@
 class RtRay{
     public:
         RtRay();
-        print();
+        void print();
 
     private: 
         struct point;
