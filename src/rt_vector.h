@@ -9,6 +9,11 @@ public:
     RtVector();
     ~RtVector();
     void print();
+    RtVector operator+(const RtVector& v);
+    RtVector& operator+=(const RtVector& v);
+    RtVector operator*(const RtVector& v);
+    RtVector& operator*=(const RtVector& v);
+    RtVector operator*(const double& d);
 
 private:
     double x,y,z;
