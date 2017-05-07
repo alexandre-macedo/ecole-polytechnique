@@ -13,6 +13,7 @@ class RtScene
     RtSphere take_last();
     int size();
     void print();
+    RtSphere at_index(int);
 
   private:
     std::vector<RtSphere> list_of_spheres_;

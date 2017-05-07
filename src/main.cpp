@@ -41,4 +41,6 @@ int main()
   sc.add(sph2);
   //sc.take_last();
   sc.print();
+  std::cout << "Taking the second sphere of the scene: " << std::endl;
+  sc.at_index(1).print();
 }

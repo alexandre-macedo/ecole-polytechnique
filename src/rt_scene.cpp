@@ -25,3 +25,7 @@ void RtScene::print()
         list_of_spheres_[i].print();
     }
 }
+
+RtSphere RtScene::at_index(int i){
+	return list_of_spheres_[i];
+}
