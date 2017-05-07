@@ -1,7 +1,11 @@
 #include "rt_ray.h"
 #include "rt_sphere.h"
 #include "rt_scene.h"
+<<<<<<< HEAD
 #include "rt_light.h"
+=======
+#include "rt_camera.h"
+>>>>>>> 80640db1eef801d9624d3126cbc9c40bc291cf33
 
 int main()
 {
@@ -49,4 +53,12 @@ int main()
   std::cout << "########## Testing Ligth ##########" << std::endl;
   RtLight li (10., 10., 10., 0, 0, 0);
   std::cout << li << std::endl;
+
+  std::cout << sc << std::endl;
+
+  // Testing Camera
+   std::cout << "########## Testing Camera ##########" << std::endl;
+   RtCamera cam(dir, dir2, dir, 10.0, 20.0);
+   std::cout << cam << std::endl;
+
 }

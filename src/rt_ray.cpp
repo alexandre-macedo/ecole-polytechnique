@@ -2,9 +2,9 @@
 
 RtRay::RtRay() {}
 
-RtRay::RtRay(double x, double y, double z, RtVector &direction) : point_{x,y,z}, direction_(direction) {}
-
 RtRay::~RtRay() {}
+
+RtRay::RtRay(double x, double y, double z, RtVector &direction) : point_{x,y,z}, direction_(direction) {}
 
 void RtRay::print()
 {

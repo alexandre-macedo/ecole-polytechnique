@@ -8,6 +8,7 @@ src/rt_ray.cpp
 src/rt_sphere.cpp
 src/rt_scene.cpp
 src/rt_light.cpp
+src/rt_camera.cpp
 )
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_src})

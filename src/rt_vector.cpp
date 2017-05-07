@@ -1,11 +1,12 @@
-#include "rt_vector.h"
 #include <cmath>
+
+#include "rt_vector.h"
 
 RtVector::RtVector() : x_(0), y_(0), z_(0) {}
 
-RtVector::RtVector(double x, double y, double z) : x_(x), y_(y), z_(z) {}
-
 RtVector::~RtVector() {}
+
+RtVector::RtVector(double x, double y, double z) : x_(x), y_(y), z_(z) {}
 
 void RtVector::print()
 {
@@ -86,14 +87,14 @@ RtVector &RtVector::operator*=(const double &d)
     return *this;
 }
 
-RtVector operator*(const double d, const RtVector &v)
-{
-    RtVector vector = v;
-    return vector * d;
-}
-
 std::ostream &operator<<(std::ostream &s, const RtVector &v)
 {
     s << "[" << v.x_ << ", " << v.y_ << ", " << v.z_ << "]";
     return s;
+}
+
+RtVector operator*(const double d, const RtVector &v)
+{
+    RtVector vector = v;
+    return vector * d;
 }
