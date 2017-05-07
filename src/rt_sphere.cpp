@@ -6,7 +6,7 @@ RtSphere::RtSphere(double x_, double y_, double z_, double rad_, int r_, int g_,
     center.y = y_;
     center.z = z_;
     radius = rad_;
-    // init color !!
+    // Initializing colors:
     color.red = r_;
     color.green = g_;
     color.blue = b_;
@@ -18,8 +18,4 @@ void RtSphere::print(){
     printf("(red, green, blue) = (%d, %d, %d)\n", color.red, color.green, color.blue);
 }
 
-int main(){
-    RtSphere sph (0., 0., 0., 1., 0, 0, 0);
-    sph.print();
-    return 0;
-}
+

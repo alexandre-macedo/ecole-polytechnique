@@ -6,15 +6,12 @@
 
 class RtRay{
     public:
-        struct point_struct{
-                double x, y, z;
-            };
+        struct point_struct{double x, y, z;};
         RtRay(double, double, double, RtVector&);
         RtRay();
-<<<<<<< HEAD
-=======
+
         ~RtRay();
->>>>>>> 920808f57ff7efac4fd06edc8626056eec4beb82
+
         void print();
 
     private: 

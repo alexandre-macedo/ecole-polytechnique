@@ -13,6 +13,6 @@ RtRay::RtRay(){}
 RtRay::~RtRay(){}
 
 void RtRay::print(){
-    printf("Vector with origin (%.3lf, %.3lf, %.3lf) and direction ", point.x, point.y, point.z);
+    printf("Ray with origin (%.3lf, %.3lf, %.3lf) and direction ", point.x, point.y, point.z);
     direction.print();
 }
