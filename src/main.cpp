@@ -17,6 +17,7 @@ int main()
   std::cout << dir * 2.0 << std::endl;
   std::cout << 3.0 * dir << std::endl;
   dir += dir2;
+  dir *= 2.0;
   dir.print();
   // dir.print();n
 
