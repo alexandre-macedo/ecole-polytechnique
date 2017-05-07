@@ -22,4 +22,3 @@ std::ostream &operator<<(std::ostream &s, const RtRay &r)
     s << "[[" << r.point_.x << ", " << r.point_.y << ", " << r.point_.z << "], " << r.direction_ << "]";
     return s;
 }
-    
