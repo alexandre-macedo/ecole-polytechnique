@@ -2,22 +2,24 @@
 #ifndef RT_VECTOR_H
 #define RT_VECTOR_H
 
-class RtVector{
-    
-public:
-    RtVector(double , double, double);
+#include <iostream>
+
+class RtVector
+{
+  public:
+    RtVector(double, double, double);
     RtVector();
     ~RtVector();
     void print();
-    RtVector operator+(const RtVector& v);
-    RtVector& operator+=(const RtVector& v);
-    RtVector operator*(const RtVector& v);
-    RtVector& operator*=(const RtVector& v);
-    RtVector operator*(const double& d);
+    RtVector operator+(const RtVector &);
+    RtVector &operator+=(const RtVector &);
+    RtVector operator*(const RtVector &);
+    RtVector &operator*=(const RtVector &);
+    RtVector operator*(const double &);
+    friend std::ostream &operator<<(std::ostream &, const RtVector &);
 
-private:
-    double x,y,z;
-
+  private:
+    double x_, y_, z_;
 };
 
 #endif /* RT_VECTOR_H */

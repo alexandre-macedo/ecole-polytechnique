@@ -1,50 +1,61 @@
 #include "rt_vector.h"
-#include <iostream>
 
-RtVector::RtVector(double x_, double y_, double z_): x(x_), y(y_), z(z_){}
+RtVector::RtVector(double x, double y, double z) : x_(x), y_(y), z_(z) {}
 
-RtVector::RtVector(): x(0), y(0), z(0){}
+RtVector::RtVector() : x_(0), y_(0), z_(0) {}
 
-RtVector::~RtVector(){}
+RtVector::~RtVector() {}
 
-void RtVector::print(){
-    std::cout << "[x, y, z] = [" << this->x << ", " << this->y << ", " << this->z << "]" << std::endl;
+void RtVector::print()
+{
+    std::cout << "Vector = [" << this->x_ << ", " << this->y_ << ", " << this->z_ << "]" << std::endl;
 }
 
-RtVector RtVector::operator+(const RtVector& v){
+RtVector RtVector::operator+(const RtVector &v)
+{
     RtVector vector;
-    vector.x = this->x + v.x;
-    vector.y = this->y + v.y;
-    vector.z = this->z + v.z;
+    vector.x_ = this->x_ + v.x_;
+    vector.y_ = this->y_ + v.y_;
+    vector.z_ = this->z_ + v.z_;
     return vector;
 }
 
-RtVector& RtVector::operator+=(const RtVector& v){
-    this->x += v.x;
-    this->y += v.y;
-    this->z += v.z;
+RtVector &RtVector::operator+=(const RtVector &v)
+{
+    this->x_ += v.x_;
+    this->y_ += v.y_;
+    this->z_ += v.z_;
     return *this;
 }
 
-RtVector RtVector::operator*(const RtVector& v){
+RtVector RtVector::operator*(const RtVector &v)
+{
     RtVector vector;
-    vector.x = this->x * v.x;
-    vector.y = this->y * v.y;
-    vector.z = this->z * v.z;
+    vector.x_ = this->x_ * v.x_;
+    vector.y_ = this->y_ * v.y_;
+    vector.z_ = this->z_ * v.z_;
     return vector;
 }
 
-RtVector& RtVector::operator*=(const RtVector& v){
-    this->x *= v.x;
-    this->y *= v.y;
-    this->z *= v.z;
+RtVector &RtVector::operator*=(const RtVector &v)
+{
+    this->x_ *= v.x_;
+    this->y_ *= v.y_;
+    this->z_ *= v.z_;
     return *this;
 }
 
-RtVector RtVector::operator*(const double& d){
+RtVector RtVector::operator*(const double &d)
+{
     RtVector vector;
-    vector.x = this->x * d;
-    vector.y = this->y * d;
-    vector.z = this->z * d;
+    vector.x_ = this->x_ * d;
+    vector.y_ = this->y_ * d;
+    vector.z_ = this->z_ * d;
     return vector;
+}
+
+std::ostream &operator<<(std::ostream &s, const RtVector &v)
+{
+    s << "[" << v.x_ << ", " << v.y_ << ", " << v.z_ << "]";
+    return s;
 }

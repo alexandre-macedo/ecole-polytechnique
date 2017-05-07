@@ -1,18 +1,25 @@
 #include "rt_ray.h"
-#include <stdio.h>
 
-RtRay::RtRay(double x_, double y_, double z_, RtVector &direction_){
-    point.x= x_;
-    point.y= y_;
-    point.z= z_;
-    direction= direction_;
+RtRay::RtRay(double x, double y, double z, RtVector &direction)
+{
+    point_.x = x;
+    point_.y = y;
+    point_.z = z;
+    direction_ = direction;
 }
 
-RtRay::RtRay(){}
+RtRay::RtRay() {}
 
-RtRay::~RtRay(){}
+RtRay::~RtRay() {}
 
-void RtRay::print(){
-    printf("Vector with origin (%lf, %lf, %lf) and direction ", point.x, point.y, point.z);
-    direction.print();
+void RtRay::print()
+{
+    std::cout << "Ray with origin (" << point_.x << "," << point_.y << "," << point_.z << ") and direction " << direction_ << std::endl;
 }
+
+std::ostream &operator<<(std::ostream &s, const RtRay &r)
+{
+    s << "[[" << r.point_.x << ", " << r.point_.y << ", " << r.point_.z << "], " << r.direction_ << "]";
+    return s;
+}
+    
