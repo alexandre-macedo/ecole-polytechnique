@@ -1,12 +1,6 @@
 #include "rt_ray.h"
 
-RtRay::RtRay(double x, double y, double z, RtVector &direction)
-{
-    point_.x = x;
-    point_.y = y;
-    point_.z = z;
-    direction_ = direction;
-}
+RtRay::RtRay(double x, double y, double z, RtVector &direction) : point_{x,y,z}, direction_(direction) {}
 
 RtRay::RtRay() {}
 
@@ -19,6 +13,6 @@ void RtRay::print()
 
 std::ostream &operator<<(std::ostream &s, const RtRay &r)
 {
-    s << "[[" << r.point_.x << ", " << r.point_.y << ", " << r.point_.z << "], " << r.direction_ << "]";
+    s << "[(" << r.point_.x << ", " << r.point_.y << ", " << r.point_.z << "), " << r.direction_ << "]";
     return s;
 }

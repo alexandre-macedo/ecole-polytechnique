@@ -5,6 +5,8 @@ set(${PROJECT_NAME}_src
 src/main.cpp
 src/rt_vector.cpp
 src/rt_ray.cpp
+src/rt_sphere.cpp
+src/rt_scene.cpp
 )
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_src})

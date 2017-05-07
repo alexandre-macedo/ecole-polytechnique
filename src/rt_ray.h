@@ -8,10 +8,6 @@
 class RtRay
 {
 public:
-  struct point_struct
-  {
-    double x, y, z;
-  };
   RtRay(double, double, double, RtVector &);
   RtRay();
   ~RtRay();
@@ -19,7 +15,7 @@ public:
   friend std::ostream &operator<<(std::ostream &, const RtRay &);
 
 private:
-  point_struct point_;
+  struct point_struct { double x, y, z;} point_;
   RtVector direction_;
 };
 
