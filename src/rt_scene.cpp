@@ -1,5 +1,10 @@
-#include "rt_scene.h"
 #include <assert.h>
+
+#include "rt_scene.h"
+
+RtScene::RtScene() {}
+
+RtScene::~RtScene() {}
 
 void RtScene::add(RtSphere sph)
 {
@@ -26,6 +31,16 @@ void RtScene::print()
     }
 }
 
-RtSphere RtScene::at_index(int i){
-	return list_of_spheres_[i];
+RtSphere RtScene::at_index(int i)
+{
+    return list_of_spheres_[i];
+}
+
+std::ostream &operator<<(std::ostream &s, const RtScene &sc)
+{
+    s << "{";
+    for (int i = 0; i < sc.list_of_spheres_.size() - 1; i++)
+        s << sc.list_of_spheres_[i] << ", ";
+    s << sc.list_of_spheres_[sc.list_of_spheres_.size() - 1] << "}";
+    return s;
 }

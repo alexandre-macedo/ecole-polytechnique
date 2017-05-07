@@ -1,8 +1,9 @@
-#include "rt_sphere.h"
-#include <stdio.h>
 #include <stdexcept>
 
+#include "rt_sphere.h"
+
 RtSphere::RtSphere() {}
+
 RtSphere::~RtSphere() {}
 
 RtSphere::RtSphere(double x, double y, double z, double rad, int r, int g, int b) : center_{x,y,z}, radius_(rad), color_{r,g,b}
@@ -15,9 +16,7 @@ RtSphere::RtSphere(double x, double y, double z, double rad, int r, int g, int b
 
 void RtSphere::print()
 {
-    printf("Sphere with center (%.3lf, %.3lf, %.3lf), radius = %.3lf and color ", center_.x,
-           center_.y, center_.z, radius_);
-    printf("(red, green, blue) = (%d, %d, %d)\n", color_.r, color_.g, color_.b);
+    std::cout<<"Sphere with center (" << center_.x << ", " << center_.y << ", " << center_.z << "), radius = " << radius_ << " and color [" << color_.r << ", " << color_.g << ", " << color_.b << "]" << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &s, const RtSphere &sp){

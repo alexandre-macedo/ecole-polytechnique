@@ -3,14 +3,15 @@
 #define RT_RAY_H
 
 #include <iostream>
+
 #include "rt_vector.h"
 
 class RtRay
 {
 public:
   RtRay();
-  RtRay(double, double, double, RtVector &);
   ~RtRay();
+  RtRay(double, double, double, RtVector &);
   void print();
   friend std::ostream &operator<<(std::ostream &, const RtRay &);
 

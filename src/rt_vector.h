@@ -8,8 +8,8 @@ class RtVector
 {
   public:
     RtVector();
-    RtVector(double, double, double);
     ~RtVector();
+    RtVector(double, double, double);
     void print();
     double norm2();
     RtVector operator+(const RtVector &);
@@ -21,11 +21,11 @@ class RtVector
     RtVector &operator-=(const RtVector &);
     RtVector &operator*=(const RtVector &);
     RtVector &operator*=(const double &d);
-    friend RtVector operator*(const double, const RtVector &);
     friend std::ostream &operator<<(std::ostream &, const RtVector &);
 
   private:
     double x_, y_, z_;
 };
+RtVector operator*(const double, const RtVector &);
 
 #endif /* RT_VECTOR_H */

@@ -2,19 +2,23 @@
 #ifndef RT_SCENE_H
 #define RT_SCENE_H
 
-#include "rt_sphere.h"
 #include <iostream>
 #include <vector>
+
+#include "rt_sphere.h"
 
 class RtScene
 {
   public:
+    RtScene();
+    ~RtScene();
     void add(RtSphere);
     RtSphere take_last();
     int size();
     void print();
     RtSphere at_index(int);
-
+    friend std::ostream &operator<<(std::ostream &, const RtScene &);
+    
   private:
     std::vector<RtSphere> list_of_spheres_;
 };

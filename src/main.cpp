@@ -1,6 +1,7 @@
 #include "rt_ray.h"
 #include "rt_sphere.h"
 #include "rt_scene.h"
+#include "rt_camera.h"
 
 int main()
 {
@@ -43,4 +44,10 @@ int main()
   sc.print();
   std::cout << "Taking the second sphere of the scene: " << std::endl;
   sc.at_index(1).print();
+  std::cout << sc << std::endl;
+
+  // Testing Camera
+   std::cout << "########## Testing Camera ##########" << std::endl;
+   RtCamera cam(dir, dir2, dir, 10.0, 20.0);
+   std::cout << cam << std::endl;
 }
