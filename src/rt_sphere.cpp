@@ -1,6 +1,7 @@
-#include "rt_sphere.h"
 #include <stdio.h>
 #include <stdexcept>
+
+#include "rt_sphere.h"
 
 RtSphere::RtSphere() {}
 RtSphere::~RtSphere() {}

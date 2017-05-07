@@ -1,6 +1,7 @@
 #include "rt_ray.h"
 #include "rt_sphere.h"
 #include "rt_scene.h"
+#include "rt_light.h"
 
 int main()
 {
@@ -43,4 +44,9 @@ int main()
   sc.print();
   std::cout << "Taking the second sphere of the scene: " << std::endl;
   sc.at_index(1).print();
+
+  // Testing Light:
+  std::cout << "########## Testing Ligth ##########" << std::endl;
+  RtLight li (10., 10., 10., 0, 0, 0);
+  std::cout << li << std::endl;
 }
