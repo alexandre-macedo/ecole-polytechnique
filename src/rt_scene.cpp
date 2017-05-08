@@ -22,15 +22,6 @@ int RtScene::size()
     return list_of_spheres_.size();
 }
 
-void RtScene::print()
-{
-    std::cout << "List of spheres in the scene: " << std::endl;
-    for (int i = 0; i < this->size(); i++)
-    {
-        list_of_spheres_[i].print();
-    }
-}
-
 RtSphere RtScene::at_index(int i)
 {
     return list_of_spheres_[i];

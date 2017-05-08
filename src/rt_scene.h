@@ -15,7 +15,6 @@ class RtScene
     void add(RtSphere);
     RtSphere take_last();
     int size();
-    void print();
     RtSphere at_index(int);
     friend std::ostream &operator<<(std::ostream &, const RtScene &);
     

@@ -1,11 +1,9 @@
 #include "rt_ray.h"
 #include "rt_sphere.h"
 #include "rt_scene.h"
-<<<<<<< HEAD
 #include "rt_light.h"
-=======
 #include "rt_camera.h"
->>>>>>> 80640db1eef801d9624d3126cbc9c40bc291cf33
+
 
 int main()
 {
@@ -23,42 +21,53 @@ int main()
   std::cout << 3.0 * dir << std::endl;
   dir += dir2;
   dir *= 2.0;
-  dir.print();
   // dir.print();n
 
   // Testing Ray:
   std::cout << "########## Testing Ray ##########" << std::endl;
-  RtRay ray(2.0, 2.0, 2.0, dir);
+  RtVector pt (1.5, 2.0, 2.0);
+  RtRay ray(pt, dir);
   std::cout << ray << std::endl;
-  ray.print();
 
   // Testing Spheres:
   std::cout << "########## Testing Spheres ##########" << std::endl;
-  RtSphere sph(0., 0., 0., 1., 0, 0, 0);
+  RtSphere sph(RtVector(1., 2., 3.), 1., 0, 0, 0);
   std::cout << sph << std::endl;
-  sph.print();
 
   // Testing Scenes:
   std::cout << "########## Testing Scenes ##########" << std::endl;
-  RtSphere sph2(0., 0., 0., 3., 37, 73, 254);
+  RtSphere sph2(RtVector(0.,0.,0.), 3., 37, 73, 254);
   RtScene sc;
   sc.add(sph);
   sc.add(sph2);
   //sc.take_last();
-  sc.print();
   std::cout << "Taking the second sphere of the scene: " << std::endl;
-  sc.at_index(1).print();
+  std::cout << sc.at_index(1) << std::endl;
 
   // Testing Light:
   std::cout << "########## Testing Ligth ##########" << std::endl;
-  RtLight li (10., 10., 10., 0, 0, 0);
+  RtLight li (RtVector(11., 11., 11.), 0, 0, 0);
   std::cout << li << std::endl;
 
-  std::cout << sc << std::endl;
-
-  // Testing Camera
+   // Testing Camera
    std::cout << "########## Testing Camera ##########" << std::endl;
    RtCamera cam(dir, dir2, dir, 10.0, 20.0);
    std::cout << cam << std::endl;
 
+   // Testing Vectorial Product
+   std::cout << "########## Testing Vectorial Product ##########" << std::endl;
+   RtVector v1 (1., 0., 0.);
+   RtVector v2 (0., 1., 0.);
+   std::cout << v1.cross(v2) << std::endl;
+
+   // Testing Ray-sphere intersection
+   std::cout << "########## Testing Ray-sphere intersection ##########" << std::endl;
+   RtRay r (RtVector (-4., 0., 0.), RtVector(1., 0., 0.)); 
+   RtSphere o (RtVector(0., 0., 0.), 1., 0, 0, 0);
+   RtVector in;
+   std::cout << "Has to be true: " << o.intersectionWith(r, in) << std::endl;
+   std::cout << "Insection has to be (-1, 0, 0): " << in << std::endl;
 }
+
+
+

@@ -8,11 +8,6 @@ RtVector::~RtVector() {}
 
 RtVector::RtVector(double x, double y, double z) : x_(x), y_(y), z_(z) {}
 
-void RtVector::print()
-{
-    std::cout << "Vector with coordinates [" << this->x_ << ", " << this->y_ << ", " << this->z_ << "]" << std::endl;
-}
-
 double RtVector::norm2()
 {
     return sqrt(this->x_ * this->x_ + this->y_ * this->y_ + this->z_ * this->z_);
@@ -89,7 +84,7 @@ RtVector &RtVector::operator*=(const double &d)
 
 std::ostream &operator<<(std::ostream &s, const RtVector &v)
 {
-    s << "[" << v.x_ << ", " << v.y_ << ", " << v.z_ << "]";
+    s << "(" << v.x_ << ", " << v.y_ << ", " << v.z_ << ")";
     return s;
 }
 
@@ -97,4 +92,12 @@ RtVector operator*(const double d, const RtVector &v)
 {
     RtVector vector = v;
     return vector * d;
+}
+
+RtVector RtVector::cross(const RtVector &v){
+    return RtVector( 
+        this->y_*v.z_ - v.y_*this->z_, 
+        -this->x_*v.z_ + v.x_*this->z_,
+        this->x_*v.y_ - v.x_*this->y_
+    );
 }

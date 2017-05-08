@@ -4,15 +4,19 @@ RtRay::RtRay() {}
 
 RtRay::~RtRay() {}
 
-RtRay::RtRay(double x, double y, double z, RtVector &direction) : point_{x,y,z}, direction_(direction) {}
-
-void RtRay::print()
-{
-    std::cout << "Ray with origin (" << point_.x << "," << point_.y << "," << point_.z << ") and direction " << direction_ << std::endl;
-}
+RtRay::RtRay(RtVector point, RtVector direction) : point_(point), direction_(direction) {}
 
 std::ostream &operator<<(std::ostream &s, const RtRay &r)
 {
-    s << "[(" << r.point_.x << ", " << r.point_.y << ", " << r.point_.z << "), " << r.direction_ << "]";
+    s << "[" << r.point_ << ", " << r.direction_ << "]";
     return s;
 }
+
+RtVector RtRay::getDirection(){
+    return this->direction_;
+}
+
+RtVector RtRay::getPoint(){
+    return this->point_;
+}
+

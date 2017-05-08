@@ -4,17 +4,21 @@
 
 #include <iostream>
 
+#include "rt_ray.h"
+
 class RtSphere
 {
   public:
     RtSphere();
     ~RtSphere();
-    RtSphere(double, double, double, double, int, int, int);
-    void print();
+    RtSphere(RtVector, double, int, int, int);
     friend std::ostream &operator<<(std::ostream &, const RtSphere &);
+    
+    // if there is an intersectiom, the RtVector received will be updated to it
+    bool intersectionWith(RtRay, RtVector&); 
 
   private:
-    struct { double x, y, z;} center_;
+    RtVector center_;
     struct { int r, g, b;} color_;
     double radius_;
 };

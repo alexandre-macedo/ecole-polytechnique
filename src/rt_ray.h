@@ -11,12 +11,13 @@ class RtRay
 public:
   RtRay();
   ~RtRay();
-  RtRay(double, double, double, RtVector &);
-  void print();
+  RtRay(RtVector, RtVector);
   friend std::ostream &operator<<(std::ostream &, const RtRay &);
+  RtVector getDirection();
+  RtVector getPoint();
 
 private:
-  struct { double x, y, z;} point_;
+  RtVector point_;
   RtVector direction_;
 };
 

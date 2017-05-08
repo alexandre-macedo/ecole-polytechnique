@@ -10,8 +10,7 @@ class RtVector
     RtVector();
     ~RtVector();
     RtVector(double, double, double);
-    void print();
-    double norm2();
+    double norm2(); // normal norm, already with sqrt
     RtVector operator+(const RtVector &);
     RtVector operator-();
     RtVector operator-(const RtVector &);
@@ -22,6 +21,7 @@ class RtVector
     RtVector &operator*=(const RtVector &);
     RtVector &operator*=(const double &d);
     friend std::ostream &operator<<(std::ostream &, const RtVector &);
+    RtVector cross (const RtVector &);
 
   private:
     double x_, y_, z_;
