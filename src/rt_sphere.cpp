@@ -23,7 +23,7 @@ std::ostream &operator<<(std::ostream &s, const RtSphere &sp){
 bool RtSphere::intersectionWith(RtRay r, RtVector &i){
     RtVector dir = r.getDirection();
     dir = dir* (1./(dir.norm2())); // norm == 1 now
-    RtVector p = r.getPoint();
+    RtVector p = r.getOrigin();
     double d = ((dir.cross(center_-p)).norm2());
     
     if(d > radius_){

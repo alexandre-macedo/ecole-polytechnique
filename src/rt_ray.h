@@ -14,10 +14,10 @@ public:
   RtRay(RtVector, RtVector);
   friend std::ostream &operator<<(std::ostream &, const RtRay &);
   RtVector getDirection();
-  RtVector getPoint();
+  RtVector getOrigin();
 
 private:
-  RtVector point_;
+  RtVector origin_;
   RtVector direction_;
 };
 
