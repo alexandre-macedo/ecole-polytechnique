@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
     int n;
  
     if (rank == 0) {
+      std::cout << size;
       std::cout
           << "Entrez le nombre d'intervalles (ou un entier < 1 pour quitter) :"
           << std::endl;

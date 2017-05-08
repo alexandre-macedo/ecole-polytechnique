@@ -12,7 +12,7 @@ unsigned long monteCarlo(unsigned long e, std::vector<Boule> mol,
 	unsigned long ePrime = 0;
 	for (unsigned long i =0; i < e; i++)
 	{
-	randomPoint(point, BB);
+	randomPoint(point, BB);	
  	//std::cout << point[0];
 	for (unsigned int j=0; j < mol.size(); j++)
 		if (mol[j].contains(point))
