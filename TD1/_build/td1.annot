@@ -1,0 +1,3697 @@
+"td1.ml" 2 75 79 "td1.ml" 2 75 83
+type(
+  ('a -> 'b) -> ('c -> 'd) -> 'a * 'c -> 'b * 'd
+)
+"td1.ml" 2 75 84 "td1.ml" 2 75 85
+type(
+  'a -> 'b
+)
+"td1.ml" 2 75 86 "td1.ml" 2 75 87
+type(
+  'c -> 'd
+)
+"td1.ml" 2 75 95 "td1.ml" 2 75 96
+type(
+  'a
+)
+"td1.ml" 2 75 98 "td1.ml" 2 75 99
+type(
+  'c
+)
+"td1.ml" 2 75 94 "td1.ml" 2 75 100
+type(
+  'a * 'c
+)
+"td1.ml" 2 75 105 "td1.ml" 2 75 106
+type(
+  'a -> 'b
+)
+"td1.ml" 2 75 107 "td1.ml" 2 75 108
+type(
+  'a
+)
+"td1.ml" 2 75 105 "td1.ml" 2 75 108
+type(
+  'b
+)
+"td1.ml" 2 75 110 "td1.ml" 2 75 111
+type(
+  'c -> 'd
+)
+"td1.ml" 2 75 112 "td1.ml" 2 75 113
+type(
+  'c
+)
+"td1.ml" 2 75 110 "td1.ml" 2 75 113
+type(
+  'd
+)
+"td1.ml" 2 75 104 "td1.ml" 2 75 114
+type(
+  'b * 'd
+)
+"td1.ml" 2 75 90 "td1.ml" 2 75 114
+type(
+  'a * 'c -> 'b * 'd
+)
+"td1.ml" 12 303 307 "td1.ml" 12 303 310
+type(
+  int -> (int -> int) * (int -> int)
+)
+"td1.ml" 12 303 312 "td1.ml" 12 303 313
+type(
+  int
+)
+"td1.ml" 12 303 329 "td1.ml" 12 303 330
+type(
+  int
+)
+"td1.ml" 12 303 334 "td1.ml" 12 303 335
+type(
+  int
+)
+"td1.ml" 12 303 336 "td1.ml" 12 303 337
+type(
+  int -> int -> int
+)
+"td1.ml" 12 303 338 "td1.ml" 12 303 339
+type(
+  int
+)
+"td1.ml" 12 303 334 "td1.ml" 12 303 339
+type(
+  int
+)
+"td1.ml" 12 303 324 "td1.ml" 12 303 340
+type(
+  int -> int
+)
+"td1.ml" 12 303 347 "td1.ml" 12 303 348
+type(
+  int
+)
+"td1.ml" 12 303 352 "td1.ml" 12 303 353
+type(
+  int
+)
+"td1.ml" 12 303 354 "td1.ml" 12 303 355
+type(
+  int -> int -> int
+)
+"td1.ml" 12 303 356 "td1.ml" 12 303 357
+type(
+  int
+)
+"td1.ml" 12 303 352 "td1.ml" 12 303 357
+type(
+  int
+)
+"td1.ml" 12 303 342 "td1.ml" 12 303 358
+type(
+  int -> int
+)
+"td1.ml" 12 303 323 "td1.ml" 12 303 359
+type(
+  (int -> int) * (int -> int)
+)
+"td1.ml" 15 436 440 "td1.ml" 15 436 444
+type(
+  ('a -> 'b) -> ('c -> 'a) -> 'c -> 'b
+)
+"td1.ml" 15 436 445 "td1.ml" 15 436 446
+type(
+  'a -> 'b
+)
+"td1.ml" 15 436 447 "td1.ml" 15 436 448
+type(
+  'c -> 'a
+)
+"td1.ml" 15 436 455 "td1.ml" 15 436 456
+type(
+  'c
+)
+"td1.ml" 15 436 460 "td1.ml" 15 436 461
+type(
+  'a -> 'b
+)
+"td1.ml" 15 436 463 "td1.ml" 15 436 464
+type(
+  'c -> 'a
+)
+"td1.ml" 15 436 465 "td1.ml" 15 436 466
+type(
+  'c
+)
+"td1.ml" 15 436 462 "td1.ml" 15 436 467
+type(
+  'a
+)
+"td1.ml" 15 436 460 "td1.ml" 15 436 467
+type(
+  'b
+)
+"td1.ml" 15 436 451 "td1.ml" 15 436 467
+type(
+  'c -> 'b
+)
+"td1.ml" 25 631 637 "td1.ml" 25 631 640
+type(
+  int -> int
+)
+"td1.ml" 25 631 649 "td1.ml" 25 631 651
+type(
+  int -> int
+)
+"td1.ml" 25 631 653 "td1.ml" 25 631 655
+type(
+  int -> int
+)
+"td1.ml" 25 631 648 "td1.ml" 25 631 656
+type(
+  (int -> int) * (int -> int)
+)
+"td1.ml" 25 631 659 "td1.ml" 25 631 662
+type(
+  int -> (int -> int) * (int -> int)
+)
+"td1.ml" 25 631 663 "td1.ml" 25 631 665
+type(
+  int
+)
+"td1.ml" 25 631 659 "td1.ml" 25 631 665
+type(
+  (int -> int) * (int -> int)
+)
+"td1.ml" 25 631 669 "td1.ml" 25 631 673
+type(
+  (int -> int) -> (int -> int) -> int -> int
+)
+"td1.ml" 25 631 674 "td1.ml" 25 631 676
+type(
+  int -> int
+)
+"td1.ml" 25 631 677 "td1.ml" 25 631 679
+type(
+  int -> int
+)
+"td1.ml" 25 631 669 "td1.ml" 25 631 679
+type(
+  int -> int
+)
+"td1.ml" 25 631 643 "td1.ml" 25 631 680
+type(
+  int -> int
+)
+"td1.ml" 26 684 690 "td1.ml" 26 684 691
+type(
+  int
+)
+"td1.ml" 26 684 703 "td1.ml" 26 684 706
+type(
+  int -> int
+)
+"td1.ml" 26 684 707 "td1.ml" 26 684 708
+type(
+  int
+)
+"td1.ml" 26 684 703 "td1.ml" 26 684 708
+type(
+  int
+)
+"td1.ml" 26 684 709 "td1.ml" 26 684 710
+type(
+  int -> int -> bool
+)
+"td1.ml" 26 684 711 "td1.ml" 26 684 712
+type(
+  int
+)
+"td1.ml" 26 684 702 "td1.ml" 26 684 713
+type(
+  bool
+)
+"td1.ml" 26 684 695 "td1.ml" 26 684 713
+type(
+  unit
+)
+"td1.ml" 26 684 686 "td1.ml" 26 684 713
+type(
+  int -> unit
+)
+"td1.ml" 25 631 633 "td1.ml" 26 684 713
+type(
+  int -> unit
+)
+"td1.ml" 29 790 798 "td1.ml" 29 790 802
+type(
+  int -> int
+)
+"td1.ml" 29 790 804 "td1.ml" 29 790 805
+type(
+  int
+)
+"td1.ml" 30 815 820 "td1.ml" 30 815 821
+type(
+  int
+)
+"td1.ml" 30 815 822 "td1.ml" 30 815 824
+type(
+  int -> int -> bool
+)
+"td1.ml" 30 815 825 "td1.ml" 30 815 826
+type(
+  int
+)
+"td1.ml" 30 815 820 "td1.ml" 30 815 826
+type(
+  bool
+)
+"td1.ml" 30 815 832 "td1.ml" 30 815 833
+type(
+  int
+)
+"td1.ml" 30 815 839 "td1.ml" 30 815 840
+type(
+  int
+)
+"td1.ml" 30 815 841 "td1.ml" 30 815 842
+type(
+  int -> int -> int
+)
+"td1.ml" 30 815 844 "td1.ml" 30 815 848
+type(
+  int -> int
+)
+"td1.ml" 30 815 850 "td1.ml" 30 815 851
+type(
+  int
+)
+"td1.ml" 30 815 851 "td1.ml" 30 815 852
+type(
+  int -> int -> int
+)
+"td1.ml" 30 815 852 "td1.ml" 30 815 853
+type(
+  int
+)
+"td1.ml" 30 815 849 "td1.ml" 30 815 854
+type(
+  int
+)
+"td1.ml" 30 815 843 "td1.ml" 30 815 855
+type(
+  int
+)
+"td1.ml" 30 815 839 "td1.ml" 30 815 855
+type(
+  int
+)
+"td1.ml" 30 815 817 "td1.ml" 30 815 855
+type(
+  int
+)
+"td1.ml" 33 932 940 "td1.ml" 33 932 946
+type(
+  int -> int -> int
+)
+"td1.ml" 33 932 948 "td1.ml" 33 932 949
+type(
+  int
+)
+"td1.ml" 33 932 958 "td1.ml" 33 932 959
+type(
+  int
+)
+"td1.ml" 34 969 974 "td1.ml" 34 969 975
+type(
+  int
+)
+"td1.ml" 34 969 976 "td1.ml" 34 969 978
+type(
+  int -> int -> bool
+)
+"td1.ml" 34 969 979 "td1.ml" 34 969 980
+type(
+  int
+)
+"td1.ml" 34 969 974 "td1.ml" 34 969 980
+type(
+  bool
+)
+"td1.ml" 34 969 986 "td1.ml" 34 969 987
+type(
+  int
+)
+"td1.ml" 34 969 993 "td1.ml" 34 969 999
+type(
+  int -> int -> int
+)
+"td1.ml" 34 969 1001 "td1.ml" 34 969 1002
+type(
+  int
+)
+"td1.ml" 34 969 1003 "td1.ml" 34 969 1004
+type(
+  int -> int -> int
+)
+"td1.ml" 34 969 1005 "td1.ml" 34 969 1006
+type(
+  int
+)
+"td1.ml" 34 969 1000 "td1.ml" 34 969 1007
+type(
+  int
+)
+"td1.ml" 34 969 1009 "td1.ml" 34 969 1010
+type(
+  int
+)
+"td1.ml" 34 969 1011 "td1.ml" 34 969 1012
+type(
+  int -> int -> int
+)
+"td1.ml" 34 969 1013 "td1.ml" 34 969 1014
+type(
+  int
+)
+"td1.ml" 34 969 1008 "td1.ml" 34 969 1015
+type(
+  int
+)
+"td1.ml" 34 969 993 "td1.ml" 34 969 1015
+type(
+  int
+)
+"td1.ml" 34 969 971 "td1.ml" 34 969 1015
+type(
+  int
+)
+"td1.ml" 36 1017 1021 "td1.ml" 36 1017 1026
+type(
+  int -> int
+)
+"td1.ml" 36 1017 1029 "td1.ml" 36 1017 1035
+type(
+  int -> int -> int
+)
+"td1.ml" 36 1017 1036 "td1.ml" 36 1017 1037
+type(
+  int
+)
+"td1.ml" 36 1017 1029 "td1.ml" 36 1017 1037
+type(
+  int -> int
+)
+"td1.ml" 39 1114 1122 "td1.ml" 39 1114 1131
+type(
+  int -> int -> int
+)
+"td1.ml" 39 1114 1133 "td1.ml" 39 1114 1134
+type(
+  int
+)
+"td1.ml" 39 1114 1143 "td1.ml" 39 1114 1144
+type(
+  int
+)
+"td1.ml" 40 1154 1159 "td1.ml" 40 1154 1160
+type(
+  int
+)
+"td1.ml" 40 1154 1161 "td1.ml" 40 1154 1163
+type(
+  int -> int -> bool
+)
+"td1.ml" 40 1154 1164 "td1.ml" 40 1154 1165
+type(
+  int
+)
+"td1.ml" 40 1154 1159 "td1.ml" 40 1154 1165
+type(
+  bool
+)
+"td1.ml" 40 1154 1171 "td1.ml" 40 1154 1172
+type(
+  int
+)
+"td1.ml" 40 1154 1178 "td1.ml" 40 1154 1179
+type(
+  int
+)
+"td1.ml" 40 1154 1180 "td1.ml" 40 1154 1181
+type(
+  int -> int -> int
+)
+"td1.ml" 40 1154 1183 "td1.ml" 40 1154 1192
+type(
+  int -> int -> int
+)
+"td1.ml" 40 1154 1193 "td1.ml" 40 1154 1194
+type(
+  int
+)
+"td1.ml" 40 1154 1196 "td1.ml" 40 1154 1197
+type(
+  int
+)
+"td1.ml" 40 1154 1198 "td1.ml" 40 1154 1199
+type(
+  int -> int -> int
+)
+"td1.ml" 40 1154 1200 "td1.ml" 40 1154 1201
+type(
+  int
+)
+"td1.ml" 40 1154 1195 "td1.ml" 40 1154 1202
+type(
+  int
+)
+"td1.ml" 40 1154 1182 "td1.ml" 40 1154 1203
+type(
+  int
+)
+"td1.ml" 40 1154 1178 "td1.ml" 40 1154 1203
+type(
+  int
+)
+"td1.ml" 40 1154 1156 "td1.ml" 40 1154 1203
+type(
+  int
+)
+"td1.ml" 42 1205 1209 "td1.ml" 42 1205 1212
+type(
+  int -> int -> int
+)
+"td1.ml" 42 1205 1214 "td1.ml" 42 1205 1215
+type(
+  int
+)
+"td1.ml" 43 1225 1235 "td1.ml" 43 1225 1238
+type(
+  int -> int -> int
+)
+"td1.ml" 43 1225 1240 "td1.ml" 43 1225 1241
+type(
+  int
+)
+"td1.ml" 43 1225 1250 "td1.ml" 43 1225 1251
+type(
+  int
+)
+"td1.ml" 44 1261 1268 "td1.ml" 44 1261 1269
+type(
+  int
+)
+"td1.ml" 44 1261 1270 "td1.ml" 44 1261 1272
+type(
+  int -> int -> bool
+)
+"td1.ml" 44 1261 1273 "td1.ml" 44 1261 1274
+type(
+  int
+)
+"td1.ml" 44 1261 1268 "td1.ml" 44 1261 1274
+type(
+  bool
+)
+"td1.ml" 44 1261 1280 "td1.ml" 44 1261 1281
+type(
+  int
+)
+"td1.ml" 44 1261 1287 "td1.ml" 44 1261 1290
+type(
+  int -> int -> int
+)
+"td1.ml" 44 1261 1292 "td1.ml" 44 1261 1293
+type(
+  int
+)
+"td1.ml" 44 1261 1294 "td1.ml" 44 1261 1295
+type(
+  int -> int -> int
+)
+"td1.ml" 44 1261 1296 "td1.ml" 44 1261 1297
+type(
+  int
+)
+"td1.ml" 44 1261 1291 "td1.ml" 44 1261 1298
+type(
+  int
+)
+"td1.ml" 44 1261 1300 "td1.ml" 44 1261 1301
+type(
+  int
+)
+"td1.ml" 44 1261 1302 "td1.ml" 44 1261 1303
+type(
+  int -> int -> int
+)
+"td1.ml" 44 1261 1304 "td1.ml" 44 1261 1305
+type(
+  int
+)
+"td1.ml" 44 1261 1299 "td1.ml" 44 1261 1306
+type(
+  int
+)
+"td1.ml" 44 1261 1287 "td1.ml" 44 1261 1306
+type(
+  int
+)
+"td1.ml" 44 1261 1265 "td1.ml" 44 1261 1306
+type(
+  int
+)
+"td1.ml" 45 1307 1316 "td1.ml" 45 1307 1317
+type(
+  int
+)
+"td1.ml" 45 1307 1321 "td1.ml" 45 1307 1324
+type(
+  int -> int -> int
+)
+"td1.ml" 45 1307 1325 "td1.ml" 45 1307 1326
+type(
+  int
+)
+"td1.ml" 45 1307 1327 "td1.ml" 45 1307 1328
+type(
+  int
+)
+"td1.ml" 45 1307 1321 "td1.ml" 45 1307 1328
+type(
+  int
+)
+"td1.ml" 45 1307 1312 "td1.ml" 45 1307 1328
+type(
+  int -> int
+)
+"td1.ml" 43 1225 1227 "td1.ml" 45 1307 1328
+type(
+  int -> int
+)
+"td1.ml" 47 1330 1334 "td1.ml" 47 1330 1342
+type(
+  int -> int -> int
+)
+"td1.ml" 47 1330 1344 "td1.ml" 47 1330 1345
+type(
+  int
+)
+"td1.ml" 48 1355 1365 "td1.ml" 48 1355 1368
+type(
+  int -> int
+)
+"td1.ml" 48 1355 1370 "td1.ml" 48 1355 1371
+type(
+  int
+)
+"td1.ml" 49 1381 1388 "td1.ml" 49 1381 1389
+type(
+  int
+)
+"td1.ml" 49 1381 1390 "td1.ml" 49 1381 1392
+type(
+  int -> int -> bool
+)
+"td1.ml" 49 1381 1393 "td1.ml" 49 1381 1394
+type(
+  int
+)
+"td1.ml" 49 1381 1388 "td1.ml" 49 1381 1394
+type(
+  bool
+)
+"td1.ml" 49 1381 1400 "td1.ml" 49 1381 1401
+type(
+  int
+)
+"td1.ml" 50 1407 1415 "td1.ml" 50 1407 1416
+type(
+  int
+)
+"td1.ml" 50 1407 1419 "td1.ml" 50 1407 1422
+type(
+  int -> int
+)
+"td1.ml" 50 1407 1424 "td1.ml" 50 1407 1425
+type(
+  int
+)
+"td1.ml" 50 1407 1425 "td1.ml" 50 1407 1426
+type(
+  int -> int -> int
+)
+"td1.ml" 50 1407 1426 "td1.ml" 50 1407 1427
+type(
+  int
+)
+"td1.ml" 50 1407 1423 "td1.ml" 50 1407 1428
+type(
+  int
+)
+"td1.ml" 50 1407 1419 "td1.ml" 50 1407 1428
+type(
+  int
+)
+"td1.ml" 51 1432 1439 "td1.ml" 51 1432 1440
+type(
+  int
+)
+"td1.ml" 51 1432 1441 "td1.ml" 51 1432 1445
+type(
+  int -> int -> int
+)
+"td1.ml" 51 1432 1446 "td1.ml" 51 1432 1447
+type(
+  int
+)
+"td1.ml" 51 1432 1439 "td1.ml" 51 1432 1447
+type(
+  int
+)
+"td1.ml" 51 1432 1448 "td1.ml" 51 1432 1449
+type(
+  int -> int -> bool
+)
+"td1.ml" 51 1432 1450 "td1.ml" 51 1432 1451
+type(
+  int
+)
+"td1.ml" 51 1432 1439 "td1.ml" 51 1432 1451
+type(
+  bool
+)
+"td1.ml" 51 1432 1457 "td1.ml" 51 1432 1458
+type(
+  int
+)
+"td1.ml" 51 1432 1459 "td1.ml" 51 1432 1460
+type(
+  int -> int -> int
+)
+"td1.ml" 51 1432 1461 "td1.ml" 51 1432 1462
+type(
+  int
+)
+"td1.ml" 51 1432 1457 "td1.ml" 51 1432 1462
+type(
+  int
+)
+"td1.ml" 51 1432 1468 "td1.ml" 51 1432 1469
+type(
+  int
+)
+"td1.ml" 51 1432 1470 "td1.ml" 51 1432 1471
+type(
+  int -> int -> int
+)
+"td1.ml" 51 1432 1472 "td1.ml" 51 1432 1473
+type(
+  int
+)
+"td1.ml" 51 1432 1474 "td1.ml" 51 1432 1475
+type(
+  int -> int -> int
+)
+"td1.ml" 51 1432 1476 "td1.ml" 51 1432 1477
+type(
+  int
+)
+"td1.ml" 51 1432 1472 "td1.ml" 51 1432 1477
+type(
+  int
+)
+"td1.ml" 51 1432 1468 "td1.ml" 51 1432 1477
+type(
+  int
+)
+"td1.ml" 51 1432 1436 "td1.ml" 51 1432 1477
+type(
+  int
+)
+"td1.ml" 50 1407 1411 "td1.ml" 51 1432 1477
+type(
+  int
+)
+"td1.ml" 49 1381 1385 "td1.ml" 51 1432 1477
+type(
+  int
+)
+"td1.ml" 52 1478 1487 "td1.ml" 52 1478 1488
+type(
+  int
+)
+"td1.ml" 52 1478 1492 "td1.ml" 52 1478 1495
+type(
+  int -> int
+)
+"td1.ml" 52 1478 1496 "td1.ml" 52 1478 1497
+type(
+  int
+)
+"td1.ml" 52 1478 1492 "td1.ml" 52 1478 1497
+type(
+  int
+)
+"td1.ml" 52 1478 1483 "td1.ml" 52 1478 1497
+type(
+  int -> int
+)
+"td1.ml" 48 1355 1357 "td1.ml" 52 1478 1497
+type(
+  int -> int
+)
+"td1.ml" 55 1574 1582 "td1.ml" 55 1574 1586
+type(
+  int -> bool
+)
+"td1.ml" 56 1598 1602 "td1.ml" 56 1598 1603
+type(
+  int
+)
+"td1.ml" 56 1598 1607 "td1.ml" 56 1598 1611
+type(
+  bool
+)
+"td1.ml" 57 1612 1616 "td1.ml" 57 1612 1617
+type(
+  int
+)
+"td1.ml" 57 1612 1623 "td1.ml" 57 1612 1624
+type(
+  int
+)
+"td1.ml" 57 1612 1625 "td1.ml" 57 1612 1626
+type(
+  int -> int -> bool
+)
+"td1.ml" 57 1612 1627 "td1.ml" 57 1612 1628
+type(
+  int
+)
+"td1.ml" 57 1612 1623 "td1.ml" 57 1612 1628
+type(
+  bool
+)
+"td1.ml" 57 1612 1632 "td1.ml" 57 1612 1636
+type(
+  int -> bool
+)
+"td1.ml" 57 1612 1638 "td1.ml" 57 1612 1639
+type(
+  int -> int
+)
+"td1.ml" 57 1612 1639 "td1.ml" 57 1612 1640
+type(
+  int
+)
+"td1.ml" 57 1612 1637 "td1.ml" 57 1612 1641
+type(
+  int
+)
+"td1.ml" 57 1612 1632 "td1.ml" 57 1612 1641
+type(
+  bool
+)
+"td1.ml" 57 1612 1618 "td1.ml" 57 1612 1641
+type(
+  bool
+)
+"td1.ml" 58 1642 1646 "td1.ml" 58 1642 1647
+type(
+  int
+)
+"td1.ml" 58 1642 1651 "td1.ml" 58 1642 1654
+type(
+  int -> bool
+)
+"td1.ml" 58 1642 1656 "td1.ml" 58 1642 1657
+type(
+  int
+)
+"td1.ml" 58 1642 1657 "td1.ml" 58 1642 1658
+type(
+  int -> int -> int
+)
+"td1.ml" 58 1642 1658 "td1.ml" 58 1642 1659
+type(
+  int
+)
+"td1.ml" 58 1642 1655 "td1.ml" 58 1642 1660
+type(
+  int
+)
+"td1.ml" 58 1642 1651 "td1.ml" 58 1642 1660
+type(
+  bool
+)
+"td1.ml" 55 1574 1589 "td1.ml" 58 1642 1660
+type(
+  int -> bool
+)
+"td1.ml" 60 1662 1666 "td1.ml" 60 1662 1669
+type(
+  int -> bool
+)
+"td1.ml" 61 1681 1685 "td1.ml" 61 1681 1686
+type(
+  int
+)
+"td1.ml" 61 1681 1690 "td1.ml" 61 1681 1695
+type(
+  bool
+)
+"td1.ml" 62 1696 1700 "td1.ml" 62 1696 1701
+type(
+  int
+)
+"td1.ml" 62 1696 1707 "td1.ml" 62 1696 1708
+type(
+  int
+)
+"td1.ml" 62 1696 1709 "td1.ml" 62 1696 1710
+type(
+  int -> int -> bool
+)
+"td1.ml" 62 1696 1711 "td1.ml" 62 1696 1712
+type(
+  int
+)
+"td1.ml" 62 1696 1707 "td1.ml" 62 1696 1712
+type(
+  bool
+)
+"td1.ml" 62 1696 1716 "td1.ml" 62 1696 1719
+type(
+  int -> bool
+)
+"td1.ml" 62 1696 1721 "td1.ml" 62 1696 1722
+type(
+  int -> int
+)
+"td1.ml" 62 1696 1722 "td1.ml" 62 1696 1723
+type(
+  int
+)
+"td1.ml" 62 1696 1720 "td1.ml" 62 1696 1724
+type(
+  int
+)
+"td1.ml" 62 1696 1716 "td1.ml" 62 1696 1724
+type(
+  bool
+)
+"td1.ml" 62 1696 1702 "td1.ml" 62 1696 1724
+type(
+  bool
+)
+"td1.ml" 63 1725 1729 "td1.ml" 63 1725 1730
+type(
+  int
+)
+"td1.ml" 63 1725 1734 "td1.ml" 63 1725 1738
+type(
+  int -> bool
+)
+"td1.ml" 63 1725 1740 "td1.ml" 63 1725 1741
+type(
+  int
+)
+"td1.ml" 63 1725 1741 "td1.ml" 63 1725 1742
+type(
+  int -> int -> int
+)
+"td1.ml" 63 1725 1742 "td1.ml" 63 1725 1743
+type(
+  int
+)
+"td1.ml" 63 1725 1739 "td1.ml" 63 1725 1744
+type(
+  int
+)
+"td1.ml" 63 1725 1734 "td1.ml" 63 1725 1744
+type(
+  bool
+)
+"td1.ml" 60 1662 1672 "td1.ml" 63 1725 1744
+type(
+  int -> bool
+)
+"td1.ml" 65 1746 1754 "td1.ml" 65 1746 1760
+type(
+  bool -> int -> bool
+)
+"td1.ml" 65 1746 1762 "td1.ml" 65 1746 1763
+type(
+  bool
+)
+"td1.ml" 66 1783 1787 "td1.ml" 66 1783 1788
+type(
+  int
+)
+"td1.ml" 66 1783 1792 "td1.ml" 66 1783 1793
+type(
+  bool
+)
+"td1.ml" 67 1794 1798 "td1.ml" 67 1794 1799
+type(
+  int
+)
+"td1.ml" 67 1794 1805 "td1.ml" 67 1794 1806
+type(
+  int
+)
+"td1.ml" 67 1794 1807 "td1.ml" 67 1794 1808
+type(
+  int -> int -> bool
+)
+"td1.ml" 67 1794 1809 "td1.ml" 67 1794 1810
+type(
+  int
+)
+"td1.ml" 67 1794 1805 "td1.ml" 67 1794 1810
+type(
+  bool
+)
+"td1.ml" 67 1794 1814 "td1.ml" 67 1794 1820
+type(
+  bool -> int -> bool
+)
+"td1.ml" 67 1794 1821 "td1.ml" 67 1794 1822
+type(
+  bool
+)
+"td1.ml" 67 1794 1824 "td1.ml" 67 1794 1825
+type(
+  int -> int
+)
+"td1.ml" 67 1794 1825 "td1.ml" 67 1794 1826
+type(
+  int
+)
+"td1.ml" 67 1794 1823 "td1.ml" 67 1794 1827
+type(
+  int
+)
+"td1.ml" 67 1794 1814 "td1.ml" 67 1794 1827
+type(
+  bool
+)
+"td1.ml" 67 1794 1800 "td1.ml" 67 1794 1827
+type(
+  bool
+)
+"td1.ml" 68 1828 1832 "td1.ml" 68 1828 1833
+type(
+  int
+)
+"td1.ml" 68 1828 1837 "td1.ml" 68 1828 1843
+type(
+  bool -> int -> bool
+)
+"td1.ml" 68 1828 1845 "td1.ml" 68 1828 1848
+type(
+  bool -> bool
+)
+"td1.ml" 68 1828 1849 "td1.ml" 68 1828 1850
+type(
+  bool
+)
+"td1.ml" 68 1828 1844 "td1.ml" 68 1828 1851
+type(
+  bool
+)
+"td1.ml" 68 1828 1853 "td1.ml" 68 1828 1854
+type(
+  int
+)
+"td1.ml" 68 1828 1854 "td1.ml" 68 1828 1855
+type(
+  int -> int -> int
+)
+"td1.ml" 68 1828 1855 "td1.ml" 68 1828 1856
+type(
+  int
+)
+"td1.ml" 68 1828 1852 "td1.ml" 68 1828 1857
+type(
+  int
+)
+"td1.ml" 68 1828 1837 "td1.ml" 68 1828 1857
+type(
+  bool
+)
+"td1.ml" 65 1746 1774 "td1.ml" 68 1828 1857
+type(
+  int -> bool
+)
+"td1.ml" 70 1859 1863 "td1.ml" 70 1859 1870
+type(
+  bool -> int -> bool
+)
+"td1.ml" 70 1859 1882 "td1.ml" 70 1859 1886
+type(
+  bool
+)
+"td1.ml" 70 1859 1890 "td1.ml" 70 1859 1894
+type(
+  int -> bool
+)
+"td1.ml" 70 1859 1897 "td1.ml" 70 1859 1902
+type(
+  bool
+)
+"td1.ml" 70 1859 1906 "td1.ml" 70 1859 1909
+type(
+  int -> bool
+)
+"td1.ml" 70 1859 1873 "td1.ml" 70 1859 1909
+type(
+  bool -> int -> bool
+)
+"td1.ml" 73 1986 1994 "td1.ml" 73 1986 1998
+type(
+  int -> int
+)
+"td1.ml" 73 1986 2000 "td1.ml" 73 1986 2001
+type(
+  int
+)
+"td1.ml" 74 2011 2016 "td1.ml" 74 2011 2017
+type(
+  int
+)
+"td1.ml" 74 2011 2018 "td1.ml" 74 2011 2020
+type(
+  int -> int -> bool
+)
+"td1.ml" 74 2011 2021 "td1.ml" 74 2011 2022
+type(
+  int
+)
+"td1.ml" 74 2011 2016 "td1.ml" 74 2011 2022
+type(
+  bool
+)
+"td1.ml" 74 2011 2028 "td1.ml" 74 2011 2029
+type(
+  int
+)
+"td1.ml" 74 2011 2035 "td1.ml" 74 2011 2039
+type(
+  int -> int
+)
+"td1.ml" 74 2011 2041 "td1.ml" 74 2011 2042
+type(
+  int
+)
+"td1.ml" 74 2011 2042 "td1.ml" 74 2011 2043
+type(
+  int -> int -> int
+)
+"td1.ml" 74 2011 2043 "td1.ml" 74 2011 2044
+type(
+  int
+)
+"td1.ml" 74 2011 2040 "td1.ml" 74 2011 2045
+type(
+  int
+)
+"td1.ml" 74 2011 2035 "td1.ml" 74 2011 2045
+type(
+  int
+)
+"td1.ml" 74 2011 2046 "td1.ml" 74 2011 2047
+type(
+  int -> int -> int
+)
+"td1.ml" 74 2011 2048 "td1.ml" 74 2011 2052
+type(
+  int -> int
+)
+"td1.ml" 74 2011 2054 "td1.ml" 74 2011 2055
+type(
+  int
+)
+"td1.ml" 74 2011 2055 "td1.ml" 74 2011 2056
+type(
+  int -> int -> int
+)
+"td1.ml" 74 2011 2056 "td1.ml" 74 2011 2057
+type(
+  int
+)
+"td1.ml" 74 2011 2053 "td1.ml" 74 2011 2058
+type(
+  int
+)
+"td1.ml" 74 2011 2048 "td1.ml" 74 2011 2058
+type(
+  int
+)
+"td1.ml" 74 2011 2035 "td1.ml" 74 2011 2058
+type(
+  int
+)
+"td1.ml" 74 2011 2013 "td1.ml" 74 2011 2058
+type(
+  int
+)
+"td1.ml" 77 2135 2143 "td1.ml" 77 2135 2149
+type(
+  int -> int -> int -> int
+)
+"td1.ml" 77 2135 2151 "td1.ml" 77 2135 2152
+type(
+  int
+)
+"td1.ml" 77 2135 2161 "td1.ml" 77 2135 2162
+type(
+  int
+)
+"td1.ml" 77 2135 2171 "td1.ml" 77 2135 2172
+type(
+  int
+)
+"td1.ml" 78 2182 2187 "td1.ml" 78 2182 2188
+type(
+  int
+)
+"td1.ml" 78 2182 2189 "td1.ml" 78 2182 2191
+type(
+  int -> int -> bool
+)
+"td1.ml" 78 2182 2192 "td1.ml" 78 2182 2193
+type(
+  int
+)
+"td1.ml" 78 2182 2187 "td1.ml" 78 2182 2193
+type(
+  bool
+)
+"td1.ml" 78 2182 2199 "td1.ml" 78 2182 2200
+type(
+  int
+)
+"td1.ml" 78 2182 2206 "td1.ml" 78 2182 2212
+type(
+  int -> int -> int -> int
+)
+"td1.ml" 78 2182 2213 "td1.ml" 78 2182 2214
+type(
+  int
+)
+"td1.ml" 78 2182 2216 "td1.ml" 78 2182 2217
+type(
+  int
+)
+"td1.ml" 78 2182 2217 "td1.ml" 78 2182 2218
+type(
+  int -> int -> int
+)
+"td1.ml" 78 2182 2218 "td1.ml" 78 2182 2219
+type(
+  int
+)
+"td1.ml" 78 2182 2215 "td1.ml" 78 2182 2220
+type(
+  int
+)
+"td1.ml" 78 2182 2222 "td1.ml" 78 2182 2223
+type(
+  int
+)
+"td1.ml" 78 2182 2223 "td1.ml" 78 2182 2224
+type(
+  int -> int -> int
+)
+"td1.ml" 78 2182 2224 "td1.ml" 78 2182 2225
+type(
+  int
+)
+"td1.ml" 78 2182 2221 "td1.ml" 78 2182 2226
+type(
+  int
+)
+"td1.ml" 78 2182 2206 "td1.ml" 78 2182 2226
+type(
+  int
+)
+"td1.ml" 78 2182 2184 "td1.ml" 78 2182 2226
+type(
+  int
+)
+"td1.ml" 80 2228 2232 "td1.ml" 80 2228 2237
+type(
+  int -> int
+)
+"td1.ml" 80 2228 2240 "td1.ml" 80 2228 2246
+type(
+  int -> int -> int -> int
+)
+"td1.ml" 80 2228 2247 "td1.ml" 80 2228 2248
+type(
+  int
+)
+"td1.ml" 80 2228 2249 "td1.ml" 80 2228 2250
+type(
+  int
+)
+"td1.ml" 80 2228 2240 "td1.ml" 80 2228 2250
+type(
+  int -> int
+)
+"td1.ml" 83 2327 2335 "td1.ml" 83 2327 2338
+type(
+  int list -> int
+)
+"td1.ml" 83 2327 2350 "td1.ml" 83 2327 2352
+type(
+  int list
+)
+"td1.ml" 83 2327 2356 "td1.ml" 83 2327 2357
+type(
+  int
+)
+"td1.ml" 83 2327 2360 "td1.ml" 83 2327 2361
+type(
+  int
+)
+"td1.ml" 83 2327 2363 "td1.ml" 83 2327 2364
+type(
+  int list
+)
+"td1.ml" 83 2327 2360 "td1.ml" 83 2327 2364
+type(
+  int list
+)
+"td1.ml" 83 2327 2368 "td1.ml" 83 2327 2369
+type(
+  int
+)
+"td1.ml" 83 2327 2370 "td1.ml" 83 2327 2371
+type(
+  int -> int -> int
+)
+"td1.ml" 83 2327 2372 "td1.ml" 83 2327 2375
+type(
+  int list -> int
+)
+"td1.ml" 83 2327 2376 "td1.ml" 83 2327 2377
+type(
+  int list
+)
+"td1.ml" 83 2327 2372 "td1.ml" 83 2327 2377
+type(
+  int
+)
+"td1.ml" 83 2327 2368 "td1.ml" 83 2327 2377
+type(
+  int
+)
+"td1.ml" 83 2327 2341 "td1.ml" 83 2327 2377
+type(
+  int list -> int
+)
+"td1.ml" 86 2454 2458 "td1.ml" 86 2454 2462
+type(
+  ('a -> int) -> 'a list -> int
+)
+"td1.ml" 86 2454 2463 "td1.ml" 86 2454 2464
+type(
+  'a -> int
+)
+"td1.ml" 87 2467 2477 "td1.ml" 87 2467 2480
+type(
+  'a list -> int
+)
+"td1.ml" 88 2483 2496 "td1.ml" 88 2483 2498
+type(
+  'a list
+)
+"td1.ml" 88 2483 2502 "td1.ml" 88 2483 2503
+type(
+  int
+)
+"td1.ml" 88 2483 2506 "td1.ml" 88 2483 2507
+type(
+  'a
+)
+"td1.ml" 88 2483 2509 "td1.ml" 88 2483 2510
+type(
+  'a list
+)
+"td1.ml" 88 2483 2506 "td1.ml" 88 2483 2510
+type(
+  'a list
+)
+"td1.ml" 88 2483 2514 "td1.ml" 88 2483 2515
+type(
+  'a -> int
+)
+"td1.ml" 88 2483 2516 "td1.ml" 88 2483 2517
+type(
+  'a
+)
+"td1.ml" 88 2483 2514 "td1.ml" 88 2483 2517
+type(
+  int
+)
+"td1.ml" 88 2483 2518 "td1.ml" 88 2483 2519
+type(
+  int -> int -> int
+)
+"td1.ml" 88 2483 2520 "td1.ml" 88 2483 2523
+type(
+  'a list -> int
+)
+"td1.ml" 88 2483 2524 "td1.ml" 88 2483 2525
+type(
+  'a list
+)
+"td1.ml" 88 2483 2520 "td1.ml" 88 2483 2525
+type(
+  int
+)
+"td1.ml" 88 2483 2514 "td1.ml" 88 2483 2525
+type(
+  int
+)
+"td1.ml" 88 2483 2487 "td1.ml" 88 2483 2525
+type(
+  'a list -> int
+)
+"td1.ml" 89 2526 2535 "td1.ml" 89 2526 2536
+type(
+  'a list
+)
+"td1.ml" 89 2526 2540 "td1.ml" 89 2526 2543
+type(
+  'a list -> int
+)
+"td1.ml" 89 2526 2544 "td1.ml" 89 2526 2545
+type(
+  'a list
+)
+"td1.ml" 89 2526 2540 "td1.ml" 89 2526 2545
+type(
+  int
+)
+"td1.ml" 89 2526 2531 "td1.ml" 89 2526 2545
+type(
+  'a list -> int
+)
+"td1.ml" 87 2467 2469 "td1.ml" 89 2526 2545
+type(
+  'a list -> int
+)
+"td1.ml" 91 2547 2551 "td1.ml" 91 2547 2555
+type(
+  int list -> int
+)
+"td1.ml" 91 2547 2558 "td1.ml" 91 2547 2562
+type(
+  (int -> int) -> int list -> int
+)
+"td1.ml" 91 2547 2568 "td1.ml" 91 2547 2569
+type(
+  int
+)
+"td1.ml" 91 2547 2573 "td1.ml" 91 2547 2574
+type(
+  int
+)
+"td1.ml" 91 2547 2563 "td1.ml" 91 2547 2575
+type(
+  int -> int
+)
+"td1.ml" 91 2547 2558 "td1.ml" 91 2547 2575
+type(
+  int list -> int
+)
+"td1.ml" 94 2652 2660 "td1.ml" 94 2652 2667
+type(
+  int list -> int list
+)
+"td1.ml" 95 2679 2683 "td1.ml" 95 2679 2685
+type(
+  int list
+)
+"td1.ml" 95 2679 2689 "td1.ml" 95 2679 2691
+type(
+  int list
+)
+"td1.ml" 96 2692 2696 "td1.ml" 96 2692 2697
+type(
+  int
+)
+"td1.ml" 96 2692 2699 "td1.ml" 96 2692 2700
+type(
+  int list
+)
+"td1.ml" 96 2692 2696 "td1.ml" 96 2692 2700
+type(
+  int list
+)
+"td1.ml" 96 2692 2706 "td1.ml" 96 2692 2707
+type(
+  int
+)
+"td1.ml" 96 2692 2708 "td1.ml" 96 2692 2709
+type(
+  int -> int -> bool
+)
+"td1.ml" 96 2692 2710 "td1.ml" 96 2692 2711
+type(
+  int
+)
+"td1.ml" 96 2692 2706 "td1.ml" 96 2692 2711
+type(
+  bool
+)
+"td1.ml" 96 2692 2715 "td1.ml" 96 2692 2722
+type(
+  int list -> int list
+)
+"td1.ml" 96 2692 2723 "td1.ml" 96 2692 2724
+type(
+  int list
+)
+"td1.ml" 96 2692 2715 "td1.ml" 96 2692 2724
+type(
+  int list
+)
+"td1.ml" 96 2692 2701 "td1.ml" 96 2692 2724
+type(
+  int list
+)
+"td1.ml" 97 2725 2729 "td1.ml" 97 2725 2730
+type(
+  int
+)
+"td1.ml" 97 2725 2732 "td1.ml" 97 2725 2733
+type(
+  int list
+)
+"td1.ml" 97 2725 2729 "td1.ml" 97 2725 2733
+type(
+  int list
+)
+"td1.ml" 97 2725 2737 "td1.ml" 97 2725 2738
+type(
+  int
+)
+"td1.ml" 97 2725 2742 "td1.ml" 97 2725 2749
+type(
+  int list -> int list
+)
+"td1.ml" 97 2725 2750 "td1.ml" 97 2725 2751
+type(
+  int list
+)
+"td1.ml" 97 2725 2742 "td1.ml" 97 2725 2751
+type(
+  int list
+)
+"td1.ml" 97 2725 2737 "td1.ml" 97 2725 2751
+type(
+  int list
+)
+"td1.ml" 94 2652 2670 "td1.ml" 97 2725 2751
+type(
+  int list -> int list
+)
+"td1.ml" 100 2828 2832 "td1.ml" 100 2828 2838
+type(
+  ('a -> bool) -> 'a list -> 'a list
+)
+"td1.ml" 100 2828 2840 "td1.ml" 100 2828 2841
+type(
+  'a -> bool
+)
+"td1.ml" 101 2858 2868 "td1.ml" 101 2858 2871
+type(
+  'a list -> 'a list
+)
+"td1.ml" 102 2883 2889 "td1.ml" 102 2883 2891
+type(
+  'a list
+)
+"td1.ml" 102 2883 2895 "td1.ml" 102 2883 2897
+type(
+  'a list
+)
+"td1.ml" 103 2898 2904 "td1.ml" 103 2898 2905
+type(
+  'a
+)
+"td1.ml" 103 2898 2907 "td1.ml" 103 2898 2908
+type(
+  'a list
+)
+"td1.ml" 103 2898 2904 "td1.ml" 103 2898 2908
+type(
+  'a list
+)
+"td1.ml" 103 2898 2914 "td1.ml" 103 2898 2915
+type(
+  'a -> bool
+)
+"td1.ml" 103 2898 2916 "td1.ml" 103 2898 2917
+type(
+  'a
+)
+"td1.ml" 103 2898 2914 "td1.ml" 103 2898 2917
+type(
+  bool
+)
+"td1.ml" 103 2898 2921 "td1.ml" 103 2898 2922
+type(
+  'a
+)
+"td1.ml" 103 2898 2926 "td1.ml" 103 2898 2929
+type(
+  'a list -> 'a list
+)
+"td1.ml" 103 2898 2930 "td1.ml" 103 2898 2931
+type(
+  'a list
+)
+"td1.ml" 103 2898 2926 "td1.ml" 103 2898 2931
+type(
+  'a list
+)
+"td1.ml" 103 2898 2921 "td1.ml" 103 2898 2931
+type(
+  'a list
+)
+"td1.ml" 103 2898 2909 "td1.ml" 103 2898 2931
+type(
+  'a list
+)
+"td1.ml" 104 2932 2938 "td1.ml" 104 2932 2939
+type(
+  'a
+)
+"td1.ml" 104 2932 2941 "td1.ml" 104 2932 2942
+type(
+  'a list
+)
+"td1.ml" 104 2932 2938 "td1.ml" 104 2932 2942
+type(
+  'a list
+)
+"td1.ml" 104 2932 2946 "td1.ml" 104 2932 2949
+type(
+  'a list -> 'a list
+)
+"td1.ml" 104 2932 2950 "td1.ml" 104 2932 2951
+type(
+  'a list
+)
+"td1.ml" 104 2932 2946 "td1.ml" 104 2932 2951
+type(
+  'a list
+)
+"td1.ml" 101 2858 2874 "td1.ml" 104 2932 2951
+type(
+  'a list -> 'a list
+)
+"td1.ml" 105 2952 2961 "td1.ml" 105 2952 2962
+type(
+  'a list
+)
+"td1.ml" 105 2952 2966 "td1.ml" 105 2952 2969
+type(
+  'a list -> 'a list
+)
+"td1.ml" 105 2952 2970 "td1.ml" 105 2952 2971
+type(
+  'a list
+)
+"td1.ml" 105 2952 2966 "td1.ml" 105 2952 2971
+type(
+  'a list
+)
+"td1.ml" 105 2952 2957 "td1.ml" 105 2952 2971
+type(
+  'a list -> 'a list
+)
+"td1.ml" 101 2858 2860 "td1.ml" 105 2952 2971
+type(
+  'a list -> 'a list
+)
+"td1.ml" 114 3123 3127 "td1.ml" 114 3123 3135
+type(
+  int list -> int list
+)
+"td1.ml" 114 3123 3138 "td1.ml" 114 3123 3144
+type(
+  (int -> bool) -> int list -> int list
+)
+"td1.ml" 114 3123 3150 "td1.ml" 114 3123 3151
+type(
+  int
+)
+"td1.ml" 114 3123 3155 "td1.ml" 114 3123 3156
+type(
+  int
+)
+"td1.ml" 114 3123 3157 "td1.ml" 114 3123 3159
+type(
+  int -> int -> bool
+)
+"td1.ml" 114 3123 3160 "td1.ml" 114 3123 3161
+type(
+  int
+)
+"td1.ml" 114 3123 3155 "td1.ml" 114 3123 3161
+type(
+  bool
+)
+"td1.ml" 114 3123 3145 "td1.ml" 114 3123 3162
+type(
+  int -> bool
+)
+"td1.ml" 114 3123 3138 "td1.ml" 114 3123 3162
+type(
+  int list -> int list
+)
+"td1.ml" 117 3239 3243 "td1.ml" 117 3239 3249
+type(
+  'a -> 'a list -> 'a list
+)
+"td1.ml" 117 3239 3250 "td1.ml" 117 3239 3251
+type(
+  'a
+)
+"td1.ml" 118 3254 3264 "td1.ml" 118 3254 3267
+type(
+  'a list -> 'a list
+)
+"td1.ml" 119 3279 3285 "td1.ml" 119 3279 3287
+type(
+  'a list
+)
+"td1.ml" 119 3279 3292 "td1.ml" 119 3279 3293
+type(
+  'a
+)
+"td1.ml" 119 3279 3291 "td1.ml" 119 3279 3294
+type(
+  'a list
+)
+"td1.ml" 120 3295 3302 "td1.ml" 120 3295 3303
+type(
+  'a
+)
+"td1.ml" 120 3295 3307 "td1.ml" 120 3295 3308
+type(
+  'a list
+)
+"td1.ml" 120 3295 3301 "td1.ml" 120 3295 3309
+type(
+  'a list
+)
+"td1.ml" 120 3295 3301 "td1.ml" 120 3295 3314
+type(
+  'a list
+)
+"td1.ml" 120 3295 3320 "td1.ml" 120 3295 3321
+type(
+  'a
+)
+"td1.ml" 120 3295 3322 "td1.ml" 120 3295 3324
+type(
+  'a -> 'a -> bool
+)
+"td1.ml" 120 3295 3325 "td1.ml" 120 3295 3326
+type(
+  'a
+)
+"td1.ml" 120 3295 3320 "td1.ml" 120 3295 3326
+type(
+  bool
+)
+"td1.ml" 120 3295 3330 "td1.ml" 120 3295 3331
+type(
+  'a
+)
+"td1.ml" 120 3295 3335 "td1.ml" 120 3295 3336
+type(
+  'a list
+)
+"td1.ml" 120 3295 3330 "td1.ml" 120 3295 3336
+type(
+  'a list
+)
+"td1.ml" 120 3295 3315 "td1.ml" 120 3295 3336
+type(
+  'a list
+)
+"td1.ml" 121 3337 3344 "td1.ml" 121 3337 3345
+type(
+  'a
+)
+"td1.ml" 121 3337 3349 "td1.ml" 121 3337 3350
+type(
+  'a list
+)
+"td1.ml" 121 3337 3343 "td1.ml" 121 3337 3351
+type(
+  'a list
+)
+"td1.ml" 121 3337 3355 "td1.ml" 121 3337 3356
+type(
+  'a
+)
+"td1.ml" 121 3337 3360 "td1.ml" 121 3337 3363
+type(
+  'a list -> 'a list
+)
+"td1.ml" 121 3337 3364 "td1.ml" 121 3337 3365
+type(
+  'a list
+)
+"td1.ml" 121 3337 3360 "td1.ml" 121 3337 3365
+type(
+  'a list
+)
+"td1.ml" 121 3337 3355 "td1.ml" 121 3337 3365
+type(
+  'a list
+)
+"td1.ml" 118 3254 3270 "td1.ml" 121 3337 3365
+type(
+  'a list -> 'a list
+)
+"td1.ml" 122 3366 3375 "td1.ml" 122 3366 3376
+type(
+  'a list
+)
+"td1.ml" 122 3366 3380 "td1.ml" 122 3366 3383
+type(
+  'a list -> 'a list
+)
+"td1.ml" 122 3366 3384 "td1.ml" 122 3366 3385
+type(
+  'a list
+)
+"td1.ml" 122 3366 3380 "td1.ml" 122 3366 3385
+type(
+  'a list
+)
+"td1.ml" 122 3366 3371 "td1.ml" 122 3366 3385
+type(
+  'a list -> 'a list
+)
+"td1.ml" 118 3254 3256 "td1.ml" 122 3366 3385
+type(
+  'a list -> 'a list
+)
+"td1.ml" 125 3462 3470 "td1.ml" 125 3462 3474
+type(
+  'a list -> 'a list
+)
+"td1.ml" 125 3462 3486 "td1.ml" 125 3462 3488
+type(
+  'a list
+)
+"td1.ml" 125 3462 3492 "td1.ml" 125 3462 3494
+type(
+  'a list
+)
+"td1.ml" 125 3462 3497 "td1.ml" 125 3462 3498
+type(
+  'a
+)
+"td1.ml" 125 3462 3500 "td1.ml" 125 3462 3501
+type(
+  'a list
+)
+"td1.ml" 125 3462 3497 "td1.ml" 125 3462 3501
+type(
+  'a list
+)
+"td1.ml" 125 3462 3505 "td1.ml" 125 3462 3511
+type(
+  'a -> 'a list -> 'a list
+)
+"td1.ml" 125 3462 3512 "td1.ml" 125 3462 3513
+type(
+  'a
+)
+"td1.ml" 125 3462 3515 "td1.ml" 125 3462 3519
+type(
+  'a list -> 'a list
+)
+"td1.ml" 125 3462 3520 "td1.ml" 125 3462 3521
+type(
+  'a list
+)
+"td1.ml" 125 3462 3514 "td1.ml" 125 3462 3522
+type(
+  'a list
+)
+"td1.ml" 125 3462 3505 "td1.ml" 125 3462 3522
+type(
+  'a list
+)
+"td1.ml" 125 3462 3477 "td1.ml" 125 3462 3522
+type(
+  'a list -> 'a list
+)
+"td1.ml" 128 3599 3603 "td1.ml" 128 3599 3610
+type(
+  ('a -> 'a -> bool) -> 'a -> 'a list -> 'a list
+)
+"td1.ml" 128 3599 3612 "td1.ml" 128 3599 3615
+type(
+  'a -> 'a -> bool
+)
+"td1.ml" 128 3599 3637 "td1.ml" 128 3599 3638
+type(
+  'a
+)
+"td1.ml" 129 3647 3657 "td1.ml" 129 3647 3660
+type(
+  'a list -> 'a list
+)
+"td1.ml" 130 3672 3678 "td1.ml" 130 3672 3680
+type(
+  'a list
+)
+"td1.ml" 130 3672 3685 "td1.ml" 130 3672 3686
+type(
+  'a
+)
+"td1.ml" 130 3672 3684 "td1.ml" 130 3672 3687
+type(
+  'a list
+)
+"td1.ml" 131 3688 3695 "td1.ml" 131 3688 3696
+type(
+  'a
+)
+"td1.ml" 131 3688 3700 "td1.ml" 131 3688 3701
+type(
+  'a list
+)
+"td1.ml" 131 3688 3694 "td1.ml" 131 3688 3702
+type(
+  'a list
+)
+"td1.ml" 131 3688 3694 "td1.ml" 131 3688 3707
+type(
+  'a list
+)
+"td1.ml" 131 3688 3713 "td1.ml" 131 3688 3716
+type(
+  'a -> 'a -> bool
+)
+"td1.ml" 131 3688 3717 "td1.ml" 131 3688 3718
+type(
+  'a
+)
+"td1.ml" 131 3688 3719 "td1.ml" 131 3688 3720
+type(
+  'a
+)
+"td1.ml" 131 3688 3713 "td1.ml" 131 3688 3720
+type(
+  bool
+)
+"td1.ml" 131 3688 3724 "td1.ml" 131 3688 3725
+type(
+  'a
+)
+"td1.ml" 131 3688 3729 "td1.ml" 131 3688 3730
+type(
+  'a list
+)
+"td1.ml" 131 3688 3724 "td1.ml" 131 3688 3730
+type(
+  'a list
+)
+"td1.ml" 131 3688 3708 "td1.ml" 131 3688 3730
+type(
+  'a list
+)
+"td1.ml" 132 3731 3738 "td1.ml" 132 3731 3739
+type(
+  'a
+)
+"td1.ml" 132 3731 3743 "td1.ml" 132 3731 3744
+type(
+  'a list
+)
+"td1.ml" 132 3731 3737 "td1.ml" 132 3731 3745
+type(
+  'a list
+)
+"td1.ml" 132 3731 3749 "td1.ml" 132 3731 3750
+type(
+  'a
+)
+"td1.ml" 132 3731 3754 "td1.ml" 132 3731 3757
+type(
+  'a list -> 'a list
+)
+"td1.ml" 132 3731 3758 "td1.ml" 132 3731 3759
+type(
+  'a list
+)
+"td1.ml" 132 3731 3754 "td1.ml" 132 3731 3759
+type(
+  'a list
+)
+"td1.ml" 132 3731 3749 "td1.ml" 132 3731 3759
+type(
+  'a list
+)
+"td1.ml" 129 3647 3663 "td1.ml" 132 3731 3759
+type(
+  'a list -> 'a list
+)
+"td1.ml" 133 3760 3769 "td1.ml" 133 3760 3770
+type(
+  'a list
+)
+"td1.ml" 133 3760 3774 "td1.ml" 133 3760 3777
+type(
+  'a list -> 'a list
+)
+"td1.ml" 133 3760 3778 "td1.ml" 133 3760 3779
+type(
+  'a list
+)
+"td1.ml" 133 3760 3774 "td1.ml" 133 3760 3779
+type(
+  'a list
+)
+"td1.ml" 133 3760 3765 "td1.ml" 133 3760 3779
+type(
+  'a list -> 'a list
+)
+"td1.ml" 129 3647 3649 "td1.ml" 133 3760 3779
+type(
+  'a list -> 'a list
+)
+"td1.ml" 136 3856 3860 "td1.ml" 136 3856 3865
+type(
+  ('a -> 'a -> bool) ->
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list ->
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 136 3856 3867 "td1.ml" 136 3856 3870
+type(
+  'a -> 'a -> bool
+)
+"td1.ml" 137 3893 3903 "td1.ml" 137 3893 3906
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list ->
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 138 3909 3922 "td1.ml" 138 3909 3924
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list
+)
+"td1.ml" 138 3909 3928 "td1.ml" 138 3909 3930
+type(
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 138 3909 3933 "td1.ml" 138 3909 3934
+type(
+  ('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool
+)
+"td1.ml" 138 3909 3936 "td1.ml" 138 3909 3937
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list
+)
+"td1.ml" 138 3909 3933 "td1.ml" 138 3909 3937
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list
+)
+"td1.ml" 138 3909 3941 "td1.ml" 138 3909 3948
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) ->
+  ('a -> 'a -> bool) -> ('a -> 'a -> bool) list -> ('a -> 'a -> bool) list
+)
+"td1.ml" 138 3909 3949 "td1.ml" 138 3909 3950
+type(
+  ('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool
+)
+"td1.ml" 138 3909 3951 "td1.ml" 138 3909 3954
+type(
+  'a -> 'a -> bool
+)
+"td1.ml" 138 3909 3956 "td1.ml" 138 3909 3959
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list ->
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 138 3909 3960 "td1.ml" 138 3909 3961
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list
+)
+"td1.ml" 138 3909 3955 "td1.ml" 138 3909 3962
+type(
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 138 3909 3941 "td1.ml" 138 3909 3962
+type(
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 138 3909 3913 "td1.ml" 138 3909 3962
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list ->
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 139 3963 3972 "td1.ml" 139 3963 3973
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list
+)
+"td1.ml" 139 3963 3977 "td1.ml" 139 3963 3980
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list ->
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 139 3963 3981 "td1.ml" 139 3963 3982
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list
+)
+"td1.ml" 139 3963 3977 "td1.ml" 139 3963 3982
+type(
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 139 3963 3968 "td1.ml" 139 3963 3982
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list ->
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 137 3893 3895 "td1.ml" 139 3963 3982
+type(
+  (('a -> 'a -> bool) -> ('a -> 'a -> bool) -> bool) list ->
+  ('a -> 'a -> bool) list
+)
+"td1.ml" 142 4059 4063 "td1.ml" 142 4059 4070
+type(
+  ('a -> 'a -> bool) -> 'a list -> bool
+)
+"td1.ml" 142 4059 4072 "td1.ml" 142 4059 4075
+type(
+  'a -> 'a -> bool
+)
+"td1.ml" 143 4098 4108 "td1.ml" 143 4098 4111
+type(
+  'a list -> bool
+)
+"td1.ml" 144 4123 4129 "td1.ml" 144 4123 4131
+type(
+  'a list
+)
+"td1.ml" 144 4123 4135 "td1.ml" 144 4123 4136
+type(
+  'a
+)
+"td1.ml" 144 4123 4134 "td1.ml" 144 4123 4137
+type(
+  'a list
+)
+"td1.ml" 144 4123 4129 "td1.ml" 144 4123 4137
+type(
+  'a list
+)
+"td1.ml" 144 4123 4141 "td1.ml" 144 4123 4145
+type(
+  bool
+)
+"td1.ml" 145 4146 4152 "td1.ml" 145 4146 4153
+type(
+  'a
+)
+"td1.ml" 145 4146 4159 "td1.ml" 145 4146 4160
+type(
+  'a
+)
+"td1.ml" 145 4146 4164 "td1.ml" 145 4146 4165
+type(
+  'a list
+)
+"td1.ml" 145 4146 4158 "td1.ml" 145 4146 4166
+type(
+  'a list
+)
+"td1.ml" 145 4146 4157 "td1.ml" 145 4146 4172
+type(
+  'a list
+)
+"td1.ml" 145 4146 4152 "td1.ml" 145 4146 4172
+type(
+  'a list
+)
+"td1.ml" 145 4146 4176 "td1.ml" 145 4146 4179
+type(
+  'a -> 'a -> bool
+)
+"td1.ml" 145 4146 4180 "td1.ml" 145 4146 4181
+type(
+  'a
+)
+"td1.ml" 145 4146 4182 "td1.ml" 145 4146 4183
+type(
+  'a
+)
+"td1.ml" 145 4146 4176 "td1.ml" 145 4146 4183
+type(
+  bool
+)
+"td1.ml" 145 4146 4184 "td1.ml" 145 4146 4186
+type(
+  bool -> bool -> bool
+)
+"td1.ml" 145 4146 4187 "td1.ml" 145 4146 4190
+type(
+  'a list -> bool
+)
+"td1.ml" 145 4146 4191 "td1.ml" 145 4146 4192
+type(
+  'a list
+)
+"td1.ml" 145 4146 4187 "td1.ml" 145 4146 4192
+type(
+  bool
+)
+"td1.ml" 145 4146 4176 "td1.ml" 145 4146 4192
+type(
+  bool
+)
+"td1.ml" 143 4098 4114 "td1.ml" 145 4146 4192
+type(
+  'a list -> bool
+)
+"td1.ml" 146 4193 4202 "td1.ml" 146 4193 4203
+type(
+  'a list
+)
+"td1.ml" 146 4193 4207 "td1.ml" 146 4193 4210
+type(
+  'a list -> bool
+)
+"td1.ml" 146 4193 4211 "td1.ml" 146 4193 4212
+type(
+  'a list
+)
+"td1.ml" 146 4193 4207 "td1.ml" 146 4193 4212
+type(
+  bool
+)
+"td1.ml" 146 4193 4198 "td1.ml" 146 4193 4212
+type(
+  'a list -> bool
+)
+"td1.ml" 143 4098 4100 "td1.ml" 146 4193 4212
+type(
+  'a list -> bool
+)
+"td1.ml" 149 4289 4293 "td1.ml" 149 4289 4296
+type(
+  ('a -> 'b) -> 'a list -> 'b list
+)
+"td1.ml" 149 4289 4298 "td1.ml" 149 4289 4299
+type(
+  'a -> 'b
+)
+"td1.ml" 150 4314 4324 "td1.ml" 150 4314 4327
+type(
+  'a list -> 'b list
+)
+"td1.ml" 151 4330 4343 "td1.ml" 151 4330 4345
+type(
+  'a list
+)
+"td1.ml" 151 4330 4349 "td1.ml" 151 4330 4351
+type(
+  'b list
+)
+"td1.ml" 151 4330 4354 "td1.ml" 151 4330 4355
+type(
+  'a
+)
+"td1.ml" 151 4330 4359 "td1.ml" 151 4330 4360
+type(
+  'a list
+)
+"td1.ml" 151 4330 4354 "td1.ml" 151 4330 4360
+type(
+  'a list
+)
+"td1.ml" 151 4330 4364 "td1.ml" 151 4330 4365
+type(
+  'a -> 'b
+)
+"td1.ml" 151 4330 4366 "td1.ml" 151 4330 4367
+type(
+  'a
+)
+"td1.ml" 151 4330 4364 "td1.ml" 151 4330 4367
+type(
+  'b
+)
+"td1.ml" 151 4330 4371 "td1.ml" 151 4330 4374
+type(
+  'a list -> 'b list
+)
+"td1.ml" 151 4330 4375 "td1.ml" 151 4330 4376
+type(
+  'a list
+)
+"td1.ml" 151 4330 4371 "td1.ml" 151 4330 4376
+type(
+  'b list
+)
+"td1.ml" 151 4330 4364 "td1.ml" 151 4330 4376
+type(
+  'b list
+)
+"td1.ml" 151 4330 4334 "td1.ml" 151 4330 4376
+type(
+  'a list -> 'b list
+)
+"td1.ml" 152 4377 4386 "td1.ml" 152 4377 4387
+type(
+  'a list
+)
+"td1.ml" 152 4377 4391 "td1.ml" 152 4377 4394
+type(
+  'a list -> 'b list
+)
+"td1.ml" 152 4377 4395 "td1.ml" 152 4377 4396
+type(
+  'a list
+)
+"td1.ml" 152 4377 4391 "td1.ml" 152 4377 4396
+type(
+  'b list
+)
+"td1.ml" 152 4377 4382 "td1.ml" 152 4377 4396
+type(
+  'a list -> 'b list
+)
+"td1.ml" 150 4314 4316 "td1.ml" 152 4377 4396
+type(
+  'a list -> 'b list
+)
+"td1.ml" 154 4398 4406 "td1.ml" 154 4398 4413
+type(
+  'a list list -> 'a list
+)
+"td1.ml" 154 4398 4425 "td1.ml" 154 4398 4427
+type(
+  'a list list
+)
+"td1.ml" 154 4398 4431 "td1.ml" 154 4398 4433
+type(
+  'a list
+)
+"td1.ml" 154 4398 4436 "td1.ml" 154 4398 4437
+type(
+  'a list
+)
+"td1.ml" 154 4398 4441 "td1.ml" 154 4398 4442
+type(
+  'a list list
+)
+"td1.ml" 154 4398 4436 "td1.ml" 154 4398 4442
+type(
+  'a list list
+)
+"td1.ml" 154 4398 4446 "td1.ml" 154 4398 4447
+type(
+  'a list
+)
+"td1.ml" 154 4398 4448 "td1.ml" 154 4398 4449
+type(
+  'a list -> 'a list -> 'a list
+)
+"td1.ml" 154 4398 4450 "td1.ml" 154 4398 4457
+type(
+  'a list list -> 'a list
+)
+"td1.ml" 154 4398 4458 "td1.ml" 154 4398 4459
+type(
+  'a list list
+)
+"td1.ml" 154 4398 4450 "td1.ml" 154 4398 4459
+type(
+  'a list
+)
+"td1.ml" 154 4398 4446 "td1.ml" 154 4398 4459
+type(
+  'a list
+)
+"td1.ml" 154 4398 4416 "td1.ml" 154 4398 4459
+type(
+  'a list list -> 'a list
+)
+"td1.ml" 156 4461 4469 "td1.ml" 156 4461 4479
+type(
+  'a list -> 'a list -> 'a list
+)
+"td1.ml" 156 4461 4481 "td1.ml" 156 4461 4483
+type(
+  'a list
+)
+"td1.ml" 156 4461 4496 "td1.ml" 156 4461 4498
+type(
+  'a list
+)
+"td1.ml" 157 4512 4520 "td1.ml" 157 4512 4522
+type(
+  'a list
+)
+"td1.ml" 157 4512 4528 "td1.ml" 157 4512 4530
+type(
+  'a list
+)
+"td1.ml" 157 4512 4534 "td1.ml" 157 4512 4536
+type(
+  'a list
+)
+"td1.ml" 157 4512 4539 "td1.ml" 157 4512 4540
+type(
+  'a
+)
+"td1.ml" 157 4512 4544 "td1.ml" 157 4512 4546
+type(
+  'a list
+)
+"td1.ml" 157 4512 4539 "td1.ml" 157 4512 4546
+type(
+  'a list
+)
+"td1.ml" 157 4512 4550 "td1.ml" 157 4512 4560
+type(
+  'a list -> 'a list -> 'a list
+)
+"td1.ml" 157 4512 4561 "td1.ml" 157 4512 4563
+type(
+  'a list
+)
+"td1.ml" 157 4512 4565 "td1.ml" 157 4512 4566
+type(
+  'a
+)
+"td1.ml" 157 4512 4570 "td1.ml" 157 4512 4572
+type(
+  'a list
+)
+"td1.ml" 157 4512 4564 "td1.ml" 157 4512 4573
+type(
+  'a list
+)
+"td1.ml" 157 4512 4550 "td1.ml" 157 4512 4573
+type(
+  'a list
+)
+"td1.ml" 157 4512 4514 "td1.ml" 157 4512 4573
+type(
+  'a list
+)
+"td1.ml" 159 4575 4579 "td1.ml" 159 4575 4602
+type(
+  int -> int list -> int list list
+)
+"td1.ml" 159 4575 4604 "td1.ml" 159 4575 4605
+type(
+  int
+)
+"td1.ml" 160 4615 4625 "td1.ml" 160 4615 4628
+type(
+  int list list -> int list -> int list -> int list list
+)
+"td1.ml" 160 4615 4629 "td1.ml" 160 4615 4632
+type(
+  int list list
+)
+"td1.ml" 160 4615 4633 "td1.ml" 160 4615 4635
+type(
+  int list
+)
+"td1.ml" 160 4615 4636 "td1.ml" 160 4615 4638
+type(
+  int list
+)
+"td1.ml" 161 4641 4649 "td1.ml" 161 4641 4652
+type(
+  int list list
+)
+"td1.ml" 161 4641 4656 "td1.ml" 161 4641 4666
+type(
+  int list -> int list -> int list
+)
+"td1.ml" 161 4641 4667 "td1.ml" 161 4641 4669
+type(
+  int list
+)
+"td1.ml" 161 4641 4671 "td1.ml" 161 4641 4672
+type(
+  int
+)
+"td1.ml" 161 4641 4676 "td1.ml" 161 4641 4678
+type(
+  int list
+)
+"td1.ml" 161 4641 4670 "td1.ml" 161 4641 4679
+type(
+  int list
+)
+"td1.ml" 161 4641 4655 "td1.ml" 161 4641 4680
+type(
+  int list
+)
+"td1.ml" 161 4641 4684 "td1.ml" 161 4641 4687
+type(
+  int list list
+)
+"td1.ml" 161 4641 4655 "td1.ml" 161 4641 4687
+type(
+  int list list
+)
+"td1.ml" 162 4691 4701 "td1.ml" 162 4691 4703
+type(
+  int list
+)
+"td1.ml" 162 4691 4709 "td1.ml" 162 4691 4711
+type(
+  int list
+)
+"td1.ml" 162 4691 4715 "td1.ml" 162 4691 4723
+type(
+  int list list -> int list list
+)
+"td1.ml" 162 4691 4724 "td1.ml" 162 4691 4727
+type(
+  int list list
+)
+"td1.ml" 162 4691 4715 "td1.ml" 162 4691 4727
+type(
+  int list list
+)
+"td1.ml" 162 4691 4730 "td1.ml" 162 4691 4731
+type(
+  int
+)
+"td1.ml" 162 4691 4735 "td1.ml" 162 4691 4737
+type(
+  int list
+)
+"td1.ml" 162 4691 4730 "td1.ml" 162 4691 4737
+type(
+  int list
+)
+"td1.ml" 162 4691 4741 "td1.ml" 162 4691 4744
+type(
+  int list list -> int list -> int list -> int list list
+)
+"td1.ml" 162 4691 4745 "td1.ml" 162 4691 4748
+type(
+  int list list
+)
+"td1.ml" 162 4691 4750 "td1.ml" 162 4691 4751
+type(
+  int
+)
+"td1.ml" 162 4691 4755 "td1.ml" 162 4691 4757
+type(
+  int list
+)
+"td1.ml" 162 4691 4749 "td1.ml" 162 4691 4758
+type(
+  int list
+)
+"td1.ml" 162 4691 4759 "td1.ml" 162 4691 4761
+type(
+  int list
+)
+"td1.ml" 162 4691 4741 "td1.ml" 162 4691 4761
+type(
+  int list list
+)
+"td1.ml" 162 4691 4695 "td1.ml" 162 4691 4761
+type(
+  int list list
+)
+"td1.ml" 161 4641 4645 "td1.ml" 162 4691 4761
+type(
+  int list list
+)
+"td1.ml" 163 4762 4771 "td1.ml" 163 4762 4772
+type(
+  int list
+)
+"td1.ml" 163 4762 4776 "td1.ml" 163 4762 4779
+type(
+  int list list -> int list -> int list -> int list list
+)
+"td1.ml" 163 4762 4780 "td1.ml" 163 4762 4782
+type(
+  int list list
+)
+"td1.ml" 163 4762 4783 "td1.ml" 163 4762 4785
+type(
+  int list
+)
+"td1.ml" 163 4762 4786 "td1.ml" 163 4762 4787
+type(
+  int list
+)
+"td1.ml" 163 4762 4776 "td1.ml" 163 4762 4787
+type(
+  int list list
+)
+"td1.ml" 163 4762 4767 "td1.ml" 163 4762 4787
+type(
+  int list -> int list list
+)
+"td1.ml" 160 4615 4617 "td1.ml" 163 4762 4787
+type(
+  int list -> int list list
+)
+"td1.ml" 165 4789 4797 "td1.ml" 165 4789 4801
+type(
+  int list -> int list list
+)
+"td1.ml" 166 4813 4817 "td1.ml" 166 4813 4819
+type(
+  int list
+)
+"td1.ml" 166 4813 4824 "td1.ml" 166 4813 4826
+type(
+  int list
+)
+"td1.ml" 166 4813 4823 "td1.ml" 166 4813 4827
+type(
+  int list list
+)
+"td1.ml" 167 4828 4832 "td1.ml" 167 4828 4833
+type(
+  int
+)
+"td1.ml" 167 4828 4837 "td1.ml" 167 4828 4838
+type(
+  int list
+)
+"td1.ml" 167 4828 4832 "td1.ml" 167 4828 4838
+type(
+  int list
+)
+"td1.ml" 167 4828 4842 "td1.ml" 167 4828 4849
+type(
+  int list list list -> int list list
+)
+"td1.ml" 167 4828 4851 "td1.ml" 167 4828 4854
+type(
+  (int list -> int list list) -> int list list -> int list list list
+)
+"td1.ml" 167 4828 4856 "td1.ml" 167 4828 4879
+type(
+  int -> int list -> int list list
+)
+"td1.ml" 167 4828 4880 "td1.ml" 167 4828 4881
+type(
+  int
+)
+"td1.ml" 167 4828 4855 "td1.ml" 167 4828 4882
+type(
+  int list -> int list list
+)
+"td1.ml" 167 4828 4884 "td1.ml" 167 4828 4888
+type(
+  int list -> int list list
+)
+"td1.ml" 167 4828 4889 "td1.ml" 167 4828 4890
+type(
+  int list
+)
+"td1.ml" 167 4828 4883 "td1.ml" 167 4828 4891
+type(
+  int list list
+)
+"td1.ml" 167 4828 4850 "td1.ml" 167 4828 4892
+type(
+  int list list list
+)
+"td1.ml" 167 4828 4842 "td1.ml" 167 4828 4892
+type(
+  int list list
+)
+"td1.ml" 165 4789 4804 "td1.ml" 167 4828 4892
+type(
+  int list -> int list list
+)
+"td1.ml" 172 5012 5016 "td1.ml" 172 5012 5019
+type(
+  complex -> complex -> complex
+)
+"td1.ml" 172 5012 5020 "td1.ml" 172 5012 5021
+type(
+  complex
+)
+"td1.ml" 172 5012 5022 "td1.ml" 172 5012 5023
+type(
+  complex
+)
+"td1.ml" 173 5026 5035 "td1.ml" 173 5026 5036
+type(
+  complex
+)
+"td1.ml" 173 5026 5035 "td1.ml" 173 5026 5039
+type(
+  float
+)
+"td1.ml" 173 5026 5040 "td1.ml" 173 5026 5042
+type(
+  float -> float -> float
+)
+"td1.ml" 173 5026 5043 "td1.ml" 173 5026 5044
+type(
+  complex
+)
+"td1.ml" 173 5026 5043 "td1.ml" 173 5026 5047
+type(
+  float
+)
+"td1.ml" 173 5026 5035 "td1.ml" 173 5026 5047
+type(
+  float
+)
+"td1.ml" 173 5026 5054 "td1.ml" 173 5026 5055
+type(
+  complex
+)
+"td1.ml" 173 5026 5054 "td1.ml" 173 5026 5058
+type(
+  float
+)
+"td1.ml" 173 5026 5059 "td1.ml" 173 5026 5061
+type(
+  float -> float -> float
+)
+"td1.ml" 173 5026 5062 "td1.ml" 173 5026 5063
+type(
+  complex
+)
+"td1.ml" 173 5026 5062 "td1.ml" 173 5026 5066
+type(
+  float
+)
+"td1.ml" 173 5026 5054 "td1.ml" 173 5026 5066
+type(
+  float
+)
+"td1.ml" 173 5026 5028 "td1.ml" 173 5026 5069
+type(
+  complex
+)
+"td1.ml" 175 5071 5075 "td1.ml" 175 5071 5078
+type(
+  complex -> complex
+)
+"td1.ml" 175 5071 5079 "td1.ml" 175 5071 5080
+type(
+  complex
+)
+"td1.ml" 176 5083 5092 "td1.ml" 176 5083 5094
+type(
+  float -> float
+)
+"td1.ml" 176 5083 5095 "td1.ml" 176 5083 5096
+type(
+  complex
+)
+"td1.ml" 176 5083 5095 "td1.ml" 176 5083 5099
+type(
+  float
+)
+"td1.ml" 176 5083 5092 "td1.ml" 176 5083 5099
+type(
+  float
+)
+"td1.ml" 176 5083 5106 "td1.ml" 176 5083 5108
+type(
+  float -> float
+)
+"td1.ml" 176 5083 5109 "td1.ml" 176 5083 5110
+type(
+  complex
+)
+"td1.ml" 176 5083 5109 "td1.ml" 176 5083 5113
+type(
+  float
+)
+"td1.ml" 176 5083 5106 "td1.ml" 176 5083 5113
+type(
+  float
+)
+"td1.ml" 176 5083 5085 "td1.ml" 176 5083 5116
+type(
+  complex
+)
+"td1.ml" 178 5118 5122 "td1.ml" 178 5118 5125
+type(
+  complex -> complex -> complex
+)
+"td1.ml" 178 5118 5126 "td1.ml" 178 5118 5127
+type(
+  complex
+)
+"td1.ml" 178 5118 5128 "td1.ml" 178 5118 5129
+type(
+  complex
+)
+"td1.ml" 179 5132 5141 "td1.ml" 179 5132 5142
+type(
+  complex
+)
+"td1.ml" 179 5132 5141 "td1.ml" 179 5132 5145
+type(
+  float
+)
+"td1.ml" 179 5132 5146 "td1.ml" 179 5132 5148
+type(
+  float -> float -> float
+)
+"td1.ml" 179 5132 5149 "td1.ml" 179 5132 5150
+type(
+  complex
+)
+"td1.ml" 179 5132 5149 "td1.ml" 179 5132 5153
+type(
+  float
+)
+"td1.ml" 179 5132 5141 "td1.ml" 179 5132 5153
+type(
+  float
+)
+"td1.ml" 179 5132 5154 "td1.ml" 179 5132 5156
+type(
+  float -> float -> float
+)
+"td1.ml" 179 5132 5157 "td1.ml" 179 5132 5158
+type(
+  complex
+)
+"td1.ml" 179 5132 5157 "td1.ml" 179 5132 5161
+type(
+  float
+)
+"td1.ml" 179 5132 5162 "td1.ml" 179 5132 5164
+type(
+  float -> float -> float
+)
+"td1.ml" 179 5132 5165 "td1.ml" 179 5132 5166
+type(
+  complex
+)
+"td1.ml" 179 5132 5165 "td1.ml" 179 5132 5169
+type(
+  float
+)
+"td1.ml" 179 5132 5157 "td1.ml" 179 5132 5169
+type(
+  float
+)
+"td1.ml" 179 5132 5141 "td1.ml" 179 5132 5169
+type(
+  float
+)
+"td1.ml" 180 5171 5180 "td1.ml" 180 5171 5181
+type(
+  complex
+)
+"td1.ml" 180 5171 5180 "td1.ml" 180 5171 5184
+type(
+  float
+)
+"td1.ml" 180 5171 5185 "td1.ml" 180 5171 5187
+type(
+  float -> float -> float
+)
+"td1.ml" 180 5171 5188 "td1.ml" 180 5171 5189
+type(
+  complex
+)
+"td1.ml" 180 5171 5188 "td1.ml" 180 5171 5192
+type(
+  float
+)
+"td1.ml" 180 5171 5180 "td1.ml" 180 5171 5192
+type(
+  float
+)
+"td1.ml" 180 5171 5193 "td1.ml" 180 5171 5195
+type(
+  float -> float -> float
+)
+"td1.ml" 180 5171 5196 "td1.ml" 180 5171 5197
+type(
+  complex
+)
+"td1.ml" 180 5171 5196 "td1.ml" 180 5171 5200
+type(
+  float
+)
+"td1.ml" 180 5171 5201 "td1.ml" 180 5171 5203
+type(
+  float -> float -> float
+)
+"td1.ml" 180 5171 5204 "td1.ml" 180 5171 5205
+type(
+  complex
+)
+"td1.ml" 180 5171 5204 "td1.ml" 180 5171 5208
+type(
+  float
+)
+"td1.ml" 180 5171 5196 "td1.ml" 180 5171 5208
+type(
+  float
+)
+"td1.ml" 180 5171 5180 "td1.ml" 180 5171 5208
+type(
+  float
+)
+"td1.ml" 179 5132 5134 "td1.ml" 180 5171 5211
+type(
+  complex
+)
+"td1.ml" 182 5213 5217 "td1.ml" 182 5213 5220
+type(
+  complex -> complex
+)
+"td1.ml" 182 5213 5221 "td1.ml" 182 5213 5222
+type(
+  complex
+)
+"td1.ml" 183 5225 5231 "td1.ml" 183 5225 5232
+type(
+  float
+)
+"td1.ml" 183 5225 5235 "td1.ml" 183 5225 5236
+type(
+  complex
+)
+"td1.ml" 183 5225 5235 "td1.ml" 183 5225 5239
+type(
+  float
+)
+"td1.ml" 183 5225 5240 "td1.ml" 183 5225 5242
+type(
+  float -> float -> float
+)
+"td1.ml" 183 5225 5243 "td1.ml" 183 5225 5244
+type(
+  complex
+)
+"td1.ml" 183 5225 5243 "td1.ml" 183 5225 5247
+type(
+  float
+)
+"td1.ml" 183 5225 5235 "td1.ml" 183 5225 5247
+type(
+  float
+)
+"td1.ml" 183 5225 5248 "td1.ml" 183 5225 5250
+type(
+  float -> float -> float
+)
+"td1.ml" 183 5225 5251 "td1.ml" 183 5225 5252
+type(
+  complex
+)
+"td1.ml" 183 5225 5251 "td1.ml" 183 5225 5255
+type(
+  float
+)
+"td1.ml" 183 5225 5256 "td1.ml" 183 5225 5258
+type(
+  float -> float -> float
+)
+"td1.ml" 183 5225 5259 "td1.ml" 183 5225 5260
+type(
+  complex
+)
+"td1.ml" 183 5225 5259 "td1.ml" 183 5225 5263
+type(
+  float
+)
+"td1.ml" 183 5225 5251 "td1.ml" 183 5225 5263
+type(
+  float
+)
+"td1.ml" 183 5225 5235 "td1.ml" 183 5225 5263
+type(
+  float
+)
+"td1.ml" 184 5267 5276 "td1.ml" 184 5267 5277
+type(
+  complex
+)
+"td1.ml" 184 5267 5276 "td1.ml" 184 5267 5280
+type(
+  float
+)
+"td1.ml" 184 5267 5281 "td1.ml" 184 5267 5283
+type(
+  float -> float -> float
+)
+"td1.ml" 184 5267 5284 "td1.ml" 184 5267 5285
+type(
+  float
+)
+"td1.ml" 184 5267 5276 "td1.ml" 184 5267 5285
+type(
+  float
+)
+"td1.ml" 184 5267 5292 "td1.ml" 184 5267 5294
+type(
+  float -> float
+)
+"td1.ml" 184 5267 5295 "td1.ml" 184 5267 5296
+type(
+  complex
+)
+"td1.ml" 184 5267 5295 "td1.ml" 184 5267 5299
+type(
+  float
+)
+"td1.ml" 184 5267 5292 "td1.ml" 184 5267 5299
+type(
+  float
+)
+"td1.ml" 184 5267 5300 "td1.ml" 184 5267 5302
+type(
+  float -> float -> float
+)
+"td1.ml" 184 5267 5303 "td1.ml" 184 5267 5304
+type(
+  float
+)
+"td1.ml" 184 5267 5292 "td1.ml" 184 5267 5304
+type(
+  float
+)
+"td1.ml" 184 5267 5269 "td1.ml" 184 5267 5307
+type(
+  complex
+)
+"td1.ml" 183 5225 5227 "td1.ml" 184 5267 5307
+type(
+  complex
+)
+"td1.ml" 192 5511 5519 "td1.ml" 192 5511 5524
+type(
+  int -> int -> int list
+)
+"td1.ml" 192 5511 5525 "td1.ml" 192 5511 5526
+type(
+  int
+)
+"td1.ml" 192 5511 5527 "td1.ml" 192 5511 5528
+type(
+  int
+)
+"td1.ml" 193 5531 5536 "td1.ml" 193 5531 5537
+type(
+  int
+)
+"td1.ml" 193 5531 5538 "td1.ml" 193 5531 5539
+type(
+  int -> int -> bool
+)
+"td1.ml" 193 5531 5540 "td1.ml" 193 5531 5541
+type(
+  int
+)
+"td1.ml" 193 5531 5536 "td1.ml" 193 5531 5541
+type(
+  bool
+)
+"td1.ml" 193 5531 5547 "td1.ml" 193 5531 5549
+type(
+  int list
+)
+"td1.ml" 193 5531 5555 "td1.ml" 193 5531 5556
+type(
+  int
+)
+"td1.ml" 193 5531 5560 "td1.ml" 193 5531 5565
+type(
+  int -> int -> int list
+)
+"td1.ml" 193 5531 5567 "td1.ml" 193 5531 5568
+type(
+  int
+)
+"td1.ml" 193 5531 5568 "td1.ml" 193 5531 5569
+type(
+  int -> int -> int
+)
+"td1.ml" 193 5531 5569 "td1.ml" 193 5531 5570
+type(
+  int
+)
+"td1.ml" 193 5531 5566 "td1.ml" 193 5531 5571
+type(
+  int
+)
+"td1.ml" 193 5531 5572 "td1.ml" 193 5531 5573
+type(
+  int
+)
+"td1.ml" 193 5531 5560 "td1.ml" 193 5531 5573
+type(
+  int list
+)
+"td1.ml" 193 5531 5555 "td1.ml" 193 5531 5573
+type(
+  int list
+)
+"td1.ml" 193 5531 5533 "td1.ml" 193 5531 5573
+type(
+  int list
+)
+"td1.ml" 195 5575 5579 "td1.ml" 195 5575 5589
+type(
+  cvalue list
+)
+"td1.ml" 196 5592 5594 "td1.ml" 196 5592 5596
+type(
+  cvalue
+)
+"td1.ml" 196 5592 5601 "td1.ml" 196 5592 5604
+type(
+  (int -> cvalue) -> int list -> cvalue list
+)
+"td1.ml" 196 5592 5610 "td1.ml" 196 5592 5611
+type(
+  int
+)
+"td1.ml" 196 5592 5621 "td1.ml" 196 5592 5622
+type(
+  int
+)
+"td1.ml" 196 5592 5615 "td1.ml" 196 5592 5622
+type(
+  cvalue
+)
+"td1.ml" 196 5592 5605 "td1.ml" 196 5592 5623
+type(
+  int -> cvalue
+)
+"td1.ml" 196 5592 5625 "td1.ml" 196 5592 5630
+type(
+  int -> int -> int list
+)
+"td1.ml" 196 5592 5631 "td1.ml" 196 5592 5632
+type(
+  int
+)
+"td1.ml" 196 5592 5633 "td1.ml" 196 5592 5635
+type(
+  int
+)
+"td1.ml" 196 5592 5624 "td1.ml" 196 5592 5636
+type(
+  int list
+)
+"td1.ml" 196 5592 5600 "td1.ml" 196 5592 5637
+type(
+  cvalue list
+)
+"td1.ml" 196 5592 5594 "td1.ml" 196 5592 5637
+type(
+  cvalue list
+)
+"td1.ml" 196 5592 5638 "td1.ml" 196 5592 5639
+type(
+  cvalue list -> cvalue list -> cvalue list
+)
+"td1.ml" 196 5592 5641 "td1.ml" 196 5592 5645
+type(
+  cvalue
+)
+"td1.ml" 196 5592 5647 "td1.ml" 196 5592 5652
+type(
+  cvalue
+)
+"td1.ml" 196 5592 5654 "td1.ml" 196 5592 5658
+type(
+  cvalue
+)
+"td1.ml" 196 5592 5640 "td1.ml" 196 5592 5659
+type(
+  cvalue list
+)
+"td1.ml" 196 5592 5594 "td1.ml" 196 5592 5659
+type(
+  cvalue list
+)
+"td1.ml" 198 5661 5665 "td1.ml" 198 5661 5674
+type(
+  suit list
+)
+"td1.ml" 199 5677 5680 "td1.ml" 199 5677 5685
+type(
+  suit
+)
+"td1.ml" 199 5677 5687 "td1.ml" 199 5677 5691
+type(
+  suit
+)
+"td1.ml" 199 5677 5693 "td1.ml" 199 5677 5699
+type(
+  suit
+)
+"td1.ml" 199 5677 5701 "td1.ml" 199 5677 5705
+type(
+  suit
+)
+"td1.ml" 199 5677 5679 "td1.ml" 199 5677 5706
+type(
+  suit list
+)
+"td1.ml" 201 5708 5712 "td1.ml" 201 5708 5724
+type(
+  (suit * cvalue) list
+)
+"td1.ml" 202 5727 5729 "td1.ml" 202 5727 5736
+type(
+  (suit * cvalue) list list -> (suit * cvalue) list
+)
+"td1.ml" 202 5727 5738 "td1.ml" 202 5727 5741
+type(
+  (suit -> (suit * cvalue) list) -> suit list -> (suit * cvalue) list list
+)
+"td1.ml" 202 5727 5747 "td1.ml" 202 5727 5748
+type(
+  suit
+)
+"td1.ml" 202 5727 5752 "td1.ml" 202 5727 5755
+type(
+  (cvalue -> suit * cvalue) -> cvalue list -> (suit * cvalue) list
+)
+"td1.ml" 202 5727 5761 "td1.ml" 202 5727 5762
+type(
+  cvalue
+)
+"td1.ml" 202 5727 5767 "td1.ml" 202 5727 5768
+type(
+  suit
+)
+"td1.ml" 202 5727 5770 "td1.ml" 202 5727 5771
+type(
+  cvalue
+)
+"td1.ml" 202 5727 5766 "td1.ml" 202 5727 5772
+type(
+  suit * cvalue
+)
+"td1.ml" 202 5727 5756 "td1.ml" 202 5727 5773
+type(
+  cvalue -> suit * cvalue
+)
+"td1.ml" 202 5727 5774 "td1.ml" 202 5727 5784
+type(
+  cvalue list
+)
+"td1.ml" 202 5727 5752 "td1.ml" 202 5727 5784
+type(
+  (suit * cvalue) list
+)
+"td1.ml" 202 5727 5742 "td1.ml" 202 5727 5785
+type(
+  suit -> (suit * cvalue) list
+)
+"td1.ml" 202 5727 5786 "td1.ml" 202 5727 5795
+type(
+  suit list
+)
+"td1.ml" 202 5727 5737 "td1.ml" 202 5727 5796
+type(
+  (suit * cvalue) list list
+)
+"td1.ml" 202 5727 5729 "td1.ml" 202 5727 5796
+type(
+  (suit * cvalue) list
+)
+"td1.ml" 204 5798 5802 "td1.ml" 204 5798 5814
+type(
+  (suit * cvalue) list
+)
+"td1.ml" 205 5817 5823 "td1.ml" 205 5817 5824
+type(
+  'a * cvalue -> bool
+)
+"td1.ml" 205 5817 5826 "td1.ml" 205 5817 5827
+type(
+  'a
+)
+"td1.ml" 205 5817 5829 "td1.ml" 205 5817 5830
+type(
+  cvalue
+)
+"td1.ml" 205 5817 5825 "td1.ml" 205 5817 5831
+type(
+  'a * cvalue
+)
+"td1.ml" 206 5834 5844 "td1.ml" 206 5834 5845
+type(
+  cvalue
+)
+"td1.ml" 207 5851 5863 "td1.ml" 207 5851 5864
+type(
+  int
+)
+"td1.ml" 207 5851 5857 "td1.ml" 207 5851 5864
+type(
+  cvalue
+)
+"td1.ml" 207 5851 5868 "td1.ml" 207 5851 5869
+type(
+  int
+)
+"td1.ml" 207 5851 5870 "td1.ml" 207 5851 5872
+type(
+  int -> int -> bool
+)
+"td1.ml" 207 5851 5873 "td1.ml" 207 5851 5874
+type(
+  int
+)
+"td1.ml" 207 5851 5868 "td1.ml" 207 5851 5874
+type(
+  bool
+)
+"td1.ml" 207 5851 5875 "td1.ml" 207 5851 5877
+type(
+  bool -> bool -> bool
+)
+"td1.ml" 207 5851 5878 "td1.ml" 207 5851 5879
+type(
+  int
+)
+"td1.ml" 207 5851 5880 "td1.ml" 207 5851 5882
+type(
+  int -> int -> bool
+)
+"td1.ml" 207 5851 5883 "td1.ml" 207 5851 5885
+type(
+  int
+)
+"td1.ml" 207 5851 5878 "td1.ml" 207 5851 5885
+type(
+  bool
+)
+"td1.ml" 207 5851 5868 "td1.ml" 207 5851 5885
+type(
+  bool
+)
+"td1.ml" 208 5886 5892 "td1.ml" 208 5886 5893
+type(
+  cvalue
+)
+"td1.ml" 208 5886 5897 "td1.ml" 208 5886 5901
+type(
+  bool
+)
+"td1.ml" 206 5834 5838 "td1.ml" 208 5886 5901
+type(
+  bool
+)
+"td1.ml" 209 5902 5907 "td1.ml" 209 5902 5913
+type(
+  (suit * cvalue -> bool) -> (suit * cvalue) list -> (suit * cvalue) list
+)
+"td1.ml" 209 5902 5914 "td1.ml" 209 5902 5915
+type(
+  suit * cvalue -> bool
+)
+"td1.ml" 209 5902 5916 "td1.ml" 209 5902 5928
+type(
+  (suit * cvalue) list
+)
+"td1.ml" 209 5902 5907 "td1.ml" 209 5902 5928
+type(
+  (suit * cvalue) list
+)
+"td1.ml" 205 5817 5819 "td1.ml" 209 5902 5928
+type(
+  (suit * cvalue) list
+)
+"td1.ml" 211 5930 5934 "td1.ml" 211 5930 5942
+type(
+  bool -> cvalue -> int
+)
+"td1.ml" 211 5930 5944 "td1.ml" 211 5930 5949
+type(
+  bool
+)
+"td1.ml" 211 5930 5959 "td1.ml" 211 5930 5960
+type(
+  cvalue
+)
+"td1.ml" 212 5973 5978 "td1.ml" 212 5973 5983
+type(
+  bool
+)
+"td1.ml" 213 5989 5999 "td1.ml" 213 5989 6000
+type(
+  cvalue
+)
+"td1.ml" 214 6006 6012 "td1.ml" 214 6006 6014
+type(
+  cvalue
+)
+"td1.ml" 214 6006 6024 "td1.ml" 214 6006 6026
+type(
+  int
+)
+"td1.ml" 215 6027 6039 "td1.ml" 215 6027 6040
+type(
+  int
+)
+"td1.ml" 215 6027 6033 "td1.ml" 215 6027 6040
+type(
+  cvalue
+)
+"td1.ml" 215 6027 6045 "td1.ml" 215 6027 6047
+type(
+  int
+)
+"td1.ml" 216 6048 6060 "td1.ml" 216 6048 6062
+type(
+  int
+)
+"td1.ml" 216 6048 6054 "td1.ml" 216 6048 6062
+type(
+  cvalue
+)
+"td1.ml" 216 6048 6066 "td1.ml" 216 6048 6068
+type(
+  int
+)
+"td1.ml" 217 6069 6081 "td1.ml" 217 6069 6082
+type(
+  int
+)
+"td1.ml" 217 6069 6075 "td1.ml" 217 6069 6082
+type(
+  cvalue
+)
+"td1.ml" 217 6069 6087 "td1.ml" 217 6069 6088
+type(
+  int
+)
+"td1.ml" 218 6089 6095 "td1.ml" 218 6089 6099
+type(
+  cvalue
+)
+"td1.ml" 218 6089 6107 "td1.ml" 218 6089 6109
+type(
+  int
+)
+"td1.ml" 219 6110 6116 "td1.ml" 219 6110 6121
+type(
+  cvalue
+)
+"td1.ml" 219 6110 6128 "td1.ml" 219 6110 6129
+type(
+  int
+)
+"td1.ml" 220 6130 6136 "td1.ml" 220 6130 6140
+type(
+  cvalue
+)
+"td1.ml" 220 6130 6148 "td1.ml" 220 6130 6149
+type(
+  int
+)
+"td1.ml" 213 5989 5993 "td1.ml" 220 6130 6149
+type(
+  int
+)
+"td1.ml" 222 6157 6167 "td1.ml" 222 6157 6168
+type(
+  cvalue
+)
+"td1.ml" 223 6174 6180 "td1.ml" 223 6174 6182
+type(
+  cvalue
+)
+"td1.ml" 223 6174 6192 "td1.ml" 223 6174 6194
+type(
+  int
+)
+"td1.ml" 224 6195 6207 "td1.ml" 224 6195 6209
+type(
+  int
+)
+"td1.ml" 224 6195 6201 "td1.ml" 224 6195 6209
+type(
+  cvalue
+)
+"td1.ml" 224 6195 6213 "td1.ml" 224 6195 6215
+type(
+  int
+)
+"td1.ml" 225 6216 6228 "td1.ml" 225 6216 6229
+type(
+  int
+)
+"td1.ml" 225 6216 6222 "td1.ml" 225 6216 6229
+type(
+  cvalue
+)
+"td1.ml" 225 6216 6234 "td1.ml" 225 6216 6235
+type(
+  int
+)
+"td1.ml" 226 6236 6242 "td1.ml" 226 6236 6246
+type(
+  cvalue
+)
+"td1.ml" 226 6236 6254 "td1.ml" 226 6236 6255
+type(
+  int
+)
+"td1.ml" 227 6256 6262 "td1.ml" 227 6256 6267
+type(
+  cvalue
+)
+"td1.ml" 227 6256 6274 "td1.ml" 227 6256 6275
+type(
+  int
+)
+"td1.ml" 228 6276 6282 "td1.ml" 228 6276 6286
+type(
+  cvalue
+)
+"td1.ml" 228 6276 6294 "td1.ml" 228 6276 6295
+type(
+  int
+)
+"td1.ml" 222 6157 6161 "td1.ml" 228 6276 6295
+type(
+  int
+)
+"td1.ml" 212 5973 5975 "td1.ml" 228 6276 6295
+type(
+  int
+)
+"td1.ml" 230 6297 6301 "td1.ml" 230 6297 6307
+type(
+  suit -> card list -> int
+)
+"td1.ml" 230 6297 6309 "td1.ml" 230 6297 6310
+type(
+  suit
+)
+"td1.ml" 230 6297 6320 "td1.ml" 230 6297 6324
+type(
+  card list
+)
+"td1.ml" 231 6340 6346 "td1.ml" 231 6340 6351
+type(
+  suit * cvalue -> int
+)
+"td1.ml" 231 6340 6353 "td1.ml" 231 6340 6355
+type(
+  suit
+)
+"td1.ml" 231 6340 6357 "td1.ml" 231 6340 6358
+type(
+  cvalue
+)
+"td1.ml" 231 6340 6352 "td1.ml" 231 6340 6359
+type(
+  suit * cvalue
+)
+"td1.ml" 231 6340 6362 "td1.ml" 231 6340 6370
+type(
+  bool -> cvalue -> int
+)
+"td1.ml" 231 6340 6372 "td1.ml" 231 6340 6373
+type(
+  suit
+)
+"td1.ml" 231 6340 6374 "td1.ml" 231 6340 6375
+type(
+  suit -> suit -> bool
+)
+"td1.ml" 231 6340 6376 "td1.ml" 231 6340 6378
+type(
+  suit
+)
+"td1.ml" 231 6340 6371 "td1.ml" 231 6340 6379
+type(
+  bool
+)
+"td1.ml" 231 6340 6380 "td1.ml" 231 6340 6381
+type(
+  cvalue
+)
+"td1.ml" 231 6340 6362 "td1.ml" 231 6340 6381
+type(
+  int
+)
+"td1.ml" 232 6385 6387 "td1.ml" 232 6385 6390
+type(
+  int list -> int
+)
+"td1.ml" 232 6385 6392 "td1.ml" 232 6385 6395
+type(
+  (card -> int) -> card list -> int list
+)
+"td1.ml" 232 6385 6396 "td1.ml" 232 6385 6401
+type(
+  card -> int
+)
+"td1.ml" 232 6385 6402 "td1.ml" 232 6385 6406
+type(
+  card list
+)
+"td1.ml" 232 6385 6391 "td1.ml" 232 6385 6407
+type(
+  int list
+)
+"td1.ml" 232 6385 6387 "td1.ml" 232 6385 6407
+type(
+  int
+)
+"td1.ml" 231 6340 6342 "td1.ml" 232 6385 6407
+type(
+  int
+)
+"td1.ml" 235 6484 6488 "td1.ml" 235 6484 6495
+type(
+  int -> unit -> int
+)
+"td1.ml" 235 6484 6497 "td1.ml" 235 6484 6498
+type(
+  int
+)
+"td1.ml" 236 6508 6514 "td1.ml" 236 6508 6515
+type(
+  int ref
+)
+"td1.ml" 236 6508 6518 "td1.ml" 236 6508 6521
+type(
+  int -> int ref
+)
+"td1.ml" 236 6508 6522 "td1.ml" 236 6508 6523
+type(
+  int
+)
+"td1.ml" 236 6508 6518 "td1.ml" 236 6508 6523
+type(
+  int ref
+)
+"td1.ml" 236 6508 6531 "td1.ml" 236 6508 6533
+type(
+  unit
+)
+"td1.ml" 236 6508 6541 "td1.ml" 236 6508 6545
+type(
+  int
+)
+"td1.ml" 236 6508 6548 "td1.ml" 236 6508 6549
+type(
+  int ref -> int
+)
+"td1.ml" 236 6508 6549 "td1.ml" 236 6508 6550
+type(
+  int ref
+)
+"td1.ml" 236 6508 6548 "td1.ml" 236 6508 6550
+type(
+  int
+)
+"td1.ml" 236 6508 6555 "td1.ml" 236 6508 6556
+type(
+  int ref
+)
+"td1.ml" 236 6508 6557 "td1.ml" 236 6508 6559
+type(
+  int ref -> int -> unit
+)
+"td1.ml" 236 6508 6560 "td1.ml" 236 6508 6561
+type(
+  int ref -> int
+)
+"td1.ml" 236 6508 6561 "td1.ml" 236 6508 6562
+type(
+  int ref
+)
+"td1.ml" 236 6508 6560 "td1.ml" 236 6508 6562
+type(
+  int
+)
+"td1.ml" 236 6508 6563 "td1.ml" 236 6508 6564
+type(
+  int -> int -> int
+)
+"td1.ml" 236 6508 6565 "td1.ml" 236 6508 6566
+type(
+  int
+)
+"td1.ml" 236 6508 6560 "td1.ml" 236 6508 6566
+type(
+  int
+)
+"td1.ml" 236 6508 6555 "td1.ml" 236 6508 6566
+type(
+  unit
+)
+"td1.ml" 236 6508 6568 "td1.ml" 236 6508 6572
+type(
+  int
+)
+"td1.ml" 236 6508 6554 "td1.ml" 236 6508 6573
+type(
+  int
+)
+"td1.ml" 236 6508 6537 "td1.ml" 236 6508 6573
+type(
+  int
+)
+"td1.ml" 236 6508 6527 "td1.ml" 236 6508 6573
+type(
+  unit -> int
+)
+"td1.ml" 236 6508 6510 "td1.ml" 236 6508 6573
+type(
+  unit -> int
+)
