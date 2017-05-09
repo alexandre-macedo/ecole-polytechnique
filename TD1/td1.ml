@@ -1,12 +1,11 @@
 (* -------------------------------------------------------------------- *)
 let pmap f g = fun (x, y) -> (f x, g y)
 
-(*
 let pmap_type :
   'a1 'a2 'b1 'b2.
     ('a1 -> 'a2) -> ('b1 -> 'b2) -> ('a1 * 'b1) -> ('a2 * 'b2)
 = pmap
-*)
+
 
 (* -------------------------------------------------------------------- *)
 let idc (x : int) = ((fun y -> y + x), (fun y -> y - x))
@@ -14,11 +13,9 @@ let idc (x : int) = ((fun y -> y + x), (fun y -> y - x))
 (* -------------------------------------------------------------------- *)
 let comp f g = fun x -> f (g x)
 
-(*
 let comp_type :
   'a 'b 'c. ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c
 = comp
-*)
 
 (* -------------------------------------------------------------------- *)
 let _ =
@@ -104,11 +101,9 @@ let filter (p : 'a -> bool) =
     | _::s -> aux s
   in fun s -> aux s
 
-(*
 let filter_type :
   'a. ('a -> bool) -> 'a list -> 'a list
 = filter
-*)
 
 (* -------------------------------------------------------------------- *)
 let zfilter' = filter (fun x -> 0 <= x)
@@ -183,6 +178,50 @@ let inv x =
   let d = x.re *. x.re +. x.im *. x.im in
   { re = x.re /. d; im = -. x.re /. d; }
 
+(* -------------------------------------------------------------------- *)
+type date = { day : int; month : int; year : int }
+
+let day   = function { day   } -> day
+let month = function { month } -> month
+let year  = function { year  } -> year
+
+let is_leap_year (year : int) =
+  (year mod 4 = 0) && (year mod 100 <> 0 || year mod 400 = 0)
+
+let days_of_month (leap : bool) = function
+  |  1 -> 31
+  |  2 -> 28 + (if leap then 1 else 0)
+  |  3 -> 31
+  |  4 -> 30
+  |  5 -> 31
+  |  6 -> 30
+  |  7 -> 31
+  |  8 -> 31
+  |  9 -> 30
+  | 10 -> 31
+  | 11 -> 30
+  | 12 -> 31
+  | _  -> invalid_arg "month is not between 1 and 12"
+
+let year_is_valid { day; month; year } =
+  let between a x b = a <= x && x <= b in
+     between 1 month 12
+  && between 1 day (days_of_month (is_leap_year year) month)
+
+let nextday date =
+  assert (year_is_valid date);
+
+  let date = { date with day = date.day + 1 } in
+  let date =
+    if   date.day > days_of_month (is_leap_year date.year) date.month
+    then { date with day = 1; month = date.month + 1 }
+    else date in
+  let date =
+    if   date.month > 12
+    then { date with month = 1; year = date.year + 1; }
+    else date in
+
+  date
 
 (* -------------------------------------------------------------------- *)
 type suit   = Heart | Tile | Clover | Pike
