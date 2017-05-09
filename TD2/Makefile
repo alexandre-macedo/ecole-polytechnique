@@ -1,24 +1,8 @@
-OCB = ocamlbuild -classic-display
+SOURCES = Binary.mli Binary.ml BinomialTree.mli BinomialTree.ml BinomialHeap.mli BinomialHeap.ml PriorityQueue.ml Graph.ml
+RESULT = bh
+ANNOTATE = true
 
-.PHONY: all
-all:
-	$(OCB) td4.native
+all: dc dnc
+	./bh
 
-.PHONY: clean
-clean:
-	$(OCB) -clean
-	$(RM) version.ml
-	$(RM) td4
-
-.PHONY: byte
-byte:
-	$(OCB) td4.byte
-
-.PHONY: gitclean
-gitclean:
-	git clean -xfd -e examples
-
-.PHONY: top
-top: all
-	$(OCB) td4.cma
-	ocaml
+include OCamlMakefile
