@@ -33,15 +33,13 @@ extern int multiStartForgy;
 //   where init_args must already be defined, and have the same type
 //   as the objects or references classAttributes. In this case
 //   the list consists of just one reference (point), so there are no commas
-Partition::Partition(std::vector<std::vector<double>> &data, int numClusters)
-    : point(data)
-{
+Partition::Partition(std::vector<std::vector<double> >& data, int numClusters)
+    : point(data) {
   using namespace std;
   n = data.size();
   d = data[0].size();
   k = numClusters;
-  for (int h = 0; h < k; ++h)
-  {
+  for (int h = 0; h < k; ++h) {
     // by default, we assign to each key an empty vector
     vector<int> emptyCluster;
     cluster.push_back(emptyCluster);
@@ -49,8 +47,7 @@ Partition::Partition(std::vector<std::vector<double>> &data, int numClusters)
 }
 
 //// copy constructor
-Partition::Partition(Partition &P) : point(P.getData())
-{
+Partition::Partition(Partition& P) : point(P.getData()) {
   d = P.getDimension();
   n = P.getNumberOfPoints();
   k = P.getNumberOfClusters();
@@ -59,8 +56,7 @@ Partition::Partition(Partition &P) : point(P.getData())
 }
 
 //// assignment overloading
-Partition &Partition::operator=(Partition &P)
-{
+Partition& Partition::operator=(Partition& P) {
   d = P.getDimension();
   n = P.getNumberOfPoints();
   k = P.getNumberOfClusters();
@@ -70,19 +66,16 @@ Partition &Partition::operator=(Partition &P)
 }
 
 //// print clusters
-void Partition::printClusters(void)
-{
+void Partition::printClusters(void) {
   using namespace std;
   // not using iterators for the outer loop since k is much smaller than n,
   //   so the consequent time loss is not important. Also, we're
   //   just printing to console, who cares if we're slightly suboptimal?
   //   The console is going to be MUCH slower than this time loss anyhow
-  for (int h = 0; h < k; ++h)
-  {
+  for (int h = 0; h < k; ++h) {
     cout << "  cluster " << h << ":";
     for (vector<int>::iterator vi = cluster[h].begin(); vi != cluster[h].end();
-         ++vi)
-    {
+         ++vi) {
       cout << " " << *vi;
     }
     cout << endl;
@@ -90,8 +83,7 @@ void Partition::printClusters(void)
 }
 
 //// Forgy's initialization: use k random points as centroids
-void Partition::Forgy(void)
-{
+void Partition::Forgy(void) {
   using namespace std;
   centroid.clear();
   // this vector holds integers from 0 to n-1 (n is P.n, number of points)
@@ -101,15 +93,13 @@ void Partition::Forgy(void)
   //   WARNING2: if you reject repetitions, you end up with O(n^2) if k=n
   vector<int> pointIndexChoice;
   // initialize this vector to 0,...,n-1
-  for (int i = 0; i < n; i++)
-  {
+  for (int i = 0; i < n; i++) {
     pointIndexChoice.push_back(i);
   }
   // we keep score of the vector size as we remove elements
   int m = n;
   // we only randomly pick k (=P.k, number of clusters) out of n elements
-  for (int h = 0; h < k; ++h)
-  {
+  for (int h = 0; h < k; ++h) {
     // pick a random index from the m remaining ones
     int i = randomInteger(0, m);
     // map i to the point index using pointIndexChoice,
@@ -125,8 +115,7 @@ void Partition::Forgy(void)
 }
 
 //// run Forgy s times, keep best
-void Partition::initialize(int s)
-{
+void Partition::initialize(int s) {
   // we want to run Forgy s times to find the best random assignment
   //   so we initialize the current cost to infinity (meaning: at
   //   this stage we haven't run it yet, so anything's better than
@@ -134,14 +123,13 @@ void Partition::initialize(int s)
   double cost = infinity;
   double mincost = cost;
   Partition minP(*this);
-  for (int i = 0; i < s; ++i)
-  {
+  for (int i = 0; i < s; ++i) {
     Forgy();
+    reassign();
     cost = interClusterDistances();
     // if the cost of this run improves on the current minimum so far,
     //   save the cost and the partition
-    if (cost < mincost)
-    {
+    if (cost < mincost) {
       mincost = cost;
       minP = *this;
     }
@@ -151,15 +139,12 @@ void Partition::initialize(int s)
 }
 
 //// re-assign points to closest centroids
-void Partition::reassign(void)
-{
+void Partition::reassign(void) {
   using namespace std;
   // clear the cluster data structures
-  for (vector<vector<int>>::iterator mi = cluster.begin(); mi != cluster.end();
-       ++mi)
-  {
-    //   since mi is an iterator on a vector<int>, we can apply the clear()
-    //   method
+  for (vector<vector<int> >::iterator mi = cluster.begin(); mi != cluster.end();
+       ++mi) {
+    //   since mi is a vector<int>, we can apply the clear() method
     //   to remove all its elements
     mi->clear();
   }
@@ -169,61 +154,58 @@ void Partition::reassign(void)
   int h = 0;
   int i = 0;
   // iterate over points
-  for (vector<vector<double>>::iterator p = point.begin(); p != point.end();
-       ++p)
-  {
+  for (vector<vector<double> >::iterator p = point.begin(); p != point.end();
+       ++p) {
     // we have to find the centroid with minimum distance from this point,
     //   so we initialize this minimum distance to infinity
     double minDist = infinity;
     int closest = -1;
     // ...and loop over centroids to find the closest
     h = 0;
-    for (vector<vector<double>>::iterator c = centroid.begin();
-         c != centroid.end(); ++c)
-    {
-      double calcDist = sqEuclideanDistance(*p, *c);
-      if (calcDist < minDist)
-      {
-        minDist = calcDist;
+    for (vector<vector<double> >::iterator c = centroid.begin();
+         c != centroid.end(); ++c) {
+      double dist = sqEuclideanDistance(*p, *c);
+      if (dist < minDist) {
+        minDist = dist;
         closest = h;
       }
       h++;
     }
-    i++;
     cluster[closest].push_back(i);
+    i++;
   }
 }
 
 //// update the centroids based on the new cluster assignment
-void Partition::updateCentroids(void)
-{
-  for (unsigned int i = 0; i < cluster.size(); ++i)
-  {
-    for (int j = 0; j < d; ++j)
-    { // for each dimension
-      //// TODO // Compute the average over all points in the cluster to give
-      ///the new values of centroids
+void Partition::updateCentroids(void) {
+  for (int i = 0; i < cluster.size(); ++i) {
+    for (int j = 0; j < d; ++j) {  // for each dimension
+      // Compute the average over all points in the cluster to give the new
+      // values of centroids
+      double component = 0.0;
+      for (int c = 0; c < cluster[i].size(); c++) {
+        component += point[cluster[i][c]][j];
+      }
+      centroid[i][j] = component / cluster[i].size();
     }
   }
 }
 
 //// evaluate cost of current partition
-double Partition::interClusterDistances(void)
-{
+double Partition::interClusterDistances(void) {
   double cost = 0.0;
-  for (unsigned int i = 0; i < cluster.size(); i++)
-  { // for each cluster
-    for (unsigned int c = 0; c < cluster[i].size();
-         ++c)
-    { // for each point in the cluster
-      //// TODO // Compute the cost
+  for (int i = 0; i < cluster.size(); i++) {  // for each cluster
+    for (int c = 0; c < cluster[i].size();
+         c++) {                      // for each point in the cluster
+      for (int j = 0; j < d; ++j) {  // Compute the cost
+        cost += pow(point[cluster[i][c]][j] - centroid[i][j], 2);
+      }
     }
   }
   return cost;
 }
 
-double Partition::iteration(void)
-{
+double Partition::iteration(void) {
   using namespace std;
   // we want to find the best clustering with an iterative method, so we
   //   start from an infinity cost, since clustering will be better than
@@ -231,12 +213,15 @@ double Partition::iteration(void)
   double cost = infinity;
   double minCost = 0;
   initialize(multiStartForgy);
-  while (fabs(cost - minCost) > zero)
-  {
-    //// TODO // Use the functions above to find the convergence of clusters
-
-    if (debug)
-    {
+  while (fabs(cost - minCost) > zero) {
+    // Use the functions above to find the convergence of clusters
+    reassign();
+    updateCentroids();
+    // we don't need to say "if cost < minCost" since this Lloyd's algorithm
+    //   is contractive, i.e. no iteration can worsen previous ones
+    minCost = cost;
+    cost = interClusterDistances();
+    if (debug) {
       cerr << "Partition::Lloyd(): current cost = " << cost << endl;
     }
   }

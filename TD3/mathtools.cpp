@@ -75,7 +75,7 @@ std::vector<std::vector<double> > sqEDM(std::vector<std::vector<double> >& S) {
   return EDM;
 }
 
-// sample Gaussian projd x d matrix
+// sample (transposed) Gaussian p x d matrix
 //   sequential computation
 std::vector<std::vector<double> > JLProjectionMatrix(int d, int projd) {
   using namespace std;
@@ -85,13 +85,54 @@ std::vector<std::vector<double> > JLProjectionMatrix(int d, int projd) {
   double sqrtp = sqrt(projd);
 
   if (debug) {
-    cerr << "JLProjectionMatrix(): using sequential";
+    cerr << "JLProjectionMatrix(): sequential";
   }
 
-  // create the Gaussian matrix component by component
-  //// TODO: JL must contain projd vectors of length d, each component
-  ////       of which is sampled by a Gaussian distribution with mean 0
-  ////       and standard deviation 1 / sqrtp
+#ifndef TRIVIAL
+  // in this version we exploit the fact that Box-Muller outputs two
+  //   Gaussian samples, and use them both
+  if (debug) {
+    cerr << " (nontrivial)" << endl;
+  }
+  for (int h = 0; h < projd; ++h) {
+    vector<double> row;
+    // we are going to leverage the fact that the Box-Muller's algorithm
+    //   returns two samples, not just one, and use them both
+    // d2 contains floor(d/2)
+    int d2 = d / 2;
+    if (d % 2 == 1) {
+      d2 = (d - 1) / 2;
+    }
+    // storage for the two Gaussian samples
+    double g1, g2;
+    for (int f = 0; f < d2; ++f) {
+      GaussianRandomPair(g1, g2);
+      // since this is for JL, multiply by 1/sqrt(p)
+      row.push_back(g1 / sqrtp);
+      row.push_back(g2 / sqrtp);
+    }
+    if (d % 2 == 1) {
+      // if d is odd, then we must add one last sample for row to be a d-vector
+      GaussianRandomPair(g1, g2);
+      row.push_back(g1 / sqrtp);
+    }
+    JL.push_back(row);
+  }
+
+#else
+  // this is the "trivial" version
+  if (debug) {
+    cerr << " (trivial)" << endl;
+  }
+  vector<double> row;
+  for (int i = 0; i < projd; i++) {
+    row.clear();
+    for (int f = 0; f < d; ++f) {
+      row.push_back(GaussianRandom() / sqrtp);
+    }
+    JL.push_back(row);
+  }
+#endif  // !TRIVIAL
 
   if (debug) {
     cerr << "JLProjectionMatrix(): JL is " << JL.size() << " x " << JL[0].size()
@@ -111,7 +152,7 @@ std::vector<std::vector<double> > MatrixProduct(
     std::vector<std::vector<double> >& X) {
   using namespace std;
   if (debug) {
-    cerr << "MatrixProduct(): using sequential" << endl;
+    cerr << "MatrixProduct(): sequential" << endl;
   }
   // this will hold the product of JL and X
   vector<vector<double> > projX;
@@ -123,11 +164,19 @@ std::vector<std::vector<double> > MatrixProduct(
   //   as a vector of vectors, JL holds projd vectors of length d
   //   as a vector of vectors, X holds n vectors of length d
 
-  //// TODO: projX must be the scalar product of JL by X, meaning
-  ////       component (i,j) of projX is the scalar product of the
-  ////       i-th row of JL by j-th column of X (recall that JL
-  ////       is stored as a vector of rows, whereas X is stored as
-  ////       a vector of columns)
+  for (vector<vector<double> >::iterator Xit = X.begin(); Xit != X.end();
+       ++Xit) {
+    vector<double> projCol;
+    for (vector<vector<double> >::iterator JLit = JL.begin(); JLit != JL.end();
+         ++JLit) {
+      double a = 0;
+      for (int j = 0; j < d; j++) {
+        a += (*JLit)[j] * (*Xit)[j];
+      }
+      projCol.push_back(a);
+    }
+    projX.push_back(projCol);
+  }
 
   return projX;
 }
