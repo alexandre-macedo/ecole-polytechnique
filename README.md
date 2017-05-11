@@ -2,6 +2,6 @@
 Ray Tracer - Project INF442
 
 ## Build
-To build the project for the first time
+To build  and run the project
 
-`mkdir build; cd build; cmake ..; make`
+`mkdir build && cd build && cmake .. && make && ./ray_tracer`
