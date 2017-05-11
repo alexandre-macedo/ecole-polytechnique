@@ -11,16 +11,17 @@ int main()
   std::cout << "########## Testing Vector ##########" << std::endl;
   RtVector dir(1.0, 2.0, 3.0);
   RtVector dir2(4.0, 5.0, 6.0);
-  std::cout << dir << std::endl;
-  std::cout << dir2 << std::endl;
-  std::cout << dir + dir2 << std::endl;
-  std::cout << -dir2 << std::endl;
-  std::cout << dir - dir2 << std::endl;
-  std::cout << dir.norm2() << std::endl;
-  std::cout << dir * 2.0 << std::endl;
-  std::cout << 3.0 * dir << std::endl;
+  // std::cout << dir << std::endl;
+  // std::cout << dir2 << std::endl;
+  // std::cout << dir + dir2 << std::endl;
+  // std::cout << -dir2 << std::endl;
+  // std::cout << dir - dir2 << std::endl;
+  // std::cout << dir.norm2() << std::endl;
+  // std::cout << dir * 2.0 << std::endl;
+  // std::cout << 3.0 * dir << std::endl;
   dir += dir2;
   dir *= 2.0;
+  std::cout << dir.unit() << std::endl;
   // dir.print();n
 
   // Testing Ray:

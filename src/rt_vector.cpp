@@ -94,10 +94,15 @@ RtVector operator*(const double d, const RtVector &v)
     return vector * d;
 }
 
-RtVector RtVector::cross(const RtVector &v){
-    return RtVector( 
-        this->y_*v.z_ - v.y_*this->z_, 
-        -this->x_*v.z_ + v.x_*this->z_,
-        this->x_*v.y_ - v.x_*this->y_
-    );
+RtVector RtVector::cross(const RtVector &v)
+{
+    return RtVector(
+        this->y_ * v.z_ - v.y_ * this->z_,
+        -this->x_ * v.z_ + v.x_ * this->z_,
+        this->x_ * v.y_ - v.x_ * this->y_);
+}
+
+RtVector RtVector::unit()
+{
+    return *this * (1.0 / this->norm2());
 }

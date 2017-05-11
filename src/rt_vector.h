@@ -22,6 +22,7 @@ class RtVector
     RtVector &operator*=(const double &d);
     friend std::ostream &operator<<(std::ostream &, const RtVector &);
     RtVector cross (const RtVector &);
+    RtVector unit();
 
   private:
     double x_, y_, z_;
