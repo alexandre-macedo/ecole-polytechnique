@@ -3,7 +3,7 @@
 #include "rt_scene.h"
 #include "rt_light.h"
 #include "rt_camera.h"
-
+#include "rt_tools.cpp"
 
 int main()
 {
@@ -66,7 +66,7 @@ int main()
    RtRay r (RtVector (-4., 0., 0.), RtVector(1., 0., 0.)); 
    RtSphere o (RtVector(0., 0., 0.), 1., 0, 0, 0);
    RtVector in;
-   std::cout << "Has to be true: " << o.intersectionWith(r, in) << std::endl;
+   std::cout << "Has to be true: " << intersection(o, r, in) << std::endl;
    std::cout << "Insection has to be (-1, 0, 0): " << in << std::endl;
 }
 

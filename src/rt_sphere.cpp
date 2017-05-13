@@ -1,5 +1,4 @@
 #include <stdexcept>
-#include <cmath>
 
 #include "rt_sphere.h"
 
@@ -20,24 +19,12 @@ std::ostream &operator<<(std::ostream &s, const RtSphere &sp){
     return s;
 };
 
-bool RtSphere::intersectionWith(RtRay r, RtVector &i){
-    RtVector dir = r.getDirection();
-    dir = dir* (1./(dir.norm2())); // norm == 1 now
-    RtVector p = r.getOrigin();
-    double d = ((dir.cross(center_-p)).norm2());
-    
-    if(d > radius_){
-        return false;
-    }
-    
-    double hip = (center_-p).norm2();
-    double cateto = sqrt(hip*hip - d*d);
-    double correction = sqrt(radius_*radius_ - d*d);
-    // Updating intersection point 
-    //std::cout << "p: " << p << " dir: " << dir << " cat: " << cateto << " dist: " << d << std::endl;;
-    i = p + dir*(cateto-correction);
+RtVector RtSphere::getCenter(){
+    return center_;
+}
 
-    return true;
+double RtSphere::getRadius(){
+    return radius_;
 }
 
 
