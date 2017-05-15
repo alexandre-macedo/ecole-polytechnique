@@ -1,0 +1,192 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Awesome CV LaTeX Template
+%
+% This template has been downloaded from:
+% https://github.com/posquit0/Awesome-CV
+%
+% Author:
+% Claud D. Park <posquit0.bj@gmail.com>
+% http://www.posquit0.com
+%
+% Template license:
+% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+%
+%Edited by Alexandre
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Configuration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Themes: Awesome-CV
+\documentclass[11pt, a4paper]{awesome-cv}
+
+%%% Override a directory location for fonts(default: 'fonts/')
+\fontdir[fonts/]
+
+%%% Override a separator for social informations in header(default: ' | ')
+%\headersocialsep[\quad\textbar\quad]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Added by me
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Print only mont and year
+\usepackage{datetime}
+\newdateformat{monthyeardate}{%
+	\monthname[\THEMONTH], \THEYEAR}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Personal Data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Essentials
+\name{Alexandre}{Ribeiro João Macedo}
+\address{12 Boulevard des Maréchaux, Bâtiment Joffre, Studio 12.20.29 – 91120 Palaiseau, France}
+\mobile{+33 06 67 26 57 04}
+%
+%%% Social
+\email{arj.macedo@gmail.com}
+\linkedin{alexandre-macedo}
+%
+%%% Personal
+\nationality{Brazilian}
+\birthday{21}{08}{1993}
+%
+%%% Optionals
+\statement{\textbf{Applying for an internship position from June 12\textsuperscript{th} to August 31\textsuperscript{st} 2017}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Make a footer for CV with three arguments(<left>, <center>, <right>)
+\makecvfooter
+  {}
+  {\monthyeardate\today}
+  {}
+
+\begin{document}
+%%% Make a header for CV with personal data
+\makecvheader
+%
+%%% Entries
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Education
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{Education}
+\begin{cventries}
+	\cventry
+	{Cycle d'ingénieur polytechnicien}
+	{X- École Polytechnique}
+	{Palaiseau, Île-de-France, France}
+	{2015 - Present}
+	{
+		\begin{cvitems}
+			\item{Studies in sciences and engineering: applied mathematics and computer sciences. Expected graduation in 2018.}
+		\end{cvitems}
+	}
+	\cventry
+	{B. S. Mechanical Engineering}
+	{UFMG- Universidade Federal de Minas Gerais}
+	{Belo Horizonte, MG, Brazil}
+	{2012-2013; 2015}
+	{
+		\begin{cvitems}
+			\item {4th year student. Graduation put on hold in the beginning of 2016.}
+		\end{cvitems}
+	}
+	\cventry
+	{Visiting student}
+	{UofT- University of Toronto}
+	{Toronto, ON, Canada}
+	{2014}
+	{
+		\begin{cvitems}
+			\item{Engineering studies: bioengineering and signal processing.}
+		\end{cvitems}
+	}
+\end{cventries}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Experiences
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{Experience}
+\begin{cventries}
+	\cventry
+	{Undergraduate research assistant}
+	{morLAB/UofT- Medical Operations Research Laboratory}
+	{Toronto, ON, Canada}
+	{Summer 2014}
+	{
+		\begin{cvitems}
+			\item {Acquired data for pandemic disease spread simulation model and did minor modifications on the model.}
+		\end{cvitems}
+	}
+	\cventry
+	{Undergraduate research assistant}
+	{LRSS/UFMG- Laboratório de Robótica Soldagem e Simulação (Robotics,	Welding and Simulation Laboratory)}
+	{Belo Horizonte, MG, Brazil \mbox{Oct. 2012 - Dec. 2013}}
+	{}
+	{
+		\begin{cvitems}
+			\item {Assited PhD students in preparing experiments for their thesis.}
+		\end{cvitems}
+	}
+	\cventry
+	{Teaching assistant}
+	{Colégio Santo Antônio}
+	{Belo Horizonte, MG, Brazil}
+	{Mar. 2012 - Aug. 2013}
+	{
+		\begin{cvitems}
+			\item {Assisted high school students by clarifying their questions in physics and mathematics.}
+		\end{cvitems}
+	}
+\end{cventries}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Languages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{Languages}
+\begin{cvskills}
+	\cvskill{Portuguese}{Native Speaker}
+	\cvskill{English}{\makebox[2cm]{Fluent\hfill} TOEFL iBT (Dec. 2013): 103/120}
+	\cvskill{French}{\makebox[2cm]{Advanced\hfill} TCF Compréhesion (Apr. 2016): C1}
+\end{cvskills}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Computer Skills
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{Technical Skills}
+\begin{cvskills}
+	\cvskill{Programming}{Knowledgeable in MATLAB, Java, Python, C++}
+	\cvskill{O.S.}{Linux, Windows}
+	\cvskill{Other}{\LaTeX, Git, ROS}
+\end{cvskills}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Volunteer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{Volunteer Work}
+\begin{cventries}
+	\cventry
+	{Teaching assistant}
+	{GRUFAJE}
+	{Belo Horizonte, MG, Brazil}
+	{Aug. 2015 – Nov. 2015}
+	{
+		\begin{cvitems}
+			\item{ Helped less fortunate students aging from 17 to 70 prepare for a high school validation test and university entry examinations.}
+		\end{cvitems}
+	}
+\end{cventries}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Hobbies
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cvsection{Hobbies}
+\begin{cvskills}
+	\cvskill{Practicing Sports}{Tennis, Climbing, Judo, Sailing}
+	\cvskill{Free Time}{Fishing, Watch movies}
+\end{cvskills}
+%
+\end{document}
