@@ -16,13 +16,14 @@
 \usepackage[export]{adjustbox} % Positioning figures
 \usepackage{amsmath,amsthm,amssymb} % American Mathematics Society facilities
 
+
 % --------------------------------------------------------------
 %                       Header Definition
 % --------------------------------------------------------------
-\newcommand{\createHeader}[5]{
+\newcommand{\createHeader}[6]{
 	\noindent
 	\normalsize\textbf{#2} \hfill \textbf{#1}\\
-	\normalsize\textbf{#3} \hfill \textbf{\today}\vspace{20pt}
+	\normalsize\textbf{#3} \hfill \textbf{\displaydate{#6}}\vspace{20pt}
 	\centerline{\Large \textbf{#5}}\vspace{3pt}
 	\centerline{\normalsize #4}\vspace{20pt}}
 
@@ -35,6 +36,7 @@
 \usepackage[french]{babel} % Multilingual support [french]
 %\usepackage[brazilian]{babel} % Multilingual support [pt-BR]
 
+\usepackage{datetime}
 
 % --------------------------------------------------------------
 %                         Fonts
@@ -50,7 +52,8 @@
 % --------------------------------------------------------------
 
 \begin{document}
-	\createHeader{École Polytechnique}{Atelier d'écriture}{LAN484fFLE}{Alexandre Ribeiro João Macedo}{Cours 2 - Proverbe}
+	\newdate{date}{18}{04}{2017}
+	\createHeader{École Polytechnique}{Atelier d'écriture}{LAN484fFLE}{Alexandre Ribeiro João Macedo}{Cours 2 - Proverbe}{date}
 	Proverbes:
 	\begin{itemize}
 		\item Il faut battre le fer quand il est chaud. (Internationale)

@@ -16,15 +16,16 @@
 \usepackage[export]{adjustbox} % Positioning figures
 \usepackage{amsmath,amsthm,amssymb} % American Mathematics Society facilities
 
+
 % --------------------------------------------------------------
 %                       Header Definition
 % --------------------------------------------------------------
-\newcommand{\createHeader}[5]{
+\newcommand{\createHeader}[6]{
 	\noindent
 	\normalsize\textbf{#2} \hfill \textbf{#1}\\
-	\normalsize\textbf{#3} \hfill \textbf{\today}\vspace{20pt}
-	\centerline{\Large \textbf{#5}}\vspace{1pt}
-	\centerline{\small #4}\vspace{20pt}}
+	\normalsize\textbf{#3} \hfill \textbf{\displaydate{#6}}\vspace{20pt}
+	\centerline{\Large \textbf{#5}}\vspace{3pt}
+	\centerline{\normalsize #4}\vspace{20pt}}
 
 
 % --------------------------------------------------------------
@@ -35,6 +36,7 @@
 \usepackage[french]{babel} % Multilingual support [french]
 %\usepackage[brazilian]{babel} % Multilingual support [pt-BR]
 
+\usepackage{datetime}
 
 % --------------------------------------------------------------
 %                         Fonts
@@ -50,7 +52,8 @@
 % --------------------------------------------------------------
 
 \begin{document}
-	\createHeader{École Polytechnique}{Atelier d'écriture}{LAN484fFLE}{Alexandre Ribeiro João Macedo}{Cours 2 - Emprisonnement}
+	\newdate{date}{18}{04}{2017}
+	\createHeader{École Polytechnique}{Atelier d'écriture}{LAN484fFLE}{Alexandre Ribeiro João Macedo}{Cours 2 - Emprisonnement}{date}
 	
 Quand je suis arrivé en prison, le gardien, qui n'était pas très gentil, m'a demandé de changer mes vêtements pour un salopette orange et des bottes noires. Il m'a demandé aussi de déposer toutes mes affaires dans une petite boite. Je n'avais pas grand chose avec moi : une montre et des écouteurs, deux choses dont je n’avais plus besoin. Le plus remarquable de cette petite salle où tous les condamnés devraient passer avant d'aller a ses cellules était l'odeur, une mélange de sueur et de moule terribles.
 

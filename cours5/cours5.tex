@@ -16,15 +16,16 @@
 \usepackage[export]{adjustbox} % Positioning figures
 \usepackage{amsmath,amsthm,amssymb} % American Mathematics Society facilities
 
+
 % --------------------------------------------------------------
 %                       Header Definition
 % --------------------------------------------------------------
-\newcommand{\createHeader}[5]{
+\newcommand{\createHeader}[6]{
 	\noindent
 	\normalsize\textbf{#2} \hfill \textbf{#1}\\
-	\normalsize\textbf{#3} \hfill \textbf{\today}\vspace{20pt}
-	\centerline{\Large \textbf{#5}}\vspace{1pt}
-	\centerline{\small #4}\vspace{20pt}}
+	\normalsize\textbf{#3} \hfill \textbf{\displaydate{#6}}\vspace{20pt}
+	\centerline{\Large \textbf{#5}}\vspace{3pt}
+	\centerline{\normalsize #4}\vspace{20pt}}
 
 
 % --------------------------------------------------------------
@@ -35,6 +36,7 @@
 \usepackage[french]{babel} % Multilingual support [french]
 %\usepackage[brazilian]{babel} % Multilingual support [pt-BR]
 
+\usepackage{datetime}
 
 % --------------------------------------------------------------
 %                         Fonts
@@ -50,7 +52,8 @@
 % --------------------------------------------------------------
 
 \begin{document}
-	\createHeader{École Polytechnique}{Atelier d'écriture}{LAN484fFLE}{Alexandre Ribeiro João Macedo}{Cours 5 - Un avatar d'un jeux vidéo}
+	\newdate{date}{09}{05}{2017}
+	\createHeader{École Polytechnique}{Atelier d'écriture}{LAN484fFLE}{Alexandre Ribeiro João Macedo}{Cours 5 - Un avatar d'un jeux vidéo}{date}
 
 Le jeux World of Warcraft est un jeux en ligne qui permet de créer un personnage qui appartient à une de deux équipe, soit "la Horde", soit "l'Alliance". Dans ce jeux, la personne doit choisir la race et la classe de son avatar et, une fois que le personnage est crée, la personne doit battre des ennemis dans le jeux pour devenir plus fort. Ce jeux est un vrai chronophage.
 
