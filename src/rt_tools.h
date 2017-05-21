@@ -2,8 +2,12 @@
 
 #include "rt_sphere.h"
 #include "rt_ray.h"
+#include "rt_vector.h"
+#include "rt_light.h"
 
 namespace RtTools{
-    bool intersection(RtSphere &, RtRay &, RtVector &);
+    bool intersection(RtSphere &sph, RtRay &r, RtVector &i);
+    
+    // "viewer" is the vector from the camera pointing towards the point 
+    int colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer, RtLight &light);
 }
-// We will fill the next line with the prototype of "bool intersection()"

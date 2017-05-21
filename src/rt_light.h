@@ -12,6 +12,7 @@ class RtLight{
         ~RtLight();
         RtLight(RtVector, int, int, int);
         friend std::ostream &operator<<(std::ostream &, const RtLight &);
+        RtVector getPoint();
     private:
         RtVector point_;
         struct{int r, g, b;} color_;

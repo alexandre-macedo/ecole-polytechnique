@@ -18,3 +18,7 @@ std::ostream &operator<<(std::ostream &s, const RtLight &li){
     s << "[" << li.point_ << ", ["<< li.color_.r << ", " << li.color_.g << ", " << li.color_.b << "]]";
     return s;
 };
+
+RtVector RtLight::getPoint(){
+    return point_;    
+}
