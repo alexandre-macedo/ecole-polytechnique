@@ -10,13 +10,14 @@ class RtCamera {
 public:
   RtCamera();
   ~RtCamera();
-  RtCamera(RtVector, RtVector, RtVector, double, double);
+  RtCamera(const RtVector &, const RtVector &, const RtVector &, double,
+           double);
   friend std::ostream &operator<<(std::ostream &, const RtCamera &);
 
 private:
-  RtVector eye_;
-  RtVector target_;
-  RtVector up_;
+  const RtVector eye_;
+  const RtVector target_;
+  const RtVector up_;
   struct {
     double w, h;
   } dimensions_;

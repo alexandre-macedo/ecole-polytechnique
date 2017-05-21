@@ -11,14 +11,14 @@ class RtSphere {
 public:
   RtSphere();
   ~RtSphere();
-  RtSphere(RtVector, double, RtColor);
+  RtSphere(const RtVector &, double, const RtColor &);
   friend std::ostream &operator<<(std::ostream &, const RtSphere &);
   RtVector getCenter() const;
   double getRadius() const;
 
 private:
-  RtVector center_;
-  RtColor color_;
+  const RtVector center_;
+  const RtColor color_;
   double radius_;
 };
 

@@ -6,8 +6,8 @@ RtCamera::RtCamera() {}
 
 RtCamera::~RtCamera() {}
 
-RtCamera::RtCamera(RtVector eye, RtVector target, RtVector up, double w,
-                   double h)
+RtCamera::RtCamera(const RtVector &eye, const RtVector &target,
+                   const RtVector &up, double w, double h)
     : eye_(eye), target_(target), up_(up), dimensions_{w, h} {
   if (w < 0 || h < 0)
     throw std::runtime_error("Invalid dimensions.");

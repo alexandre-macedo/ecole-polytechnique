@@ -6,7 +6,7 @@ RtSphere::RtSphere() {}
 
 RtSphere::~RtSphere() {}
 
-RtSphere::RtSphere(RtVector center, double rad, RtColor color)
+RtSphere::RtSphere(const RtVector &center, double rad, const RtColor &color)
     : center_(center), radius_(rad), color_(color) {
 
   if (rad < 0)
