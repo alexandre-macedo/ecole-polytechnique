@@ -1,3 +1,5 @@
+#define DOUBLE_COMPARE 1.0e-6
+
 #include <stdexcept>
 
 #include "rt_camera.h"
@@ -16,7 +18,8 @@ RtCamera::RtCamera(const RtVector &eye, const RtVector &target,
     throw std::runtime_error("Invalid dimensions.");
 
   double projection = fabs((target - eye).unit() * up.unit());
-  if (projection >= (1.0 -.0000001) && projection <= (1.0 + .0000001))
+  if (projection >= (1.0 - DOUBLE_COMPARE) &&
+      projection <= (1.0 + DOUBLE_COMPARE))
     throw std::runtime_error("Vector up cannot define orientation.");
 }
 
