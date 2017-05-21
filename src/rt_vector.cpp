@@ -12,7 +12,7 @@ double RtVector::norm2() const {
   return sqrt(this->x_ * this->x_ + this->y_ * this->y_ + this->z_ * this->z_);
 }
 
-RtVector RtVector::operator+(const RtVector &v) const{
+RtVector RtVector::operator+(const RtVector &v) const {
   RtVector vector;
   vector.x_ = this->x_ + v.x_;
   vector.y_ = this->y_ + v.y_;
@@ -20,7 +20,7 @@ RtVector RtVector::operator+(const RtVector &v) const{
   return vector;
 }
 
-RtVector RtVector::operator-() const{
+RtVector RtVector::operator-() const {
   RtVector vector;
   vector.x_ = -this->x_;
   vector.y_ = -this->y_;
@@ -28,7 +28,7 @@ RtVector RtVector::operator-() const{
   return vector;
 }
 
-RtVector RtVector::operator-(const RtVector &v) const{
+RtVector RtVector::operator-(const RtVector &v) const {
   RtVector vector;
   vector.x_ = this->x_ - v.x_;
   vector.y_ = this->y_ - v.y_;
@@ -44,8 +44,17 @@ RtVector RtVector::operator*(const double &d) const {
   return vector;
 }
 
-double RtVector::operator*(const RtVector &v) const{
-  return this->x_ * v.x_ + this->y_ * v.y_ +  this->z_ * v.z_;
+<<<<<<< HEAD
+double RtVector::operator*(const RtVector &v) const {
+  return this->x_ * v.x_ + this->y_ * v.y_ + this->z_ * v.z_;
+=======
+double RtVector::operator*(const RtVector &v) {
+  double dotProduct = 0.;
+  dotProduct += this->x_ * v.x_;
+  dotProduct += this->y_ * v.y_;
+  dotProduct += this->z_ * v.z_;
+  return dotProduct;
+>>>>>>> 7384cc5b8b087da3847731904b03245a19a35ee8
 }
 
 RtVector &RtVector::operator+=(const RtVector &v) {
