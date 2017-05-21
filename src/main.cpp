@@ -47,7 +47,7 @@ int main() {
 
   // Testing Camera
   std::cout << "########## Testing Camera ##########" << std::endl;
-  RtCamera cam(dir, dir2, dir2 , 10.0, 20.0);
+  RtCamera cam(RtVector(0,0,0), RtVector(0,1,0), RtVector(1,0,0), 10.0, 20.0);
   std::cout << cam << std::endl;
 
   // Testing Vectorial Product

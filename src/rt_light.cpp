@@ -14,10 +14,6 @@ std::ostream &operator<<(std::ostream &s, const RtLight &li) {
   return s;
 };
 
-RtVector RtLight::getPoint() const{
-    return point_;    
-}
+RtVector RtLight::getPoint() const { return point_; }
 
-RtColor RtLight::getColor() const{
-    return color_;
-}
+RtColor RtLight::getColor() const { return color_; }
