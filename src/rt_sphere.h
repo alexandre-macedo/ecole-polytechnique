@@ -5,20 +5,21 @@
 #include <iostream>
 
 #include "rt_ray.h"
+#include "rt_color.h"
 
 class RtSphere
 {
   public:
     RtSphere();
     ~RtSphere();
-    RtSphere(RtVector, double, int, int, int);
+    RtSphere(RtVector, double, RtColor);
     friend std::ostream &operator<<(std::ostream &, const RtSphere &);
     RtVector getCenter();
     double getRadius();
 
   private:
     RtVector center_;
-    struct { int r, g, b;} color_;
+    RtColor color_;
     double radius_;
 };
 

@@ -49,13 +49,13 @@ RtVector RtVector::operator*(const double &d)
     return vector;
 }
 
-RtVector RtVector::operator*(const RtVector &v)
+double RtVector::operator*(const RtVector &v)
 {
-    RtVector vector;
-    vector.x_ = this->x_ * v.x_;
-    vector.y_ = this->y_ * v.y_;
-    vector.z_ = this->z_ * v.z_;
-    return vector;
+    double dotProduct =0.;
+    dotProduct += this->x_ * v.x_;
+    dotProduct += this->y_ * v.y_;
+    dotProduct += this->z_ * v.z_;
+    return dotProduct;
 }
 
 RtVector &RtVector::operator+=(const RtVector &v)
@@ -67,12 +67,6 @@ RtVector &RtVector::operator+=(const RtVector &v)
 RtVector &RtVector::operator-=(const RtVector &v)
 {
     *this = *this - v;
-    return *this;
-}
-
-RtVector &RtVector::operator*=(const RtVector &v)
-{
-    *this = *this * v;
     return *this;
 }
 

@@ -14,11 +14,10 @@ class RtVector
     RtVector operator+(const RtVector &);
     RtVector operator-();
     RtVector operator-(const RtVector &);
-    RtVector operator*(const RtVector &);
+    double operator*(const RtVector &);
     RtVector operator*(const double &);
     RtVector &operator+=(const RtVector &);
     RtVector &operator-=(const RtVector &);
-    RtVector &operator*=(const RtVector &);
     RtVector &operator*=(const double &d);
     friend std::ostream &operator<<(std::ostream &, const RtVector &);
     RtVector cross (const RtVector &);

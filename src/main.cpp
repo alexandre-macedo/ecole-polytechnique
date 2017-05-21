@@ -4,6 +4,7 @@
 #include "rt_light.h"
 #include "rt_camera.h"
 #include "rt_tools.h"
+#include "rt_color.h"
 
 int main()
 {
@@ -11,18 +12,13 @@ int main()
   std::cout << "########## Testing Vector ##########" << std::endl;
   RtVector dir(1.0, 2.0, 3.0);
   RtVector dir2(4.0, 5.0, 6.0);
-  // std::cout << dir << std::endl;
-  // std::cout << dir2 << std::endl;
-  // std::cout << dir + dir2 << std::endl;
-  // std::cout << -dir2 << std::endl;
-  // std::cout << dir - dir2 << std::endl;
-  // std::cout << dir.norm2() << std::endl;
-  // std::cout << dir * 2.0 << std::endl;
-  // std::cout << 3.0 * dir << std::endl;
   dir += dir2;
   dir *= 2.0;
   std::cout << dir.unit() << std::endl;
   // dir.print();n
+
+  // Cor
+  RtColor cor(0,0,0);
 
   // Testing Ray:
   std::cout << "########## Testing Ray ##########" << std::endl;
@@ -32,12 +28,12 @@ int main()
 
   // Testing Spheres:
   std::cout << "########## Testing Spheres ##########" << std::endl;
-  RtSphere sph(RtVector(1., 2., 3.), 1., 0, 0, 0);
+  RtSphere sph(RtVector(1., 2., 3.), 1., cor);
   std::cout << sph << std::endl;
 
   // Testing Scenes:
   std::cout << "########## Testing Scenes ##########" << std::endl;
-  RtSphere sph2(RtVector(0.,0.,0.), 3., 37, 73, 254);
+  RtSphere sph2(RtVector(0.,0.,0.), 3., cor);
   RtScene sc;
   sc.add(sph);
   sc.add(sph2);
@@ -47,7 +43,7 @@ int main()
 
   // Testing Light:
   std::cout << "########## Testing Ligth ##########" << std::endl;
-  RtLight li (RtVector(11., 11., 11.), 0, 0, 0);
+  RtLight li (RtVector(11., 11., 11.), cor);
   std::cout << li << std::endl;
 
    // Testing Camera
@@ -63,8 +59,9 @@ int main()
 
    // Testing Ray-sphere intersection
    std::cout << "########## Testing Ray-sphere intersection ##########" << std::endl;
+   
    RtRay r (RtVector (-4., 0., 0.), RtVector(1., 0., 0.)); 
-   RtSphere o (RtVector(0., 0., 0.), 1., 0, 0, 0);
+   RtSphere o (RtVector(0., 0., 0.), 1., cor);
    RtVector in;
    std::cout << "Has to be true: " << RtTools::intersection(o, r, in) << std::endl;
    std::cout << "Insection has to be (-1, 0, 0): " << in << std::endl;

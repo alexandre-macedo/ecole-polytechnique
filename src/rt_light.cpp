@@ -1,5 +1,3 @@
-#include <stdexcept>
-
 #include "rt_light.h"
 
 // Make standard contructor and destructor later if you have a bug 
@@ -8,17 +6,18 @@
 RtLight::RtLight(){};
 RtLight::~RtLight(){};
 
-RtLight::RtLight(RtVector pt, int r, int g, int b) : point_(pt), color_{r, g, b}
-{
-    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-        throw std::runtime_error("Invalid color.");
-}
+RtLight::RtLight(RtVector pt, RtColor color) : point_(pt), color_(color) {}
+
 
 std::ostream &operator<<(std::ostream &s, const RtLight &li){
-    s << "[" << li.point_ << ", ["<< li.color_.r << ", " << li.color_.g << ", " << li.color_.b << "]]";
+    s << "[" << li.point_ << ", ["<< li.color_.getR() << ", " << li.color_.getG() << ", " << li.color_.getB() << "]]";
     return s;
 };
 
-RtVector RtLight::getPoint(){
+RtVector RtLight::getPoint() const{
     return point_;    
+}
+
+RtColor RtLight::getColor() const{
+    return color_;
 }

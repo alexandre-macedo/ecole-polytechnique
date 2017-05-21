@@ -6,16 +6,15 @@ RtSphere::RtSphere() {}
 
 RtSphere::~RtSphere() {}
 
-RtSphere::RtSphere(RtVector center, double rad, int r, int g, int b) : center_(center), radius_(rad), color_{r,g,b}
+RtSphere::RtSphere(RtVector center, double rad, RtColor color) : center_(center), radius_(rad), color_(color)
 {
-    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-        throw std::runtime_error("Invalid color.");
+    
     if (rad < 0)
         throw std::runtime_error("Negative radius.");
 }
 
 std::ostream &operator<<(std::ostream &s, const RtSphere &sp){
-    s << "[" << sp.center_ << ", " << sp.radius_ << ", [" << sp.color_.r << ", " << sp.color_.g << ", " << sp.color_.b << "]]";
+    s << "[" << sp.center_ << ", " << sp.radius_ << ", [" << sp.color_.getR() << ", " << sp.color_.getG() << ", " << sp.color_.getB() << "]]";
     return s;
 };
 

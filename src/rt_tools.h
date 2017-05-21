@@ -9,5 +9,5 @@ namespace RtTools{
     bool intersection(RtSphere &sph, RtRay &r, RtVector &i);
     
     // "viewer" is the vector from the camera pointing towards the point 
-    int colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer, RtLight &light);
+    RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer, RtLight &light);
 }

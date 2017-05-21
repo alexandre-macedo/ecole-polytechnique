@@ -10,6 +10,7 @@ src/rt_scene.cpp
 src/rt_light.cpp
 src/rt_camera.cpp
 src/rt_tools.cpp
+src/rt_color.cpp
 )
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_src})
