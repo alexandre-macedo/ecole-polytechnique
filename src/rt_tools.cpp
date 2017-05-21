@@ -1,5 +1,6 @@
 // Methods / tools for the project
 
+#include <stdexcept>
 #include <cmath>
 #include <math.h> 
 
@@ -31,6 +32,10 @@ namespace RtTools{
     // "viewer" is the vector from the camera pointing towards the point 
     // using Phong Reflection Model - https://en.wikipedia.org/wiki/Phong_reflection_model
     RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer, RtLight &light){
+        if(pt.distance(sph.getCenter())!=sph.getRadius()){
+            throw std::runtime_error("Point must be in the surface of the sphere in colorOfPoint.");
+        }
+        
         double ks, kd, ka, alpha;
         int ra, ga, ba; // red, green and blue of the ambient
         //int rl, gl, bl; // red, green and blue of Light

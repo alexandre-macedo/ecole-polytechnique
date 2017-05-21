@@ -21,6 +21,7 @@ public:
   friend std::ostream &operator<<(std::ostream &, const RtVector &);
   RtVector cross(const RtVector &);
   RtVector unit() const;
+  double distance(const RtVector&);
 
 private:
   double x_, y_, z_;
