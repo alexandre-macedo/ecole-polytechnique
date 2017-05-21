@@ -14,8 +14,8 @@ class RtSphere
     ~RtSphere();
     RtSphere(RtVector, double, RtColor);
     friend std::ostream &operator<<(std::ostream &, const RtSphere &);
-    RtVector getCenter();
-    double getRadius();
+    RtVector getCenter() const;
+    double getRadius() const;
 
   private:
     RtVector center_;

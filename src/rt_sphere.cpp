@@ -14,15 +14,15 @@ RtSphere::RtSphere(RtVector center, double rad, RtColor color) : center_(center)
 }
 
 std::ostream &operator<<(std::ostream &s, const RtSphere &sp){
-    s << "[" << sp.center_ << ", " << sp.radius_ << ", [" << sp.color_.getR() << ", " << sp.color_.getG() << ", " << sp.color_.getB() << "]]";
+    s << "[" << sp.center_ << ", " << sp.radius_ << ", " << sp.color_ << "]";
     return s;
 };
 
-RtVector RtSphere::getCenter(){
+RtVector RtSphere::getCenter() const{
     return center_;
 }
 
-double RtSphere::getRadius(){
+double RtSphere::getRadius() const{
     return radius_;
 }
 

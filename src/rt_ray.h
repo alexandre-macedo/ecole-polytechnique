@@ -13,8 +13,8 @@ public:
   ~RtRay();
   RtRay(RtVector, RtVector);
   friend std::ostream &operator<<(std::ostream &, const RtRay &);
-  RtVector getDirection();
-  RtVector getOrigin();
+  RtVector getDirection() const;
+  RtVector getOrigin() const;
 
 private:
   RtVector origin_;

@@ -12,6 +12,11 @@ RtColor::RtColor(int r, int g, int b) : r_(r), g_(g), b_(b)
         throw std::runtime_error("Invalid color.");
 }
 
+std::ostream &operator<<(std::ostream & s, const RtColor & cl){
+        s << "[" << cl.r_ << ", " << cl.g_ << ", " << cl.b_ << "]";
+    return s;
+}
+
 int RtColor::getR() const
 {
     return this->r_;

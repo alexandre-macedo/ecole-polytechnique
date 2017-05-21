@@ -10,6 +10,6 @@ RtLight::RtLight(RtVector pt, RtColor color) : point_(pt), color_(color) {}
 
 
 std::ostream &operator<<(std::ostream &s, const RtLight &li){
-    s << "[" << li.point_ << ", ["<< li.color_.getR() << ", " << li.color_.getG() << ", " << li.color_.getB() << "]]";
+    s << "[" << li.point_ << ", "<< li.color_ << "]";
     return s;
 };

@@ -12,11 +12,11 @@ std::ostream &operator<<(std::ostream &s, const RtRay &r)
     return s;
 }
 
-RtVector RtRay::getDirection(){
+RtVector RtRay::getDirection() const{
     return this->direction_;
 }
 
-RtVector RtRay::getOrigin(){
+RtVector RtRay::getOrigin() const{
     return this->origin_;
 }
 

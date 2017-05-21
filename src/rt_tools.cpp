@@ -6,7 +6,7 @@
 
 namespace RtTools
 {
-bool intersection(RtSphere &sph, RtRay &r, RtVector &i)
+bool intersection(const RtSphere &sph, const RtRay &r, RtVector &i)
 {
     RtVector center = sph.getCenter();
     double radius = sph.getRadius();
