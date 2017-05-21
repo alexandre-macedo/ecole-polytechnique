@@ -7,17 +7,18 @@
 #include "rt_color.h"
 #include "rt_vector.h"
 
-class RtLight{
-    public:
-        RtLight();
-        ~RtLight();
-        RtLight(const RtVector&, const RtColor&);
-        friend std::ostream &operator<<(std::ostream &, const RtLight &);
-        RtVector getPoint() const;
-        RtColor getColor() const;
-    private:
-        const RtVector point_;
-        const RtColor color_;
+class RtLight {
+public:
+  RtLight();
+  ~RtLight();
+  RtLight(const RtVector &, const RtColor &);
+  friend std::ostream &operator<<(std::ostream &, const RtLight &);
+  RtVector getPoint() const;
+  RtColor getColor() const;
+
+private:
+  const RtVector point_;
+  const RtColor color_;
 };
 
 #endif /* RT_LIGHT_H */

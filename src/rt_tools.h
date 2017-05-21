@@ -1,4 +1,6 @@
-// Methods / tools for the project
+#pragma once
+#ifndef RT_TOOLS_H
+#define RT_TOOLS_H
 
 #include "rt_ray.h"
 #include "rt_vector.h"
@@ -12,3 +14,4 @@ namespace RtTools{
     RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer, RtLight &light);
 }
 
+#endif /* RT_TOOLS_H */

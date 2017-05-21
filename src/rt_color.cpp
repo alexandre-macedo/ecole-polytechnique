@@ -2,7 +2,7 @@
 
 #include "rt_color.h"
 
-RtColor::RtColor() {}
+RtColor::RtColor() : r_(0), g_(0), b_(0) {}
 
 RtColor::~RtColor() {}
 

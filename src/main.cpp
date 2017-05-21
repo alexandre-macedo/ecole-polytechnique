@@ -47,7 +47,8 @@ int main() {
 
   // Testing Camera
   std::cout << "########## Testing Camera ##########" << std::endl;
-  RtCamera cam(dir, dir2, dir, 10.0, 20.0);
+  RtCamera cam(RtVector(0, 0, 0), RtVector(0, 1, 0), RtVector(1, 1, 0), 10.0,
+               20.0);
   std::cout << cam << std::endl;
 
   // Testing Vectorial Product
@@ -70,11 +71,13 @@ int main() {
   // Testing colorOfPoint from tools
   std::cout << "########## Testing colorOfPoint from tools ##########"
             << std::endl;
-  RtColor c (100, 100, 100);
+  RtColor c(100, 100, 100);
   RtSphere esfera(RtVector(3., 0., 0.), 1., c);
-  RtVector ponto (2., 0., 0.);
-  RtVector doOlhoAoPonto (1., 0., 0.); // olho em (-3.,0., 0.)
-  RtVector ptLuz (-2., 0., 0.);
+  RtVector ponto(2., 0., 0.);
+  RtVector doOlhoAoPonto(1., 0., 0.); // olho em (-3.,0., 0.)
+  RtVector ptLuz(-2., 0., 0.);
   RtLight luz(ptLuz, c);
-  std::cout << "Color of point should be [67, 67, 67] and it is: " << RtTools::colorOfPoint(ponto, esfera, doOlhoAoPonto, luz) << std::endl;
+  std::cout << "Color of point should be [67, 67, 67] and it is: "
+            << RtTools::colorOfPoint(ponto, esfera, doOlhoAoPonto, luz)
+            << std::endl;
 }

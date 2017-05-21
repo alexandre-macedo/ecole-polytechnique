@@ -8,11 +8,11 @@ RtVector::~RtVector() {}
 
 RtVector::RtVector(double x, double y, double z) : x_(x), y_(y), z_(z) {}
 
-double RtVector::norm2() {
+double RtVector::norm2() const {
   return sqrt(this->x_ * this->x_ + this->y_ * this->y_ + this->z_ * this->z_);
 }
 
-RtVector RtVector::operator+(const RtVector &v) {
+RtVector RtVector::operator+(const RtVector &v) const {
   RtVector vector;
   vector.x_ = this->x_ + v.x_;
   vector.y_ = this->y_ + v.y_;
@@ -20,7 +20,7 @@ RtVector RtVector::operator+(const RtVector &v) {
   return vector;
 }
 
-RtVector RtVector::operator-() {
+RtVector RtVector::operator-() const {
   RtVector vector;
   vector.x_ = -this->x_;
   vector.y_ = -this->y_;
@@ -28,7 +28,7 @@ RtVector RtVector::operator-() {
   return vector;
 }
 
-RtVector RtVector::operator-(const RtVector &v) {
+RtVector RtVector::operator-(const RtVector &v) const {
   RtVector vector;
   vector.x_ = this->x_ - v.x_;
   vector.y_ = this->y_ - v.y_;
@@ -36,7 +36,7 @@ RtVector RtVector::operator-(const RtVector &v) {
   return vector;
 }
 
-RtVector RtVector::operator*(const double &d) {
+RtVector RtVector::operator*(const double &d) const {
   RtVector vector;
   vector.x_ = this->x_ * d;
   vector.y_ = this->y_ * d;
@@ -44,13 +44,8 @@ RtVector RtVector::operator*(const double &d) {
   return vector;
 }
 
-double RtVector::operator*(const RtVector &v)
-{
-    double dotProduct =0.;
-    dotProduct += this->x_ * v.x_;
-    dotProduct += this->y_ * v.y_;
-    dotProduct += this->z_ * v.z_;
-    return dotProduct;
+double RtVector::operator*(const RtVector &v) const {
+  return this->x_ * v.x_ + this->y_ * v.y_ + this->z_ * v.z_;
 }
 
 RtVector &RtVector::operator+=(const RtVector &v) {
@@ -63,11 +58,9 @@ RtVector &RtVector::operator-=(const RtVector &v) {
   return *this;
 }
 
-
-RtVector &RtVector::operator*=(const double &d)
-{
-    *this = *this * d;
-    return *this;
+RtVector &RtVector::operator*=(const double &d) {
+  *this = *this * d;
+  return *this;
 }
 
 std::ostream &operator<<(std::ostream &s, const RtVector &v) {
@@ -86,4 +79,4 @@ RtVector RtVector::cross(const RtVector &v) {
                   this->x_ * v.y_ - v.x_ * this->y_);
 }
 
-RtVector RtVector::unit() { return *this * (1.0 / this->norm2()); }
+RtVector RtVector::unit() const { return *this * (1.0 / this->norm2()); }
