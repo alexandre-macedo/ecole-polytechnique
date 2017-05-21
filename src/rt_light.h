@@ -5,16 +5,17 @@
 #include <iostream>
 
 #include "rt_vector.h"
+#include "rt_color.h"
 
 class RtLight{
     public:
         RtLight();
         ~RtLight();
-        RtLight(RtVector, int, int, int);
+        RtLight(RtVector, RtColor);
         friend std::ostream &operator<<(std::ostream &, const RtLight &);
     private:
         RtVector point_;
-        struct{int r, g, b;} color_;
+        RtColor color_;
 };
 
 
