@@ -74,4 +74,5 @@ namespace RtTools{
 
         return RtColor(rp, gp, bp); // the point's color
     }
+
 }

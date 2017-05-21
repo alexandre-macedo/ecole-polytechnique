@@ -4,8 +4,8 @@
 
 #include <iostream>
 
-#include "rt_vector.h"
 #include "rt_color.h"
+#include "rt_vector.h"
 
 class RtLight{
     public:
@@ -20,6 +20,9 @@ class RtLight{
         RtColor color_;
 };
 
-
+private:
+  const RtVector point_;
+  const RtColor color_;
+};
 
 #endif /* RT_LIGHT_H */

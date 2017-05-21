@@ -6,19 +6,18 @@
 
 #include "rt_vector.h"
 
-class RtRay
-{
+class RtRay {
 public:
   RtRay();
   ~RtRay();
-  RtRay(RtVector, RtVector);
+  RtRay(const RtVector &, const RtVector &);
   friend std::ostream &operator<<(std::ostream &, const RtRay &);
-  RtVector getDirection();
-  RtVector getOrigin();
+  RtVector getDirection() const;
+  RtVector getOrigin() const;
 
 private:
-  RtVector origin_;
-  RtVector direction_;
+  const RtVector origin_;
+  const RtVector direction_;
 };
 
 #endif /* RT_RAY_H */
