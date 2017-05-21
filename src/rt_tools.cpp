@@ -4,7 +4,8 @@
 
 #include "rt_tools.h"
 
-bool intersection(RtSphere &sph, RtRay &r, RtVector &i){
+namespace RtTools{
+    bool intersection(RtSphere &sph, RtRay &r, RtVector &i){
     RtVector center = sph.getCenter(); double radius = sph.getRadius();
     RtVector dir = r.getDirection();
     dir = dir.unit(); // norm == 1 now
@@ -23,4 +24,5 @@ bool intersection(RtSphere &sph, RtRay &r, RtVector &i){
     i = p + dir*(cateto-correction);
 
     return true;
+}
 }

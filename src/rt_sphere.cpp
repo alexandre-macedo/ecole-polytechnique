@@ -6,7 +6,7 @@ RtSphere::RtSphere() {}
 
 RtSphere::~RtSphere() {}
 
-RtSphere::RtSphere(RtVector c, double rad, int r, int g, int b) : center_(c), radius_(rad), color_{r,g,b}
+RtSphere::RtSphere(RtVector center, double rad, int r, int g, int b) : center_(center), radius_(rad), color_{r,g,b}
 {
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
         throw std::runtime_error("Invalid color.");
