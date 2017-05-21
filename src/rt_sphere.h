@@ -4,23 +4,22 @@
 
 #include <iostream>
 
-#include "rt_ray.h"
 #include "rt_color.h"
+#include "rt_ray.h"
 
-class RtSphere
-{
-  public:
-    RtSphere();
-    ~RtSphere();
-    RtSphere(RtVector, double, RtColor);
-    friend std::ostream &operator<<(std::ostream &, const RtSphere &);
-    RtVector getCenter() const;
-    double getRadius() const;
+class RtSphere {
+public:
+  RtSphere();
+  ~RtSphere();
+  RtSphere(RtVector, double, RtColor);
+  friend std::ostream &operator<<(std::ostream &, const RtSphere &);
+  RtVector getCenter() const;
+  double getRadius() const;
 
-  private:
-    RtVector center_;
-    RtColor color_;
-    double radius_;
+private:
+  RtVector center_;
+  RtColor color_;
+  double radius_;
 };
 
 #endif /* RT_SPHERE_H */

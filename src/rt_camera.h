@@ -6,18 +6,20 @@
 
 #include "rt_vector.h"
 
-class RtCamera
-{
-  public:
-    RtCamera();
-    ~RtCamera();
-    RtCamera(RtVector, RtVector, RtVector, double, double);
-    friend std::ostream &operator<<(std::ostream &, const RtCamera &);
-  private:
-    RtVector eye_;
-    RtVector target_;
-    RtVector up_;
-    struct{double w, h;} dimensions_; 
+class RtCamera {
+public:
+  RtCamera();
+  ~RtCamera();
+  RtCamera(RtVector, RtVector, RtVector, double, double);
+  friend std::ostream &operator<<(std::ostream &, const RtCamera &);
+
+private:
+  RtVector eye_;
+  RtVector target_;
+  RtVector up_;
+  struct {
+    double w, h;
+  } dimensions_;
 };
 
 #endif /* RT_CAMERA_H */

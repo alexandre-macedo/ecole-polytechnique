@@ -6,8 +6,7 @@
 
 #include "rt_vector.h"
 
-class RtRay
-{
+class RtRay {
 public:
   RtRay();
   ~RtRay();

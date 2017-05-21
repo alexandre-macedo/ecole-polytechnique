@@ -4,19 +4,14 @@ RtRay::RtRay() {}
 
 RtRay::~RtRay() {}
 
-RtRay::RtRay(RtVector origin, RtVector direction) : origin_(origin), direction_(direction) {}
+RtRay::RtRay(RtVector origin, RtVector direction)
+    : origin_(origin), direction_(direction) {}
 
-std::ostream &operator<<(std::ostream &s, const RtRay &r)
-{
-    s << "[" << r.origin_ << ", " << r.direction_ << "]";
-    return s;
+std::ostream &operator<<(std::ostream &s, const RtRay &r) {
+  s << "[" << r.origin_ << ", " << r.direction_ << "]";
+  return s;
 }
 
-RtVector RtRay::getDirection() const{
-    return this->direction_;
-}
+RtVector RtRay::getDirection() const { return this->direction_; }
 
-RtVector RtRay::getOrigin() const{
-    return this->origin_;
-}
-
+RtVector RtRay::getOrigin() const { return this->origin_; }
