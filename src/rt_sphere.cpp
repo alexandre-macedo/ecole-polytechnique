@@ -18,6 +18,14 @@ std::ostream &operator<<(std::ostream &s, const RtSphere &sp) {
   return s;
 };
 
-RtVector RtSphere::getCenter() const { return center_; }
+RtVector RtSphere::getCenter() const { 
+  return center_; 
+}
 
-double RtSphere::getRadius() const { return radius_; }
+double RtSphere::getRadius() const { 
+  return radius_; 
+}
+
+RtColor RtSphere::getColor() const{
+  return color_;
+}

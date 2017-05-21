@@ -33,8 +33,10 @@ namespace RtTools{
     RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer, RtLight &light){
         double ks, kd, ka, alpha;
         int ra, ga, ba; // red, green and blue of the ambient
-        int rl, gl, bl; // red, green and blue of Light
+        //int rl, gl, bl; // red, green and blue of Light
+        int rs, gs, bs; // red, green and blue of Sphere
         int rp, gp, bp; // same for our point
+        RtColor cSphere; // color of the sphere
 
         RtVector V = ((-1)*viewer).unit(); // viewer
         RtVector N = (pt-sph.getCenter()).unit(); // normal
@@ -43,32 +45,37 @@ namespace RtTools{
         RtVector R = (2*(L*N)*N-L).unit(); // reflection direction
 
         // Constants
-        ks=0.5;
+        ks=0.25;
         kd=0.5;
         ka=0.5;
-        alpha=0.5;
+        alpha=2.;
 
         // Color of my ambient
         ra=ga=ba=50;
 
-        rl = colorOfLight.getR();
-        gl = colorOfLight.getG();
-        bl = colorOfLight.getB();
+        //rl = colorOfLight.getR();
+        //gl = colorOfLight.getG();
+        //bl = colorOfLight.getB();
+        
+        cSphere = sph.getColor();
+        rs = cSphere.getR();
+        gs = cSphere.getG();
+        bs = cSphere.getB(); 
 
         // Percentage for diffusion
-        double pForDiffusion = 0.7;
+        double pForDiffusion = .7;
 
         rp = ka*ra;
         gp = ka*ga;
         bp = ka*ba;
         if((L*N)>0.){
-            rp += kd*(L*N)*(pForDiffusion*rl);
-            gp += kd*(L*N)*(pForDiffusion*gl);
-            bp += kd*(L*N)*(pForDiffusion*bl);
+            rp += kd*(L*N)*(pForDiffusion*rs);
+            gp += kd*(L*N)*(pForDiffusion*gs);
+            bp += kd*(L*N)*(pForDiffusion*bs);
             if((R*V)>0.){
-                rp += ks * pow(R*V, alpha) * (1-pForDiffusion)*rl;
-                gp += ks * pow(R*V, alpha) * (1-pForDiffusion)*gl;
-                bp += ks * pow(R*V, alpha) * (1-pForDiffusion)*bl;
+                rp += ks * pow(R*V, alpha) * (1-pForDiffusion)*rs;
+                gp += ks * pow(R*V, alpha) * (1-pForDiffusion)*gs;
+                bp += ks * pow(R*V, alpha) * (1-pForDiffusion)*bs;
             }
         }
 

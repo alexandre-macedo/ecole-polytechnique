@@ -11,18 +11,13 @@ class RtLight{
     public:
         RtLight();
         ~RtLight();
-        RtLight(RtVector, RtColor);
+        RtLight(const RtVector&, const RtColor&);
         friend std::ostream &operator<<(std::ostream &, const RtLight &);
         RtVector getPoint() const;
         RtColor getColor() const;
     private:
-        RtVector point_;
-        RtColor color_;
-};
-
-private:
-  const RtVector point_;
-  const RtColor color_;
+        const RtVector point_;
+        const RtColor color_;
 };
 
 #endif /* RT_LIGHT_H */

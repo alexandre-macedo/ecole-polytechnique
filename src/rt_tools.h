@@ -3,6 +3,7 @@
 #include "rt_ray.h"
 #include "rt_vector.h"
 #include "rt_light.h"
+#include "rt_sphere.h"
 
 namespace RtTools{
     bool intersection(RtSphere &sph, RtRay &r, RtVector &i);
