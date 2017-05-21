@@ -15,6 +15,7 @@ public:
   friend std::ostream &operator<<(std::ostream &, const RtSphere &);
   RtVector getCenter() const;
   double getRadius() const;
+  RtColor getColor() const;
 
 private:
   const RtVector center_;

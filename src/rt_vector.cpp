@@ -80,3 +80,7 @@ RtVector RtVector::cross(const RtVector &v) {
 }
 
 RtVector RtVector::unit() const { return *this * (1.0 / this->norm2()); }
+
+double RtVector::distance(const RtVector &other){
+  return ((*this)-other).norm2();
+}
