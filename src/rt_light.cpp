@@ -1,7 +1,6 @@
 #include "rt_light.h"
 
-// Make standard contructor and destructor later if you have a bug
-// I did not do one here just to test
+// Light Source
 
 RtLight::RtLight(){};
 RtLight::~RtLight(){};

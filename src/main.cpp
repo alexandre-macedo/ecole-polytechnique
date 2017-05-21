@@ -47,7 +47,8 @@ int main() {
 
   // Testing Camera
   std::cout << "########## Testing Camera ##########" << std::endl;
-  RtCamera cam(RtVector(0,0,0), RtVector(0,1,0), RtVector(1,1,0), 10.0, 20.0);
+  RtCamera cam(RtVector(0, 0, 0), RtVector(0, 1, 0), RtVector(1, 1, 0), 10.0,
+               20.0);
   std::cout << cam << std::endl;
 
   // Testing Vectorial Product
@@ -66,4 +67,11 @@ int main() {
   std::cout << "Has to be true: " << RtTools::intersection(o, r, in)
             << std::endl;
   std::cout << "Insection has to be (-1, 0, 0): " << in << std::endl;
+
+  // Test Image
+  std::cout << "########## Testing Image ##########" << std::endl;
+  RtImage im(1920, 680);
+  std::cout << im << std::endl;
+  RtTools::generateImage(sc, cam, li, im);
+  std::cout << im.getImage()[0][0] << std::endl;
 }
