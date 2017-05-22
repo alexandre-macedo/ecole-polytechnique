@@ -13,14 +13,15 @@ class RtImage {
 public:
   RtImage();
   ~RtImage();
-  RtImage(int, int);
+  RtImage(const int, const int);
   int getHeight() const;
   int getWidth() const;
   friend std::ostream &operator<<(std::ostream &, const RtImage &);
   std::vector<std::vector<RtColor>>& getImage();
 
 private:
-  int height_, width_;
+  const int height_ = 0;
+  const int width_ = 0;
   std::vector<std::vector<RtColor>> image_;
 };
 

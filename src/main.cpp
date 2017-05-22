@@ -13,6 +13,8 @@ int main() {
   RtVector dir2(4.0, 5.0, 6.0);
   dir += dir2;
   dir *= 2.0;
+  RtVector dir3;
+  dir3 = 4 * dir;
   std::cout << dir.unit() << std::endl;
   // dir.print();n
 
@@ -75,6 +77,7 @@ int main() {
   std::cout << im << std::endl;
   RtTools::generateImage(sc, cam, li, im);
   std::cout << im.getImage()[0][0] << std::endl;
+  std::cout << im.getImage()[im.getWidth()-1][im.getHeight()-1] << std::endl;
 
   // Testing colorOfPoint from tools
   std::cout << "########## Testing colorOfPoint from tools ##########"

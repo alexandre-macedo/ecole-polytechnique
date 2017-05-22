@@ -94,6 +94,9 @@ RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer,
 void generateImage(const RtScene &scene, const RtCamera &camera,
                    const RtLight &light, RtImage &rtimage) {
   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
-  image[0][0] = RtColor(20, 20, 20);
+  for (int i = 0; i < rtimage.getWidth(); i++)
+    for (int j = 0; j < rtimage.getHeight(); j++)
+        image[i][j] = RtColor(20,20,20);
+        std::cout << camera << std::endl;
 }
 }
