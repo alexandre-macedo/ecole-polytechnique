@@ -34,18 +34,18 @@ bool intersection(RtSphere &sph, RtRay &r, RtVector &i) {
 // using Phong Reflection Model -
 // https://en.wikipedia.org/wiki/Phong_reflection_model
 RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer,
-                     RtLight &light) {
-  if (pt.distance(sph.getCenter()) != sph.getRadius()) {
+                     const RtLight &light) {
+  if (round(pt.distance(sph.getCenter())) != sph.getRadius()) {
     throw std::runtime_error(
         "Point must be in the surface of the sphere in colorOfPoint.");
   }
 
   double ks, kd, ka, alpha;
-  int ra, ga, ba; // red, green and blue of the ambient
+  double ra, ga, ba; // red, green and blue of the ambient
   // int rl, gl, bl; // red, green and blue of Light
-  int rs, gs, bs;  // red, green and blue of Sphere
-  int rp, gp, bp;  // same for our point
-  RtColor cSphere; // color of the sphere
+  double rs, gs, bs; // red, green and blue of Sphere
+  double rp, gp, bp; // same for our point
+  RtColor cSphere;   // color of the sphere
 
   RtVector V = ((-1) * viewer).unit();         // viewer
   RtVector N = (pt - sph.getCenter()).unit();  // normal
@@ -60,43 +60,91 @@ RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer,
   alpha = 2.;
 
   // Color of my ambient
-  ra = ga = ba = 50;
+  ra = ga = ba = 50.0;
 
   // rl = colorOfLight.getR();
   // gl = colorOfLight.getG();
   // bl = colorOfLight.getB();
 
   cSphere = sph.getColor();
-  rs = cSphere.getR();
-  gs = cSphere.getG();
-  bs = cSphere.getB();
+  rs = (double)cSphere.getR();
+  gs = (double)cSphere.getG();
+  bs = (double)cSphere.getB();
 
   // Percentage for diffusion
 
   rp = ka * ra;
   gp = ka * ga;
   bp = ka * ba;
-  if ((L * N) > 0.) {
+  // std::cout << L * N << std::endl;
+  if ((L * N) >= 0.0) {
     double pForDiffusion = .7;
+    // std::cout << rp << std::endl;
     rp += kd * (L * N) * (pForDiffusion * rs);
+    // std::cout << rp << std::endl;
     gp += kd * (L * N) * (pForDiffusion * gs);
     bp += kd * (L * N) * (pForDiffusion * bs);
-    if ((R * V) > 0.) {
+    if ((R * V) >= 0.0) {
       rp += ks * pow(R * V, alpha) * (1 - pForDiffusion) * rs;
       gp += ks * pow(R * V, alpha) * (1 - pForDiffusion) * gs;
       bp += ks * pow(R * V, alpha) * (1 - pForDiffusion) * bs;
     }
   }
 
-  return RtColor(rp, gp, bp); // the point's color
+  return RtColor((int)rp, (int)gp, (int)bp); // the point's color
 }
 
 void generateImage(const RtScene &scene, const RtCamera &camera,
                    const RtLight &light, RtImage &rtimage) {
+  RtVector intersectionPoint;
+  bool intersectionFound = false;
+  RtSphere currentSphere;
   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
-  for (int i = 0; i < rtimage.getWidth(); i++)
-    for (int j = 0; j < rtimage.getHeight(); j++)
-        image[i][j] = RtColor(20,20,20);
-        std::cout << camera << std::endl;
+
+  RtVector verticalIncrement =
+      -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
+
+  RtVector horizontalIncrement =
+      (camera.getUp().cross(camera.getTarget() - camera.getEye())) *
+      (camera.getWidth() / rtimage.getWidth());
+
+  RtVector initialPoint =
+      camera.getTarget() + (camera.getUp() * camera.getHeight() * 0.5 *
+                            (1.0 - 1.0 / rtimage.getHeight())) -
+      (camera.getUp().cross(camera.getTarget() - camera.getEye()) *
+       camera.getWidth() * 0.5 * (1.0 - 1.0 / rtimage.getWidth()));
+
+  for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
+    for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
+      intersectionFound = false;
+      // Get point in space
+      RtVector currentVector =
+          initialPoint + i * horizontalIncrement + j * verticalIncrement;
+      RtRay currentRay(camera.getEye(), currentVector - camera.getEye());
+      RtVector viewer = currentVector - camera.getEye();
+      // Find Intersection point
+      for (unsigned int k = 0; k < scene.size(); ++k) {
+        currentSphere = scene.at_index(k);
+        if (intersection(currentSphere, currentRay, intersectionPoint)) {
+          intersectionFound = true;
+          break;
+        }
+      }
+      // Find color
+      if (intersectionFound) {
+        //  std::cout << "Intersection point " << intersectionPoint <<
+        //  std::endl;
+        //  std::cout << "Sphere " << currentSphere << std::endl;
+        //  std::cout << "Viewer " << viewer << std::endl;
+        //  std::cout << colorOfPoint(intersectionPoint, currentSphere, viewer,
+        //                            light)
+        //            << std::endl;
+        image[i][j] =
+            colorOfPoint(intersectionPoint, currentSphere, viewer, light);
+      } else {
+        image[i][j] = RtColor(255, 255, 255);
+      }
+    }
+  }
 }
 }

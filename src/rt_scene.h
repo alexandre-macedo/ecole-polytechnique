@@ -13,8 +13,8 @@ public:
   ~RtScene();
   void add(RtSphere);
   RtSphere take_last();
-  int size();
-  RtSphere at_index(int);
+  int size() const;
+  RtSphere at_index(int) const;
   friend std::ostream &operator<<(std::ostream &, const RtScene &);
 
 private:

@@ -3,6 +3,7 @@
 #define RT_IMAGE_H
 
 #include <vector>
+#include <string>
 
 #include "rt_camera.h"
 #include "rt_color.h"
@@ -18,10 +19,11 @@ public:
   int getWidth() const;
   friend std::ostream &operator<<(std::ostream &, const RtImage &);
   std::vector<std::vector<RtColor>>& getImage();
+  std::string info() const;
 
 private:
-  const int height_ = 0;
-  const int width_ = 0;
+  int height_ = 0;
+  int width_ = 0;
   std::vector<std::vector<RtColor>> image_;
 };
 

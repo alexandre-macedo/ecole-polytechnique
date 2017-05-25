@@ -15,8 +15,20 @@ int RtImage::getHeight() const { return this->height_; }
 
 int RtImage::getWidth() const { return this->width_; }
 
+std::string RtImage::info() const {
+  std::string s;
+  s = "[" + std::to_string(this->height_) + ", " + std::to_string(this->width_) + "]";
+  return s;
+}
+
 std::ostream &operator<<(std::ostream &s, const RtImage &im) {
-  s << "[" << im.height_ << ", " << im.width_ << "]";
+  s << "[" << im.height_ << ", " << im.width_ << "] Image:" << std::endl;
+  for (int j = 0; j < im.height_; ++j) {
+    for (int i = 0; i < im.width_; ++i)
+      s << im.image_[i][j] << ",";
+    s << std::endl;
+  }
+
   return s;
 }
 

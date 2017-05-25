@@ -13,9 +13,9 @@ RtSphere RtScene::take_last() {
   list_of_spheres_.pop_back();
 }
 
-int RtScene::size() { return list_of_spheres_.size(); }
+int RtScene::size() const { return list_of_spheres_.size(); }
 
-RtSphere RtScene::at_index(int i) { return list_of_spheres_[i]; }
+RtSphere RtScene::at_index(int i) const { return list_of_spheres_[i]; }
 
 std::ostream &operator<<(std::ostream &s, const RtScene &sc) {
   s << "{";

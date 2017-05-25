@@ -18,8 +18,8 @@ public:
   RtColor getColor() const;
 
 private:
-  const RtVector center_;
-  const RtColor color_;
+  RtVector center_;
+  RtColor color_;
   double radius_;
 };
 

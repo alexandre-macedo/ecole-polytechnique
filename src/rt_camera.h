@@ -13,11 +13,16 @@ public:
   RtCamera(const RtVector &, const RtVector &, const RtVector &, double,
            double);
   friend std::ostream &operator<<(std::ostream &, const RtCamera &);
+  RtVector getTarget() const;
+  RtVector getEye() const;
+  RtVector getUp() const;
+  double getWidth() const;
+  double getHeight() const;
 
 private:
-  const RtVector eye_;
-  const RtVector target_;
-  const RtVector up_;
+  RtVector eye_;
+  RtVector target_;
+  RtVector up_;
   struct {
     double w, h;
   } dimensions_;

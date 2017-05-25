@@ -14,7 +14,7 @@ namespace RtTools {
 bool intersection(RtSphere &, RtRay &, RtVector &);
 
 // "viewer" is the vector from the camera pointing towards the point
-RtColor colorOfPoint(RtVector &, RtSphere &, RtVector &, RtLight &);
+RtColor colorOfPoint(RtVector &, RtSphere &, RtVector &, const RtLight &);
 
 void generateImage(const RtScene &, const RtCamera &, const RtLight &,
                    RtImage &);

@@ -16,8 +16,8 @@ public:
   RtVector getOrigin() const;
 
 private:
-  const RtVector origin_;
-  const RtVector direction_;
+  RtVector origin_;
+  RtVector direction_;
 };
 
 #endif /* RT_RAY_H */

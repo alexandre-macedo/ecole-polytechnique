@@ -28,3 +28,9 @@ std::ostream &operator<<(std::ostream &s, const RtCamera &c) {
     << c.dimensions_.w << ", " << c.dimensions_.h << "]] ";
   return s;
 }
+
+RtVector RtCamera::getTarget() const { return this->target_; }
+RtVector RtCamera::getEye() const { return this->eye_; }
+RtVector RtCamera::getUp() const { return this->up_; }
+double RtCamera::getWidth() const { return this->dimensions_.w; }
+double RtCamera::getHeight() const { return this->dimensions_.h; }

@@ -17,8 +17,8 @@ public:
   RtColor getColor() const;
 
 private:
-  const RtVector point_;
-  const RtColor color_;
+  RtVector point_;
+  RtColor color_;
 };
 
 #endif /* RT_LIGHT_H */
