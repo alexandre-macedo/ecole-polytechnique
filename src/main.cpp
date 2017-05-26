@@ -3,7 +3,6 @@
 
 #include <opencv2/core/core.hpp>
 
-
 #include "rt_camera.h"
 #include "rt_color.h"
 #include "rt_light.h"
@@ -112,22 +111,20 @@ int main() {
   sceneImageTest.add(sphereImageTest);
   std::cout << "Scene:" << sceneImageTest << std::endl;
 
-  RtLight lightImageTest(RtVector(0, 0, 0), RtColor(255, 255, 255));
+  RtLight lightImageTest(RtVector(4, 20, 0), RtColor(255, 255, 255));
   std::cout << "Light:" << lightImageTest << std::endl;
 
-  RtImage imageImageTest(200, 200);
+  RtImage imageImageTest(800, 800);
   std::cout << "Image:" << imageImageTest.info() << std::endl;
 
   RtTools::generateImage(sceneImageTest, cameraImageTest, lightImageTest,
                          imageImageTest);
-  // std::ofstream myfile;
-  // myfile.open("example.txt");
-  // myfile << imageImageTest;
-  // myfile.close();
+  std::ofstream myfile;
+  myfile.open("example.txt");
+  myfile << imageImageTest;
+  myfile.close();
 
   cv::Mat output;
   RtTools::convertToOpenCV(imageImageTest, output);
-
   RtTools::printCVImage(output);
-  
 }

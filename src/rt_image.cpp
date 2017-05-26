@@ -4,7 +4,7 @@
 
 RtImage::RtImage() {}
 RtImage::~RtImage() {}
-RtImage::RtImage(const int height, const int width)
+RtImage::RtImage(const int width, const int height)
     : height_(height), width_(width),
       image_(width, std::vector<RtColor>(height)) {
   if (height <= 0 || width <= 0)
@@ -17,12 +17,12 @@ int RtImage::getWidth() const { return this->width_; }
 
 std::string RtImage::info() const {
   std::string s;
-  s = "[" + std::to_string(this->height_) + ", " + std::to_string(this->width_) + "]";
+  s = "[" + std::to_string(this->width_) + ", " + std::to_string(this->height_) + "]";
   return s;
 }
 
 std::ostream &operator<<(std::ostream &s, const RtImage &im) {
-  s << "[" << im.height_ << ", " << im.width_ << "] Image:" << std::endl;
+  s << "[" << im.width_<< ", " << im.height_ << "] Image:" << std::endl;
   for (int j = 0; j < im.height_; ++j) {
     for (int i = 0; i < im.width_; ++i)
       s << im.image_[i][j] << ",";
