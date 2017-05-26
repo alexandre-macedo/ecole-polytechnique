@@ -147,4 +147,32 @@ void generateImage(const RtScene &scene, const RtCamera &camera,
     }
   }
 }
+
+void convertToOpenCV(RtImage &input, cv::Mat &output) {
+
+  std::vector<std::vector<RtColor>> &image = input.getImage();
+  cv::Mat cvimage(input.getWidth(), input.getHeight(), CV_8UC3,
+                  cv::Scalar(255, 255, 255));
+  for (unsigned int i = 0; i < input.getWidth(); ++i)
+    for (unsigned int j = 0; j < input.getHeight(); ++j)
+      cvimage.at<cv::Vec3b>(cv::Point(i, j)) =
+          cv::Vec3b(image[i][j].getR(), image[i][j].getG(), image[i][j].getB());
+
+  //    cv::Scalar(image[i][j].getR(), image[i][j].getG(), image[i][j].getB());
+
+  output = cvimage.clone();
+}
+
+void printCVImage(cv::Mat &output) {
+  if (!output.data) // Check for invalid input
+  {
+    std::cout << "Could not open or find the output" << std::endl;
+  }
+
+  cv::namedWindow("Display window",
+                  cv::WINDOW_AUTOSIZE); // Create a window for display.
+  cv::imshow("Display window", output); // Show our image inside it.
+
+  cv::waitKey(0); // Wait for a keystroke in the window
+}
 }
