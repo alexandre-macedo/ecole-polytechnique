@@ -5,7 +5,7 @@ RtRay::RtRay() {}
 RtRay::~RtRay() {}
 
 RtRay::RtRay(const RtVector &origin, const RtVector &direction)
-    : origin_(origin), direction_(direction) {}
+    : origin_(origin), direction_(direction.unit()) {}
 
 std::ostream &operator<<(std::ostream &s, const RtRay &r) {
   s << "[" << r.origin_ << ", " << r.direction_ << "]";

@@ -14,7 +14,9 @@
 #include "rt_vector.h"
 
 namespace RtTools {
-bool intersection(RtSphere &, RtRay &, RtVector &);
+bool intersection(const RtSphere &, const RtRay &, RtVector &);
+
+bool intersection(const RtScene &, const RtRay &, RtSphere &, RtVector &);
 
 // "viewer" is the vector from the camera pointing towards the point
 RtColor colorOfPoint(RtVector &, RtSphere &, RtVector &, const RtLight &);
@@ -28,7 +30,8 @@ void convertToOpenCV(RtImage &, cv::Mat &);
     
     // "viewer" is the vector from the camera pointing towards the point 
     RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer, RtLight &light);
-    void printCVImage(cv::Mat &);
+
+void printCVImage(const cv::Mat &);
 }
 
 #endif /* RT_TOOLS_H */
