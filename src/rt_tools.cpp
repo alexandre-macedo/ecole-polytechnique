@@ -55,8 +55,10 @@ bool intersection(const RtScene &scene, const RtRay &ray,
 // "viewer" is the vector from the camera pointing towards the point
 // using Phong Reflection Model -
 // https://en.wikipedia.org/wiki/Phong_reflection_model
+
 RtColor colorOfPoint(const RtVector &pt, const RtSphere &sph,
                      const RtVector &viewer, const RtLight &light) {
+
   if (round(pt.distanceTo(sph.getCenter())) != sph.getRadius()) {
     throw std::runtime_error(
         "Point must be in the surface of the sphere in colorOfPoint.");

@@ -23,6 +23,11 @@ public:
   RtVector cross(const RtVector &);
   RtVector unit() const;
   double distanceTo(const RtVector&) const;
+  void copyHere(const RtVector &);
+  double getX() const;
+  double getY() const;
+  double getZ() const;
+
 
 private:
   double x_, y_, z_;

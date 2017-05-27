@@ -26,3 +26,9 @@ RtColor RtColor::darker(double percentage) {
   double comple = 1.0 - percentage;
   return RtColor(this->r_ *= comple, this->g_ *= comple, this->b_ *= comple);
 }
+
+void RtColor::copyHere(const RtColor &other) {
+  r_ = other.getR();
+  g_ = other.getG();
+  b_ = other.getB();
+}

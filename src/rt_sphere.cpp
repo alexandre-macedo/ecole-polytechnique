@@ -17,8 +17,8 @@ RtSphere::RtSphere(const RtVector &center, double rad, const RtColor &color)
 
 RtSphere::RtSphere(const RtVector &center, double rad, const RtColor &color,
                    double reflectionCoeficient)
-    : center_(center), radius_(rad),
-      color_(color), reflectionCoeficient_(reflectionCoeficient) {
+    : center_(center), radius_(rad), color_(color),
+      reflectionCoeficient_(reflectionCoeficient) {
 
   if (rad < 0)
     throw std::runtime_error("Negative radius.");
@@ -41,3 +41,9 @@ RtVector RtSphere::getCenter() const { return center_; }
 double RtSphere::getRadius() const { return radius_; }
 
 RtColor RtSphere::getColor() const { return color_; }
+
+void RtSphere::copyHere(RtSphere &other) {
+  center_.copyHere(other.getCenter());
+  color_.copyHere(other.getColor());
+  radius_ = other.getRadius();
+}

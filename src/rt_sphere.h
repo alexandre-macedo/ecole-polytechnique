@@ -18,6 +18,7 @@ public:
   RtVector getCenter() const;
   double getRadius() const;
   RtColor getColor() const;
+  void copyHere(RtSphere &);
 
 private:
   RtVector center_;
