@@ -1,3 +1,8 @@
+#include <fstream>
+#include <iostream>
+
+#include <opencv2/core/core.hpp>
+
 #include "rt_camera.h"
 #include "rt_color.h"
 #include "rt_light.h"
@@ -7,6 +12,9 @@
 #include "rt_tools.h"
 
 int main() {
+  // Cor
+  RtColor cor(0, 0, 0);
+/*
   // Testing Vector:
   std::cout << "########## Testing Vector ##########" << std::endl;
   RtVector dir(1.0, 2.0, 3.0);
@@ -16,8 +24,6 @@ int main() {
   std::cout << dir.unit() << std::endl;
   // dir.print();n
 
-  // Cor
-  RtColor cor(0, 0, 0);
 
   // Testing Ray:
   std::cout << "########## Testing Ray ##########" << std::endl;
@@ -81,6 +87,8 @@ int main() {
             << RtTools::colorOfPoint(ponto, esfera, doOlhoAoPonto, luz)
             << std::endl;
 
+  */
+
   // Testing sort in scene
   std::cout << "########## Testing sort in scene ##########"
             << std::endl;
@@ -97,4 +105,35 @@ int main() {
   for(int i = 0; i < cena.size(); i++){
     std::cout<< "Position " << i << " : " << cena.at_index(i) << std::endl;
   }
+
+  // Testing Image Creation
+  std::cout << "Testing image Creation" << std::endl;
+
+  RtCamera cameraImageTest(RtVector(0, 0, 0), RtVector(1, 0, 0),
+                           RtVector(0, 1, 0), 4, 4);
+  std::cout << "Camera:" << cameraImageTest << std::endl;
+
+  RtSphere sphereImageTest(RtVector(4, 0, 0), 2.0, RtColor(51, 255, 51));
+  std::cout << "Sphere:" << sphereImageTest << std::endl;
+
+  RtScene sceneImageTest;
+  sceneImageTest.add(sphereImageTest);
+  std::cout << "Scene:" << sceneImageTest << std::endl;
+
+  RtLight lightImageTest(RtVector(4, 20, 0), RtColor(255, 255, 255));
+  std::cout << "Light:" << lightImageTest << std::endl;
+
+  RtImage imageImageTest(800, 800);
+  std::cout << "Image:" << imageImageTest.info() << std::endl;
+
+  RtTools::generateImage(sceneImageTest, cameraImageTest, lightImageTest,
+                         imageImageTest);
+  std::ofstream myfile;
+  myfile.open("example.txt");
+  myfile << imageImageTest;
+  myfile.close();
+
+  cv::Mat output;
+  RtTools::convertToOpenCV(imageImageTest, output);
+  RtTools::printCVImage(output);
 }
