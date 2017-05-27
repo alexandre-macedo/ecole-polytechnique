@@ -16,10 +16,11 @@ public:
   RtVector getCenter() const;
   double getRadius() const;
   RtColor getColor() const;
+  void copyHere(RtSphere &);
 
 private:
-  const RtVector center_;
-  const RtColor color_;
+  RtVector center_;
+  RtColor color_;
   double radius_;
 };
 

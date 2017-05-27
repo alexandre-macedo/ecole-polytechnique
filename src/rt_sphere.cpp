@@ -29,3 +29,9 @@ double RtSphere::getRadius() const {
 RtColor RtSphere::getColor() const{
   return color_;
 }
+
+void RtSphere::copyHere(RtSphere &other){
+  center_.copyHere(other.getCenter());
+  color_.copyHere(other.getColor());
+  radius_ = other.getRadius();
+}

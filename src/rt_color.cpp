@@ -21,3 +21,9 @@ int RtColor::getR() const { return this->r_; }
 int RtColor::getG() const { return this->g_; }
 
 int RtColor::getB() const { return this->b_; }
+
+void RtColor::copyHere(const RtColor &other){
+  r_=other.getR();
+  g_=other.getG();
+  b_=other.getB();
+}

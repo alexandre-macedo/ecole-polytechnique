@@ -8,6 +8,7 @@
 #include "rt_sphere.h"
 
 namespace RtTools{
+    // if there is intersection will return true and put the point of intersection in "i" 
     bool intersection(RtSphere &sph, RtRay &r, RtVector &i);
     
     // "viewer" is the vector from the camera pointing towards the point 

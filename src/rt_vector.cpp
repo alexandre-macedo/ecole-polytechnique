@@ -81,6 +81,24 @@ RtVector RtVector::cross(const RtVector &v) {
 
 RtVector RtVector::unit() const { return *this * (1.0 / this->norm2()); }
 
-double RtVector::distance(const RtVector &other){
+double RtVector::distanceTo(const RtVector &other) const {
   return ((*this)-other).norm2();
+}
+
+double RtVector::getX() const{
+  return x_;
+}
+
+double RtVector::getY() const{
+  return y_;
+}
+
+double RtVector::getZ() const{
+  return z_;
+}
+
+void RtVector::copyHere(const RtVector &other){
+  x_ = other.getX();
+  y_ = other.getY();
+  z_ = other.getZ();
 }

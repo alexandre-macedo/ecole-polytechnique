@@ -15,7 +15,9 @@ public:
   RtSphere take_last();
   int size();
   RtSphere at_index(int);
-  friend std::ostream &operator<<(std::ostream &, const RtScene &);
+  friend std::ostream &operator<<(std::ostream &, RtScene &);
+  // Sort the list of spheres with reference to the distance from the vetor passed as argument, nearest first
+  void sort( RtVector &);
 
 private:
   std::vector<RtSphere> list_of_spheres_;

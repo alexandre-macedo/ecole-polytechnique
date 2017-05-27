@@ -80,4 +80,21 @@ int main() {
   std::cout << "Color of point should be [67, 67, 67] and it is: "
             << RtTools::colorOfPoint(ponto, esfera, doOlhoAoPonto, luz)
             << std::endl;
+
+  // Testing sort in scene
+  std::cout << "########## Testing sort in scene ##########"
+            << std::endl;
+  RtSphere esfera1(RtVector(3., 0., 0.), .1, cor);
+  RtSphere esfera2(RtVector(1., 0., 0.), .1, cor);
+  RtSphere esfera3(RtVector(2.1, 0., 0.), .1, cor);
+  RtScene cena;
+  cena.add(esfera1);
+  cena.add(esfera2);
+  cena.add(esfera3);
+  RtVector ref(0.,0.,0.);
+  cena.sort(ref);
+  std::cout << "Should be in the increasing distance from the origin: " << std::endl;
+  for(int i = 0; i < cena.size(); i++){
+    std::cout<< "Position " << i << " : " << cena.at_index(i) << std::endl;
+  }
 }

@@ -32,7 +32,7 @@ namespace RtTools{
     // "viewer" is the vector from the camera pointing towards the point 
     // using Phong Reflection Model - https://en.wikipedia.org/wiki/Phong_reflection_model
     RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer, RtLight &light){
-        if(pt.distance(sph.getCenter())!=sph.getRadius()){
+        if(pt.distanceTo(sph.getCenter())!=sph.getRadius()){
             throw std::runtime_error("Point must be in the surface of the sphere in colorOfPoint.");
         }
         
@@ -58,6 +58,7 @@ namespace RtTools{
         // Color of my ambient
         ra=ga=ba=50;
 
+        // We will use the light and its color later
         //rl = colorOfLight.getR();
         //gl = colorOfLight.getG();
         //bl = colorOfLight.getB();
@@ -67,13 +68,13 @@ namespace RtTools{
         gs = cSphere.getG();
         bs = cSphere.getB(); 
 
-        // Percentage for diffusion
-        double pForDiffusion = .7;
-
         rp = ka*ra;
         gp = ka*ga;
         bp = ka*ba;
         if((L*N)>0.){
+            // Percentage for diffusion
+            double pForDiffusion = .7;
+
             rp += kd*(L*N)*(pForDiffusion*rs);
             gp += kd*(L*N)*(pForDiffusion*gs);
             bp += kd*(L*N)*(pForDiffusion*bs);
