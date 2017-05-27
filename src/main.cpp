@@ -107,11 +107,15 @@ int main() {
   RtSphere sphereImageTest(RtVector(4, 0, 0), 2.0, RtColor(51, 255, 51));
   std::cout << "Sphere:" << sphereImageTest << std::endl;
 
+  RtSphere sphereImageTest2(RtVector(4, 2, 0), 2.0, RtColor(255, 255, 0));
+  std::cout << "Sphere:" << sphereImageTest2 << std::endl;
+
   RtScene sceneImageTest;
   sceneImageTest.add(sphereImageTest);
+  sceneImageTest.add(sphereImageTest2);
   std::cout << "Scene:" << sceneImageTest << std::endl;
 
-  RtLight lightImageTest(RtVector(4, 20, 0), RtColor(255, 255, 255));
+  RtLight lightImageTest(RtVector(0, 0, 0), RtColor(255, 255, 255));
   std::cout << "Light:" << lightImageTest << std::endl;
 
   RtImage imageImageTest(800, 800);
@@ -119,10 +123,11 @@ int main() {
 
   RtTools::generateImage(sceneImageTest, cameraImageTest, lightImageTest,
                          imageImageTest);
-  std::ofstream myfile;
-  myfile.open("example.txt");
-  myfile << imageImageTest;
-  myfile.close();
+
+  // std::ofstream myfile;
+  // myfile.open("example.txt");
+  // myfile << imageImageTest;
+  // myfile.close();
 
   cv::Mat output;
   RtTools::convertToOpenCV(imageImageTest, output);

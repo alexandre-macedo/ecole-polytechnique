@@ -1,13 +1,14 @@
 // Methods / tools for the project
 
 #include <cmath>
+#include <limits>
 #include <math.h>
 #include <stdexcept>
 
 #include "rt_tools.h"
 
 namespace RtTools {
-bool intersection(RtSphere &sph, RtRay &r, RtVector &i) {
+bool intersection(const RtSphere &sph, const RtRay &r, RtVector &i) {
   RtVector center = sph.getCenter();
   double radius = sph.getRadius();
   RtVector dir = r.getDirection();
@@ -28,6 +29,27 @@ bool intersection(RtSphere &sph, RtRay &r, RtVector &i) {
   i = p + dir * (cateto - correction);
 
   return true;
+}
+
+bool intersection(const RtScene &scene, const RtRay &ray, RtSphere &sphere,
+                  RtVector &intersectionVector) {
+  double minDist = std::numeric_limits<double>::max();
+  bool intersectionFound = false;
+  for (unsigned int i = 0; i < scene.size(); ++i) {
+    RtSphere currentSphere = scene.at_index(i);
+    RtVector currentVector;
+    if (intersection(currentSphere, ray, currentVector)) {
+      double dist = (currentSphere.getCenter() - ray.getOrigin()).norm2() -
+                    currentSphere.getRadius();
+      if (dist < minDist) {
+        minDist = dist;
+        intersectionFound = true;
+        sphere = currentSphere;
+        intersectionVector = currentVector;
+      }
+    }
+  }
+  return intersectionFound;
 }
 
 // "viewer" is the vector from the camera pointing towards the point
@@ -97,7 +119,6 @@ RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer,
 void generateImage(const RtScene &scene, const RtCamera &camera,
                    const RtLight &light, RtImage &rtimage) {
   RtVector intersectionPoint;
-  bool intersectionFound = false;
   RtSphere currentSphere;
   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
 
@@ -105,33 +126,25 @@ void generateImage(const RtScene &scene, const RtCamera &camera,
       -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
 
   RtVector horizontalIncrement =
-      (camera.getUp().cross(camera.getTarget() - camera.getEye())) *
+      (camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
       (camera.getWidth() / rtimage.getWidth());
 
   RtVector initialPoint =
       camera.getTarget() + (camera.getUp() * camera.getHeight() * 0.5 *
                             (1.0 - 1.0 / rtimage.getHeight())) -
-      (camera.getUp().cross(camera.getTarget() - camera.getEye()) *
+      ((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
        camera.getWidth() * 0.5 * (1.0 - 1.0 / rtimage.getWidth()));
 
   for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
     for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
-      intersectionFound = false;
       // Get point in space
       RtVector currentVector =
           initialPoint + i * horizontalIncrement + j * verticalIncrement;
       RtRay currentRay(camera.getEye(), currentVector - camera.getEye());
       RtVector viewer = currentVector - camera.getEye();
-      // Find Intersection point
-      for (unsigned int k = 0; k < scene.size(); ++k) {
-        currentSphere = scene.at_index(k);
-        if (intersection(currentSphere, currentRay, intersectionPoint)) {
-          intersectionFound = true;
-          break;
-        }
-      }
+      
       // Find color
-      if (intersectionFound) {
+      if (intersection(scene, currentRay, currentSphere, intersectionPoint)) {
         //  std::cout << "Intersection point " << intersectionPoint <<
         //  std::endl;
         //  std::cout << "Sphere " << currentSphere << std::endl;
@@ -153,26 +166,25 @@ void convertToOpenCV(RtImage &input, cv::Mat &output) {
   std::vector<std::vector<RtColor>> &image = input.getImage();
   cv::Mat cvimage(input.getHeight(), input.getWidth(), CV_8UC3,
                   cv::Scalar(255, 255, 255));
+
   for (unsigned int i = 0; i < input.getWidth(); ++i)
     for (unsigned int j = 0; j < input.getHeight(); ++j)
       cvimage.at<cv::Vec3b>(cv::Point(i, j)) =
           cv::Vec3b(image[i][j].getR(), image[i][j].getG(), image[i][j].getB());
 
-  //    cv::Scalar(image[i][j].getR(), image[i][j].getG(), image[i][j].getB());
-
   output = cvimage.clone();
 }
 
-void printCVImage(cv::Mat &output) {
+void printCVImage(const cv::Mat &output) {
   if (!output.data) // Check for invalid input
   {
     std::cout << "Could not open or find the output" << std::endl;
+  } else {
+    cv::namedWindow("Ray Tracer",
+                    cv::WINDOW_AUTOSIZE); // Create a window for display.
+    cv::imshow("Ray Tracer", output);     // Show our image inside it.
+
+    cv::waitKey(0); // Wait for a keystroke in the window
   }
-
-  cv::namedWindow("Ray Tracer",
-                  cv::WINDOW_AUTOSIZE); // Create a window for display.
-  cv::imshow("Ray Tracer", output); // Show our image inside it.
-
-  cv::waitKey(0); // Wait for a keystroke in the window
 }
 }
