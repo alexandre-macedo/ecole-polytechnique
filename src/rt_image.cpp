@@ -33,3 +33,4 @@ std::ostream &operator<<(std::ostream &s, const RtImage &im) {
 }
 
 std::vector<std::vector<RtColor>> &RtImage::getImage() { return this->image_; }
+std::vector<std::vector<RtColor>> RtImage::getConstImage() const { return this->image_; }

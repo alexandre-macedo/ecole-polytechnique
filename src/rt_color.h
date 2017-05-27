@@ -13,6 +13,7 @@ public:
   int getR() const;
   int getG() const;
   int getB() const;
+  RtColor darker(double );
 
 private:
   int r_, g_, b_;

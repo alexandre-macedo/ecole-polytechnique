@@ -31,20 +31,20 @@ bool intersection(const RtSphere &sph, const RtRay &r, RtVector &i) {
   return true;
 }
 
-bool intersection(const RtScene &scene, const RtRay &ray, RtSphere &sphere,
-                  RtVector &intersectionVector) {
+bool intersection(const RtScene &scene, const RtRay &ray,
+                  RtSphere &intersectionSphere, RtVector &intersectionVector) {
   double minDist = std::numeric_limits<double>::max();
   bool intersectionFound = false;
   for (unsigned int i = 0; i < scene.size(); ++i) {
     RtSphere currentSphere = scene.at_index(i);
     RtVector currentVector;
     if (intersection(currentSphere, ray, currentVector)) {
-      double dist = (currentSphere.getCenter() - ray.getOrigin()).norm2() -
+      double dist = currentSphere.getCenter().distanceTo(ray.getOrigin()) -
                     currentSphere.getRadius();
       if (dist < minDist) {
         minDist = dist;
         intersectionFound = true;
-        sphere = currentSphere;
+        intersectionSphere = currentSphere;
         intersectionVector = currentVector;
       }
     }
@@ -55,9 +55,9 @@ bool intersection(const RtScene &scene, const RtRay &ray, RtSphere &sphere,
 // "viewer" is the vector from the camera pointing towards the point
 // using Phong Reflection Model -
 // https://en.wikipedia.org/wiki/Phong_reflection_model
-RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer,
-                     const RtLight &light) {
-  if (round(pt.distance(sph.getCenter())) != sph.getRadius()) {
+RtColor colorOfPoint(const RtVector &pt, const RtSphere &sph,
+                     const RtVector &viewer, const RtLight &light) {
+  if (round(pt.distanceTo(sph.getCenter())) != sph.getRadius()) {
     throw std::runtime_error(
         "Point must be in the surface of the sphere in colorOfPoint.");
   }
@@ -76,13 +76,13 @@ RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer,
   RtVector R = (2 * (L * N) * N - L).unit(); // reflection direction
 
   // Constants
-  ks = 0.25;
-  kd = 0.5;
-  ka = 0.5;
+  ks = 1.0;
+  kd = 1.0;
+  ka = 1.0;
   alpha = 2.;
 
   // Color of my ambient
-  ra = ga = ba = 50.0;
+  ra = ga = ba = 0.0;
 
   // rl = colorOfLight.getR();
   // gl = colorOfLight.getG();
@@ -116,54 +116,178 @@ RtColor colorOfPoint(RtVector &pt, RtSphere &sph, RtVector &viewer,
   return RtColor((int)rp, (int)gp, (int)bp); // the point's color
 }
 
+// void generateSimpleImage(const RtScene &scene, const RtCamera &camera,
+//                          const RtLight &light, RtImage &rtimage) {
+//   RtVector intersectionPoint;
+//   RtSphere intersectionSphere;
+//   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
+
+//   RtVector verticalIncrement =
+//       -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
+
+//   RtVector horizontalIncrement =
+//       -((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
+//         (camera.getWidth() / rtimage.getWidth()));
+
+//   RtVector initialPoint =
+//       camera.getTarget() -
+//       (verticalIncrement * 0.5 * (rtimage.getHeight() - 0.5)) -
+//       (horizontalIncrement * 0.5 * (rtimage.getWidth() - 0.5));
+
+//   RtVector rayDirection = camera.getTarget() - camera.getEye();
+
+//   for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
+//     for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
+//       // Get point in space
+//       RtVector currentVector =
+//           initialPoint + (i * horizontalIncrement) + (j * verticalIncrement);
+//       RtRay currentRay(currentVector, rayDirection);
+//       RtVector currentViewer = currentVector - camera.getEye();
+
+//       // Find color
+//       if (intersection(scene, currentRay, intersectionSphere,
+//                        intersectionPoint)) {
+//         image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
+//                                    currentViewer, light);
+//       } else {
+//         image[i][j] = RtColor(255, 255, 255);
+//       }
+//     }
+//   }
+// }
+
+// void generateImageWithShadows(const RtScene &scene, const RtCamera &camera,
+//                               const RtLight &light, RtImage &rtimage) {
+//   RtVector intersectionPoint;
+//   RtSphere intersectionSphere;
+//   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
+
+//   RtVector verticalIncrement =
+//       -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
+
+//   RtVector horizontalIncrement =
+//       -((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
+//         (camera.getWidth() / rtimage.getWidth()));
+
+//   RtVector initialPoint =
+//       camera.getTarget() -
+//       (verticalIncrement * 0.5 * (rtimage.getHeight() - 0.5)) -
+//       (horizontalIncrement * 0.5 * (rtimage.getWidth() - 0.5));
+
+//   RtVector rayDirection = camera.getTarget() - camera.getEye();
+
+//   for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
+//     for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
+//       // Get point in space
+//       RtVector currentVector =
+//           initialPoint + (i * horizontalIncrement) + (j * verticalIncrement);
+//       RtRay imageRay(currentVector, rayDirection);
+//       RtVector currentViewer = currentVector - camera.getEye();
+
+//       // Find color
+//       if (intersection(scene, imageRay, intersectionSphere,
+//                        intersectionPoint)) {
+//         RtRay lightRay(light.getPoint(), intersectionPoint -
+//         light.getPoint());
+//         RtSphere lightIntersectionSphere;
+//         RtVector lightIntersectionVector;
+//         // Check if light hits another sphere first
+//         if (intersection(scene, lightRay, lightIntersectionSphere,
+//                          lightIntersectionVector)) {
+//           if (lightIntersectionVector == intersectionPoint) {
+//             image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
+//                                        currentViewer, light);
+//           } else {
+//             image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
+//                                        currentViewer, light)
+//                               .darker(0.5);
+//           }
+//         }
+
+//       } else {
+//         image[i][j] = RtColor(255, 255, 255);
+//       }
+//     }
+//   }
+// }
+
 void generateImage(const RtScene &scene, const RtCamera &camera,
-                   const RtLight &light, RtImage &rtimage) {
+                   const RtLight &light, RtImage &rtimage, imageType imType) {
   RtVector intersectionPoint;
-  RtSphere currentSphere;
+  RtSphere intersectionSphere;
   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
 
   RtVector verticalIncrement =
       -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
 
   RtVector horizontalIncrement =
-      (camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
-      (camera.getWidth() / rtimage.getWidth());
+      -((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
+        (camera.getWidth() / rtimage.getWidth()));
 
   RtVector initialPoint =
-      camera.getTarget() + (camera.getUp() * camera.getHeight() * 0.5 *
-                            (1.0 - 1.0 / rtimage.getHeight())) -
-      ((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
-       camera.getWidth() * 0.5 * (1.0 - 1.0 / rtimage.getWidth()));
+      camera.getTarget() -
+      (verticalIncrement * 0.5 * (rtimage.getHeight() - 0.5)) -
+      (horizontalIncrement * 0.5 * (rtimage.getWidth() - 0.5));
+
+  RtVector rayDirection = camera.getTarget() - camera.getEye();
 
   for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
     for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
       // Get point in space
       RtVector currentVector =
-          initialPoint + i * horizontalIncrement + j * verticalIncrement;
-      RtRay currentRay(camera.getEye(), currentVector - camera.getEye());
-      RtVector viewer = currentVector - camera.getEye();
-      
+          initialPoint + (i * horizontalIncrement) + (j * verticalIncrement);
+      RtRay imageRay(currentVector, rayDirection);
+      RtVector currentViewer = currentVector - camera.getEye();
+
       // Find color
-      if (intersection(scene, currentRay, currentSphere, intersectionPoint)) {
-        //  std::cout << "Intersection point " << intersectionPoint <<
-        //  std::endl;
-        //  std::cout << "Sphere " << currentSphere << std::endl;
-        //  std::cout << "Viewer " << viewer << std::endl;
-        //  std::cout << colorOfPoint(intersectionPoint, currentSphere, viewer,
-        //                            light)
-        //            << std::endl;
-        image[i][j] =
-            colorOfPoint(intersectionPoint, currentSphere, viewer, light);
-      } else {
-        image[i][j] = RtColor(255, 255, 255);
+      switch (imType) {
+      case imageType::SIMPLE: {
+        if (intersection(scene, imageRay, intersectionSphere,
+                         intersectionPoint)) {
+          image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
+                                     currentViewer, light);
+        } else {
+          image[i][j] = RtColor(255, 255, 255);
+        }
+        break;
+      }
+      case imageType::WITHSHADOWS: {
+        if (intersection(scene, imageRay, intersectionSphere,
+                         intersectionPoint)) {
+          RtRay lightRay(light.getPoint(),
+                         intersectionPoint - light.getPoint());
+          RtSphere lightIntersectionSphere;
+          RtVector lightIntersectionVector;
+          // Check if light hits another sphere first
+          if (intersection(scene, lightRay, lightIntersectionSphere,
+                           lightIntersectionVector)) {
+            if (lightIntersectionVector == intersectionPoint) {
+              image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
+                                         currentViewer, light);
+            } else {
+              image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
+                                         currentViewer, light)
+                                .darker(0.5);
+            }
+          }
+
+        } else {
+          image[i][j] = RtColor(255, 255, 255);
+        }
+        break;
+      }
+      case imageType::WITHREFLECTION: {
+        std::cout << "TODO" << std::endl;
+        break;
+      }
       }
     }
   }
 }
 
-void convertToOpenCV(RtImage &input, cv::Mat &output) {
+void convertToOpenCV(const RtImage &input, cv::Mat &output) {
 
-  std::vector<std::vector<RtColor>> &image = input.getImage();
+  std::vector<std::vector<RtColor>> image = input.getConstImage();
   cv::Mat cvimage(input.getHeight(), input.getWidth(), CV_8UC3,
                   cv::Scalar(255, 255, 255));
 
@@ -185,6 +309,15 @@ void printCVImage(const cv::Mat &output) {
     cv::imshow("Ray Tracer", output);     // Show our image inside it.
 
     cv::waitKey(0); // Wait for a keystroke in the window
+  }
+}
+
+void saveCVImage(const cv::Mat &output, const std::string &name) {
+  if (!output.data) // Check for invalid input
+  {
+    std::cout << "Could not open or find the output." << std::endl;
+  } else {
+    cv::imwrite(name + ".jpg", output);
   }
 }
 }

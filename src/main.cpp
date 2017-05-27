@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <string>
 
 #include <opencv2/core/core.hpp>
 
@@ -101,35 +102,47 @@ int main() {
   std::cout << "Testing image Creation" << std::endl;
 
   RtCamera cameraImageTest(RtVector(0, 0, 0), RtVector(1, 0, 0),
-                           RtVector(0, 1, 0), 4, 4);
+                           RtVector(0, 1, 0), 20, 20);
   std::cout << "Camera:" << cameraImageTest << std::endl;
 
   RtSphere sphereImageTest(RtVector(4, 0, 0), 2.0, RtColor(51, 255, 51));
   std::cout << "Sphere:" << sphereImageTest << std::endl;
 
-  RtSphere sphereImageTest2(RtVector(4, 2, 0), 2.0, RtColor(255, 255, 0));
+  RtSphere sphereImageTest2(RtVector(8, 1, 0), 2.0, RtColor(255, 255, 51));
   std::cout << "Sphere:" << sphereImageTest2 << std::endl;
+
+  RtSphere sphereImageTest3(RtVector(8, 1, 4), 2.0, RtColor(255, 255, 51));
+  std::cout << "Sphere:" << sphereImageTest3 << std::endl;
 
   RtScene sceneImageTest;
   sceneImageTest.add(sphereImageTest);
   sceneImageTest.add(sphereImageTest2);
+  sceneImageTest.add(sphereImageTest3);
   std::cout << "Scene:" << sceneImageTest << std::endl;
 
-  RtLight lightImageTest(RtVector(0, 0, 0), RtColor(255, 255, 255));
+  RtLight lightImageTest(RtVector(-4, 0, 0), RtColor(255, 255, 255));
   std::cout << "Light:" << lightImageTest << std::endl;
 
   RtImage imageImageTest(800, 800);
   std::cout << "Image:" << imageImageTest.info() << std::endl;
+  RtImage imageImageTest2(800, 800);
+  std::cout << "Image:" << imageImageTest.info() << std::endl;
+
+  // RtTools::generateSimpleImage(sceneImageTest, cameraImageTest, lightImageTest,
+  //                              imageImageTest);
+  // RtTools::generateImageWithShadows(sceneImageTest, cameraImageTest, lightImageTest,
+  //                              imageImageTest2);
 
   RtTools::generateImage(sceneImageTest, cameraImageTest, lightImageTest,
-                         imageImageTest);
-
-  // std::ofstream myfile;
-  // myfile.open("example.txt");
-  // myfile << imageImageTest;
-  // myfile.close();
+                               imageImageTest, RtTools::imageType::SIMPLE);
+  RtTools::generateImage(sceneImageTest, cameraImageTest, lightImageTest,
+                               imageImageTest2, RtTools::imageType::WITHSHADOWS);
 
   cv::Mat output;
   RtTools::convertToOpenCV(imageImageTest, output);
-  RtTools::printCVImage(output);
+  RtTools::saveCVImage(output, "test1");
+  cv::Mat output2;
+  RtTools::convertToOpenCV(imageImageTest2, output2);
+  RtTools::saveCVImage(output2, "test2");
+  RtTools::printCVImage(output2);
 }

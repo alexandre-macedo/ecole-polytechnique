@@ -21,3 +21,8 @@ int RtColor::getR() const { return this->r_; }
 int RtColor::getG() const { return this->g_; }
 
 int RtColor::getB() const { return this->b_; }
+
+RtColor RtColor::darker(double percentage) {
+  double comple = 1.0 - percentage;
+  return RtColor(this->r_ *= comple, this->g_ *= comple, this->b_ *= comple);
+}

@@ -19,6 +19,7 @@ public:
   int getWidth() const;
   friend std::ostream &operator<<(std::ostream &, const RtImage &);
   std::vector<std::vector<RtColor>>& getImage();
+  std::vector<std::vector<RtColor>> getConstImage() const;
   std::string info() const;
 
 private:
