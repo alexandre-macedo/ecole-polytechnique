@@ -319,56 +319,69 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
   }
   int pos_col = start % w; // column position
   int pos_lin = (start-pos_col)/h; // line position
+  std::vector<RtColor> colors;
+  RtColor color;
 
-  for(int j=0; j<npixels_here; j++){
-    // Get point in space
-      RtVector current_vector = initial_point + (i * horizontal_increment) + (j * vertical_increment);
-      RtRay image_ray(current_vector, ray_direction);
-      RtVector current_viewer = camera.getEye() - current_vector;
-
-      // Find color
-      switch (reflection) {
-      case Reflection::OFF: {
-        image[i][j] =
-            colorOfPoint(scene, light, image_ray, current_viewer, shadows);
-        break;
-      }
-      case Reflection::ON: {
-        image[i][j] = colorOfPointRecursive(scene, light, image_ray,
-                                            current_viewer, shadows);
-        break;
-      }
-      }
-
-    start++;
-    pos_col = start % w;
-    pos_lin = (start-pos_col)/h;
-  }
-
-  // soh na root
-  for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
-    for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
+  for(int j = 0; j < npixels_here; j++){
       // Get point in space
-      RtVector current_vector =
-          initial_point + (i * horizontal_increment) + (j * vertical_increment);
+      RtVector current_vector = initial_point + (pos_col * horizontal_increment) + (pos_lin * vertical_increment);
       RtRay image_ray(current_vector, ray_direction);
       RtVector current_viewer =  camera.getEye() - current_vector;
 
       // Find color
       switch (reflection) {
         case Reflection::OFF: {
-          image[i][j] =
-              colorOfPoint(scene, light, image_ray, current_viewer, shadows);
+          color = colorOfPoint(scene, light, image_ray, current_viewer, shadows);
           break;
         }
         case Reflection::ON: {
-          image[i][j] = colorOfPointRecursive(scene, light, image_ray,
-                                              current_viewer, shadows);
+          color = colorOfPointRecursive(scene, light, image_ray, current_viewer, shadows);
           break;
         }
       }
+      colors.push_back(color);
+
+      if(rank == 0){
+        image[pos_lin][pos_col] = color;
+      }
+
+      start++;
+      pos_col = start % w;
+      pos_lin = (start-pos_col)/h;
+  }
+
+  std::vector<RtColor> other_colors;
+  if(rank != 0){
+    world.send(0, 1, colors);
+  }
+  else{ // rank == 0
+    for(int other_rank = 1; other_rank<p; other_rank++){
+      world.recv(other_rank, 1, other_colors);
+      
+      int other_npixels_here = total_pixels/p;
+      int other_start;
+      if(other_rank < total_pixels%p){
+        other_npixels_here++;
+        other_start = other_rank * other_npixels_here;
+      }
+      else{
+        other_start = other_rank * other_npixels_here + (total_pixels%p);
+      }
+      int other_pos_col = other_start % w; // column position
+      int other_pos_lin = (other_start-other_pos_col)/h; // line position
+
+      for(int j=0; j < other_colors.size(); j++){
+        image[other_pos_lin][other_pos_col] = other_colors[j];
+
+        other_start++;
+        other_pos_col = other_start % w;
+        other_pos_lin = (other_start-other_pos_col)/h;
+      }
+
     }
   }
+
+  
 }
 
 
