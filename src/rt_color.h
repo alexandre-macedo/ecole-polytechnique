@@ -10,10 +10,14 @@ public:
   ~RtColor();
   RtColor(int r, int g, int b);
   friend std::ostream &operator<<(std::ostream &, const RtColor &);
+  RtColor operator+(const RtColor&) const;
+  RtColor operator*(const double) const;
   int getR() const;
   int getG() const;
   int getB() const;
-  void copyHere(const RtColor&);
+  RtColor darker(double);
+  void copyHere(const RtColor &);
+
 private:
   int r_, g_, b_;
 };

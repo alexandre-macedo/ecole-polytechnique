@@ -18,6 +18,7 @@ public:
   RtVector &operator+=(const RtVector &);
   RtVector &operator-=(const RtVector &);
   RtVector &operator*=(const double &d);
+  bool operator==(const RtVector &);
   friend std::ostream &operator<<(std::ostream &, const RtVector &);
   RtVector cross(const RtVector &);
   RtVector unit() const;
@@ -26,6 +27,7 @@ public:
   double getX() const;
   double getY() const;
   double getZ() const;
+
 
 private:
   double x_, y_, z_;

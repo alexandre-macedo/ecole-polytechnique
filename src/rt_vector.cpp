@@ -1,3 +1,5 @@
+#define DOUBLE_COMPARE 1.0e-6
+
 #include <cmath>
 
 #include "rt_vector.h"
@@ -63,6 +65,10 @@ RtVector &RtVector::operator*=(const double &d) {
   return *this;
 }
 
+bool RtVector::operator==(const RtVector & vec){
+return this->distanceTo(vec) < DOUBLE_COMPARE;
+};
+
 std::ostream &operator<<(std::ostream &s, const RtVector &v) {
   s << "(" << v.x_ << ", " << v.y_ << ", " << v.z_ << ")";
   return s;
@@ -82,7 +88,7 @@ RtVector RtVector::cross(const RtVector &v) {
 RtVector RtVector::unit() const { return *this * (1.0 / this->norm2()); }
 
 double RtVector::distanceTo(const RtVector &other) const {
-  return ((*this)-other).norm2();
+  return ((*this) - other).norm2();
 }
 
 double RtVector::getX() const{
