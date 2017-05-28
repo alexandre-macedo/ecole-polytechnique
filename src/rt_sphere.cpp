@@ -27,7 +27,8 @@ RtSphere::RtSphere(const RtVector &center, double rad, const RtColor &color,
 }
 
 std::ostream &operator<<(std::ostream &s, const RtSphere &sp) {
-  s << "[" << sp.center_ << ", " << sp.radius_ << ", " << sp.color_ << "]";
+  s << "[" << sp.center_ << ", " << sp.radius_ << ", " << sp.color_ << ", "
+    << sp.reflectionCoeficient_ << "]";
   return s;
 };
 

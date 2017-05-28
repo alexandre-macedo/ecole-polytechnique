@@ -34,6 +34,8 @@ RtColor colorOfPoint(const RtScene &, const RtLight &, const RtRay &,
 RtColor colorOfPointRecursive(const RtScene &, const RtLight &, const RtRay &,
                               const RtVector &, const Shadows);
 
+void newScene(const RtScene &, const RtCamera &, RtScene & );
+
 void generateImage(const RtScene &scene, const RtCamera &camera,
                    const RtLight &light, RtImage &rtimage, const Shadows, const Reflection);
 

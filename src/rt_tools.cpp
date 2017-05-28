@@ -66,10 +66,10 @@ bool intersection(const RtScene &scene, const RtRay &ray,
 RtColor colorOfPoint(const RtVector &pt, const RtSphere &sph,
                      const RtVector &viewer, const RtLight &light) {
 
-  if (round(pt.distanceTo(sph.getCenter())) != sph.getRadius()) {
-    throw std::runtime_error(
-        "Point must be in the surface of the sphere in colorOfPoint.");
-  }
+  // if (round(pt.distanceTo(sph.getCenter())) != sph.getRadius()) {
+  //   throw std::runtime_error(
+  //       "Point must be in the surface of the sphere in colorOfPoint.");
+  // }
 
   double ks, kd, ka, alpha;
   double ra, ga, ba; // red, green and blue of the ambient
@@ -141,14 +141,14 @@ RtColor colorOfPoint(const RtVector &pt, const RtSphere &sph,
 }
 
 RtColor colorOfPoint(const RtScene &scene, const RtLight &light,
-                     const RtRay &ray, const RtVector &viewer,
+                     const RtRay &ray, const RtVector &viewer_eye,
                      const Shadows shadows) {
   RtVector intersection_point;
   RtSphere intersection_sphere;
   if (intersection(scene, ray, intersection_sphere, intersection_point)) {
     switch (shadows) {
     case Shadows::OFF: {
-      return colorOfPoint(intersection_point, intersection_sphere, viewer,
+      return colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
                           light);
     }
     case Shadows::ON: {
@@ -159,10 +159,10 @@ RtColor colorOfPoint(const RtScene &scene, const RtLight &light,
       intersection(scene, ligth_ray, light_intersection_sphere,
                    light_intersection_vector);
       if (light_intersection_vector == intersection_point) {
-        return colorOfPoint(intersection_point, intersection_sphere, viewer,
+        return colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
                             light);
       } else {
-        return colorOfPoint(intersection_point, intersection_sphere, viewer,
+        return colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
                             light)
             .darker(SHADOW_PERCENTAGE);
       }
@@ -174,7 +174,7 @@ RtColor colorOfPoint(const RtScene &scene, const RtLight &light,
 }
 
 RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
-                              const RtRay &ray, const RtVector &viewer,
+                              const RtRay &ray, const RtVector &viewer_eye,
                               const Shadows shadows) {
   const double DELTA = 1.0e-6;
   RtVector intersection_point;
@@ -188,7 +188,7 @@ RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
     RtRay new_ray(intersection_point + DELTA * new_direction, new_direction);
     switch (shadows) {
     case Shadows::OFF: {
-      return (colorOfPoint(intersection_point, intersection_sphere, viewer,
+      return (colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
                            light) *
               (1.0 - intersection_sphere.getReflectionCoeficient())) +
              (colorOfPointRecursive(scene, light, new_ray, new_viewer,
@@ -203,18 +203,18 @@ RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
       intersection(scene, ligth_ray, light_intersection_sphere,
                    light_intersection_vector);
       if (light_intersection_vector == intersection_point) {
-        return (colorOfPoint(intersection_point, intersection_sphere, viewer,
+        return (colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
                              light) *
                 (1.0 - intersection_sphere.getReflectionCoeficient())) +
                (colorOfPointRecursive(scene, light, new_ray, new_viewer,
                                       shadows) *
                 intersection_sphere.getReflectionCoeficient());
       } else {
-        return ((colorOfPoint(intersection_point, intersection_sphere, viewer,
+        return ((colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
                               light) *
                  (1.0 - intersection_sphere.getReflectionCoeficient())) +
-                (colorOfPointRecursive(scene, light, new_ray,
-                                       new_viewer, shadows) *
+                (colorOfPointRecursive(scene, light, new_ray, new_viewer,
+                                       shadows) *
                  intersection_sphere.getReflectionCoeficient()))
             .darker(SHADOW_PERCENTAGE);
       }
@@ -223,6 +223,21 @@ RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
 
   } else {
     return RtColor(255, 255, 255);
+  }
+}
+
+void newScene(const RtScene &scene, const RtCamera &camera,
+              RtScene &new_scene) {
+  for (unsigned int i = 0; i < scene.size(); ++i) {
+    RtSphere current_sphere = scene.at_index(i);
+    double d1 = (current_sphere.getCenter() - camera.getEye()) *
+                ((camera.getTarget() - camera.getEye()).unit());
+    double r_image = (camera.getTarget() - camera.getEye()).norm2() *
+                     current_sphere.getRadius() / d1;
+    RtSphere new_sphere(current_sphere.getCenter(), r_image,
+                        current_sphere.getColor(),
+                        current_sphere.getReflectionCoeficient());
+    new_scene.add(new_sphere);
   }
 }
 
@@ -253,18 +268,18 @@ void generateImage(const RtScene &scene, const RtCamera &camera,
       RtVector current_vector =
           initial_point + (i * horizontal_increment) + (j * vertical_increment);
       RtRay image_ray(current_vector, ray_direction);
-      RtVector current_viewer =  camera.getEye() - current_vector;
+      //RtVector current_viewer = camera.getEye() - current_vector;
 
       // Find color
       switch (reflection) {
       case Reflection::OFF: {
         image[i][j] =
-            colorOfPoint(scene, light, image_ray, current_viewer, shadows);
+            colorOfPoint(scene, light, image_ray, camera.getEye(), shadows);
         break;
       }
       case Reflection::ON: {
         image[i][j] = colorOfPointRecursive(scene, light, image_ray,
-                                            current_viewer, shadows);
+                                            camera.getEye(), shadows);
         break;
       }
       }
