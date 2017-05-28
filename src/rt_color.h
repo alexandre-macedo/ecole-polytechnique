@@ -10,6 +10,8 @@ public:
   ~RtColor();
   RtColor(int r, int g, int b);
   friend std::ostream &operator<<(std::ostream &, const RtColor &);
+  RtColor operator+(const RtColor&) const;
+  RtColor operator*(const double) const;
   int getR() const;
   int getG() const;
   int getB() const;

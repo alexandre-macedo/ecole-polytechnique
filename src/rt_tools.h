@@ -16,7 +16,9 @@
 #include "rt_vector.h"
 
 namespace RtTools {
-enum class imageType { SIMPLE , WITHSHADOWS, WITHREFLECTION};
+enum class Shadows { ON, OFF };
+
+enum class Reflection { ON, OFF };
 
 bool intersection(const RtSphere &, const RtRay &, RtVector &);
 
@@ -26,14 +28,14 @@ bool intersection(const RtScene &, const RtRay &, RtSphere &, RtVector &);
 RtColor colorOfPoint(const RtVector &, const RtSphere &, const RtVector &,
                      const RtLight &);
 
-// void generateSimpleImage(const RtScene &, const RtCamera &, const RtLight &,
-//                          RtImage &);
+RtColor colorOfPoint(const RtScene &, const RtLight &, const RtRay &,
+                     const RtVector &, const Shadows);
 
-// void generateImageWithShadows(const RtScene &, const RtCamera &,
-//                               const RtLight &, RtImage &);
+RtColor colorOfPointRecursive(const RtScene &, const RtLight &, const RtRay &,
+                              const RtVector &, const Shadows);
 
 void generateImage(const RtScene &scene, const RtCamera &camera,
-                   const RtLight &light, RtImage &rtimage, imageType);
+                   const RtLight &light, RtImage &rtimage, const Shadows, const Reflection);
 
 void convertToOpenCV(const RtImage &, cv::Mat &);
 

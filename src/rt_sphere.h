@@ -17,6 +17,7 @@ public:
   bool operator==(const RtSphere &) const;
   RtVector getCenter() const;
   double getRadius() const;
+  double getReflectionCoeficient() const;
   RtColor getColor() const;
   void copyHere(RtSphere &);
 

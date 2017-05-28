@@ -40,6 +40,10 @@ RtVector RtSphere::getCenter() const { return center_; }
 
 double RtSphere::getRadius() const { return radius_; }
 
+double RtSphere::getReflectionCoeficient() const {
+  return reflectionCoeficient_;
+}
+
 RtColor RtSphere::getColor() const { return color_; }
 
 void RtSphere::copyHere(RtSphere &other) {

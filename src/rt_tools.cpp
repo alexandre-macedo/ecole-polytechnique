@@ -8,7 +8,13 @@
 #include "rt_tools.h"
 
 namespace RtTools {
+const double SHADOW_PERCENTAGE = 1.0;
+
 bool intersection(const RtSphere &sph, const RtRay &r, RtVector &i) {
+  const double DELTA = 1.0e-6;
+  if ((r.getOrigin() + DELTA * r.getDirection()).distanceTo(sph.getCenter()) >
+      r.getOrigin().distanceTo(sph.getCenter()))
+    return false;
   RtVector center = sph.getCenter();
   double radius = sph.getRadius();
   RtVector dir = r.getDirection();
@@ -32,24 +38,25 @@ bool intersection(const RtSphere &sph, const RtRay &r, RtVector &i) {
 }
 
 bool intersection(const RtScene &scene, const RtRay &ray,
-                  RtSphere &intersectionSphere, RtVector &intersectionVector) {
-  double minDist = std::numeric_limits<double>::max();
-  bool intersectionFound = false;
+                  RtSphere &intersection_sphere,
+                  RtVector &intersection_vector) {
+  double mind_dist = std::numeric_limits<double>::max();
+  bool intersection_found = false;
   for (unsigned int i = 0; i < scene.size(); ++i) {
-    RtSphere currentSphere = scene.at_index(i);
-    RtVector currentVector;
-    if (intersection(currentSphere, ray, currentVector)) {
-      double dist = currentSphere.getCenter().distanceTo(ray.getOrigin()) -
-                    currentSphere.getRadius();
-      if (dist < minDist) {
-        minDist = dist;
-        intersectionFound = true;
-        intersectionSphere = currentSphere;
-        intersectionVector = currentVector;
+    RtSphere current_sphere = scene.at_index(i);
+    RtVector current_vector;
+    if (intersection(current_sphere, ray, current_vector)) {
+      double dist = current_sphere.getCenter().distanceTo(ray.getOrigin()) -
+                    current_sphere.getRadius();
+      if (dist < mind_dist) {
+        mind_dist = dist;
+        intersection_found = true;
+        intersection_sphere = current_sphere;
+        intersection_vector = current_vector;
       }
     }
   }
-  return intersectionFound;
+  return intersection_found;
 }
 
 // "viewer" is the vector from the camera pointing towards the point
@@ -84,7 +91,10 @@ RtColor colorOfPoint(const RtVector &pt, const RtSphere &sph,
   alpha = 2.;
 
   // Color of my ambient
-  ra = ga = ba = 0.0;
+  // ra = ga = ba = 0.0;
+  ra = (double)light.getColor().getR();
+  ga = (double)light.getColor().getG();
+  ba = (double)light.getColor().getB();
 
   // rl = colorOfLight.getR();
   // gl = colorOfLight.getG();
@@ -115,171 +125,146 @@ RtColor colorOfPoint(const RtVector &pt, const RtSphere &sph,
     }
   }
 
+  if (rp > 255)
+    rp = 255;
+  if (gp > 255)
+    gp = 255;
+  if (bp > 255)
+    bp = 255;
+  if (rp < 0)
+    rp = 0;
+  if (gp < 0)
+    gp = 0;
+  if (bp < 0)
+    bp = 0;
   return RtColor((int)rp, (int)gp, (int)bp); // the point's color
 }
 
-// void generateSimpleImage(const RtScene &scene, const RtCamera &camera,
-//                          const RtLight &light, RtImage &rtimage) {
-//   RtVector intersectionPoint;
-//   RtSphere intersectionSphere;
-//   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
+RtColor colorOfPoint(const RtScene &scene, const RtLight &light,
+                     const RtRay &ray, const RtVector &viewer,
+                     const Shadows shadows) {
+  RtVector intersection_point;
+  RtSphere intersection_sphere;
+  if (intersection(scene, ray, intersection_sphere, intersection_point)) {
+    switch (shadows) {
+    case Shadows::OFF: {
+      return colorOfPoint(intersection_point, intersection_sphere, viewer,
+                          light);
+    }
+    case Shadows::ON: {
+      RtRay ligth_ray(light.getPoint(), intersection_point - light.getPoint());
+      RtSphere light_intersection_sphere;
+      RtVector light_intersection_vector;
+      // Check if light hits another sphere first
+      intersection(scene, ligth_ray, light_intersection_sphere,
+                   light_intersection_vector);
+      if (light_intersection_vector == intersection_point) {
+        return colorOfPoint(intersection_point, intersection_sphere, viewer,
+                            light);
+      } else {
+        return colorOfPoint(intersection_point, intersection_sphere, viewer,
+                            light)
+            .darker(SHADOW_PERCENTAGE);
+      }
+    }
+    }
+  } else {
+    return RtColor(255, 255, 255);
+  }
+}
 
-//   RtVector verticalIncrement =
-//       -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
+RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
+                              const RtRay &ray, const RtVector &viewer,
+                              const Shadows shadows) {
+  const double DELTA = 1.0e-6;
+  RtVector intersection_point;
+  RtSphere intersection_sphere;
+  if (intersection(scene, ray, intersection_sphere, intersection_point)) {
+    RtVector normal =
+        (intersection_point - intersection_sphere.getCenter()).unit();
+    RtVector new_direction =
+        ray.getDirection() - 2 * (ray.getDirection() * normal) * normal;
+    RtVector new_viewer = -new_direction;
+    RtRay new_ray(intersection_point + DELTA * new_direction, new_direction);
+    switch (shadows) {
+    case Shadows::OFF: {
+      return (colorOfPoint(intersection_point, intersection_sphere, viewer,
+                           light) *
+              (1.0 - intersection_sphere.getReflectionCoeficient())) +
+             (colorOfPointRecursive(scene, light, new_ray, new_viewer,
+                                    shadows) *
+              intersection_sphere.getReflectionCoeficient());
+    }
+    case Shadows::ON: {
+      RtRay ligth_ray(light.getPoint(), intersection_point - light.getPoint());
+      RtSphere light_intersection_sphere;
+      RtVector light_intersection_vector;
+      // Check if light hits another sphere first
+      intersection(scene, ligth_ray, light_intersection_sphere,
+                   light_intersection_vector);
+      if (light_intersection_vector == intersection_point) {
+        return (colorOfPoint(intersection_point, intersection_sphere, viewer,
+                             light) *
+                (1.0 - intersection_sphere.getReflectionCoeficient())) +
+               (colorOfPointRecursive(scene, light, new_ray, new_viewer,
+                                      shadows) *
+                intersection_sphere.getReflectionCoeficient());
+      } else {
+        return ((colorOfPoint(intersection_point, intersection_sphere, viewer,
+                              light) *
+                 (1.0 - intersection_sphere.getReflectionCoeficient())) +
+                (colorOfPointRecursive(scene, light, new_ray,
+                                       new_viewer, shadows) *
+                 intersection_sphere.getReflectionCoeficient()))
+            .darker(SHADOW_PERCENTAGE);
+      }
+    }
+    }
 
-//   RtVector horizontalIncrement =
-//       -((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
-//         (camera.getWidth() / rtimage.getWidth()));
-
-//   RtVector initialPoint =
-//       camera.getTarget() -
-//       (verticalIncrement * 0.5 * (rtimage.getHeight() - 0.5)) -
-//       (horizontalIncrement * 0.5 * (rtimage.getWidth() - 0.5));
-
-//   RtVector rayDirection = camera.getTarget() - camera.getEye();
-
-//   for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
-//     for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
-//       // Get point in space
-//       RtVector currentVector =
-//           initialPoint + (i * horizontalIncrement) + (j * verticalIncrement);
-//       RtRay currentRay(currentVector, rayDirection);
-//       RtVector currentViewer = currentVector - camera.getEye();
-
-//       // Find color
-//       if (intersection(scene, currentRay, intersectionSphere,
-//                        intersectionPoint)) {
-//         image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
-//                                    currentViewer, light);
-//       } else {
-//         image[i][j] = RtColor(255, 255, 255);
-//       }
-//     }
-//   }
-// }
-
-// void generateImageWithShadows(const RtScene &scene, const RtCamera &camera,
-//                               const RtLight &light, RtImage &rtimage) {
-//   RtVector intersectionPoint;
-//   RtSphere intersectionSphere;
-//   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
-
-//   RtVector verticalIncrement =
-//       -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
-
-//   RtVector horizontalIncrement =
-//       -((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
-//         (camera.getWidth() / rtimage.getWidth()));
-
-//   RtVector initialPoint =
-//       camera.getTarget() -
-//       (verticalIncrement * 0.5 * (rtimage.getHeight() - 0.5)) -
-//       (horizontalIncrement * 0.5 * (rtimage.getWidth() - 0.5));
-
-//   RtVector rayDirection = camera.getTarget() - camera.getEye();
-
-//   for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
-//     for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
-//       // Get point in space
-//       RtVector currentVector =
-//           initialPoint + (i * horizontalIncrement) + (j * verticalIncrement);
-//       RtRay imageRay(currentVector, rayDirection);
-//       RtVector currentViewer = currentVector - camera.getEye();
-
-//       // Find color
-//       if (intersection(scene, imageRay, intersectionSphere,
-//                        intersectionPoint)) {
-//         RtRay lightRay(light.getPoint(), intersectionPoint -
-//         light.getPoint());
-//         RtSphere lightIntersectionSphere;
-//         RtVector lightIntersectionVector;
-//         // Check if light hits another sphere first
-//         if (intersection(scene, lightRay, lightIntersectionSphere,
-//                          lightIntersectionVector)) {
-//           if (lightIntersectionVector == intersectionPoint) {
-//             image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
-//                                        currentViewer, light);
-//           } else {
-//             image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
-//                                        currentViewer, light)
-//                               .darker(0.5);
-//           }
-//         }
-
-//       } else {
-//         image[i][j] = RtColor(255, 255, 255);
-//       }
-//     }
-//   }
-// }
+  } else {
+    return RtColor(255, 255, 255);
+  }
+}
 
 void generateImage(const RtScene &scene, const RtCamera &camera,
-                   const RtLight &light, RtImage &rtimage, imageType imType) {
-  RtVector intersectionPoint;
-  RtSphere intersectionSphere;
+                   const RtLight &light, RtImage &rtimage,
+                   const Shadows shadows, const Reflection reflection) {
+  RtVector intersection_point;
+  RtSphere intersection_sphere;
   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
 
-  RtVector verticalIncrement =
+  RtVector vertical_increment =
       -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
 
-  RtVector horizontalIncrement =
+  RtVector horizontal_increment =
       -((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
         (camera.getWidth() / rtimage.getWidth()));
 
-  RtVector initialPoint =
+  RtVector initial_point =
       camera.getTarget() -
-      (verticalIncrement * 0.5 * (rtimage.getHeight() - 0.5)) -
-      (horizontalIncrement * 0.5 * (rtimage.getWidth() - 0.5));
+      (vertical_increment * 0.5 * (rtimage.getHeight() - 0.5)) -
+      (horizontal_increment * 0.5 * (rtimage.getWidth() - 0.5));
 
-  RtVector rayDirection = camera.getTarget() - camera.getEye();
+  RtVector ray_direction = camera.getTarget() - camera.getEye();
 
   for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
     for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
       // Get point in space
-      RtVector currentVector =
-          initialPoint + (i * horizontalIncrement) + (j * verticalIncrement);
-      RtRay imageRay(currentVector, rayDirection);
-      RtVector currentViewer = currentVector - camera.getEye();
+      RtVector current_vector =
+          initial_point + (i * horizontal_increment) + (j * vertical_increment);
+      RtRay image_ray(current_vector, ray_direction);
+      RtVector current_viewer =  camera.getEye() - current_vector;
 
       // Find color
-      switch (imType) {
-      case imageType::SIMPLE: {
-        if (intersection(scene, imageRay, intersectionSphere,
-                         intersectionPoint)) {
-          image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
-                                     currentViewer, light);
-        } else {
-          image[i][j] = RtColor(255, 255, 255);
-        }
+      switch (reflection) {
+      case Reflection::OFF: {
+        image[i][j] =
+            colorOfPoint(scene, light, image_ray, current_viewer, shadows);
         break;
       }
-      case imageType::WITHSHADOWS: {
-        if (intersection(scene, imageRay, intersectionSphere,
-                         intersectionPoint)) {
-          RtRay lightRay(light.getPoint(),
-                         intersectionPoint - light.getPoint());
-          RtSphere lightIntersectionSphere;
-          RtVector lightIntersectionVector;
-          // Check if light hits another sphere first
-          if (intersection(scene, lightRay, lightIntersectionSphere,
-                           lightIntersectionVector)) {
-            if (lightIntersectionVector == intersectionPoint) {
-              image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
-                                         currentViewer, light);
-            } else {
-              image[i][j] = colorOfPoint(intersectionPoint, intersectionSphere,
-                                         currentViewer, light)
-                                .darker(0.5);
-            }
-          }
-
-        } else {
-          image[i][j] = RtColor(255, 255, 255);
-        }
-        break;
-      }
-      case imageType::WITHREFLECTION: {
-        std::cout << "TODO" << std::endl;
+      case Reflection::ON: {
+        image[i][j] = colorOfPointRecursive(scene, light, image_ray,
+                                            current_viewer, shadows);
         break;
       }
       }
