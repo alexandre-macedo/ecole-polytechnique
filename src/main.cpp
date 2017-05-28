@@ -107,6 +107,7 @@ int main() {
   //   std::cout << "Position " << i << " : " << cena.at_index(i) << std::endl;
   // }
 
+<<<<<<< HEAD
   // // Testing Image Creation
   // std::cout << "Testing image Creation" << std::endl;
 
