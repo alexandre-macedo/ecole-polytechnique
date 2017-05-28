@@ -107,7 +107,7 @@ int main() {
   }
 
   // Testing Image Creation
-  std::cout << "Testing image Creation" << std::endl;
+  std::cout << "########## Testing image Creation ##########" << std::endl;
 
   RtCamera cameraImageTest(RtVector(0, 0, 0), RtVector(1, 0, 0),
                            RtVector(0, 1, 0), 4, 4);
