@@ -112,12 +112,14 @@ int main() {
   
   std::cout << "Testing image Creation" << std::endl;
 
+
   RtCamera camera_image_test(RtVector(0, 1, 1), RtVector(1, 1, 1),
                              RtVector(0, 1, 0), 20, 20);
   std::cout << "Camera:" << camera_image_test << std::endl;
 
   RtSphere sphere_image_test(RtVector(4, 0, 0), 2.0, RtColor(51, 255, 51), 0.0);
   std::cout << "Sphere:" << sphere_image_test << std::endl;
+
 
   RtSphere sphere_image_test2(RtVector(4, 6, 0), 2.0, RtColor(51, 255, 255),
                               0.5);
@@ -141,6 +143,7 @@ int main() {
   // RtImage image_image_test2(800, 800);
   // std::cout << "Image:" << image_image_test.info() << std::endl;
 
+
   // RtScene new_scene;
 
   // RtTools::newScene(scene_image_test, camera_image_test, new_scene);
@@ -148,6 +151,7 @@ int main() {
   namespace mpi = boost::mpi;
   mpi::environment env;
   mpi::communicator world;
+
 
   RtTools::MPIgenerateImage(scene_image_test, camera_image_test,
                             light_image_test, image_image_test,

@@ -313,6 +313,7 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
   } else {
     start = rank * npixels_here + (total_pixels % p);
   }
+
   int pos_col = start % w;             // column position
   int pos_lin = (start - pos_col) / h; // line position
   std::vector<RtColor> colors;
@@ -339,13 +340,15 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
     }
     colors.push_back(color);
 
+
     if (rank == 0) {
       image[pos_lin][pos_col] = color;
     }
 
-    start++;
-    pos_col = start % w;
-    pos_lin = (start - pos_col) / h;
+
+      start++;
+      pos_col = start % w;
+      pos_lin = (start-pos_col)/w;
   }
 
   std::vector<RtColor> other_colors;
@@ -360,18 +363,22 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
       if (other_rank < total_pixels % p) {
         other_npixels_here++;
         other_start = other_rank * other_npixels_here;
-      } else {
-        other_start = other_rank * other_npixels_here + (total_pixels % p);
       }
-      int other_pos_col = other_start % w;                   // column position
-      int other_pos_lin = (other_start - other_pos_col) / h; // line position
+      else{
+        other_start = other_rank * other_npixels_here + (total_pixels%p);
+      }
+      int other_pos_col = other_start % w; // column position
+      int other_pos_lin = (other_start-other_pos_col)/w; // line position
+
 
       for (int j = 0; j < other_colors.size(); j++) {
         image[other_pos_lin][other_pos_col] = other_colors[j];
 
         other_start++;
         other_pos_col = other_start % w;
-        other_pos_lin = (other_start - other_pos_col) / h;
+
+        other_pos_lin = (other_start-other_pos_col)/w;
+
       }
     }
   }
