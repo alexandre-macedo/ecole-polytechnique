@@ -4,6 +4,7 @@
 #include <limits>
 #include <math.h>
 #include <stdexcept>
+#include <boost/mpi.hpp>
 
 #include "rt_tools.h"
 
@@ -229,6 +230,8 @@ RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
 void generateImage(const RtScene &scene, const RtCamera &camera,
                    const RtLight &light, RtImage &rtimage,
                    const Shadows shadows, const Reflection reflection) {
+  
+  
   RtVector intersection_point;
   RtSphere intersection_sphere;
   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
@@ -271,6 +274,87 @@ void generateImage(const RtScene &scene, const RtCamera &camera,
     }
   }
 }
+
+
+void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
+                   const RtLight &light, RtImage &rtimage,
+                   const Shadows shadows, const Reflection reflection) {
+  
+  namespace mpi = boost::mpi;
+  mpi::environment env;
+  mpi::communicator world;
+  int p = world.size();
+  int rank = world.rank();
+
+  RtVector intersection_point;
+  RtSphere intersection_sphere;
+  std::vector<std::vector<RtColor>> &image = rtimage.getImage();
+
+  RtVector vertical_increment =
+      -camera.getUp() * (camera.getHeight() / rtimage.getHeight());
+
+  RtVector horizontal_increment =
+      -((camera.getUp().cross(camera.getTarget() - camera.getEye())).unit() *
+        (camera.getWidth() / rtimage.getWidth()));
+
+  RtVector initial_point =
+      camera.getTarget() -
+      (vertical_increment * 0.5 * (rtimage.getHeight() - 0.5)) -
+      (horizontal_increment * 0.5 * (rtimage.getWidth() - 0.5));
+
+  RtVector ray_direction = camera.getTarget() - camera.getEye();
+
+
+  int h = rtimage.getHeight();
+  int w = rtimage.getWidth();
+  int total_pixels = h*w;
+  int npixels_here = total_pixels/p;
+  int start;
+  if(rank < total_pixels%p){
+    npixels_here++;
+    start = rank * npixels_here;
+  }
+  else{
+    start = rank * npixels_here + (total_pixels%p);
+  }
+  int pos_col = start % w; // column position
+  int pos_lin = (start-pos_col)/h; // line position
+
+  for(int j=0; j<npixels_here; j++){
+
+
+    start++;
+    pos_col = start % w;
+    pos_lin = (start-pos_col)/h;
+  }
+
+
+  for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
+    for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
+      // Get point in space
+      RtVector current_vector =
+          initial_point + (i * horizontal_increment) + (j * vertical_increment);
+      RtRay image_ray(current_vector, ray_direction);
+      RtVector current_viewer =  camera.getEye() - current_vector;
+
+      // Find color
+      switch (reflection) {
+      case Reflection::OFF: {
+        image[i][j] =
+            colorOfPoint(scene, light, image_ray, current_viewer, shadows);
+        break;
+      }
+      case Reflection::ON: {
+        image[i][j] = colorOfPointRecursive(scene, light, image_ray,
+                                            current_viewer, shadows);
+        break;
+      }
+      }
+    }
+  }
+}
+
+
 
 void convertToOpenCV(const RtImage &input, cv::Mat &output) {
 

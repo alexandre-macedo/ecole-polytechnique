@@ -42,6 +42,10 @@ void convertToOpenCV(const RtImage &, cv::Mat &);
 void printCVImage(const cv::Mat &);
 
 void saveCVImage(const cv::Mat &, const std::string &);
+
+void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
+                   const RtLight &light, RtImage &rtimage, const Shadows, const Reflection);
+
 }
 
 #endif /* RT_TOOLS_H */

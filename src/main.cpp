@@ -109,18 +109,18 @@ int main() {
   // Testing Image Creation
   std::cout << "########## Testing image Creation ##########" << std::endl;
 
-  RtCamera camera_image_test(RtVector(0, 0, 0), RtVector(1, 0, 0),
-                             RtVector(0, 1, 0), 20, 20);
+  RtCamera camera_image_test(RtVector(-5, 0, 0), RtVector(-4, 0, 0),
+                             RtVector(0, 1, 0), 25, 25);
   std::cout << "Camera:" << camera_image_test << std::endl;
 
-  RtSphere sphere_image_test(RtVector(4, 0, 0), 2.0, RtColor(51, 255, 51), 0.0);
+  RtSphere sphere_image_test(RtVector(0, 0, 0), 2.0, RtColor(51, 255, 51), 0.0);
   std::cout << "Sphere:" << sphere_image_test << std::endl;
 
-  RtSphere sphere_image_test2(RtVector(8, 1, 0), 2.0, RtColor(255, 255, 51),
+  RtSphere sphere_image_test2(RtVector(0, 0, -4), 2.0, RtColor(255, 255, 51),
                               0.8);
   std::cout << "Sphere:" << sphere_image_test2 << std::endl;
 
-  RtSphere sphere_image_test3(RtVector(8, 4, 8), 2.0, RtColor(255, 255, 51),
+  RtSphere sphere_image_test3(RtVector(0, 0, 4), 2.0, RtColor(255, 255, 51),
                               0.5);
   std::cout << "Sphere:" << sphere_image_test3 << std::endl;
 
