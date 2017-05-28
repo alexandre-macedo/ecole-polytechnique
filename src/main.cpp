@@ -110,7 +110,7 @@ int main() {
   // // Testing Image Creation
   std::cout << "Testing image Creation" << std::endl;
 
-  RtCamera camera_image_test(RtVector(0, 0, 0), RtVector(1, 0, 0),
+  RtCamera camera_image_test(RtVector(0, 0, 0), RtVector(1, 0, .5),
                              RtVector(0, 1, 0), 20, 20);
   std::cout << "Camera:" << camera_image_test << std::endl;
 
@@ -119,11 +119,11 @@ int main() {
   std::cout << "Sphere:" << sphere_image_test << std::endl;
 
   RtSphere sphere_image_test2(RtVector(8, 6, 0), 2.0, RtColor(255, 255, 51),
-                              0.8);
+                              0.3);
   std::cout << "Sphere:" << sphere_image_test2 << std::endl;
 
   RtSphere sphere_image_test3(RtVector(8, 4, 8), 2.0, RtColor(255, 255, 51),
-                              0.5);
+                              0.3);
   std::cout << "Sphere:" << sphere_image_test3 << std::endl;
 
   RtScene scene_image_test;
@@ -137,8 +137,8 @@ int main() {
 
   RtImage image_image_test(800, 800);
   std::cout << "Image:" << image_image_test.info() << std::endl;
-  RtImage image_image_test2(800, 800);
-  std::cout << "Image:" << image_image_test.info() << std::endl;
+  // RtImage image_image_test2(800, 800);
+  //std::cout << "Image:" << image_image_test.info() << std::endl;
 
   // RtScene new_scene;
 
@@ -151,7 +151,7 @@ int main() {
   RtTools::MPIgenerateImage(scene_image_test, camera_image_test, light_image_test,
                          image_image_test, RtTools::Shadows::ON,
                          RtTools::Reflection::ON);
-  if(world.rank()==0){
+  if(world.rank() == 0){
     cv::Mat output;
     RtTools::convertToOpenCV(image_image_test, output);
     RtTools::saveCVImage(output, "test1");  

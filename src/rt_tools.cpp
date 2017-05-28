@@ -318,13 +318,13 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
     start = rank * npixels_here + (total_pixels%p);
   }
   int pos_col = start % w; // column position
-  int pos_lin = (start-pos_col)/h; // line position
+  int pos_lin = (start-pos_col)/w; // line position
   std::vector<RtColor> colors;
   RtColor color;
 
   for(int j = 0; j < npixels_here; j++){
       // Get point in space
-      RtVector current_vector = initial_point + (pos_col * horizontal_increment) + (pos_lin * vertical_increment);
+      RtVector current_vector = initial_point + (pos_lin * horizontal_increment) + (pos_col * vertical_increment);
       RtRay image_ray(current_vector, ray_direction);
       //RtVector current_viewer =  camera.getEye() - current_vector;
 
@@ -347,7 +347,7 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
 
       start++;
       pos_col = start % w;
-      pos_lin = (start-pos_col)/h;
+      pos_lin = (start-pos_col)/w;
   }
 
   std::vector<RtColor> other_colors;
@@ -368,14 +368,14 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
         other_start = other_rank * other_npixels_here + (total_pixels%p);
       }
       int other_pos_col = other_start % w; // column position
-      int other_pos_lin = (other_start-other_pos_col)/h; // line position
+      int other_pos_lin = (other_start-other_pos_col)/w; // line position
 
       for(int j=0; j < other_colors.size(); j++){
         image[other_pos_lin][other_pos_col] = other_colors[j];
 
         other_start++;
         other_pos_col = other_start % w;
-        other_pos_lin = (other_start-other_pos_col)/h;
+        other_pos_lin = (other_start-other_pos_col)/w;
       }
 
     }
