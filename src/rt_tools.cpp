@@ -321,21 +321,10 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
   int pos_lin = (start-pos_col)/h; // line position
 
   for(int j=0; j<npixels_here; j++){
-
-
-    start++;
-    pos_col = start % w;
-    pos_lin = (start-pos_col)/h;
-  }
-
-
-  for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
-    for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
-      // Get point in space
-      RtVector current_vector =
-          initial_point + (i * horizontal_increment) + (j * vertical_increment);
+    // Get point in space
+      RtVector current_vector = initial_point + (i * horizontal_increment) + (j * vertical_increment);
       RtRay image_ray(current_vector, ray_direction);
-      RtVector current_viewer =  camera.getEye() - current_vector;
+      RtVector current_viewer = camera.getEye() - current_vector;
 
       // Find color
       switch (reflection) {
@@ -349,6 +338,34 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
                                             current_viewer, shadows);
         break;
       }
+      }
+
+    start++;
+    pos_col = start % w;
+    pos_lin = (start-pos_col)/h;
+  }
+
+  // soh na root
+  for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
+    for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
+      // Get point in space
+      RtVector current_vector =
+          initial_point + (i * horizontal_increment) + (j * vertical_increment);
+      RtRay image_ray(current_vector, ray_direction);
+      RtVector current_viewer =  camera.getEye() - current_vector;
+
+      // Find color
+      switch (reflection) {
+        case Reflection::OFF: {
+          image[i][j] =
+              colorOfPoint(scene, light, image_ray, current_viewer, shadows);
+          break;
+        }
+        case Reflection::ON: {
+          image[i][j] = colorOfPointRecursive(scene, light, image_ray,
+                                              current_viewer, shadows);
+          break;
+        }
       }
     }
   }

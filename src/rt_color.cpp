@@ -48,3 +48,4 @@ void RtColor::copyHere(const RtColor &other) {
   g_ = other.getG();
   b_ = other.getB();
 }
+
