@@ -1,15 +1,15 @@
 // Methods / tools for the project
 
+#include <boost/mpi.hpp>
 #include <cmath>
 #include <limits>
 #include <math.h>
 #include <stdexcept>
-#include <boost/mpi.hpp>
 
 #include "rt_tools.h"
 
 namespace RtTools {
-const double SHADOW_PERCENTAGE = 1.0;
+const double SHADOW_PERCENTAGE = 0.9;
 
 bool intersection(const RtSphere &sph, const RtRay &r, RtVector &i) {
   const double DELTA = 1.0e-6;
@@ -82,13 +82,13 @@ RtColor colorOfPoint(const RtVector &pt, const RtSphere &sph,
   RtVector V = ((-1) * viewer).unit();         // viewer
   RtVector N = (pt - sph.getCenter()).unit();  // normal
   RtVector L = (light.getPoint() - pt).unit(); // light
-  RtColor colorOfLight = light.getColor();
+  //RtColor colorOfLight = light.getColor();
   RtVector R = (2 * (L * N) * N - L).unit(); // reflection direction
 
   // Constants
-  ks = 1.0;
-  kd = 1.0;
-  ka = 1.0;
+  ks = 0.5; // specular
+  kd = 1.0; // difuse
+  ka = 0.5; // ambient
   alpha = 2.;
 
   // Color of my ambient
@@ -149,8 +149,8 @@ RtColor colorOfPoint(const RtScene &scene, const RtLight &light,
   if (intersection(scene, ray, intersection_sphere, intersection_point)) {
     switch (shadows) {
     case Shadows::OFF: {
-      return colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
-                          light);
+      return colorOfPoint(intersection_point, intersection_sphere,
+                          intersection_point - viewer_eye, light);
     }
     case Shadows::ON: {
       RtRay ligth_ray(light.getPoint(), intersection_point - light.getPoint());
@@ -160,11 +160,11 @@ RtColor colorOfPoint(const RtScene &scene, const RtLight &light,
       intersection(scene, ligth_ray, light_intersection_sphere,
                    light_intersection_vector);
       if (light_intersection_vector == intersection_point) {
-        return colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
-                            light);
+        return colorOfPoint(intersection_point, intersection_sphere,
+                            intersection_point - viewer_eye, light);
       } else {
-        return colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
-                            light)
+        return colorOfPoint(intersection_point, intersection_sphere,
+                            intersection_point - viewer_eye, light)
             .darker(SHADOW_PERCENTAGE);
       }
     }
@@ -189,8 +189,8 @@ RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
     RtRay new_ray(intersection_point + DELTA * new_direction, new_direction);
     switch (shadows) {
     case Shadows::OFF: {
-      return (colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
-                           light) *
+      return (colorOfPoint(intersection_point, intersection_sphere,
+                           intersection_point - viewer_eye, light) *
               (1.0 - intersection_sphere.getReflectionCoeficient())) +
              (colorOfPointRecursive(scene, light, new_ray, new_viewer,
                                     shadows) *
@@ -204,18 +204,18 @@ RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
       intersection(scene, ligth_ray, light_intersection_sphere,
                    light_intersection_vector);
       if (light_intersection_vector == intersection_point) {
-        return (colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
-                             light) *
+        return (colorOfPoint(intersection_point, intersection_sphere,
+                             intersection_point - viewer_eye, light) *
                 (1.0 - intersection_sphere.getReflectionCoeficient())) +
                (colorOfPointRecursive(scene, light, new_ray, new_viewer,
                                       shadows) *
                 intersection_sphere.getReflectionCoeficient());
       } else {
-        return ((colorOfPoint(intersection_point, intersection_sphere, intersection_point - viewer_eye,
-                              light) *
+        return ((colorOfPoint(intersection_point, intersection_sphere,
+                              intersection_point - viewer_eye, light) *
                  (1.0 - intersection_sphere.getReflectionCoeficient())) +
-                (colorOfPointRecursive(scene, light, new_ray,
-                                       new_viewer, shadows) *
+                (colorOfPointRecursive(scene, light, new_ray, new_viewer,
+                                       shadows) *
                  intersection_sphere.getReflectionCoeficient()))
             .darker(SHADOW_PERCENTAGE);
       }
@@ -230,8 +230,7 @@ RtColor colorOfPointRecursive(const RtScene &scene, const RtLight &light,
 void generateImage(const RtScene &scene, const RtCamera &camera,
                    const RtLight &light, RtImage &rtimage,
                    const Shadows shadows, const Reflection reflection) {
-  
-  
+
   RtVector intersection_point;
   RtSphere intersection_sphere;
   std::vector<std::vector<RtColor>> &image = rtimage.getImage();
@@ -256,7 +255,7 @@ void generateImage(const RtScene &scene, const RtCamera &camera,
       RtVector current_vector =
           initial_point + (i * horizontal_increment) + (j * vertical_increment);
       RtRay image_ray(current_vector, ray_direction);
-      //RtVector current_viewer =  camera.getEye() - current_vector;
+      // RtVector current_viewer =  camera.getEye() - current_vector;
 
       // Find color
       switch (reflection) {
@@ -275,11 +274,10 @@ void generateImage(const RtScene &scene, const RtCamera &camera,
   }
 }
 
-
 void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
-                   const RtLight &light, RtImage &rtimage,
-                   const Shadows shadows, const Reflection reflection) {
-  
+                      const RtLight &light, RtImage &rtimage,
+                      const Shadows shadows, const Reflection reflection) {
+
   namespace mpi = boost::mpi;
   mpi::environment env;
   mpi::communicator world;
@@ -304,87 +302,80 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
 
   RtVector ray_direction = camera.getTarget() - camera.getEye();
 
-
   int h = rtimage.getHeight();
   int w = rtimage.getWidth();
-  int total_pixels = h*w;
-  int npixels_here = total_pixels/p;
+  int total_pixels = h * w;
+  int npixels_here = total_pixels / p;
   int start;
-  if(rank < total_pixels%p){
+  if (rank < total_pixels % p) {
     npixels_here++;
     start = rank * npixels_here;
+  } else {
+    start = rank * npixels_here + (total_pixels % p);
   }
-  else{
-    start = rank * npixels_here + (total_pixels%p);
-  }
-  int pos_col = start % w; // column position
-  int pos_lin = (start-pos_col)/h; // line position
+  int pos_col = start % w;             // column position
+  int pos_lin = (start - pos_col) / h; // line position
   std::vector<RtColor> colors;
   RtColor color;
 
-  for(int j = 0; j < npixels_here; j++){
-      // Get point in space
-      RtVector current_vector = initial_point + (pos_col * horizontal_increment) + (pos_lin * vertical_increment);
-      RtRay image_ray(current_vector, ray_direction);
-      //RtVector current_viewer =  camera.getEye() - current_vector;
+  for (int j = 0; j < npixels_here; j++) {
+    // Get point in space
+    RtVector current_vector = initial_point + (pos_lin * horizontal_increment) +
+                              (pos_col * vertical_increment);
+    RtRay image_ray(current_vector, ray_direction);
+    // RtVector current_viewer =  camera.getEye() - current_vector;
 
-      // Find color
-      switch (reflection) {
-        case Reflection::OFF: {
-          color = colorOfPoint(scene, light, image_ray, camera.getEye(), shadows);
-          break;
-        }
-        case Reflection::ON: {
-          color = colorOfPointRecursive(scene, light, image_ray, camera.getEye(), shadows);
-          break;
-        }
-      }
-      colors.push_back(color);
+    // Find color
+    switch (reflection) {
+    case Reflection::OFF: {
+      color = colorOfPoint(scene, light, image_ray, camera.getEye(), shadows);
+      break;
+    }
+    case Reflection::ON: {
+      color = colorOfPointRecursive(scene, light, image_ray, camera.getEye(),
+                                    shadows);
+      break;
+    }
+    }
+    colors.push_back(color);
 
-      if(rank == 0){
-        image[pos_lin][pos_col] = color;
-      }
+    if (rank == 0) {
+      image[pos_lin][pos_col] = color;
+    }
 
-      start++;
-      pos_col = start % w;
-      pos_lin = (start-pos_col)/h;
+    start++;
+    pos_col = start % w;
+    pos_lin = (start - pos_col) / h;
   }
 
   std::vector<RtColor> other_colors;
-  if(rank != 0){
+  if (rank != 0) {
     world.send(0, 1, colors);
-  }
-  else{ // rank == 0
-    for(int other_rank = 1; other_rank<p; other_rank++){
+  } else { // rank == 0
+    for (int other_rank = 1; other_rank < p; other_rank++) {
       world.recv(other_rank, 1, other_colors);
-      
-      int other_npixels_here = total_pixels/p;
+
+      int other_npixels_here = total_pixels / p;
       int other_start;
-      if(other_rank < total_pixels%p){
+      if (other_rank < total_pixels % p) {
         other_npixels_here++;
         other_start = other_rank * other_npixels_here;
+      } else {
+        other_start = other_rank * other_npixels_here + (total_pixels % p);
       }
-      else{
-        other_start = other_rank * other_npixels_here + (total_pixels%p);
-      }
-      int other_pos_col = other_start % w; // column position
-      int other_pos_lin = (other_start-other_pos_col)/h; // line position
+      int other_pos_col = other_start % w;                   // column position
+      int other_pos_lin = (other_start - other_pos_col) / h; // line position
 
-      for(int j=0; j < other_colors.size(); j++){
+      for (int j = 0; j < other_colors.size(); j++) {
         image[other_pos_lin][other_pos_col] = other_colors[j];
 
         other_start++;
         other_pos_col = other_start % w;
-        other_pos_lin = (other_start-other_pos_col)/h;
+        other_pos_lin = (other_start - other_pos_col) / h;
       }
-
     }
   }
-
-  
 }
-
-
 
 void convertToOpenCV(const RtImage &input, cv::Mat &output) {
 
@@ -395,7 +386,7 @@ void convertToOpenCV(const RtImage &input, cv::Mat &output) {
   for (unsigned int i = 0; i < input.getWidth(); ++i)
     for (unsigned int j = 0; j < input.getHeight(); ++j)
       cvimage.at<cv::Vec3b>(cv::Point(i, j)) =
-          cv::Vec3b(image[i][j].getR(), image[i][j].getG(), image[i][j].getB());
+          cv::Vec3b(image[i][j].getB(), image[i][j].getG(), image[i][j].getR());
 
   output = cvimage.clone();
 }

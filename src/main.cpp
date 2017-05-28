@@ -14,6 +14,7 @@
 #include "rt_tools.h"
 
 int main() {
+  
   // // Cor
   // RtColor cor(0, 0, 0);
 
@@ -108,22 +109,22 @@ int main() {
   // }
 
   // // Testing Image Creation
+  
   std::cout << "Testing image Creation" << std::endl;
 
-  RtCamera camera_image_test(RtVector(0, 0, 0), RtVector(1, 0, 0),
+  RtCamera camera_image_test(RtVector(0, 1, 1), RtVector(1, 1, 1),
                              RtVector(0, 1, 0), 20, 20);
   std::cout << "Camera:" << camera_image_test << std::endl;
 
-  RtSphere sphere_image_test(RtVector(4, 0, 0), 2.0, RtColor(51, 255, 51),
-  0.0);
+  RtSphere sphere_image_test(RtVector(4, 0, 0), 2.0, RtColor(51, 255, 51), 0.0);
   std::cout << "Sphere:" << sphere_image_test << std::endl;
 
-  RtSphere sphere_image_test2(RtVector(8, 6, 0), 2.0, RtColor(255, 255, 51),
-                              0.8);
+  RtSphere sphere_image_test2(RtVector(4, 6, 0), 2.0, RtColor(51, 255, 255),
+                              0.5);
   std::cout << "Sphere:" << sphere_image_test2 << std::endl;
 
-  RtSphere sphere_image_test3(RtVector(8, 4, 8), 2.0, RtColor(255, 255, 51),
-                              0.5);
+  RtSphere sphere_image_test3(RtVector(4, 4, 8), 2.0, RtColor(51, 255, 255),
+                              0.3);
   std::cout << "Sphere:" << sphere_image_test3 << std::endl;
 
   RtScene scene_image_test;
@@ -132,13 +133,13 @@ int main() {
   scene_image_test.add(sphere_image_test3);
   std::cout << "Scene:" << scene_image_test << std::endl;
 
-  RtLight light_image_test(RtVector(-10, 0, 0), RtColor(0, 0, 0));
+  RtLight light_image_test(RtVector(-5, 0, 0), RtColor(0, 0, 0));
   std::cout << "Light:" << light_image_test << std::endl;
 
   RtImage image_image_test(800, 800);
   std::cout << "Image:" << image_image_test.info() << std::endl;
-  RtImage image_image_test2(800, 800);
-  std::cout << "Image:" << image_image_test.info() << std::endl;
+  // RtImage image_image_test2(800, 800);
+  // std::cout << "Image:" << image_image_test.info() << std::endl;
 
   // RtScene new_scene;
 
@@ -148,31 +149,31 @@ int main() {
   mpi::environment env;
   mpi::communicator world;
 
-  RtTools::MPIgenerateImage(scene_image_test, camera_image_test, light_image_test,
-                         image_image_test, RtTools::Shadows::ON,
-                         RtTools::Reflection::ON);
+  RtTools::MPIgenerateImage(scene_image_test, camera_image_test,
+                            light_image_test, image_image_test,
+                            RtTools::Shadows::ON, RtTools::Reflection::ON);
   if(world.rank()==0){
     cv::Mat output;
     RtTools::convertToOpenCV(image_image_test, output);
-    RtTools::saveCVImage(output, "test1");  
+    RtTools::saveCVImage(output, "test1");
     RtTools::printCVImage(output);
   }
 
   // cv::Mat output2;
   // int i = 0;
   // while (1) {
-  //   light_image_test =
-  //       RtLight(RtVector(10 * cos(i / 20.0), 0, 10 * sin(i / 20.0)),
-  //               RtColor(0, 0, 0));
-  //   RtTools::generateImage(scene_image_test, camera_image_test,
-  //                          light_image_test, image_image_test2,
-  //                          RtTools::Shadows::ON, RtTools::Reflection::ON);
-  //   RtTools::convertToOpenCV(image_image_test2, output2);
-  //   cv::imshow("Teste", output2);
-  //   cv::waitKey(30);
-  //   i++;
+  //   light_image_test = RtLight(
+  //       RtVector(10 * cos(i / 20.0), 0, 10 * sin(i / 20.0)), RtColor(0, 0, 0));
+  //   RtTools::MPIgenerateImage(scene_image_test, camera_image_test,
+  //                             light_image_test, image_image_test2,
+  //                             RtTools::Shadows::ON, RtTools::Reflection::ON);
+  //   if (world.rank() == 0) {
+  //     RtTools::convertToOpenCV(image_image_test2, output2);
+  //     cv::imshow("Teste", output2);
+  //     cv::waitKey(30);
+  //     i++;
+  //   }
   // }
-
 
   // RtRay raio(RtVector(4, 5, 0), RtVector(0, 1, 0));
   // std::cout << "Ray:" << raio << std::endl;
@@ -202,7 +203,4 @@ int main() {
   //             << "." << std::endl;
   //   std::cout << color2 << std::endl;
   // }
-
-
-
 }
