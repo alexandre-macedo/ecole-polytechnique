@@ -2,6 +2,15 @@
 Ray Tracer - Project INF442
 
 ## Build
-To build  and run the project
 
-`mkdir build && cd build && cmake .. && make && ./ray_tracer`
+`mkdir build && cd build && cmake .. && make`
+
+## Run
+#### Without MPI
+`./ray_tracer`
+
+#### With MPI
+`mpirun -np 4 ./ray_tracer`
+
+## Link to report on Overleaf
+<https://www.overleaf.com/9778823sbfmqjyswjmq#/35705384/>
