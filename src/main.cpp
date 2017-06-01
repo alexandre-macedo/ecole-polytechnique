@@ -153,7 +153,7 @@ int main() {
   mpi::communicator world;
 
 
-  RtTools::generateImage(scene_image_test, camera_image_test,
+  RtTools::MPIenerateImage(scene_image_test, camera_image_test,
                             light_image_test, image_image_test,
                             RtTools::Shadows::ON, RtTools::Reflection::ON);
   if(world.rank()==0){
