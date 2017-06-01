@@ -5,8 +5,8 @@
 RtImage::RtImage() {}
 RtImage::~RtImage() {}
 RtImage::RtImage(const int width, const int height)
-    : height_(height), width_(width),
-      image_(width, std::vector<RtColor>(height)) {
+    : width_(width), height_(height),
+      image_(height, std::vector<RtColor>(width)) {
   if (height <= 0 || width <= 0)
     throw std::runtime_error("Invalid resolution.");
 }
@@ -25,7 +25,7 @@ std::ostream &operator<<(std::ostream &s, const RtImage &im) {
   s << "[" << im.width_<< ", " << im.height_ << "] Image:" << std::endl;
   for (int j = 0; j < im.height_; ++j) {
     for (int i = 0; i < im.width_; ++i)
-      s << im.image_[i][j] << ",";
+      s << im.image_[j][i] << ",";
     s << std::endl;
   }
 

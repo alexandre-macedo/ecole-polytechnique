@@ -114,7 +114,7 @@ int main() {
 
 
   RtCamera camera_image_test(RtVector(0, 1, 1), RtVector(1, 1, 1),
-                             RtVector(0, 1, 0), 20, 20);
+                             RtVector(0, 1, 0), 30, 20);
   std::cout << "Camera:" << camera_image_test << std::endl;
 
   RtSphere sphere_image_test(RtVector(4, 0, 0), 2.0, RtColor(51, 255, 51), 0.0);
@@ -138,7 +138,7 @@ int main() {
   RtLight light_image_test(RtVector(-5, 0, 0), RtColor(0, 0, 0));
   std::cout << "Light:" << light_image_test << std::endl;
 
-  RtImage image_image_test(800, 800);
+  RtImage image_image_test(900, 600);
   std::cout << "Image:" << image_image_test.info() << std::endl;
   // RtImage image_image_test2(800, 800);
   // std::cout << "Image:" << image_image_test.info() << std::endl;
@@ -153,7 +153,7 @@ int main() {
   mpi::communicator world;
 
 
-  RtTools::MPIgenerateImage(scene_image_test, camera_image_test,
+  RtTools::generateImage(scene_image_test, camera_image_test,
                             light_image_test, image_image_test,
                             RtTools::Shadows::ON, RtTools::Reflection::ON);
   if(world.rank()==0){

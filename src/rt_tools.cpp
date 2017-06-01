@@ -249,11 +249,11 @@ void generateImage(const RtScene &scene, const RtCamera &camera,
 
   RtVector ray_direction = camera.getTarget() - camera.getEye();
 
-  for (unsigned int i = 0; i < rtimage.getWidth(); ++i) {
-    for (unsigned int j = 0; j < rtimage.getHeight(); ++j) {
+  for (unsigned int i = 0; i < rtimage.getHeight(); ++i) {
+    for (unsigned int j = 0; j < rtimage.getWidth(); ++j) {
       // Get point in space
       RtVector current_vector =
-          initial_point + (i * horizontal_increment) + (j * vertical_increment);
+          initial_point + (j * horizontal_increment) + (i * vertical_increment);
       RtRay image_ray(current_vector, ray_direction);
       // RtVector current_viewer =  camera.getEye() - current_vector;
 
@@ -283,6 +283,7 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
   mpi::communicator world;
   int p = world.size();
   int rank = world.rank();
+  //std::cout << "rank = " << rank << std::endl;
 
   RtVector intersection_point;
   RtSphere intersection_sphere;
@@ -315,34 +316,35 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
   }
 
   int pos_col = start % w;             // column position
-  int pos_lin = (start - pos_col) / h; // line position
+  int pos_lin = (start - pos_col) / w; // line position
   std::vector<RtColor> colors;
   RtColor color;
 
   for (int j = 0; j < npixels_here; j++) {
     // Get point in space
-    RtVector current_vector = initial_point + (pos_lin * horizontal_increment) +
-                              (pos_col * vertical_increment);
+    RtVector current_vector = initial_point + (pos_col * horizontal_increment) +
+                              (pos_lin * vertical_increment);
     RtRay image_ray(current_vector, ray_direction);
     // RtVector current_viewer =  camera.getEye() - current_vector;
 
     // Find color
     switch (reflection) {
-    case Reflection::OFF: {
-      color = colorOfPoint(scene, light, image_ray, camera.getEye(), shadows);
-      break;
-    }
-    case Reflection::ON: {
-      color = colorOfPointRecursive(scene, light, image_ray, camera.getEye(),
-                                    shadows);
-      break;
-    }
+      case Reflection::OFF: {
+        color = colorOfPoint(scene, light, image_ray, camera.getEye(), shadows);
+        break;
+      }
+      case Reflection::ON: {
+        color = colorOfPointRecursive(scene, light, image_ray, camera.getEye(),
+                                      shadows);
+        break;
+      }
     }
     colors.push_back(color);
 
 
     if (rank == 0) {
       image[pos_lin][pos_col] = color;
+      //std::cout << "Rank 0 prints in (" << pos_lin << ", " << pos_col << ")" << std::endl;
     }
 
 
@@ -373,7 +375,7 @@ void MPIgenerateImage(const RtScene &scene, const RtCamera &camera,
 
       for (int j = 0; j < other_colors.size(); j++) {
         image[other_pos_lin][other_pos_col] = other_colors[j];
-
+//std::cout << "Rank: " << rank << " in (" << other_pos_lin << ", "  << other_pos_col << ")" << std::endl;
         other_start++;
         other_pos_col = other_start % w;
 
@@ -389,10 +391,10 @@ void convertToOpenCV(const RtImage &input, cv::Mat &output) {
   std::vector<std::vector<RtColor>> image = input.getConstImage();
   cv::Mat cvimage(input.getHeight(), input.getWidth(), CV_8UC3,
                   cv::Scalar(255, 255, 255));
-
-  for (unsigned int i = 0; i < input.getWidth(); ++i)
-    for (unsigned int j = 0; j < input.getHeight(); ++j)
-      cvimage.at<cv::Vec3b>(cv::Point(i, j)) =
+//std::cout << "Aquiii" << std::endl;
+  for (unsigned int i = 0; i < input.getHeight(); ++i)
+    for (unsigned int j = 0; j < input.getWidth(); ++j)
+      cvimage.at<cv::Vec3b>(cv::Point(j, i)) =
           cv::Vec3b(image[i][j].getB(), image[i][j].getG(), image[i][j].getR());
 
   output = cvimage.clone();
