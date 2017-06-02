@@ -45,18 +45,13 @@ int main() {
 
   RtImage image_image_test(900, 600);
   std::cout << "Image:" << image_image_test.info() << std::endl;
-
-  namespace mpi = boost::mpi;
-  mpi::environment env;
-  mpi::communicator world;
-
-  RtTools::MPIgenerateImage(scene_image_test, camera_image_test,
+  
+  RtTools::generateImage(scene_image_test, camera_image_test,
                             light_image_test, image_image_test,
                             RtTools::Shadows::ON, RtTools::Reflection::ON);
 
-  if (world.rank() == 0) {
-    cv::Mat output;
-    RtTools::convertToOpenCV(image_image_test, output);
-    RtTools::printCVImage(output);
-  }
+
+  cv::Mat output;
+  RtTools::convertToOpenCV(image_image_test, output);
+  RtTools::printCVImage(output);
 }
