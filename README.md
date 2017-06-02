@@ -7,10 +7,7 @@ Ray Tracer - Project INF442
 
 ## Run
 #### Without MPI
-`./ray_tracer`
+`./ray_tracer_serial`
 
 #### With MPI
-`mpirun -np 4 ./ray_tracer`
-
-## Link to report on Overleaf
-<https://www.overleaf.com/9778823sbfmqjyswjmq#/35705384/>
+`mpirun -np 4 ./ray_tracer_MPI`
