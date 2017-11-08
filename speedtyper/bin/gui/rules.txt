@@ -1,0 +1,7 @@
+Rules:
+_ The score is only computed after the end of each sentence.
+_ To finish a sentence use ".". The score will not be computed otherwise.
+_ You should use the suggested synonym.
+_ You can not erase a letter. Be extra careful.
+
+After reading these rules fill the field below with your nickname and enjoy!
