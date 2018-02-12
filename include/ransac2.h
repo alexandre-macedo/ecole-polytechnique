@@ -10,23 +10,23 @@ namespace RANSAC {
     virtual ~Parameter() {}
   };
 
-  template <int modelSize> class Model {
+  template <int model_size> class Model {
   public:
     virtual void initialize(const std::vector<Parameter*>& input_param) = 0;
     virtual std::pair<double, std::vector<Parameter*> > evaluate(
         std::vector<Parameter*> input_param, double threshold) = 0;
 
-    virtual std::array<Parameter*, modelSize> getModelParameters() {
+    virtual std::array<Parameter*, model_size> getModelParameters() {
       return min_model_param;
     };
 
   protected:
-    std::array<Parameter*, modelSize> min_model_param;
+    std::array<Parameter*, model_size> min_model_param;
 
     virtual double computeDistance(Parameter* parameter) = 0;
   };
   
-  template <class T, int modelSize> class Estimator {
+  template <class T, int model_size> class Estimator {
   public:
     void initialize(double threshold, int max_iterations = 1000) {
       this->threshold = threshold;
@@ -34,29 +34,29 @@ namespace RANSAC {
     }
 
     bool estimate(const std::vector<Parameter*>& data) {
-      if (data.size() <= modelSize) {
+      if (data.size() <= model_size) {
         std::cout << "Insuficient data to compute best model." << std::endl;
         execution_time = -1;
         return false;
       }
 
-      int64 startTime = cv::getTickCount();
+      int64 start_time = cv::getTickCount();
       this->data = data;
-      std::uniform_int_distribution<int> uniDist(0, int(this->data.size() - 1));
+      std::uniform_int_distribution<int> uni_dist(0, int(this->data.size() - 1));
       
       for (int i = 0; i < max_iterations; i++) {
-        std::vector<Parameter*> random_samples(modelSize);
-        std::vector<Parameter*> remainderSamples = this->data;
+        std::vector<Parameter*> random_samples(model_size);
+        std::vector<Parameter*> remainder_samples = this->data;
         std::random_device seed;
         std::mt19937 g(seed());
-        std::shuffle(remainderSamples.begin(), remainderSamples.end(), g);
+        std::shuffle(remainder_samples.begin(), remainder_samples.end(), g);
         std::copy(
-            remainderSamples.begin(), remainderSamples.begin() + modelSize, random_samples.begin());
-        remainderSamples.erase(remainderSamples.begin(), remainderSamples.begin() + modelSize);
+            remainder_samples.begin(), remainder_samples.begin() + model_size, random_samples.begin());
+        remainder_samples.erase(remainder_samples.begin(), remainder_samples.begin() + model_size);
 
         T randomModel(random_samples);
         std::pair<double, std::vector<Parameter*> > eval_pair = 
-            randomModel.evaluate(remainderSamples, threshold);
+            randomModel.evaluate(remainder_samples, threshold);
         double score = eval_pair.first;
 
         if (score > best_score) {
@@ -67,7 +67,7 @@ namespace RANSAC {
       }
 
       reset();
-      execution_time = double(cv::getTickCount() - startTime) / double(cv::getTickFrequency()) * 1000;
+      execution_time = double(cv::getTickCount() - start_time) / double(cv::getTickFrequency()) * 1000;
       return true;
     }
 

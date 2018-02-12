@@ -36,19 +36,19 @@ public:
   }
 
   virtual std::pair<double, std::vector<RANSAC::Parameter*> > evaluate(
-    std::vector<RANSAC::Parameter*> evaluateParameters, double threshold) override {
+    std::vector<RANSAC::Parameter*> evaluate_param, double threshold) override {
     std::vector<RANSAC::Parameter*> inliers;
-    int nTotalParams = int(evaluateParameters.size());
-    int nInliers = 0;
-    for (RANSAC::Parameter*& parameter : evaluateParameters) {
+    int n_total_param = int(evaluate_param.size());
+    int n_inliers = 0;
+    for (RANSAC::Parameter*& parameter : evaluate_param) {
       if (computeDistance(parameter) < threshold) {
         inliers.push_back(parameter);
-        nInliers++;
+        n_inliers++;
       }
     }
 
-    double inliersFraction = double(nInliers) / double(nTotalParams);
-    return std::make_pair(inliersFraction, inliers);
+    double inliers_fraction = double(n_inliers) / double(n_total_param);
+    return std::make_pair(inliers_fraction, inliers);
   }
 
   cv::Mat* getHomography() {
@@ -124,11 +124,11 @@ private:
 
 enum KeypointDetectorType {AKAZE, ORB};
 
-void computeKeyPoints(const cv::Mat& image, std::vector<cv::KeyPoint>& kpts, cv::Mat& descriptor, KeypointDetectorType detectorType) {
-  if (detectorType == AKAZE) {
+void computeKeyPoints(const cv::Mat& image, std::vector<cv::KeyPoint>& kpts, cv::Mat& descriptor, KeypointDetectorType detector_type) {
+  if (detector_type == AKAZE) {
     cv::Ptr<cv::AKAZE> akaze = cv::AKAZE::create();
     akaze->detectAndCompute(image, cv::noArray(), kpts, descriptor);
-  } else if (detectorType == ORB) {
+  } else if (detector_type == ORB) {
     cv::Ptr<cv::ORB> orb = cv::ORB::create();
     orb->detectAndCompute(image, cv::noArray(), kpts, descriptor);
   }
@@ -140,11 +140,11 @@ void matchPoints(const cv::Mat& descriptor1, const cv::Mat& descriptor2, std::ve
 }
 
 void drawMatches(
-    const cv::Mat& image1, const std::vector<cv::KeyPoint>& keyPoints1,
-    const cv::Mat& image2, const std::vector<cv::KeyPoint>& keyPoints2,
+    const cv::Mat& image1, const std::vector<cv::KeyPoint>& key_points1,
+    const cv::Mat& image2, const std::vector<cv::KeyPoint>& key_points2,
     std::vector<cv::DMatch>& matches) {
   cv::Mat J;
-  drawMatches(image1, keyPoints1, image2, keyPoints2, matches, J);
+  drawMatches(image1, key_points1, image2, key_points2, matches, J);
   resize(J, J, cv::Size(), .5, .5);
   imshow("Matches", J);
   cv::waitKey(0);
@@ -152,48 +152,48 @@ void drawMatches(
 
 void findHomography(
   const cv::Mat& image1, const cv::Mat& image2,
-  KeypointDetectorType detectorType, double threshold, int numIterations, cv::Mat& H, 
-  double horizontalFraction) {
-  std::vector<cv::KeyPoint> keyPoints1, keyPoints2;
+  KeypointDetectorType detector_type, double threshold, int num_inter, cv::Mat& H, 
+  double horizontal_fraction) {
+  std::vector<cv::KeyPoint> key_points1, key_points2;
   cv::Mat descriptor1, descriptor2;
   std::vector<cv::DMatch> matches;
 
-  int dx = image1.cols - image2.cols * horizontalFraction;
-  cv::Rect roi(dx, 0, image2.cols * horizontalFraction, image1.rows);
-  computeKeyPoints(image1(roi), keyPoints1, descriptor1, detectorType);
-  // computeKeyPoints(image1, keyPoints1, descriptor1, detectorType);
-  computeKeyPoints(image2, keyPoints2, descriptor2, detectorType);
+  int dx = image1.cols - image2.cols * horizontal_fraction;
+  cv::Rect roi(dx, 0, image2.cols * horizontal_fraction, image1.rows);
+  computeKeyPoints(image1(roi), key_points1, descriptor1, detector_type);
+  // computeKeyPoints(image1, key_points1, descriptor1, detector_type);
+  computeKeyPoints(image2, key_points2, descriptor2, detector_type);
   std::cout << "> computed key points" << std::endl;
 
   matchPoints(descriptor1, descriptor2, matches);
   std::cout << "> computed matches" << std::endl;
-  // drawMatches(image1, keyPoints1, image2, keyPoints2, matches);
+  // drawMatches(image1, key_points1, image2, key_points2, matches);
   
-  std::vector<RANSAC::Parameter*> candidateMatches;
+  std::vector<RANSAC::Parameter*> candidate_matches;
   for (size_t i = 0; i < matches.size(); i++) {
     Point2DPair* match = new Point2DPair(
-      keyPoints1[matches[i].queryIdx].pt.x + dx, keyPoints1[matches[i].queryIdx].pt.y,
-      keyPoints2[matches[i].trainIdx].pt.x, keyPoints2[matches[i].trainIdx].pt.y);
-    candidateMatches.push_back(match);
+      key_points1[matches[i].queryIdx].pt.x + dx, key_points1[matches[i].queryIdx].pt.y,
+      key_points2[matches[i].trainIdx].pt.x, key_points2[matches[i].trainIdx].pt.y);
+    candidate_matches.push_back(match);
   }
 
   RANSAC::Estimator<HomographyModel, HomographyModel::MODEL_SIZE> estimator;
   std::vector<RANSAC::Parameter*> inliers;
-  HomographyModel* bestHomography;
-  estimator.initialize(threshold, numIterations);
-  estimator.estimate(candidateMatches);
+  HomographyModel* best_homo;
+  estimator.initialize(threshold, num_inter);
+  estimator.estimate(candidate_matches);
 
   inliers = estimator.getBestInliers();
-  bestHomography = dynamic_cast<HomographyModel*>(estimator.getBestModel());
-  if (!bestHomography) {
-    std::cout << "> could not compute homography" << std::endl;
+  best_homo = dynamic_cast<HomographyModel*>(estimator.getBestModel());
+  if (!best_homo) {
+    std::cout << "Could not compute homography" << std::endl;
   } else {
-    H = (*(bestHomography->getHomography()));
+    H = (*(best_homo->getHomography()));
 
-    std::cout << "> computed homography" << std::endl;
-    std::cout << "\t-> RANSAC execution time: " << estimator.getExecutionTime() << " ms" << std::endl;
+    std::cout << "Cmputed homography" << std::endl;
+    std::cout << "RANSAC took: " << estimator.getExecutionTime() << " ms" << std::endl;
     // std::cout << "\t->HOMOGRAPHY = " << std::endl << H << std::endl;
-    std::cout << "\t-> " << inliers.size() << " inliers out of " << matches.size() << " matches" << std::endl;
+    std::cout << inliers.size() << " inliers out of " << matches.size() << " matches" << std::endl;
   }
 }
 
@@ -207,21 +207,21 @@ cv::Mat stitch(const cv::Mat &image1, const cv::Mat &image2, const cv::Mat &H) {
   corners[2] = cv::Point2f(image2.cols, 0);
   corners[3] = cv::Point2f(image2.cols, image2.rows);
 
-  std::vector<cv::Point2f> cornersTransform(4);
-  cv::perspectiveTransform(corners, cornersTransform, H);
+  std::vector<cv::Point2f> corner_transf(4);
+  cv::perspectiveTransform(corners, corner_transf, H);
 
   double offsetX = 0.0;
   double offsetY = 0.0;
 
   // get max offset outside of the image
   for (size_t i = 0; i < 4; i++) {
-    // std::cout << "cornersTransform[" << i << "] =" << cornersTransform[i] << std::endl;
-    if (cornersTransform[i].x < offsetX) {
-      offsetX = cornersTransform[i].x;
+    // std::cout << "corner_transf[" << i << "] =" << corner_transf[i] << std::endl;
+    if (corner_transf[i].x < offsetX) {
+      offsetX = corner_transf[i].x;
     }
 
-    if (cornersTransform[i].y < offsetY) {
-      offsetY = cornersTransform[i].y;
+    if (corner_transf[i].y < offsetY) {
+      offsetY = corner_transf[i].y;
     }
   }
 
@@ -230,8 +230,8 @@ cv::Mat stitch(const cv::Mat &image1, const cv::Mat &image2, const cv::Mat &H) {
   // std::cout << "offsetX = " << offsetX << " ; offsetY = " << offsetY << std::endl;
 
   // get max width and height for the new size of the panorama
-  double maxX = std::max((double)image1.cols + offsetX, (double)std::max(cornersTransform[2].x, cornersTransform[3].x) + offsetX);
-  double maxY = std::max((double)image1.rows + offsetY, (double)std::max(cornersTransform[1].y, cornersTransform[3].y) + offsetY);
+  double maxX = std::max((double)image1.cols + offsetX, (double)std::max(corner_transf[2].x, corner_transf[3].x) + offsetX);
+  double maxY = std::max((double)image1.rows + offsetY, (double)std::max(corner_transf[1].y, corner_transf[3].y) + offsetY);
   // std::cout << "maxX = " << maxX << " ; maxY = " << maxY << std::endl;
 
   cv::Size size_warp(maxX, maxY);
@@ -261,21 +261,21 @@ cv::Mat stitch(const cv::Mat &image1, const cv::Mat &image2, const cv::Mat &H) {
 
 void buildPanorama(
     std::vector<cv::Mat>& images, cv::Mat& result,
-    KeypointDetectorType detectorType, double threshold, int numIterations, int startIndex, 
-    double horizontalFraction) {
+    KeypointDetectorType detector_type, double threshold, int num_inter, int s_index, 
+    double horizontal_fraction) {
   if (images.size() < 2) {
     return;
   }
 
   result = images[0];
   for (size_t i = 1; i < images.size(); i++) {
-    std::string index = "[" + std::to_string(startIndex) + ".." + std::to_string(startIndex + i) + "]";
-    std::cout << "> creating panorama of images" << index << std::endl;
+    std::string index = "[" + std::to_string(s_index) + ".." + std::to_string(s_index + i) + "]";
+    std::cout << "Creating panorama of images" << index << std::endl;
     cv::Mat H;
-    findHomography(result, images[i], detectorType, threshold, numIterations, H, horizontalFraction);
+    findHomography(result, images[i], detector_type, threshold, num_inter, H, horizontal_fraction);
     result = stitch(images[i], result, H);
-    std::cout << "> stitched panorama of images " << index << std::endl;
+    std::cout << "Stitched panorama of images " << index << std::endl;
     cv::imwrite("panorama " + index + ".png", result);
-    std::cout << "> saved to file \"panorama " << index << ".png\"" << std::endl << std::endl;
+    std::cout << "Saved to file \"panorama " << index << ".png\"" << std::endl << std::endl;
   }
 }
