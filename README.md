@@ -1,4 +1,4 @@
-# INF552 - Traitement d'image -  Final Project
+# INF552 - Analyse d'images et vision par ordinateur -  Final Project
 
 ## RANSAC and Panorama
 

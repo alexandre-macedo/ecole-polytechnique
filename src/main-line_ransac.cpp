@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
         // Displaying
         cv::imshow("RANSAC example", canvas);
         cv::waitKey(0);
-        //cv::imwrite("RANSAC_line_fit.png", canvas);
+        cv::imwrite("RANSAC_line_fit.png", canvas);
         return 0;
     }
 

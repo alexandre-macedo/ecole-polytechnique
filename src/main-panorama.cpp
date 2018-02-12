@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
   buildPanorama(images1, result, detector_type, threshold, n_interaction, s_index, 1);
 
   cv::Mat result2;
-  n_images = 3;
+  n_images = 4;
   s_index = 14;
   std::vector<cv::Mat> images2(n_images);
   for (int i = 0; i < n_images; i++) {
