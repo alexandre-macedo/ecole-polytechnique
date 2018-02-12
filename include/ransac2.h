@@ -10,23 +10,23 @@ namespace RANSAC {
     virtual ~Parameter() {}
   };
 
-  template <int model_size> class Model {
+  template <int modelSize> class Model {
   public:
-    virtual void initialize(const std::vector<Parameter*>& input_parameters) = 0;
+    virtual void initialize(const std::vector<Parameter*>& input_param) = 0;
     virtual std::pair<double, std::vector<Parameter*> > evaluate(
-        std::vector<Parameter*> input_parameters, double threshold) = 0;
+        std::vector<Parameter*> input_param, double threshold) = 0;
 
-    virtual std::array<Parameter*, model_size> getModelParameters() {
+    virtual std::array<Parameter*, modelSize> getModelParameters() {
       return min_model_param;
     };
 
   protected:
-    std::array<Parameter*, model_size> min_model_param;
+    std::array<Parameter*, modelSize> min_model_param;
 
     virtual double computeDistance(Parameter* parameter) = 0;
   };
   
-  template <class ModelImpl, int model_size> class Estimator {
+  template <class T, int modelSize> class Estimator {
   public:
     void initialize(double threshold, int max_iterations = 1000) {
       this->threshold = threshold;
@@ -34,40 +34,40 @@ namespace RANSAC {
     }
 
     bool estimate(const std::vector<Parameter*>& data) {
-      if (data.size() <= model_size) {
+      if (data.size() <= modelSize) {
         std::cout << "Insuficient data to compute best model." << std::endl;
         execution_time = -1;
         return false;
       }
 
-      int64 start_time = cv::getTickCount();
+      int64 startTime = cv::getTickCount();
       this->data = data;
       std::uniform_int_distribution<int> uniDist(0, int(this->data.size() - 1));
       
       for (int i = 0; i < max_iterations; i++) {
-        std::vector<Parameter*> random_samples(model_size);
-        std::vector<Parameter*> remainder_samples = this->data;
+        std::vector<Parameter*> random_samples(modelSize);
+        std::vector<Parameter*> remainderSamples = this->data;
         std::random_device seed;
         std::mt19937 g(seed());
-        std::shuffle(remainder_samples.begin(), remainder_samples.end(), g);
+        std::shuffle(remainderSamples.begin(), remainderSamples.end(), g);
         std::copy(
-            remainder_samples.begin(), remainder_samples.begin() + model_size, random_samples.begin());
-        remainder_samples.erase(remainder_samples.begin(), remainder_samples.begin() + model_size);
+            remainderSamples.begin(), remainderSamples.begin() + modelSize, random_samples.begin());
+        remainderSamples.erase(remainderSamples.begin(), remainderSamples.begin() + modelSize);
 
-        ModelImpl random_model(random_samples);
-        std::pair<double, std::vector<Parameter*> > evalPair = 
-            random_model.evaluate(remainder_samples, threshold);
-        double score = evalPair.first;
+        T randomModel(random_samples);
+        std::pair<double, std::vector<Parameter*> > eval_pair = 
+            randomModel.evaluate(remainderSamples, threshold);
+        double score = eval_pair.first;
 
         if (score > best_score) {
           best_score = score;
-          best_model = new ModelImpl(random_samples);
-          best_inliers = evalPair.second;
+          best_model = new T(random_samples);
+          best_inleir = eval_pair.second;
         }
       }
 
       reset();
-      exectuion_time = double(cv::getTickCount() - start_time) / double(cv::getTickFrequency()) * 1000;
+      execution_time = double(cv::getTickCount() - startTime) / double(cv::getTickFrequency()) * 1000;
       return true;
     }
 
@@ -76,12 +76,12 @@ namespace RANSAC {
       best_score = 0.0;
     };
 
-    ModelImpl* getBestModel() {
+    T* getBestModel() {
       return best_model;
     }
 
     const std::vector<Parameter*>& getBestInliers() {
-      return best_inliers;
+      return best_inleir;
     }
 
     double getExecutionTime() {
@@ -93,8 +93,8 @@ namespace RANSAC {
     double threshold;
     std::vector<Parameter*> data;
 
-    ModelImpl* best_model;
-    std::vector<Parameter*> best_inliers;
+    T* best_model;
+    std::vector<Parameter*> best_inleir;
     double best_score;
     double execution_time;
   };
