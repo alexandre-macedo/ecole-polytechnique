@@ -4,7 +4,7 @@
 
 In order to run  this example, please follow the instructions to install the Malmo Plataform available [here](https://github.com/Microsoft/malmo/).
 
-Then, copy the files on repository to the folder "Python_Examples" and run then using
+Then, copy the files on repository to the folder "Python_Examples" and run them using
 
 `python2 sarsa.py`
 
