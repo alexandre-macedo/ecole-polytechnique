@@ -85,30 +85,8 @@ class TabQAgent(object):
         """switch to evaluation mode (no training)"""
         self.training = False
 
-    def act(self, world_state, agent_host, current_r ):
-        """take 1 action in response to the current world state"""
-        
-        obs_text = world_state.observations[-1].text
-        obs = json.loads(obs_text) # most recent observation
-        self.logger.debug(obs)
-        if not u'XPos' in obs or not u'ZPos' in obs:
-            self.logger.error("Incomplete observation received: %s" % obs_text)
-            return 0
-        current_s = "%d:%d" % (int(obs[u'XPos']), int(obs[u'ZPos']))
-        self.logger.debug("State: %s (x = %.2f, z = %.2f)" % (current_s, float(obs[u'XPos']), float(obs[u'ZPos'])))
-        if current_s not in self.q_table:
-            self.q_table[current_s] = ([0] * len(self.actions))
-
-#################################### Q-Learning  ##################################
-        # update Q values
-        if self.training and self.prev_s is not None and self.prev_a is not None:
-            old_q = self.q_table[self.prev_s][self.prev_a]
-            self.q_table[self.prev_s][self.prev_a] = old_q + self.alpha * (current_r
-                + self.gamma * max(self.q_table[current_s]) - old_q)
-
-        self.drawQ( curr_x = int(obs[u'XPos']), curr_y = int(obs[u'ZPos']) )
-
-        # select the next action
+    def getNextAction(self, current_s): 
+        """generate the next action using epsilon-greedy strategy"""
         rnd = random.random()
         if rnd < self.epsilon:
             a = random.randint(0, len(self.actions) - 1)
@@ -123,6 +101,34 @@ class TabQAgent(object):
             y = random.randint(0, len(l)-1)
             a = l[y]
             self.logger.info("Taking q action: %s" % self.actions[a])
+        return a
+
+    def act(self, world_state, agent_host, current_r):
+        """take 1 action in response to the current world state"""
+        
+        obs_text = world_state.observations[-1].text
+        obs = json.loads(obs_text) # most recent observation
+        self.logger.debug(obs)
+        if not u'XPos' in obs or not u'ZPos' in obs:
+            self.logger.error("Incomplete observation received: %s" % obs_text)
+            return 0
+        current_s = "%d:%d" % (int(obs[u'XPos']), int(obs[u'ZPos']))
+        self.logger.debug("State: %s (x = %.2f, z = %.2f)" % (current_s, float(obs[u'XPos']), float(obs[u'ZPos'])))
+        if current_s not in self.q_table:
+            self.q_table[current_s] = ([0] * len(self.actions))
+
+#################################### Q-Learning ##################################
+
+        # update Q values
+        if self.training and self.prev_s is not None and self.prev_a is not None:
+            old_q = self.q_table[self.prev_s][self.prev_a]
+            self.q_table[self.prev_s][self.prev_a] = old_q + self.alpha * (current_r
+                + self.gamma * max(self.q_table[current_s]) - old_q)
+
+        self.drawQ( curr_x = int(obs[u'XPos']), curr_y = int(obs[u'ZPos']) )
+
+        # select the next action using epsilon-greedy strategy
+        a = self.getNextAction(current_s)
 
         # send the selected action
         agent_host.sendCommand(self.actions[a])
@@ -130,6 +136,7 @@ class TabQAgent(object):
         self.prev_a = a
 
         return current_r
+
 ####################################################################################
 
     def run(self, agent_host):

@@ -85,8 +85,8 @@ class TabQAgent(object):
         """switch to evaluation mode (no training)"""
         self.training = False
 
-    def getNextAction(self, current_s): # Generate the next action using episilon greed
-        """select the next action"""
+    def getNextAction(self, current_s): 
+        """generate the next action using epsilon-greedy strategy"""
         rnd = random.random()
         if rnd < self.epsilon:
             a = random.randint(0, len(self.actions) - 1)
@@ -117,11 +117,13 @@ class TabQAgent(object):
         if current_s not in self.q_table:
             self.q_table[current_s] = ([0] * len(self.actions))
 
-#################################### SARSA  ##################################
+
+#################################### SARSA ##################################
+
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
             old_q = self.q_table[self.prev_s][self.prev_a]
-            a_prime = self.getNextAction(current_s)
+            a_prime = self.getNextAction(current_s) # select the next action using epsilon-greedy strategy
             self.q_table[self.prev_s][self.prev_a] = old_q + self.alpha * (current_r + self.gamma * self.q_table[current_s][a_prime] - old_q)
         else:
             a_prime = self.getNextAction(current_s)
@@ -137,7 +139,9 @@ class TabQAgent(object):
         self.prev_a = a
 
         return current_r
+
 #################################################################################
+
     def run(self, agent_host):
         """run the agent on the world"""
 
@@ -318,9 +322,9 @@ agent_host = MalmoPython.AgentHost()
 agent_host.addOptionalStringArgument('mission_file',
     'Path/to/file from which to load the mission.', './cliff_walking_1.xml')
 agent_host.addOptionalFloatArgument('alpha',
-    'Learning rate of the Q-learning agent.', 0.1)
+    'Learning rate of the SARSA agent.', 0.1)
 agent_host.addOptionalFloatArgument('epsilon',
-    'Exploration rate of the Q-learning agent.', 0.1)
+    'Exploration rate of the SARSA agent.', 0.1)
 agent_host.addOptionalFloatArgument('gamma', 'Discount factor.', 1.0)
 agent_host.addOptionalFlag('load_model', 'Load initial model from model_file.')
 agent_host.addOptionalStringArgument('model_file', 'Path to the initial model file', '')
