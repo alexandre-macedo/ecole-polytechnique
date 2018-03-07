@@ -8,7 +8,7 @@ Then, start the Minecraft client by running on the root of the malmo folder
 
 `./Minecraft/launchClient.sh`
 
-Finally, copy the files on repository to the folder "Python_Examples" and run them using
+Finally, copy the files on this repository to the folder "Python_Examples" and run them using
 
 `python2 sarsa.py`
 
