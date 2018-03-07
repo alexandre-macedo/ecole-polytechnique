@@ -1,6 +1,6 @@
 # INF581 - Advanced topics in artificial intelligence
 
-### How to run
+## How to run
 
 In order to run  this example, please follow the instructions to install the Malmo Plataform available [here](https://github.com/Microsoft/malmo/).
 
