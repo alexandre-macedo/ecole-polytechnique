@@ -50,7 +50,7 @@ if save_images:
 class TabQAgent(object):
     """Tabular Q-learning agent for discrete state/action spaces."""
 
-    def __init__(self, actions=[], epsilon=0.1, alpha=0.1, gamma=1.0, debug=False, canvas=None, root=None):
+    def __init__(self, actions=[], epsilon=0.01, alpha=0.1, gamma=1.0, debug=False, canvas=None, root=None):
         self.epsilon = epsilon
         self.alpha = alpha
         self.gamma = gamma
@@ -379,6 +379,20 @@ for imap in range(num_maps):
     my_mission.allowAllDiscreteMovementCommands()
     my_mission.requestVideo( 640, 480 )
     my_mission.setViewpoint( 1 )
+    # Add holes
+    for x in range(3,6):
+        my_mission.drawBlock( x, 45, 3,"lava")
+    
+    for x in range(1,4):
+        my_mission.drawBlock( x, 45, 6,"lava")
+
+    my_mission.drawBlock( 5, 45, 8,"lava")
+
+    for x in range(3,6):
+        my_mission.drawBlock( x, 45, 9,"lava")
+    
+    for x in range(4,6):
+        my_mission.drawBlock( x, 45, 10,"lava")
 
     my_clients = MalmoPython.ClientPool()
     my_clients.add(MalmoPython.ClientInfo('127.0.0.1', 10000)) # add Minecraft machines here as available
@@ -387,7 +401,7 @@ for imap in range(num_maps):
     agentID = 0
     expID = 'Q_learning'
 
-    num_repeats = 300
+    num_repeats = 400
     cumulative_rewards = []
     for i in range(num_repeats):
         

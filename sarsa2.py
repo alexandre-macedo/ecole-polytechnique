@@ -18,8 +18,8 @@ from __future__ import print_function
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ------------------------------------------------------------------------------------------------
 
-# The "Cliff Walking" example using Q-learning.
-# From pages 148-150 of:
+# The "Cliff Walking" example using SARSA
+# From :
 # Richard S. Sutton and Andrews G. Barto
 # Reinforcement Learning, An Introduction
 # MIT Press, 1998
@@ -48,7 +48,7 @@ if save_images:
     from PIL import Image
 
 class TabQAgent(object):
-    """Tabular Q-learning agent for discrete state/action spaces."""
+    """Sarsa agent for discrete state/action spaces."""
 
     def __init__(self, actions=[], epsilon=0.1, alpha=0.1, gamma=1.0, debug=False, canvas=None, root=None):
         self.epsilon = epsilon
@@ -107,7 +107,7 @@ class TabQAgent(object):
         """take 1 action in response to the current world state"""
         
         obs_text = world_state.observations[-1].text
-        obs = json.loads(obs_text) # most recent observation
+        obs = json.loads(obs_text)
         self.logger.debug(obs)
         if not u'XPos' in obs or not u'ZPos' in obs:
             self.logger.error("Incomplete observation received: %s" % obs_text)
@@ -117,18 +117,21 @@ class TabQAgent(object):
         if current_s not in self.q_table:
             self.q_table[current_s] = ([0] * len(self.actions))
 
-#################################### Q-Learning ##################################
+
+#################################### SARSA ##################################
 
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
             old_q = self.q_table[self.prev_s][self.prev_a]
-            self.q_table[self.prev_s][self.prev_a] = old_q + self.alpha * (current_r
-                + self.gamma * max(self.q_table[current_s]) - old_q)
+            a_prime = self.getNextAction(current_s) # select the next action using epsilon-greedy strategy
+            self.q_table[self.prev_s][self.prev_a] = old_q + self.alpha * (current_r + self.gamma * self.q_table[current_s][a_prime] - old_q)
+        else:
+            a_prime = self.getNextAction(current_s)
 
-        self.drawQ( curr_x = int(obs[u'XPos']), curr_y = int(obs[u'ZPos']) )
+        self.drawQ(curr_x = int(obs[u'XPos']), curr_y = int(obs[u'ZPos']))
 
-        # select the next action using epsilon-greedy strategy
-        a = self.getNextAction(current_s)
+        # next action
+        a = a_prime
 
         # send the selected action
         agent_host.sendCommand(self.actions[a])
@@ -137,7 +140,7 @@ class TabQAgent(object):
 
         return current_r
 
-####################################################################################
+#################################################################################
 
     def run(self, agent_host):
         """run the agent on the world"""
@@ -319,9 +322,9 @@ agent_host = MalmoPython.AgentHost()
 agent_host.addOptionalStringArgument('mission_file',
     'Path/to/file from which to load the mission.', './cliff_walking_1.xml')
 agent_host.addOptionalFloatArgument('alpha',
-    'Learning rate of the Q-learning agent.', 0.1)
+    'Learning rate of the SARSA agent.', 0.1)
 agent_host.addOptionalFloatArgument('epsilon',
-    'Exploration rate of the Q-learning agent.', 0.1)
+    'Exploration rate of the SARSA agent.', 0.1)
 agent_host.addOptionalFloatArgument('gamma', 'Discount factor.', 1.0)
 agent_host.addOptionalFlag('load_model', 'Load initial model from model_file.')
 agent_host.addOptionalStringArgument('model_file', 'Path to the initial model file', '')
@@ -380,12 +383,27 @@ for imap in range(num_maps):
     my_mission.requestVideo( 640, 480 )
     my_mission.setViewpoint( 1 )
 
+    # add holes for interest
+    for x in range(3,6):
+        my_mission.drawBlock( x, 45, 3,"lava")
+    
+    for x in range(1,4):
+        my_mission.drawBlock( x, 45, 6,"lava")
+
+    my_mission.drawBlock( 5, 45, 8,"lava")
+
+    for x in range(3,6):
+        my_mission.drawBlock( x, 45, 9,"lava")
+    
+    for x in range(4,6):
+        my_mission.drawBlock( x, 45, 10,"lava")
+
     my_clients = MalmoPython.ClientPool()
     my_clients.add(MalmoPython.ClientInfo('127.0.0.1', 10000)) # add Minecraft machines here as available
 
     max_retries = 3
     agentID = 0
-    expID = 'Q_learning'
+    expID = 'SARSA'
 
     num_repeats = 300
     cumulative_rewards = []
@@ -428,8 +446,7 @@ for imap in range(num_maps):
         # -- clean up -- #
         time.sleep(0.5) # (let the Mod reset)
 
-    # -- Save Q Table -- #
-    canvas.postscript(file="q_learning.ps", colormode='color')
+    canvas.postscript(file="SARSA.ps", colormode='color')
     print("Done.")
 
     print()
