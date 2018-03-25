@@ -1,0 +1,55 @@
+\begin{tikzpicture}[every node/.style={circle, draw, inner sep=1.5pt}]
+
+% Points
+\node[label={[label distance=1pt]180: \tiny 4}] (l4) at (0,0) {};
+\node[label={[label distance=1pt]180: \tiny 5}] (l5) at (0,-1) {};
+\node[label={[label distance=1pt]120: \tiny 1}] (lu1) at (0,1) {};
+\node[label={[label distance=1pt]-120: \tiny 1}] (ld1) at (0,-2) {};
+\node[label={[label distance=1pt]60: \tiny 6}] (6) at (1,0) {};
+\node[label={[label distance=1pt]90: \tiny 2}] (u2) at (1,1) {};
+\node[label={[label distance=1pt]60: \tiny 8}] (8) at (1,-1) {};
+\node[label={[label distance=1pt]-90: \tiny 2}] (d2) at (1,-2) {};
+\node[label={[label distance=1pt]60: \tiny 7}] (7) at (2,0) {};
+\node[label={[label distance=1pt]90: \tiny 3}] (u3) at (2,1) {};
+\node[label={[label distance=1pt]60: \tiny 9}] (9) at (2,-1) {};
+\node[label={[label distance=1pt]-90: \tiny 3}] (d3) at (2,-2) {};
+\node[label={[label distance=1pt]0: \tiny 4}] (r4) at (3,0) {};
+\node[label={[label distance=1pt]60: \tiny 1}] (ru1) at (3,1) {};
+\node[label={[label distance=1pt]0: \tiny 5}] (r5) at (3,-1) {};
+\node[label={[label distance=1pt]-60: \tiny 1}] (rd1) at (3,-2) {};
+
+%Lines
+\draw (lu1) -- (u2);
+\draw (lu1) -- (l4);
+\draw (lu1) -- (6);
+\draw (u2) -- (u3);
+\draw (u2) -- (6);
+\draw (u2) -- (7);
+\draw (u3) -- (ru1);
+\draw (u3) -- (7);
+\draw (u3) -- (r4);
+\draw (l4) -- (l5);
+\draw (l4) -- (6);
+\draw (l4) -- (8);
+\draw (6) -- (8);
+\draw (6) -- (7);
+\draw (6) -- (9);
+\draw (7) -- (9);
+\draw (7) -- (r5);
+\draw (l5) -- (8);
+\draw (l5) -- (ld1);
+\draw (l5) -- (d2);
+\draw (8) -- (d2);
+\draw (8) -- (9);
+\draw (8) -- (d3);
+\draw (9) -- (d3);
+\draw (9) -- (r5);
+\draw (9) -- (rd1);
+\draw (ru1) -- (r4);
+\draw (7) -- (r4);
+\draw (r4) -- (r5);
+\draw (r5) -- (rd1);
+\draw (ld1) -- (d2);
+\draw (d2) -- (d3);
+\draw (d3) -- (rd1);
+\end{tikzpicture}

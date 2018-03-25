@@ -1,0 +1,12 @@
+\begin{tikzpicture}[every node/.style={circle, draw, inner sep=1.5pt,fill=white},scale=0.8]
+% Points
+\node[label={[label distance=1pt]90: \tiny 1}] (u1) at (0,1.5) {};
+\node[label={[label distance=1pt]120: \tiny 4}] (4) at (0,0) {};
+\node[label={[label distance=1pt]180: \tiny 3}] (l3) at (-2,0) {};
+\node[label={[label distance=1pt]0: \tiny 2}] (r2) at (2,0) {};
+\node[label={[label distance=1pt]180: \tiny 2}] (l2) at (-2,-1.5) {};
+\node[label={[label distance=1pt]90: \tiny 6}] (6) at (-1,-1.5) {};
+\node[label={[label distance=1pt]90: \tiny 5}] (5) at (1,-1.5) {};
+\node[label={[label distance=1pt]0: \tiny 3}] (r3) at (2,-1.5) {};
+\node[label={[label distance=1pt]-90: \tiny 1}] (d1) at (0,-3) {};
+\end{tikzpicture}
