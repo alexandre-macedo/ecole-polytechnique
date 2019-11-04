@@ -1,0 +1,4 @@
+\begin{tikzpicture}[every node/.style={circle, draw, inner sep=1.5pt,fill=white}]
+\filldraw[fill=white, draw=white] (-1,-1) rectangle (1,1);
+\node[label={[label distance=1pt]180: \tiny 1}] (1) at (0,0) {};
+\end{tikzpicture}
