@@ -1,0 +1,6 @@
+[submodule "catkin_ws_3rdparty/src/serial"]
+	path = catkin_ws_3rdparty/src/serial
+	url = https://github.com/wjwwood/serial
+[submodule "catkin_ws_3rdparty/src/nmea_navsat_driver"]
+	path = catkin_ws_3rdparty/src/nmea_navsat_driver
+	url = https://github.com/ros-drivers/nmea_navsat_driver
