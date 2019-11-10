@@ -1,0 +1,10 @@
+\begin{tikzpicture}[every node/.style={circle, draw, inner sep=1.5pt,fill=white}]
+\filldraw[fill=white, draw=white] (-1,-0.5) rectangle (1,2.7);
+\node[label={[label distance=1pt]210: \tiny 1}] (1) at (-1,0) {};
+\node[label={[label distance=1pt]-30: \tiny 2}] (2) at (1,0) {};
+\node[label={[label distance=1pt]90: \tiny 3}] (3) at (0,1.7) {};
+
+\draw (1) -- (2);
+\draw (2) -- (3);
+\draw (1) -- (3);
+\end{tikzpicture}

@@ -1,0 +1,17 @@
+% 3-ball
+\begin{tikzpicture}[line join = round, line cap = round]
+\filldraw[fill=white, draw=white] (-2,-0.5) rectangle (0,2);
+\pgfmathsetmacro{\factor}{1/sqrt(2)};
+\coordinate [label=right:\tiny 1] (1) at (-0.2,0,0.8*\factor);
+\coordinate [label=left:\tiny 2] (2) at (-2,0,1.9*\factor);
+\coordinate [label=above:\tiny 3] (3) at (-0.8,1.8,2*\factor);
+\coordinate [label=below:\tiny 4] (4) at (0,0,3.6*\factor);
+
+\draw[-, fill=face5] (1) --(4)--(3)--cycle;
+\draw[-, fill=face3] (2)--(4)--(3)--cycle;
+
+\draw[fill=white] (1) circle (2pt);
+\draw[fill=white] (2) circle (2pt);
+\draw[fill=white] (3) circle (2pt);
+\draw[fill=white] (4) circle (2pt);
+\end{tikzpicture}
